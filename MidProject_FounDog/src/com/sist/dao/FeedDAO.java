@@ -1,5 +1,13 @@
 package com.sist.dao;
 
-public class FeedDAO {
+import org.apache.ibatis.session.SqlSessionFactory;
 
+public class FeedDAO {
+	private static SqlSessionFactory ssf;
+	
+	static {
+		ssf = CreateSqlSessionFactory.getSsf();
+	}
+	
+	
 }

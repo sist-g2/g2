@@ -17,7 +17,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="com/sist/mapper/food-mapper.xml" />
+		<mapper resource="com/sist/mapper/feed-mapper.xml" />
 	</mappers>
 </configuration>
 
