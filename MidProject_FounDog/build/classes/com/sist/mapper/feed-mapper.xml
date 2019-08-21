@@ -1,3 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.mapper.feed-mapper"></mapper>
+<mapper namespace="com.sist.mapper.feed-mapper">
+	<select id="brandAllData" resultType="Feed_brandVO" >
+		SELECT no, name FROM Feed_brand
+		ORDER BY no ASC
+	</select>
+	<select id="cateAllData" resultType="Feed_cateVO" >
+		SELECT no, name FROM Feed_cate
+		ORDER BY no ASC
+	</select>
+	<select id="grainAllData" resultType="Feed_grainVO" >
+		SELECT no, name FROM Feed_grain
+		ORDER BY no ASC
+	</select>
+	<select id="mtrAllData" resultType="Feed_mtrVO" >
+		SELECT no, name FROM Feed_mtr
+		ORDER BY no ASC
+	</select>
+	<select id="targetAllData" resultType="Feed_targetVO" >
+		SELECT no, name FROM Feed_target
+		ORDER BY no ASC
+	</select>
+
+
+</mapper>

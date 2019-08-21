@@ -16,24 +16,35 @@
 				<div class="sidebar blog-sidebar">
 					<div class="sidebar-item">
 						<h3>사료 종류</h3>
-						<label class="category" ><input type="checkbox" value="cate0" >&nbsp;<span class="forLabel">사료</span></label><br/>
-						<label class="category" ><input type="checkbox" value="cate1" >&nbsp;<span class="forLabel">건식사료</span></label><br/>
-						<label class="category" ><input type="checkbox" value="cate2" >&nbsp;<span class="forLabel">습식사료</span></label><br/>
-						<label class="category" ><input type="checkbox" value="cate3" >&nbsp;<span class="forLabel">소프트사료</span></label><br/>
+						<c:forEach var="cate" items="${cateList }">
+							<label class="category" ><input type="checkbox" value="${cate.no }" >&nbsp;<span class="forLabel">${cate.name }</span></label><br/>
+						</c:forEach>
 					</div>
 					<div class="sidebar-item">
 						<h3>브랜드</h3>
 						<div class="brand" >
-							<label class="brand" ><input type="checkbox" value="brand0">&nbsp;<span class="forLabel">전체</span></label><br/>
-							<label class="brand" ><input type="checkbox" value="brand1">&nbsp;<span class="forLabel">ANF</span></label><br/>
+							<c:forEach var="brnd" items="${brndList }">
+								<label class="brand" ><input type="checkbox" value="${brnd.no }" >&nbsp;<span class="forLabel">${brnd.name }</span></label><br/>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="sidebar-item">
 						<h3>급여대상</h3>
-						<label class="brand" ><input type="checkbox" value="tgt1">&nbsp;<span class="forLabel">전연령</span></label><br/>
-						<label class="brand" ><input type="checkbox" value="tgt2">&nbsp;<span class="forLabel">강아지(1~12개월)</span></label><br/>
-						<label class="brand" ><input type="checkbox" value="tgt3">&nbsp;<span class="forLabel">성견(1~7세)</span></label><br/>
-						<label class="brand" ><input type="checkbox" value="tgt4">&nbsp;<span class="forLabel">노령견(7세 이상)</span></label><br/>
+						<c:forEach var="tg" items="${tgList }">
+							<label class="target" ><input type="checkbox" value="${tg.no }" >&nbsp;<span class="forLabel">${tg.name }</span></label><br/>
+						</c:forEach>
+					</div>
+					<div class="sidebar-item">
+						<h3>주재료</h3>
+						<c:forEach var="mtr" items="${mtrList }">
+							<label class="material" ><input type="checkbox" value="${mtr.no }" >&nbsp;<span class="forLabel">${mtr.name }</span></label><br/>
+						</c:forEach>
+					</div>
+					<div class="sidebar-item">
+						<h3>알갱이크기</h3>
+						<c:forEach var="grn" items="${grnList }">
+							<label class="grain" ><input type="checkbox" value="${grn.no }" >&nbsp;<span class="forLabel">${grn.name }</span></label><br/>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

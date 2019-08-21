@@ -10,7 +10,7 @@ public class ComponentScan {
 	public static List<String> componentFileData(String pack) {
 		List<String> list = new ArrayList<String>();
 		try {
-			String path = "C:\\midProject\\MidProject_FounDog\\src";
+			String path = "C:\\midProject\\g2\\MidProject_FounDog\\src";
 			System.out.println(path);
 			path = path + "\\" + pack.replace(".", "\\");
 			System.out.println(path);
