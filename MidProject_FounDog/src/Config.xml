@@ -9,6 +9,7 @@
 		<typeAlias type="com.sist.vo.Feed_grainVO" alias="Feed_grainVO" />
 		<typeAlias type="com.sist.vo.Feed_mtrVO" alias="Feed_mtrVO" />
 		<typeAlias type="com.sist.vo.Feed_targetVO" alias="Feed_targetVO" />
+		<typeAlias type="com.sist.vo.SampleVO" alias="SampleVO" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -23,6 +24,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/sist/mapper/feed-mapper.xml" />
+		<mapper resource="com/sist/mapper/sample-mapper.xml" />
 	</mappers>
 </configuration>
 
