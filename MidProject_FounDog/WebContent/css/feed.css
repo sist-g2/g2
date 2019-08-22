@@ -103,7 +103,7 @@ div.sidebar-item label .forLabel {
 	font-size: 13px;
 	font-weight: 300;
 }
-div.brand {
-	height: 200px;
+div.scrl {
+	height: 150px;
 	overflow: auto;
 }
