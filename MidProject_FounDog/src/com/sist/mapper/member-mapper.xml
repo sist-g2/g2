@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.member-mapper">
+	<!-- <select id="memberIdCount" resultType="int" parameterType="String">
+		SELECT COUNT (*)
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<select id="memberGetPwd" resultType="MemberVO" parameterType="String">
+		SELECT pwd, name
+		FROM member
+		WHERE id=#{id}
+	</select> -->
+</mapper>
