@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.sample-mapper">
+<select id="sampleSearch" resultType="SampleVO" parameterType="SampleVO">
+	SELECT no,name,loc,tel
+	FROM hospital
+	WHERE loc LIKE '%'||#{loc}||'%' AND name LIKE '%'||#{name}||'%'  
+</select>
+<select id="sampleGetLoc" resultType="String" parameterType="String">
+		SELECT DISTINCT SUBSTR(SUBSTR(loc,7),0,INSTR(loc,' ')-3) FROM hospital
+</select>
+</mapper>
