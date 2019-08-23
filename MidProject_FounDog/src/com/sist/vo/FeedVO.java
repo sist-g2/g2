@@ -12,6 +12,11 @@ public class FeedVO {
 	private String info;
 	private String infoImg;
 	private int hit;
+	private Feed_brandVO brndVO;
+	private Feed_cateVO cateVO;
+	private Feed_grainVO grnVO;
+	private Feed_mtrVO mtrVO;
+	private Feed_targetVO tgVO;
 	
 	public int getNo() {
 		return no;
@@ -79,5 +84,35 @@ public class FeedVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-
+	public Feed_brandVO getBrndVO() {
+		return brndVO;
+	}
+	public void setBrndVO(Feed_brandVO brndVO) {
+		this.brndVO = brndVO;
+	}
+	public Feed_cateVO getCateVO() {
+		return cateVO;
+	}
+	public void setCateVO(Feed_cateVO cateVO) {
+		this.cateVO = cateVO;
+	}
+	public Feed_grainVO getGrnVO() {
+		return grnVO;
+	}
+	public void setGrnVO(Feed_grainVO grnVO) {
+		this.grnVO = grnVO;
+	}
+	public Feed_mtrVO getMtrVO() {
+		return mtrVO;
+	}
+	public void setMtrVO(Feed_mtrVO mtrVO) {
+		this.mtrVO = mtrVO;
+	}
+	public Feed_targetVO getTgVO() {
+		return tgVO;
+	}
+	public void setTgVO(Feed_targetVO tgVO) {
+		this.tgVO = tgVO;
+	}
+	
 }

@@ -51,4 +51,12 @@ public class FeedDAO {
 		session.close();
 		return list;
 	}
+	
+	public static List<FeedVO> feedAllData() {
+		List<FeedVO> list = new ArrayList<FeedVO>();
+		SqlSession session = ssf.openSession();
+		list = session.selectList("feedAllData");
+		session.close();
+		return list;
+	}
 }

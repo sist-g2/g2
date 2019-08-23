@@ -7,7 +7,7 @@ import com.sist.dao.*;
 @Controller("feedModel")
 public class FeedModel {
 	@RequestMapping("feed/feed_list.do")
-	public String feed_list(Model model) {
+	public String feed_container(Model model) {
 		// 옵션별 검색 리스트
 		List<Feed_brandVO> brndList = FeedDAO.brandAllData();
 		model.addAttribute("brndList", brndList);
@@ -19,6 +19,9 @@ public class FeedModel {
 		model.addAttribute("mtrList", mtrList);
 		List<Feed_targetVO> tgList = FeedDAO.targetAllData();
 		model.addAttribute("tgList", tgList);
+		
+		List<FeedVO> feedList = FeedDAO.feedAllData();
+		model.addAttribute("fdList", feedList);
 		
 		model.addAttribute("main_jsp", "../feed/feed_list.jsp");
 		return "../main/main.jsp";

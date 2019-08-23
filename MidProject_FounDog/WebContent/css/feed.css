@@ -1,3 +1,5 @@
+@CHARSET "UTF-8";
+
 ::-webkit-scrollbar {
     height: 16px;
     overflow: visible;
@@ -79,31 +81,105 @@ body::-webkit-scrollbar-corner {
     box-shadow: inset 1px 1px 0 rgba(0,0,0,.14);
 }
 
-div.sidebar-item label > input {
-	-webkit-appearance: none;
-	-mox-appearance: none;
-	-o-appearance: none;
-	appearance: none;
-	
-	width:15px;
-	height:15px;
-	
-	background-color: #f2f2f2;
-	border: 1px solid #d29949;
-}
-div.sidebar-item label > input:checked {
-	content: "";
-	background-color: #d29949;
-	border: 2px solid #bd8942;
-	color: #f2f2f2;
+.table.table-borderless td, .table.table-borderless th {
+    border: 0 !important;
+    padding: 4px;
 }
 
-div.sidebar-item label .forLabel {
-	color: #000;
-	font-size: 13px;
-	font-weight: 300;
+.table.table-borderless {
+    margin-bottom: 0px;
 }
-div.scrl {
-	height: 150px;
-	overflow: auto;
+.optionList th h5 {
+	vertical-align: middle;
+	color: #bd8942;
+	font-weight: 600;
 }
+.optionList td input {
+	display: none;
+}
+
+.optionList td input+label {
+	display: inline-block;
+	border-radius: 6px;
+	background: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	color: #d29949;
+}
+
+.optionList td label {
+	font-weight: 400;
+}
+
+.optionList td input[type=checkbox]:checked + label {
+	background: #bd8942;
+	color: #ffffff;
+}
+
+.optionList td input[type=radio]:checked + label {
+	background: #bd8942;
+	color: #ffffff;
+}
+
+.optionList td button {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.list_sort_btn {
+	border: 0;
+	background: #FFFFFF;
+	color: #000000;
+}
+
+.fdList {
+	display: inline-block;
+}
+
+.fd_goods {
+	display: inline-block;
+	float: left;
+	width: 285px;
+	height: 335px;
+	margin: 0px;
+	border: 0px solid #c3c3c3;
+}
+
+.fd_img {
+	margin: 0px auto;
+	width: 235px;
+	height: 235px;
+	border: 0px solid red;
+}
+
+.fd_info {
+	margin: 0px auto;
+	width: 235px;
+	height: 90px;
+	border: 0px solid yellow;
+}
+
+.fd_info_name {
+	font-size: 15px;
+	color: blue;
+	font-weight: bold;
+}
+
+.fd_info_price {
+	font-size: 14px;
+	color: red;
+	font-weight: bold;
+}
+
+
+
