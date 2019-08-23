@@ -11,23 +11,24 @@
 	width: 1200px;
 }
 </style>
-<script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
 $(function(){
 	$('#canBtn').click(function(){
-		  $.ajax({
-			  location.href="../main/main.do";
-		  })
-	  });
+		location.href="../main/main.do";
+	});
 	
 	$('#logBtn').click(function(){
 		var id = $('#id').val();
 		var pwd = $('#pwd').val();
 		
 		if(id.trim()==""){
+			alert("아이디를 입력해주세요.")
 			$('#id').focus();
 			return;
 		}
 		if(pwd.trim()==""){
+			alert("비밀번호를 입력해주세요.")
 			$('#pwd').focus();
 			return;
 		}
@@ -84,13 +85,13 @@ $(function(){
 				<tr>
 					<th class="text-right" width=40%>ID</th>
 					<td class="text-left" width=60%>
-						<input type=text name=id class="form-control2" size=25>&nbsp;&nbsp;
+						<input type=text id=id name=id class="form-control2" size=25>&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
 					<th class="text-right" width=40%>Password</th>
 					<td class="text-left" width=60%>
-						<input type=password name=pwd class="form-control2" size=25>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type=password name=pwd id=pwd class="form-control2" size=25>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>

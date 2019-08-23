@@ -24,6 +24,7 @@ public class MemberDAO {
 			vo = session.selectOne("memberGetPwd", id);
 			if(vo.getPwd().equals(pwd)){
 				vo.setName(vo.getName()); //로그인 되는 상태
+				System.out.println(vo.getName());
 			} else {
 				result="NOPWD"; //비밀번호가 틀린 상태
 				vo.setName(result);
