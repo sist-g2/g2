@@ -21,6 +21,9 @@
 		SELECT no, name FROM Feed_target
 		ORDER BY no ASC
 	</select>
-
+	<select id="feedAllData" resultType="FeedVO" >
+		SELECT * FROM feed
+		ORDER BY no ASC
+	</select>
 
 </mapper>
