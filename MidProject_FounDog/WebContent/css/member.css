@@ -42,12 +42,12 @@
 	height: 30px;
 }
 
-  .btn-common2 {
-    font-size: 14px;
-    color: #d29948;
-    border: 1px solid #dbb075;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    padding: 10px 25px;
-    background: none;
-  }
+.btn-common2 {
+	font-size: 14px;
+	color: #d29948;
+  border: 1px solid #dbb075;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  padding: 10px 25px;
+  background: none;
+}

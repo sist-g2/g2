@@ -11,6 +11,50 @@
 	width: 1200px;
 }
 </style>
+<script>
+$(function(){
+	$('#canBtn').click(function(){
+		  $.ajax({
+			  location.href="../main/main.do";
+		  })
+	  });
+	
+	$('#logBtn').click(function(){
+		var id = $('#id').val();
+		var pwd = $('#pwd').val();
+		
+		if(id.trim()==""){
+			$('#id').focus();
+			return;
+		}
+		if(pwd.trim()==""){
+			$('#pwd').focus();
+			return;
+		}
+		
+		$.ajax({
+			type:'post',
+			url:'../member/member_login_ok.do',
+			data:{id:id, pwd:pwd},
+			success:function(response){
+				var res = response.trim();
+				if(res=="NOID"){
+					alert("ID가 존재하지 않습니다.");
+					$('#id').val("");
+					$('#pwd').val("");
+					$('#id').focus();
+				} else if(res=="NOPWD"){
+					alert("비밀번호가 틀립니다.");
+					$('#pwd').val("");
+					$('#pwd').focus();
+				} else {
+					location.href="../main/main.do";
+				}
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 
@@ -51,8 +95,10 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<a href="#" class="btn btn-common uppercase">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="#" class="btn btn-common uppercase">취소</a>
+						<!-- <a href="#" class="btn btn-common uppercase">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#" class="btn btn-common uppercase">취소</a> -->
+						<input type="button" value="로그인" id="logBtn" class="btn btn-common2 uppercase">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" value="취소" id="canBtn" class="btn btn-common2 uppercase">
 					</td>
 				</tr>
 			</table>

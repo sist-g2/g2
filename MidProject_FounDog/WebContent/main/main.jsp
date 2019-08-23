@@ -31,7 +31,7 @@
         	</div> -->
         	<div class="pull-right">
         		<ul class="nav nav-pills">
-        			<li><a href="#">로그인</a></li>
+        			<li><a href="../member/member_login.do">로그인</a></li>
         			<li><a href="#">회원가입</a></li>
         			<li><a href="#">사이트 이용안내</a></li>
         		</ul>
