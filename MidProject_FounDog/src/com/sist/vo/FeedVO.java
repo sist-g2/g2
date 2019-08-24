@@ -12,11 +12,17 @@ public class FeedVO {
 	private String info;
 	private String infoImg;
 	private int hit;
+	private int lowPrice;
+	private int favNum;
+	private int rvwNum;
+	private double starAvg;
 	private Feed_brandVO brndVO;
 	private Feed_cateVO cateVO;
 	private Feed_grainVO grnVO;
 	private Feed_mtrVO mtrVO;
 	private Feed_targetVO tgVO;
+	private StoreVO svo;
+	private FavoriteVO fvo;
 	
 	public int getNo() {
 		return no;
@@ -84,6 +90,30 @@ public class FeedVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+	public int getLowPrice() {
+		return lowPrice;
+	}
+	public void setLowPrice(int lowPrice) {
+		this.lowPrice = lowPrice;
+	}
+	public int getFavNum() {
+		return favNum;
+	}
+	public void setFavNum(int favNum) {
+		this.favNum = favNum;
+	}
+	public int getRvwNum() {
+		return rvwNum;
+	}
+	public void setRvwNum(int rvwNum) {
+		this.rvwNum = rvwNum;
+	}
+	public double getStarAvg() {
+		return starAvg;
+	}
+	public void setStarAvg(double starAvg) {
+		this.starAvg = starAvg;
+	}
 	public Feed_brandVO getBrndVO() {
 		return brndVO;
 	}
@@ -113,6 +143,18 @@ public class FeedVO {
 	}
 	public void setTgVO(Feed_targetVO tgVO) {
 		this.tgVO = tgVO;
+	}
+	public StoreVO getSvo() {
+		return svo;
+	}
+	public void setSvo(StoreVO svo) {
+		this.svo = svo;
+	}
+	public FavoriteVO getFvo() {
+		return fvo;
+	}
+	public void setFvo(FavoriteVO fvo) {
+		this.fvo = fvo;
 	}
 	
 }

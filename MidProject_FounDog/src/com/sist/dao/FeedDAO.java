@@ -52,11 +52,27 @@ public class FeedDAO {
 		return list;
 	}
 	
-	public static List<FeedVO> feedAllData() {
+	public static List<FeedVO> feedAllData(Map map) {
 		List<FeedVO> list = new ArrayList<FeedVO>();
 		SqlSession session = ssf.openSession();
-		list = session.selectList("feedAllData");
+		list = session.selectList("feedAllData", map);
 		session.close();
 		return list;
+	}
+	
+	public static int feedTotalNum(Map map) {
+		int total = 0;
+		SqlSession session = ssf.openSession();
+		total = session.selectOne("feedTotalNum", map);
+		session.close();
+		return total;
+	}
+	
+	public static int feedTotalPage(Map map) {
+		int total = 0;
+		SqlSession session = ssf.openSession();
+		total = session.selectOne("feedTotalPage", map);
+		session.close();
+		return total;
 	}
 }

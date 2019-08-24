@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.feed-mapper">
+	<!-- 검색옵션 로딩 -->
 	<select id="brandAllData" resultType="Feed_brandVO" >
 		SELECT no, name FROM Feed_brand
 		ORDER BY no ASC
@@ -21,9 +22,103 @@
 		SELECT no, name FROM Feed_target
 		ORDER BY no ASC
 	</select>
-	<select id="feedAllData" resultType="FeedVO" >
-		SELECT * FROM feed
-		ORDER BY no ASC
+	
+	<!-- JOIN : 상품 목록 -->
+	<resultMap type="FeedVO" id="feedList" >
+		<result property="no" column="no" />
+		<result property="name" column="name" />
+		<result property="brand" column="brand" />
+		<result property="feedImg" column="feedImg" />
+		<result property="category" column="category" />
+		<result property="target" column="target" />
+		<result property="material" column="material" />
+		<result property="grain" column="grain" />
+		<result property="hit" column="hit" />
+		<result property="lowPrice" column="lowPrice" />
+		<result property="favNum" column="favNum" />
+		<result property="rvwNum" column="rvwNum" />
+		<result property="starAvg" column="starAvg" />
+	</resultMap>
+	
+	<!-- 상품목록 - FROM 이후 선 정의 -->
+	<sql id="feedWhere" >
+		FROM feed f, store s 
+		<where>
+			f.no=s.fnum 
+			<if test="cate!=999">
+				AND category=#{cate} 
+			</if>
+			<if test="brandList!=null" >
+				AND brand IN 
+				<foreach collection="brandList" item="brnd" separator="," open="(" close=")" >
+					#{brnd}
+				</foreach>
+			</if>
+			<if test="targetList!=null" >
+				AND target IN 
+				<foreach collection="targetList" item="tg" separator="," open="(" close=")" >
+					#{tg}
+				</foreach>
+			</if>
+			<if test="mtrSql!=null" >
+				AND REGEXP_LIKE(material, #{mtrSql}) 
+			</if>
+			<if test="grainList!=null" >
+				AND grain IN 
+				<foreach collection="grainList" item="grn" separator="," open="(" close=")" >
+					#{grn}
+				</foreach>
+			</if>
+		</where>
+		<choose>
+			<when test="sortOp=='lowP'" >
+				ORDER BY lowPrice ASC
+			</when>
+			<when test="sortOp=='highP'" >
+				ORDER BY lowPrice DESC
+			</when>
+			<when test="sortOp=='fav'" >
+				ORDER BY favNum DESC
+			</when>
+			<when test="sortOp=='rvw'" >
+				ORDER BY rvwNum DESC
+			</when>
+			<when test="sortOp=='star'" >
+				ORDER BY starAvg DESC
+			</when>
+			<otherwise>
+				ORDER BY hit DESC 
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 상품 목록 조회 -->
+	<select id="feedAllData" resultMap="feedList" parameterType="java.util.Map">
+		SELECT no, name, brand, feedImg, category, target, material, grain, hit, lowPrice, favNum, rvwNum, starAvg, num 
+		FROM (SELECT no, name, brand, feedImg, category, target, material, grain, hit, lowPrice, favNum, rvwNum, starAvg, rownum as num 
+			FROM (SELECT DISTINCT f.no as no, name, brand, feedImg, category, target, material, grain, hit, 
+					(SELECT MIN(price) FROM store WHERE fnum=f.no GROUP BY fnum) as lowPrice, 
+					(SELECT COUNT(*) FROM review WHERE feednum=f.no GROUP BY feednum) as favNum, 
+					(SELECT COUNT(*) FROM review WHERE feednum=f.no GROUP BY feednum) as rvwNum, 
+					(SELECT AVG(star) FROM review WHERE feednum=f.no GROUP BY feednum) as starAvg 
+				<include refid="feedWhere" />
+			)
+		) WHERE num BETWEEN #{start} AND #{end}
 	</select>
-
+	
+	<!-- 조건에 따른 상품 총 개수 조회 -->
+	<select id="feedTotalNum" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) 
+		FROM (SELECT DISTINCT f.no 
+			<include refid="feedWhere" />
+		)
+	</select>
+	
+	<!-- 조건에 따른 상품 목록 총 페이지 조회 -->
+	<select id="feedTotalPage" resultType="int" parameterType="java.util.Map">
+		SELECT CEIL(COUNT(*)/20.0) 
+		FROM (SELECT DISTINCT f.no 
+			<include refid="feedWhere" />
+		)
+	</select>
 </mapper>

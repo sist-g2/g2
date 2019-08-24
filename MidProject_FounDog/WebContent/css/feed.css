@@ -171,7 +171,7 @@ body::-webkit-scrollbar-corner {
 
 .fd_info_name {
 	font-size: 15px;
-	color: blue;
+	color: #535353;
 	font-weight: bold;
 }
 
@@ -180,6 +180,3 @@ body::-webkit-scrollbar-corner {
 	color: red;
 	font-weight: bold;
 }
-
-
-
