@@ -43,23 +43,23 @@ public class FeedModel {
 		model.addAttribute("category", category);
 		
 		String[] brnd = model.getRequest().getParameterValues("brand"); // 브랜드
-		List<Integer> brandOp = arrToList(brnd);
+		List<Integer> brandOp = FeedDAO.arrToList(brnd);
 		opList.put("brandList", brandOp);
 		model.addAttribute("brandOp", brandOp);
 		
 		String[] tg = model.getRequest().getParameterValues("tg"); // 연령
-		List<Integer> tgOp = arrToList(tg);
+		List<Integer> tgOp = FeedDAO.arrToList(tg);
 		opList.put("targetList", tgOp);
 		model.addAttribute("tgOp", tgOp);
 		
 		String[] mtr = model.getRequest().getParameterValues("mtr"); // 주원료
-		String mtrSql = mtrToMap(mtr);
+		String mtrSql = FeedDAO.mtrToMap(mtr);
 		opList.put("mtrSql", mtrSql);
-		List<Integer> mtrOp = arrToList(mtr);
+		List<Integer> mtrOp = FeedDAO.arrToList(mtr);
 		model.addAttribute("mtrOp", mtrOp);
 		
 		String[] grn = model.getRequest().getParameterValues("grn"); // 알갱이 크기
-		List<Integer> grnOp = arrToList(grn);
+		List<Integer> grnOp = FeedDAO.arrToList(grn);
 		opList.put("grainList", grnOp);
 		model.addAttribute("grnOp", grnOp);
 		
@@ -82,28 +82,4 @@ public class FeedModel {
 		return "../main/main.jsp";
 	}
 	
-	public List<Integer> arrToList(String[] arr) {
-		List<Integer> list = new ArrayList<Integer>();
-		if (arr==null) {
-			list = null;
-		} else {
-			for(int i = 0; i < arr.length; i++)
-				list.add(Integer.parseInt(arr[i]));
-		}
-		return list;
-	}
-	
-	public String mtrToMap(String[] arr) {
-		String sql = "";
-		if(arr==null) {
-			sql = null;
-		} else {
-			for(int i = 0; i < arr.length; i++) {
-				sql = sql.concat(arr[i]);
-				sql = sql.concat("|");
-			}
-			sql = sql.substring(0, sql.length()-1);
-		}
-		return sql;
-	}
 }

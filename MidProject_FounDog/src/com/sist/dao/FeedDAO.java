@@ -12,6 +12,7 @@ public class FeedDAO {
 		ssf = CreateSqlSessionFactory.getSsf();
 	}
 	
+	// 검색 옵션 로드
 	public static List<Feed_brandVO> brandAllData() {
 		List<Feed_brandVO> list = new ArrayList<Feed_brandVO>();
 		SqlSession session = ssf.openSession();
@@ -52,6 +53,7 @@ public class FeedDAO {
 		return list;
 	}
 	
+	// 상품 목록 출력
 	public static List<FeedVO> feedAllData(Map map) {
 		List<FeedVO> list = new ArrayList<FeedVO>();
 		SqlSession session = ssf.openSession();
@@ -75,4 +77,32 @@ public class FeedDAO {
 		session.close();
 		return total;
 	}
+	
+	// 상품 목록 부가 메서드
+	public static List<Integer> arrToList(String[] arr) {
+		List<Integer> list = new ArrayList<Integer>();
+		if (arr==null) {
+			list = null;
+		} else {
+			for(int i = 0; i < arr.length; i++)
+				list.add(Integer.parseInt(arr[i]));
+		}
+		return list;
+	}
+	
+	public static String mtrToMap(String[] arr) {
+		String sql = "";
+		if(arr==null) {
+			sql = null;
+		} else {
+			for(int i = 0; i < arr.length; i++) {
+				sql = sql.concat(arr[i]);
+				sql = sql.concat("|");
+			}
+			sql = sql.substring(0, sql.length()-1);
+		}
+		return sql;
+	}
+	
+	
 }
