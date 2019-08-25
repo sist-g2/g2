@@ -13,7 +13,7 @@
 		<typeAlias type="com.sist.vo.Feed_StoreVO" alias="Feed_StoreVO"/>
 		<typeAlias type="com.sist.vo.Feed_FavoriteVO" alias="Feed_FavoriteVO"/>
 		<typeAlias type="com.sist.vo.Feed_ReviewVO" alias="Feed_ReviewVO"/>
-		<typeAlias type="com.sist.vo.SampleVO" alias="SampleVO" />
+		<typeAlias type="com.sist.vo.HospitalVO" alias="HospitalVO" />
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.sist.vo.Board_DogVO" alias="Board_DogVO" />
@@ -33,7 +33,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/sist/mapper/feed-mapper.xml" />
-		<mapper resource="com/sist/mapper/sample-mapper.xml" />
+		<mapper resource="com/sist/mapper/hospital-mapper.xml" />
 		<mapper resource="com/sist/mapper/member-mapper.xml" />
 		<mapper resource="com/sist/mapper/board-mapper.xml" />
 	</mappers>
