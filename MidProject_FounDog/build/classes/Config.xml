@@ -9,8 +9,10 @@
 		<typeAlias type="com.sist.vo.Feed_grainVO" alias="Feed_grainVO" />
 		<typeAlias type="com.sist.vo.Feed_mtrVO" alias="Feed_mtrVO" />
 		<typeAlias type="com.sist.vo.Feed_targetVO" alias="Feed_targetVO" />
-		<typeAlias type="com.sist.vo.StoreVO" alias="StoreVO"/>
-		<typeAlias type="com.sist.vo.FavoriteVO" alias="FavoriteVO"/>
+		<typeAlias type="com.sist.vo.Feed_totalVO" alias="Feed_totalVO" />
+		<typeAlias type="com.sist.vo.Feed_StoreVO" alias="Feed_StoreVO"/>
+		<typeAlias type="com.sist.vo.Feed_FavoriteVO" alias="Feed_FavoriteVO"/>
+		<typeAlias type="com.sist.vo.Feed_ReviewVO" alias="Feed_ReviewVO"/>
 		<typeAlias type="com.sist.vo.SampleVO" alias="SampleVO" />
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO" />
@@ -31,7 +33,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/sist/mapper/feed-mapper.xml" />
-		<mapper resource="com/sist/mapper/store-mapper.xml" />
 		<mapper resource="com/sist/mapper/sample-mapper.xml" />
 		<mapper resource="com/sist/mapper/member-mapper.xml" />
 		<mapper resource="com/sist/mapper/board-mapper.xml" />

@@ -24,6 +24,7 @@ public class FeedModel {
 		
 		// 페이지
 		String page = model.getRequest().getParameter("page");
+		System.out.println("page : " + page);
 		if(page==null)
 			page = "1";
 		int curpage = Integer.parseInt(page);
@@ -72,14 +73,29 @@ public class FeedModel {
 		model.addAttribute("fdList", feedList);
 		
 		// 총 상품 개수&총 페이지
-		int totalNum = FeedDAO.feedTotalNum(opList);
-		model.addAttribute("totalNum", totalNum);
-		int totalPage = FeedDAO.feedTotalPage(opList);
-		model.addAttribute("totalPage", totalPage);
+		Feed_totalVO tvo = FeedDAO.feedTotal(opList);
+		model.addAttribute("totalNum", tvo.getTotalCnt());
+		model.addAttribute("totalPage", tvo.getTotalPage());
 		
 		// 페이지 이동
 		model.addAttribute("main_jsp", "../feed/feed_list.jsp");
 		return "../main/main.jsp";
 	}
 	
+	@RequestMapping("feed/feed_detail.do")
+	public String feed_detail(Model model) {
+		String sno = model.getRequest().getParameter("no");
+		int no = Integer.parseInt(sno);
+		FeedDAO.feedHitIncrease(no); // 조회수 업데이트
+		FeedVO vo = FeedDAO.feedDetailData(no); 
+		List<Feed_StoreVO> slist = FeedDAO.feedStoreData(no); 
+		int lowPrice = FeedDAO.feedLowPrice(no);
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("slist", slist);
+		model.addAttribute("lowPrice", lowPrice);
+		
+		model.addAttribute("main_jsp", "../feed/feed_detail.jsp");
+		return "../main/main.jsp";
+	}
 }

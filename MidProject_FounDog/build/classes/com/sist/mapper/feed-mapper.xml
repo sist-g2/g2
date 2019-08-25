@@ -23,7 +23,7 @@
 		ORDER BY no ASC
 	</select>
 	
-	<!-- JOIN : 상품 목록 -->
+	<!-- JOIN : 상품 목록 -->	
 	<resultMap type="FeedVO" id="feedList" >
 		<result property="no" column="no" />
 		<result property="name" column="name" />
@@ -38,6 +38,11 @@
 		<result property="favNum" column="favNum" />
 		<result property="rvwNum" column="rvwNum" />
 		<result property="starAvg" column="starAvg" />
+	</resultMap>
+	
+	<resultMap type="Feed_totalVO" id="feedTotal" extends="feedList" >
+		<result property="totalCnt" column="totalCnt" />
+		<result property="totalPage" column="totalPage" />
 	</resultMap>
 	
 	<!-- 상품목록 - FROM 이후 선 정의 -->
@@ -98,27 +103,103 @@
 		FROM (SELECT no, name, brand, feedImg, category, target, material, grain, hit, lowPrice, favNum, rvwNum, starAvg, rownum as num 
 			FROM (SELECT DISTINCT f.no as no, name, brand, feedImg, category, target, material, grain, hit, 
 					(SELECT MIN(price) FROM store WHERE fnum=f.no GROUP BY fnum) as lowPrice, 
-					(SELECT COUNT(*) FROM review WHERE feednum=f.no GROUP BY feednum) as favNum, 
-					(SELECT COUNT(*) FROM review WHERE feednum=f.no GROUP BY feednum) as rvwNum, 
-					(SELECT AVG(star) FROM review WHERE feednum=f.no GROUP BY feednum) as starAvg 
+					(SELECT COUNT(*) FROM favorite WHERE fnum=f.no) as favNum, 
+					(SELECT COUNT(*) FROM review WHERE fnum=f.no) as rvwNum, 
+					(SELECT AVG(star) FROM review WHERE fnum=f.no GROUP BY fnum) as starAvg 
 				<include refid="feedWhere" />
 			)
 		) WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 조건에 따른 상품 총 개수 조회 -->
-	<select id="feedTotalNum" resultType="int" parameterType="java.util.Map">
-		SELECT COUNT(*) 
-		FROM (SELECT DISTINCT f.no 
+	<select id="feedTotalReturn" resultMap="feedTotal" parameterType="java.util.Map">
+		SELECT COUNT(*) as totalCnt, CEIL(COUNT(*)/20.0) as totalPage 
+		FROM (SELECT DISTINCT f.no as no, name, brand, feedImg, category, target, material, grain, hit, 
+				(SELECT MIN(price) FROM store WHERE fnum=f.no GROUP BY fnum) as lowPrice, 
+				(SELECT COUNT(*) FROM review WHERE fnum=f.no GROUP BY fnum) as favNum, 
+				(SELECT COUNT(*) FROM review WHERE fnum=f.no GROUP BY fnum) as rvwNum, 
+				(SELECT AVG(star) FROM review WHERE fnum=f.no GROUP BY fnum) as starAvg 
 			<include refid="feedWhere" />
 		)
 	</select>
 	
-	<!-- 조건에 따른 상품 목록 총 페이지 조회 -->
-	<select id="feedTotalPage" resultType="int" parameterType="java.util.Map">
-		SELECT CEIL(COUNT(*)/20.0) 
-		FROM (SELECT DISTINCT f.no 
-			<include refid="feedWhere" />
-		)
+	<!-- 상품 선택 -->
+	<resultMap type="FeedVO" id="feedDetail" >
+		<result property="no" column="no" />
+		<result property="name" column="name" />
+		<result property="brand" column="brand" />
+		<result property="feedImg" column="feedImg" />
+		<result property="category" column="category" />
+		<result property="target" column="target" />
+		<result property="material" column="material" />
+		<result property="grain" column="grain" />
+		<result property="info" column="info" />
+		<result property="infoImg" column="infoImg" />
+		<result property="brndVO.name" column="brndName" />
+		<result property="cateVO.name" column="cateName" />
+		<result property="grnVO.name" column="grnName" />
+		<result property="tgVO.name" column="tgName" />
+		<result property="favNum" column="favNum" />
+		<result property="rvwNum" column="rvwNum" />
+		<result property="starAvg" column="starAvg" />
+	</resultMap>
+	
+	<update id="feedHitIncrease" parameterType="int" >
+		UPDATE feed 
+		SET no=no+1 
+		WHERE no=#{no} 
+	</update>
+	
+	<select id="feedDetailData" resultMap="feedDetail" parameterType="int" >
+		SELECT f.no, f.name, brand, feedImg, category, target, material, grain, info, infoImg, 
+			fb.name as brndName, fc.name as cateName, fg.name as grnName, ft.name as tgName, 
+			(SELECT COUNT(*) FROM favorite WHERE fnum=f.no) as favNum,
+			(SELECT COUNT(*) FROM review WHERE fnum=f.no) as rvwNum,
+			(SELECT AVG(star) FROM review WHERE fnum=f.no GROUP BY fnum) as starAvg 
+		FROM feed f, feed_brand fb, feed_cate fc, feed_grain fg, feed_target ft  
+		WHERE f.no=#{no} 
+		 AND f.brand=fb.no 
+		 AND f.category=fc.no 
+		 AND f.grain=fg.no(+) 
+		 AND f.target=ft.no(+) 
 	</select>
+	
+	<select id="feedStoreData" resultType="Feed_StoreVO" parameterType="int" >
+		SELECT no, stName, link, price, fnum 
+		FROM store 
+		WHERE fnum=#{no} 
+		ORDER BY price ASC 
+	</select>
+	
+	<select id="feedLowPrice" resultType="int" parameterType="int" >
+		SELECT MIN(price) 
+		FROM store 
+		WHERE fnum=#{no} 
+		GROUP BY fnum 
+	</select>
+	
+	<resultMap type="Feed_ReviewVO" id="reviewData">
+		<result property="no" column="no" />
+	</resultMap>
+	
+	<select id="reviewAllData" resultMap="reviewData" parameterType="int" >
+		private int no;
+	private Date regdate;
+	private String rdateS;
+	private String subject;
+	private String content;
+	private int star;
+	private String id;
+	private int fnum;
+	private String dtype;
+	private FeedVO fvo;
+	private MemberVO mvo;
+		SELECT r.no, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') AS rdateS, subject, content, star, fnum, r.id, m.name as name 
+		FROM review r, member m 
+		WHERE r.id=m.id 
+		 AND fnum=#{no} 
+	</select>
+	
 </mapper>
+
+

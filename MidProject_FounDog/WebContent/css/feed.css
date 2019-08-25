@@ -180,3 +180,90 @@ body::-webkit-scrollbar-corner {
 	color: red;
 	font-weight: bold;
 }
+
+.pagination li button{
+	-webkit-appearance:none;
+	color: #000;
+	background: #FFF;
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 1px solid #fff;
+}
+
+.pagination li:first-child button{
+  background: url(../images/portfolio/left.png);
+  background-repeat: no-repeat;
+  text-indent: -999999999px;
+  background-position: center top 10px;
+  width: 32px;
+  height: 36px;
+  border: none;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+.pagination li:first-child button:hover{
+  background: url(../images/portfolio/left.png);
+  background-position: center top -37px;
+  background-repeat: no-repeat;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+.pagination li:last-child button{
+  background: url(../images/portfolio/right.png);
+  background-repeat: no-repeat;
+  text-indent: -999999999px;
+  background-position: center top 10px;
+  width: 32px;
+  height: 36px;
+  border: none;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+.pagination li:last-child button:hover{
+  background: url(../images/portfolio/right.png);
+  background-position: center top -37px;
+  background-repeat: no-repeat;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+.pagination li button:hover,
+.pagination .active button,
+.pagination .active button:hover,
+.pagination .active button:focus{
+  background: none;
+  border-color: #cc9b59;
+  color: #cc9b59;
+}
+#feedDetailInfo tr td {
+	padding: 10px 5px;
+}
+.feed_detail {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.feed_title {
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.simpleInfo {
+	font-size: 14px;
+	font-weight: 200;
+	color: #808080;
+}
+
+#backList {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}

@@ -62,20 +62,11 @@ public class FeedDAO {
 		return list;
 	}
 	
-	public static int feedTotalNum(Map map) {
-		int total = 0;
+	public static Feed_totalVO feedTotal(Map map) {
 		SqlSession session = ssf.openSession();
-		total = session.selectOne("feedTotalNum", map);
+		Feed_totalVO vo = session.selectOne("feedTotalReturn", map);
 		session.close();
-		return total;
-	}
-	
-	public static int feedTotalPage(Map map) {
-		int total = 0;
-		SqlSession session = ssf.openSession();
-		total = session.selectOne("feedTotalPage", map);
-		session.close();
-		return total;
+		return vo;
 	}
 	
 	// 상품 목록 부가 메서드
@@ -104,5 +95,29 @@ public class FeedDAO {
 		return sql;
 	}
 	
+	// 상품 상세보기
+	public static void feedHitIncrease(int no) {
+		
+	}
 	
+	public static FeedVO feedDetailData(int no) {
+		SqlSession session = ssf.openSession();
+		FeedVO vo = session.selectOne("feedDetailData", no);
+		session.close();
+		return vo;
+	}
+	
+	public static List<Feed_StoreVO> feedStoreData(int no) {
+		SqlSession session = ssf.openSession();
+		List<Feed_StoreVO> list = session.selectList("feedStoreData", no);
+		session.close();
+		return list;
+	}
+	
+	public static int feedLowPrice(int no) {
+		SqlSession session = ssf.openSession();
+		int lowPrice = session.selectOne("feedLowPrice", no);
+		session.close();
+		return lowPrice;
+	}
 }

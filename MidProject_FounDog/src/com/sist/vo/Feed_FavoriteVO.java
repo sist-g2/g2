@@ -1,9 +1,10 @@
 package com.sist.vo;
 import java.util.*;
 
-public class FavoriteVO {
+public class Feed_FavoriteVO {
 	private int no;
 	private Date fdate;
+	private String fdateS;
 	private String id;
 	private int fnum;
 	private FeedVO fvo;
@@ -20,6 +21,12 @@ public class FavoriteVO {
 	}
 	public void setFdate(Date fdate) {
 		this.fdate = fdate;
+	}
+	public String getFdateS() {
+		return fdateS;
+	}
+	public void setFdateS(String fdateS) {
+		this.fdateS = fdateS;
 	}
 	public String getId() {
 		return id;

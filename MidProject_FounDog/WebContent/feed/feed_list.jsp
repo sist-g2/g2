@@ -62,125 +62,152 @@ $(function(){
 		$("#grn-"+grain[i]).prop("checked", true);
 	}
 	
+	
+	
 });
 </script>
 </head>
 <body>
 <div class="container" >
 	<div class="row" >
-		<div class="feedList" >
-			<h3 class="page-header text-center">사료 가격비교</h3>
-			<form id="optionListForm" method="post" action="../feed/feed_list.do">
-				<div class="optionList" >
-						<table class="table table-borderless" >
-							<tr>
-								<th width=10% class="text-left" ><h5>&nbsp;&nbsp;사료 종류</h5></th>
-								<td width=90% >
-									<input type="radio" id="cate-999" name="category" value="999" />
-									<label for="cate-999">&nbsp;&nbsp;전체&nbsp;&nbsp;</label>&nbsp;&nbsp;
-									<c:forEach var="cate" items="${cateList }">
-										<input type="radio" id="cate-${cate.no }" name="category" value="${cate.no }">
-										<label for="cate-${cate.no }">&nbsp;&nbsp;${cate.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
-									</c:forEach>
-								</td>
-							</tr>
-							<tr>
-								<th width=10% class="text-left" ><h5>&nbsp;&nbsp;브랜드</h5></th>
-								<td width=90% >
-									<c:forEach var="brnd" items="${brndList }">
-										<input type="checkbox" id="brnd-${brnd.no }" name="brand" value="${brnd.no }" />
-										<label for="brnd-${brnd.no }">&nbsp;&nbsp;${brnd.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
-									</c:forEach>
-								</td>
-							</tr>
-							<tr>
-								<th width=10% class="text-left" ><h5>&nbsp;&nbsp;연령</h5></th>
-								<td width=90% >
-									<c:forEach var="tg" items="${tgList }">
-										<input type="checkbox" id="tg-${tg.no }" name="tg" value="${tg.no }" />
-										<label for="tg-${tg.no }">&nbsp;&nbsp;${tg.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
-									</c:forEach>
-								</td>
-							</tr>
-							<tr>
-								<th width=10% class="text-left" ><h5>&nbsp;&nbsp;주원료</h5></th>
-								<td width=90% >
-									<c:forEach var="mtr" items="${mtrList }">
-										<input type="checkbox" id="mtr-${mtr.no }" name="mtr" value="${mtr.no }" />
-										<label for="mtr-${mtr.no }">&nbsp;&nbsp;${mtr.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
-									</c:forEach>
-								</td>
-							</tr>
-							<tr>
-								<th width=10% class="text-left" ><h5>&nbsp;&nbsp;알갱이 크기</h5></th>
-								<td width=90% >
-									<c:forEach var="grn" items="${grnList }">
-										<input type="checkbox" id="grn-${grn.no }" name="grn" value="${grn.no }" />
-										<label for="grn-${grn.no }">&nbsp;&nbsp;${grn.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
-									</c:forEach>
-								</td>
-							</tr>
-							<tr>
-								<td colspan=2 class="text-center" >
-									<button type="button" id="opDel" >조건 삭제</button>&nbsp;&nbsp;
-									<button type="submit" >검색</button>
-								</td>
-							</tr>
-						</table>
-				</div>
-			
-				<div class="ListSort" >
-					<div style="height: 30px;" ></div>
-						<button type="submit" class="list_sort_btn" name="sort_btn" value="hit" >조회수 순</button>
-						<button type="submit" class="list_sort_btn" name="sort_btn" value="lowP" >낮은 가격 순</button>
-						<button type="submit" class="list_sort_btn" name="sort_btn" value="highP" >높은 가격 순</button>
-						<button type="submit" class="list_sort_btn" name="sort_btn" value="fav" >찜 많은 순</button>
-						<button type="submit" class="list_sort_btn" name="sort_btn" value="rvw" >리뷰 많은 순</button>
-						<button type="submit" class="list_sort_btn" name="sort_btn" value="star" >별점 높은 순</button>
-						<span style="font-weight: 300; font-size: 14px; float: right;" >
-							검색 결과 ${totalNum }개
-							<c:forEach begin="1" end="15" >
-								&nbsp;
-							</c:forEach>
-						</span>
-					<div style="height: 30px;" ></div>
-				</div>
-			</form>
-			
-			<div class="fdList" >
-				<c:if test="${fn:length(fdList)==0}" >
-					<div id="listIsNull" class="text-center" style="height: 50px;" >
-						<span style="font-weight: 300; font-size: 14px;">검색된 결과가 없습니다</span>
+		<form id="optionListForm" method="post" action="../feed/feed_list.do">
+			<div class="feedList" >
+				<h3 class="page-header text-center">사료 가격비교</h3>
+					<div class="optionList" >
+							<table class="table table-borderless" >
+								<tr>
+									<th width=10% class="text-left" ><h5>&nbsp;&nbsp;사료 종류</h5></th>
+									<td width=90% >
+										<input type="radio" id="cate-999" name="category" value="999" />
+										<label for="cate-999">&nbsp;&nbsp;전체&nbsp;&nbsp;</label>&nbsp;&nbsp;
+										<c:forEach var="cate" items="${cateList }">
+											<input type="radio" id="cate-${cate.no }" name="category" value="${cate.no }">
+											<label for="cate-${cate.no }">&nbsp;&nbsp;${cate.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
+										</c:forEach>
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-left" ><h5>&nbsp;&nbsp;브랜드</h5></th>
+									<td width=90% >
+										<c:forEach var="brnd" items="${brndList }">
+											<input type="checkbox" id="brnd-${brnd.no }" name="brand" value="${brnd.no }" />
+											<label for="brnd-${brnd.no }">&nbsp;&nbsp;${brnd.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
+										</c:forEach>
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-left" ><h5>&nbsp;&nbsp;연령</h5></th>
+									<td width=90% >
+										<c:forEach var="tg" items="${tgList }">
+											<input type="checkbox" id="tg-${tg.no }" name="tg" value="${tg.no }" />
+											<label for="tg-${tg.no }">&nbsp;&nbsp;${tg.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
+										</c:forEach>
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-left" ><h5>&nbsp;&nbsp;주원료</h5></th>
+									<td width=90% >
+										<c:forEach var="mtr" items="${mtrList }">
+											<input type="checkbox" id="mtr-${mtr.no }" name="mtr" value="${mtr.no }" />
+											<label for="mtr-${mtr.no }">&nbsp;&nbsp;${mtr.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
+										</c:forEach>
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-left" ><h5>&nbsp;&nbsp;알갱이 크기</h5></th>
+									<td width=90% >
+										<c:forEach var="grn" items="${grnList }">
+											<input type="checkbox" id="grn-${grn.no }" name="grn" value="${grn.no }" />
+											<label for="grn-${grn.no }">&nbsp;&nbsp;${grn.name }&nbsp;&nbsp;</label>&nbsp;&nbsp;
+										</c:forEach>
+									</td>
+								</tr>
+								<tr>
+									<td colspan=2 class="text-center" >
+										<button type="button" id="opDel" >조건 삭제</button>&nbsp;&nbsp;
+										<button type="submit" >검색</button>
+									</td>
+								</tr>
+							</table>
 					</div>
-				</c:if>
-				<c:if test="${fn:length(fdList)>0}" >
-					<c:forEach var="vo" items="${fdList }">
-						<div class="fd_goods" >
-							<div class="fd_img" >
-								<img src="${vo.feedImg }" width=235px height=235px >
-							</div>
-							<div class="fd_info" >
-								<div style="height: 55px;" ><span class="fd_info_name" >${vo.name }</span></div>
-								<div style="height: 35px;" >
-									<span class="fd_info_price" >최저가&nbsp;<fmt:formatNumber value="${vo.lowPrice }" pattern="#,###" />원</span>
+				
+					<div class="ListSort" >
+						<div style="height: 30px;" ></div>
+							<button type="submit" class="list_sort_btn" name="sort_btn" value="hit" >조회수 순</button>
+							<button type="submit" class="list_sort_btn" name="sort_btn" value="lowP" >낮은 가격 순</button>
+							<button type="submit" class="list_sort_btn" name="sort_btn" value="highP" >높은 가격 순</button>
+							<button type="submit" class="list_sort_btn" name="sort_btn" value="fav" >찜 많은 순</button>
+							<button type="submit" class="list_sort_btn" name="sort_btn" value="rvw" >리뷰 많은 순</button>
+							<button type="submit" class="list_sort_btn" name="sort_btn" value="star" >별점 높은 순</button>
+							<span style="font-weight: 300; font-size: 14px; float: right;" >
+								검색 결과 ${totalNum }개
+								<c:forEach begin="1" end="15" >
+									&nbsp;
+								</c:forEach>
+							</span>
+						<div style="height: 30px;" ></div>
+					</div>
+					
+				<div class="fdList" >
+					<c:if test="${totalNum==0}" >
+						<div id="listIsNull" class="text-center" style="height: 50px;" >
+							<span style="font-weight: 300; font-size: 14px;">검색된 결과가 없습니다</span>
+						</div>
+					</c:if>
+					<c:if test="${totalNum>0}" >
+						<c:forEach var="vo" items="${fdList }">
+							<div class="fd_goods" >
+								<div class="fd_img" >
+									<a href="../feed/feed_detail.do?no=${vo.no }" ><img src="${vo.feedImg }" width=235px height=235px ></a>
+								</div>
+								<div class="fd_info" >
+									<div style="height: 55px;" >
+										<a href="../feed/feed_detail.do?no=${vo.no }" ><span class="fd_info_name" >${vo.name }</span></a>
+									</div>
+									<div style="height: 35px;" >
+										<span class="fd_info_price" >최저가&nbsp;<fmt:formatNumber value="${vo.lowPrice }" pattern="#,###" />원</span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
-				</c:if>
+						</c:forEach>
+					</c:if>
+				</div>
+				
+				<div class="blog-pagination">
+					<div style="height: 30px;" ></div>
+					<ul class="pagination">
+						<li><button type="submit" name="page" value="1"></button></li>
+						<c:forEach var="i" begin="1" end="${totalPage }">
+							<c:set var="pageFlag" value="true" />
+							<c:if test="${totalPage<=5 }" >
+								<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
+								<c:set var="pageFlag" value="false" />
+							</c:if>
+							<c:if test="${curpage<=3 and pageFlag}" >
+								<c:set var="pageFlag" value="false" />
+								<c:if test="${i<=5 }">
+									<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
+								</c:if>
+							</c:if>
+							<c:if test="${curpage>=totalPage-2 and pageFlag}" >
+								<c:set var="pageFlag" value="false" />
+								<c:if test="${i>totalPage-5 }" >
+									<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
+								</c:if>
+							</c:if>
+							<c:if test="${pageFlag }" >
+								<c:if test="${i>=curpage-2 and i<=curpage+2 }" >
+									<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
+								</c:if>
+							</c:if>
+						</c:forEach>
+						
+						<li><button type="submit" name="page" value="${totalPage }"></button></li>
+					</ul>
+				</div>
+				
 			</div>
-			
-			<div class="blog-pagination">
-				<ul class="pagination">
-					<li><a href="../feed/feed_list.do?page=1">left</a></li>
-					<c:forEach var="i" begin="1" end="${totalPage }">
-						<li class="${i==curpage?'active':'' }" ><a href="../feed/feed_list.do?page=${i }" >${i }</a></li>
-					</c:forEach>
-					<li><a href="../feed/feed_list.do?page=${totalPage }">right</a></li>
-				</ul>
-			</div>
-		
-		</div>
+		</form>
 	</div>
 </div>
 </body>

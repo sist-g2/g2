@@ -8,6 +8,7 @@ public class FeedVO {
 	private int category;
 	private int target;
 	private String material;
+	private String prntMtr;
 	private int grain;
 	private String info;
 	private String infoImg;
@@ -16,13 +17,13 @@ public class FeedVO {
 	private int favNum;
 	private int rvwNum;
 	private double starAvg;
-	private Feed_brandVO brndVO;
-	private Feed_cateVO cateVO;
-	private Feed_grainVO grnVO;
-	private Feed_mtrVO mtrVO;
-	private Feed_targetVO tgVO;
-	private StoreVO svo;
-	private FavoriteVO fvo;
+	private Feed_brandVO brndVO = new Feed_brandVO();
+	private Feed_cateVO cateVO = new Feed_cateVO();
+	private Feed_grainVO grnVO = new Feed_grainVO();
+	private Feed_mtrVO mtrVO = new Feed_mtrVO();
+	private Feed_targetVO tgVO = new Feed_targetVO();
+	private Feed_StoreVO svo;
+	private Feed_FavoriteVO fvo;
 	
 	public int getNo() {
 		return no;
@@ -65,6 +66,12 @@ public class FeedVO {
 	}
 	public void setMaterial(String material) {
 		this.material = material;
+	}
+	public String getPrntMtr() {
+		return prntMtr;
+	}
+	public void setPrntMtr(String prntMtr) {
+		this.prntMtr = prntMtr;
 	}
 	public int getGrain() {
 		return grain;
@@ -144,16 +151,16 @@ public class FeedVO {
 	public void setTgVO(Feed_targetVO tgVO) {
 		this.tgVO = tgVO;
 	}
-	public StoreVO getSvo() {
+	public Feed_StoreVO getSvo() {
 		return svo;
 	}
-	public void setSvo(StoreVO svo) {
+	public void setSvo(Feed_StoreVO svo) {
 		this.svo = svo;
 	}
-	public FavoriteVO getFvo() {
+	public Feed_FavoriteVO getFvo() {
 		return fvo;
 	}
-	public void setFvo(FavoriteVO fvo) {
+	public void setFvo(Feed_FavoriteVO fvo) {
 		this.fvo = fvo;
 	}
 	

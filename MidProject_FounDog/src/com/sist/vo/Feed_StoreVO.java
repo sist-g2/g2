@@ -1,12 +1,12 @@
 package com.sist.vo;
 
-public class StoreVO {
+public class Feed_StoreVO {
 	private int no;
 	private String stName;
 	private String link;
 	private int price;
 	private int fnum;
-	private FeedVO fvo;
+	private FeedVO fvo = new FeedVO();
 	
 	public int getNo() {
 		return no;
