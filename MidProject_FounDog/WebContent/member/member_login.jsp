@@ -6,17 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../css/member.css" rel="stylesheet">
 <style type="text/css">
-.row{
+.rowrow{
 	margin: 0px auto;
-	width: 1200px;
+	width: 400px;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#canBtn').click(function(){
-		location.href="../main/main.do";
-	});
 	
 	$('#logBtn').click(function(){
 		var id = $('#id').val();
@@ -81,28 +78,30 @@ $(function(){
 <section id="shortcodes">
 	<div class="container">
 		<div class="live-preview text-center">
+			<div class="rowrow">
 			<table class="table table-borderless">
 				<tr>
-					<th class="text-right" width=40%>ID</th>
-					<td class="text-left" width=60%>
-						<input type=text id=id name=id class="form-control2" size=25>&nbsp;&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<th class="text-right" width=40%>Password</th>
-					<td class="text-left" width=60%>
-						<input type=password name=pwd id=pwd class="form-control2" size=25>&nbsp;&nbsp;&nbsp;&nbsp;
+					<td colspan="2">
+						<input type=text id=id name=id class="form-control" placeholder="아이디" style="height: 50px;">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<!-- <a href="#" class="btn btn-common uppercase">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="#" class="btn btn-common uppercase">취소</a> -->
-						<input type="button" value="로그인" id="logBtn" class="btn btn-common2 uppercase">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="button" value="취소" id="canBtn" class="btn btn-common2 uppercase">
+						<input type=password name=pwd id=pwd class="form-control" placeholder="비밀번호" style="height: 50px;">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="button" value="로그인" id="logBtn" class="btn btn-submit uppercase" style="height: 50px;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="../main/main.do">취소</a>
 					</td>
 				</tr>
 			</table>
+			</div>
 		</div>
 	</div>
 </section>

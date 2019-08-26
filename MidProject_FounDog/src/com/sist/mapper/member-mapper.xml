@@ -11,4 +11,28 @@
 		FROM member
 		WHERE id=#{id}
 	</select>
+	<insert id="memberJoin" parameterType="MemberVO">
+		INSERT INTO member VALUES(
+			#{id},
+			#{pwd},
+			#{name},
+			#{birthday},
+			#{sex},
+			#{tel},
+			#{email},
+			#{post},
+			#{addr1},
+			#{addr2}
+		)
+	</insert>
+	<insert id="dogJoin" parameterType="DogVO">
+		INSERT INTO dog VALUES(
+			dog_dno_seq.nextval,
+			#{dname},
+			#{dtype},
+			#{dbirth},
+			#{dsex},
+			#{id}
+		)
+	</insert>
 </mapper>

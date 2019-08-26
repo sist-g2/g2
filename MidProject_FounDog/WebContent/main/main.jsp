@@ -31,8 +31,14 @@
         	</div> -->
         	<div class="pull-right">
         		<ul class="nav nav-pills">
+        			<c:if test="${sessionScope.id==null }">
         			<li><a href="../member/member_login.do">로그인</a></li>
-        			<li><a href="#">회원가입</a></li>
+        			<li><a href="../member/member_join.do">회원가입</a></li>
+        			</c:if>
+        			<c:if test="${sessionScope.id!=null }">
+        			<li><a href="../member/member_logout.do">로그아웃</a></li>
+        			<li><a href="../member/member_mypage.do">마이페이지</a></li>
+        			</c:if>
         			<li><a href="#">사이트 이용안내</a></li>
         		</ul>
         	</div>
@@ -58,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button> -->
-                <a class="navbar-brand" href="../main/main.jsp">
+                <a class="navbar-brand" href="../main/main.do">
                 	<h1><img src="../images/FounDog.png" alt="logo"></h1>
                 </a>
             </div>
@@ -77,7 +83,7 @@
                             <li><a href="../template/singlecolor/coming-soon.html">Coming Soon</a></li>
                         </ul> -->
                     </li>                  
-                    <li class="dropdown"><a href="../hospital/sample.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
                         <!-- <ul role="menu" class="sub-menu">
                             <li><a href="../template/singlecolor/blog.html">Blog Default</a></li>
                             <li><a href="../template/singlecolor/blogtwo.html">Timeline Blog</a></li>
@@ -87,7 +93,7 @@
                             <li><a href="../template/singlecolor/blogdetails.html">Blog Details</a></li>
                         </ul> -->
                     </li>
-                    <li class="dropdown"><a href="../template/singlecolor/portfolio.html">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
                         <!-- <ul role="menu" class="sub-menu">
                             <li><a href="../template/singlecolor/portfolio.html">Portfolio Default</a></li>
                             <li><a href="../template/singlecolor/portfoliofour.html">Isotope 3 Columns + Right Sidebar</a></li>
