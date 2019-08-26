@@ -137,12 +137,12 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=year class="form-control2">
+				<select name=year class="form-control2" style="width:27%">
 					<option></option>
 					<option>2019</option>
 					<option>2018</option>
-				</select>년&nbsp;
-				<select name=month class="form-control2">
+				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
+				<select name=month class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -156,12 +156,12 @@
 					<option>10</option>
 					<option>11</option>
 					<option>12</option>
-				</select>월&nbsp;
-				<select name=day class="form-control2">
+				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
+				<select name=day class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
-				</select>일&nbsp;
+				</select>&nbsp;일
 			</td>
 		</tr>
 		<tr>

@@ -64,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button> -->
-                <a class="navbar-brand" href="../main/main.jsp">
+                <a class="navbar-brand" href="../main/main.do">
                 	<h1><img src="../images/FounDog.png" alt="logo"></h1>
                 </a>
             </div>

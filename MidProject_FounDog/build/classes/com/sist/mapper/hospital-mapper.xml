@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.hospital-mapper">
+<select id="hospitalGetLoc" resultType="String" parameterType="String">
+		SELECT DISTINCT SUBSTR(SUBSTR(loc,7),0,INSTR(loc,' ')-3) FROM hospital
+</select>
+
+<select id="hospitalSearch" resultType="HospitalVO" parameterType="hashmap">
+    SELECT no,name,loc,tel,num
+	FROM (SELECT no,name,loc,tel,rownum as num
+	FROM hospital
+	WHERE loc LIKE '%'||#{loc}||'%' AND name LIKE '%'||#{name}||'%')  
+	WHERE num BETWEEN #{start} AND #{end}  
+</select>
+
+<select id="hospitalTotalResult" resultType="int" parameterType="hashmap">
+	 SELECT COUNT(*) 
+	 FROM hospital
+	 WHERE loc LIKE '%'||#{loc}||'%' AND name LIKE '%'||#{name}||'%'
+</select>
+</mapper>
