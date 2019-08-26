@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.adminboard-mapper">
+
+   <select id="adminboardListData" resultType="AdminBoardVO" parameterType="java.util.Map">
+      SELECT no,subject,name,dbday,hit,num 
+      FROM (SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,rownum as num 
+      FROM (SELECT no,subject,name,regdate,hit 
+      FROM adminboard ORDER BY no DESC))
+      WHERE num BETWEEN #{start} AND #{end}
+   </select>
+   <select id="adminboardTotalPage" resultType="int">
+      SELECT CEIL(COUNT(*)/10.0) FROM adminboard
+   </select>
+   <!-- 게시물 번호가 일렬로 처리  -->
+   <select id="adminboardRowCount" resultType="int">
+      SELECT COUNT(*) FROM adminboard
+   </select>
+   <insert id="adminboardInsert" parameterType="AdminBoardVO">
+      INSERT INTO adminboard(no,name,subject,content) VALUES(
+        adminboard_no_seq.nextval,
+        #{name},
+        #{subject},
+        #{content}
+      )
+   </insert>
+   <!-- 상세보기  -->
+   <update id="hitIncrement" parameterType="int">
+     UPDATE adminboard SET
+     hit=hit+1
+     WHERE no=#{no}
+   </update>
+   <select id="adminboardDetailData" resultType="AdminBoardVO" parameterType="int">
+     SELECT no,name,subject,content,TO_CHAR(regdate,'RRRR-MM-DD') as dbday,hit
+     FROM adminboard 
+     WHERE no=#{no}
+   </select>
+   <!-- 수정하기 -->
+   <select id="adminboardGetPwd" resultType="String" parameterType="int">
+     SELECT pwd FROM adminboard
+     WHERE no=#{no}
+   </select>
+   <update id="adminboardUpdate" parameterType="AdminBoardVO">
+     UPDATE adminboard SET
+     name=#{name},subject=#{subject},content=#{content}
+     WHERE no=#{no}
+   </update>
+   
+   <!-- 게시물 삭제 -->
+   <delete id="adminboardDelete" parameterType="int">
+     DELETE FROM adminboard 
+     WHERE no=#{no}
+   </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

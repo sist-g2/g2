@@ -15,10 +15,12 @@
 		<typeAlias type="com.sist.vo.Feed_ReviewVO" alias="Feed_ReviewVO"/>
 		<typeAlias type="com.sist.vo.HospitalVO" alias="HospitalVO" />
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.sist.vo.DogVO" alias="DogVO" />
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.sist.vo.Board_DogVO" alias="Board_DogVO" />
 		<typeAlias type="com.sist.vo.Board_FAQVO" alias="Board_FAQVO" />
 		<typeAlias type="com.sist.vo.Board_ReplyVO" alias="Board_ReplyVO" />
+		<typeAlias type="com.sist.vo.AdminBoardVO" alias="AdminBoardVO" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -36,6 +38,7 @@
 		<mapper resource="com/sist/mapper/hospital-mapper.xml" />
 		<mapper resource="com/sist/mapper/member-mapper.xml" />
 		<mapper resource="com/sist/mapper/board-mapper.xml" />
+		<mapper resource="com/sist/mapper/adminboard-mapper.xml" />
 	</mappers>
 </configuration>
 

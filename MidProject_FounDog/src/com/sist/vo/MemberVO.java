@@ -1,19 +1,65 @@
 package com.sist.vo;
 
-import java.util.Date;
-
 public class MemberVO {
 	private String id;
 	private String pwd;
 	private String name;
-	private Date birthday;
+	private String birthday;
+	private String year;
+	private String month;
+	private String day;
 	private String sex;
 	private String tel;
+	private String tel1;
+	private String tel2;
+	private String tel3;
 	private String email;
 	private String post;
 	private String addr1;
 	private String addr2;
 	
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public String getTel1() {
+		return tel1;
+	}
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
+	}
+	public String getTel2() {
+		return tel2;
+	}
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
+	}
+	public String getTel3() {
+		return tel3;
+	}
+	public void setTel3(String tel3) {
+		this.tel3 = tel3;
+	}
 	public String getId() {
 		return id;
 	}
@@ -31,12 +77,6 @@ public class MemberVO {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
 	}
 	public String getSex() {
 		return sex;
