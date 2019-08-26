@@ -1,7 +1,6 @@
 package com.sist.dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,14 +13,12 @@ public class HospitalDAO {
 	static{
 		ssf = CreateSqlSessionFactory.getSsf();
 	}
-	public static List<HospitalVO> hospitalSearch(String loc,String name)
+	public static List<HospitalVO> hospitalSearch(Map map)
 	   {
 		   SqlSession session=ssf.openSession();
 		   HospitalVO vo = new HospitalVO();
-		   vo.setLoc(loc);
-		   vo.setName(name);
 		   
-		   List<HospitalVO> list=session.selectList("hospitalSearch",vo);
+		   List<HospitalVO> list=session.selectList("hospitalSearch",map);
 		   session.close();
 		   return list;
 	   }
@@ -33,4 +30,12 @@ public class HospitalDAO {
 		session.close();
 		return list;
 	}
+	
+	 public static int hospitalTotalResult(Map map){
+		   int total=0;
+		   SqlSession session=ssf.openSession();	   					  
+		   total=session.selectOne("hospitalTotalResult",map);
+		   session.close();
+		   return total;
+	   }
 }
