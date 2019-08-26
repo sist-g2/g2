@@ -77,7 +77,7 @@
                             <li><a href="../template/singlecolor/coming-soon.html">Coming Soon</a></li>
                         </ul> -->
                     </li>                  
-                    <li class="dropdown"><a href="../hospital/sample.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
                         <!-- <ul role="menu" class="sub-menu">
                             <li><a href="../template/singlecolor/blog.html">Blog Default</a></li>
                             <li><a href="../template/singlecolor/blogtwo.html">Timeline Blog</a></li>
