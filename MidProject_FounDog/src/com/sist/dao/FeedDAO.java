@@ -97,7 +97,9 @@ public class FeedDAO {
 	
 	// 상품 상세보기
 	public static void feedHitIncrease(int no) {
-		
+		SqlSession session = ssf.openSession(true);
+		session.update("feedHitIncrease", no);
+		session.close();
 	}
 	
 	public static FeedVO feedDetailData(int no) {
@@ -119,5 +121,19 @@ public class FeedDAO {
 		int lowPrice = session.selectOne("feedLowPrice", no);
 		session.close();
 		return lowPrice;
+	}
+	
+	public static List<Feed_ReviewVO> reviewAllData(int no) {
+		SqlSession session = ssf.openSession();
+		List<Feed_ReviewVO> list = session.selectList("reviewAllData", no);
+		session.close();
+		return list;
+	}
+	
+	// 상품 찜하기
+	public static void feedFavInsert(Feed_FavoriteVO vo) {
+		SqlSession session = ssf.openSession(true);
+		session.insert("feedFavInsert", vo);
+		session.close();
 	}
 }

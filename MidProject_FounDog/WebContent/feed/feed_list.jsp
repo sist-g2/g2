@@ -18,9 +18,22 @@
 <script type="text/javascript">
 $(function(){
 	
+	$(window).scroll(function(){
+		var scrollTop = $(window).scrollTop();
+		$('#cookiePrnt').stop().animate({top:scrollTop+200+"px"}, 1);
+	});
+	
 	$('#opDel').click(function(){
 		$('#cate-999').prop("checked", true);
 		$('input[type=checkbox]').prop("checked", false);
+	});
+	
+	$('#PgUp').click(function(){
+		$("html").animate({scrollTop : 0}, 500);
+	});
+	
+	$('#PgDwn').click(function(){
+		$("html").animate({scrollTop : ($(document).height())}, 500);
 	});
 	
 	var cateOp = ${category};
@@ -176,38 +189,36 @@ $(function(){
 				<div class="blog-pagination">
 					<div style="height: 30px;" ></div>
 					<ul class="pagination">
-						<li><button type="submit" name="page" value="1"></button></li>
-						<c:forEach var="i" begin="1" end="${totalPage }">
-							<c:set var="pageFlag" value="true" />
-							<c:if test="${totalPage<=5 }" >
-								<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
-								<c:set var="pageFlag" value="false" />
-							</c:if>
-							<c:if test="${curpage<=3 and pageFlag}" >
-								<c:set var="pageFlag" value="false" />
-								<c:if test="${i<=5 }">
-									<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
-								</c:if>
-							</c:if>
-							<c:if test="${curpage>=totalPage-2 and pageFlag}" >
-								<c:set var="pageFlag" value="false" />
-								<c:if test="${i>totalPage-5 }" >
-									<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
-								</c:if>
-							</c:if>
-							<c:if test="${pageFlag }" >
-								<c:if test="${i>=curpage-2 and i<=curpage+2 }" >
-									<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
-								</c:if>
-							</c:if>
+						<c:if test="${curpage>3 }" >
+							<li><button type="submit" id="firstPage" name="page" value="1"></button></li>
+						</c:if>
+						<c:forEach var="i" begin="${startPage }" end="${endPage }" >
+							<li class="${i==curpage?'active':'' }" ><button type="submit" name="page" value="${i }">${i }</button></li>
 						</c:forEach>
-						
-						<li><button type="submit" name="page" value="${totalPage }"></button></li>
+						<c:if test="${curpage<totalPage-2 }" >
+							<li><button type="submit" id="lastPage" name="page" value="${totalPage }"></button></li>
+						</c:if>
 					</ul>
 				</div>
 				
 			</div>
 		</form>
+	</div>
+	<div id="cookiePrnt" >
+		<div style="margin: 0px auto; text-align: center; margin-bottom: 10px;" >
+			<button id="PgUp" >▲</button>
+		</div>
+		<div style="margin: 0px auto; text-align: center; margin-bottom: 5px;" >
+			<span class="simpleInfo" >최근 본 상품</span>
+		</div>
+		<c:forEach var="ck" items="${clist }">
+			<div style="border: 1px solid #c3c3c3; height: 52px; width: 52px; margin: 0px auto; margin-bottom: 5px;" >
+				<a href="../feed/feed_detail.do?no=${ck.no }" ><img src="${ck.feedImg }" height="50px" width="50px"></a>
+			</div>
+		</c:forEach>
+		<div style="margin: 0px auto; text-align: center; margin-top: 10px;" >
+			<button id="PgDwn" >▼</button>
+		</div>
 	</div>
 </div>
 </body>

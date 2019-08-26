@@ -190,7 +190,7 @@ body::-webkit-scrollbar-corner {
 	border: 1px solid #fff;
 }
 
-.pagination li:first-child button{
+#firstPage {
   background: url(../images/portfolio/left.png);
   background-repeat: no-repeat;
   text-indent: -999999999px;
@@ -202,7 +202,7 @@ body::-webkit-scrollbar-corner {
   transition: 300ms;
 }
 
-.pagination li:first-child button:hover{
+#firstPage:hover{
   background: url(../images/portfolio/left.png);
   background-position: center top -37px;
   background-repeat: no-repeat;
@@ -210,7 +210,7 @@ body::-webkit-scrollbar-corner {
   transition: 300ms;
 }
 
-.pagination li:last-child button{
+#lastPage {
   background: url(../images/portfolio/right.png);
   background-repeat: no-repeat;
   text-indent: -999999999px;
@@ -222,7 +222,7 @@ body::-webkit-scrollbar-corner {
   transition: 300ms;
 }
 
-.pagination li:last-child button:hover{
+#lastPage:hover{
   background: url(../images/portfolio/right.png);
   background-position: center top -37px;
   background-repeat: no-repeat;
@@ -267,3 +267,78 @@ body::-webkit-scrollbar-corner {
 	text-align: center;
 	cursor: pointer;
 }
+
+#myFav {
+	display: inline-block;
+	border: 1px solid #808080;
+	border-radius: 12px;
+	background: #FFFFFF;
+	color: #808080;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#myFav:HOVER {
+	display: inline-block;
+	border-radius: 12px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.reviewList {
+	display: inline-block;
+}
+
+#reviewSubmit {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-left: 5px;
+	width: 85px;
+	height: 85px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#cookiePrnt {
+	position: absolute;
+	top: 200px;
+	left: 1350px;
+	width: 100px;
+	height: 300px;
+}
+
+#yellowStar {
+	font-weight: 300;
+	font-size: 20px;
+	color: #fce303;
+}
+#greyStar {
+	font-weight: 300;
+	font-size: 20px;
+	color:#808080;
+}
+
+#PgUp, #PgDwn {
+	display: inline-block;
+	border: 1px solid #808080;
+	border-radius: 6px;
+	background: #FFFFFF;
+	color: #808080;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+

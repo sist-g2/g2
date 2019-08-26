@@ -144,12 +144,14 @@
 		<result property="starAvg" column="starAvg" />
 	</resultMap>
 	
+	<!-- 상품 조회수 증가 -->
 	<update id="feedHitIncrease" parameterType="int" >
 		UPDATE feed 
-		SET no=no+1 
+		SET hit=hit+1 
 		WHERE no=#{no} 
 	</update>
 	
+	<!-- 상품 상세정보 -->
 	<select id="feedDetailData" resultMap="feedDetail" parameterType="int" >
 		SELECT f.no, f.name, brand, feedImg, category, target, material, grain, info, infoImg, 
 			fb.name as brndName, fc.name as cateName, fg.name as grnName, ft.name as tgName, 
@@ -164,6 +166,7 @@
 		 AND f.target=ft.no(+) 
 	</select>
 	
+	<!-- 상품별 판매처 정보 -->
 	<select id="feedStoreData" resultType="Feed_StoreVO" parameterType="int" >
 		SELECT no, stName, link, price, fnum 
 		FROM store 
@@ -171,6 +174,7 @@
 		ORDER BY price ASC 
 	</select>
 	
+	<!-- 상품 최저가 -->
 	<select id="feedLowPrice" resultType="int" parameterType="int" >
 		SELECT MIN(price) 
 		FROM store 
@@ -178,27 +182,33 @@
 		GROUP BY fnum 
 	</select>
 	
+	<!-- 리뷰 -->
 	<resultMap type="Feed_ReviewVO" id="reviewData">
 		<result property="no" column="no" />
+		<result property="regdate" column="regdate" />
+		<result property="rdateS" column="rdateS" />
+		<result property="subject" column="subject" />
+		<result property="content" column="content" />
+		<result property="star" column="star" />
+		<result property="id" column="id" />
+		<result property="fnum" column="fnum" />
+		<result property="dtype" column="dtype" />
+		<result property="mvo.name" column="name" />
 	</resultMap>
 	
+	<!-- 상품별 리뷰 정보 -->
 	<select id="reviewAllData" resultMap="reviewData" parameterType="int" >
-		private int no;
-	private Date regdate;
-	private String rdateS;
-	private String subject;
-	private String content;
-	private int star;
-	private String id;
-	private int fnum;
-	private String dtype;
-	private FeedVO fvo;
-	private MemberVO mvo;
-		SELECT r.no, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') AS rdateS, subject, content, star, fnum, r.id, m.name as name 
+		SELECT r.no, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') AS rdateS, subject, content, star, dtype, fnum, r.id, m.name as name 
 		FROM review r, member m 
 		WHERE r.id=m.id 
 		 AND fnum=#{no} 
 	</select>
+	
+	<!-- 찜하기 -->
+	<insert id="feedFavInsert" parameterType="Feed_FavoriteVO">
+		INSERT INTO favorite (no, id, fnum) 
+		VALUES ((SELECT NVL(MAX(no)+1, 1), #{id}, #{fnum})
+	</insert>
 	
 </mapper>
 
