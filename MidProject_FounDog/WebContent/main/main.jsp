@@ -87,7 +87,7 @@
                             <li><a href="../template/singlecolor/blogdetails.html">Blog Details</a></li>
                         </ul> -->
                     </li>
-                    <li class="dropdown"><a href="../template/singlecolor/portfolio.html">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
                         <!-- <ul role="menu" class="sub-menu">
                             <li><a href="../template/singlecolor/portfolio.html">Portfolio Default</a></li>
                             <li><a href="../template/singlecolor/portfoliofour.html">Isotope 3 Columns + Right Sidebar</a></li>
