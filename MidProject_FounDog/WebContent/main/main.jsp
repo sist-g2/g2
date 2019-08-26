@@ -31,8 +31,14 @@
         	</div> -->
         	<div class="pull-right">
         		<ul class="nav nav-pills">
+        			<c:if test="${sessionScope.id==null }">
         			<li><a href="../member/member_login.do">로그인</a></li>
-        			<li><a href="#">회원가입</a></li>
+        			<li><a href="../member/member_join.do">회원가입</a></li>
+        			</c:if>
+        			<c:if test="${sessionScope.id!=null }">
+        			<li><a href="../member/member_logout.do">로그아웃</a></li>
+        			<li><a href="../member/member_mypage.do">마이페이지</a></li>
+        			</c:if>
         			<li><a href="#">사이트 이용안내</a></li>
         		</ul>
         	</div>

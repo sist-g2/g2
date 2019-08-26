@@ -33,4 +33,10 @@ public class MemberDAO {
 		session.close();
 		return vo;
 	}
+	
+	public static void memberJoin(MemberVO vo){
+		SqlSession session = ssf.openSession(true);
+		session.insert("memberJoin", vo);
+		session.close();
+	}
 }

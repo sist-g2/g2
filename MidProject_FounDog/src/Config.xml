@@ -15,6 +15,7 @@
 		<typeAlias type="com.sist.vo.Feed_ReviewVO" alias="Feed_ReviewVO"/>
 		<typeAlias type="com.sist.vo.HospitalVO" alias="HospitalVO" />
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.sist.vo.DogVO" alias="DogVO" />
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.sist.vo.Board_DogVO" alias="Board_DogVO" />
 		<typeAlias type="com.sist.vo.Board_FAQVO" alias="Board_FAQVO" />
