@@ -22,7 +22,7 @@
          <tr>
            <th class="text-right info" width=20%>이름</th>
            <td width=80% class="text-left">
-             <input type=text name=name size=15 class="input-sm">
+             <input type=text name=name size=15 class="input-sm" value="${sessionScope.id}" id=name readonly="readonly">
            </td>
          </tr>
          <tr>

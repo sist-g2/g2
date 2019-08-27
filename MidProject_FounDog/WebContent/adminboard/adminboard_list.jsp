@@ -34,9 +34,11 @@ $(function(){
        <h2 class="text-center">게시판</h2>
        <table class="table">
          <tr>
+    	   <c:if test="${sessionScope.id!=null && sessionScope.id=='admin' }">
            <td class="text-left">
              <a href="adminboard_insert.do" class="btn btn-sm btn-success">새글</a>
            </td>
+            </c:if>
            <td class="text-right">
              ${curpage } page / ${totalpage } pages
            </td>

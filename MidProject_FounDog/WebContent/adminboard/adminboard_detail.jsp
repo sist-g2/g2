@@ -47,8 +47,10 @@
         </tr>
         <tr>
           <td colspan="4" class="text-right">
+          <c:if test="${sessionScope.id!=null && sessionScope.id=='admin' }">
             <a href="adminboard_update.do?no=${vo.no }" class="btn btn-sm btn-success">수정</a>
             <a href="adminboard_delete.do?no=${vo.no }" class="btn btn-sm btn-info">삭제</a>
+          </c:if>
             <a href="adminboard_list.do" class="btn btn-sm btn-warning">목록</a>
           </td>
         </tr>

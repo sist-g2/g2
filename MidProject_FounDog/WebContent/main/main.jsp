@@ -70,7 +70,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="../main/main.jsp">Home</a></li>
+                    <li class="active"><a href="../main/main.do">Home</a></li>
                     <li class="dropdown"><a href="../feed/feed_list.do">사료비교 <!-- <i class="fa fa-angle-down"></i> --></a>
                         <!-- <ul role="menu" class="sub-menu">
                             <li><a href="../template/singlecolor/aboutus.html">About</a></li>
