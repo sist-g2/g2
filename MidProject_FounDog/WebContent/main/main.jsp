@@ -21,7 +21,7 @@
 <body>
 <header id="header">      
     <div class="container">
-        <div class="row">
+        <div class="found">
         	<!-- <div class="pull-right">
         		<ul class="nav nav-pills">
         			<li><a href="#">마이페이지</a></li>
@@ -72,36 +72,21 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="../main/main.do">Home</a></li>
                     <li class="dropdown"><a href="../feed/feed_list.do">사료비교 <!-- <i class="fa fa-angle-down"></i> --></a>
-                        <!-- <ul role="menu" class="sub-menu">
-                            <li><a href="../template/singlecolor/aboutus.html">About</a></li>
-                            <li><a href="../template/singlecolor/aboutus2.html">About 2</a></li>
-                            <li><a href="../template/singlecolor/service.html">Services</a></li>
-                            <li><a href="../template/singlecolor/pricing.html">Pricing</a></li>
-                            <li><a href="../template/singlecolor/contact.html">Contact us</a></li>
-                            <li><a href="../template/singlecolor/contact2.html">Contact us 2</a></li>
-                            <li><a href="../template/singlecolor/404.html">404 error</a></li>
-                            <li><a href="../template/singlecolor/coming-soon.html">Coming Soon</a></li>
-                        </ul> -->
+                         <ul role="menu" class="sub-menu">
+                            <li><a href="../feed/feed_list.do">사료비교</a></li>
+                            <li><a href="#">찜 목록</a></li>
+                        </ul>
                     </li>                  
                     <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
-                        <!-- <ul role="menu" class="sub-menu">
-                            <li><a href="../template/singlecolor/blog.html">Blog Default</a></li>
-                            <li><a href="../template/singlecolor/blogtwo.html">Timeline Blog</a></li>
-                            <li><a href="../template/singlecolor/blogone.html">2 Columns + Right Sidebar</a></li>
-                            <li><a href="../template/singlecolor/blogthree.html">1 Column + Left Sidebar</a></li>
-                            <li><a href="../template/singlecolor/blogfour.html">Blog Masonary</a></li>
-                            <li><a href="../template/singlecolor/blogdetails.html">Blog Details</a></li>
-                        </ul> -->
+                         <ul role="menu" class="sub-menu">
+                            <li><a href="../hospital/hospital_list.do">병원 이용</a></li>
+                        </ul>
                     </li>
                     <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
-                        <!-- <ul role="menu" class="sub-menu">
-                            <li><a href="../template/singlecolor/portfolio.html">Portfolio Default</a></li>
-                            <li><a href="../template/singlecolor/portfoliofour.html">Isotope 3 Columns + Right Sidebar</a></li>
-                            <li><a href="../template/singlecolor/portfolioone.html">3 Columns + Right Sidebar</a></li>
-                            <li><a href="../template/singlecolor/portfoliotwo.html">3 Columns + Left Sidebar</a></li>
-                            <li><a href="../template/singlecolor/portfoliothree.html">2 Columns</a></li>
-                            <li><a href="../template/singlecolor/portfolio-details.html">Portfolio Details</a></li>
-                        </ul> -->
+                         <ul role="menu" class="sub-menu">
+                            <li><a href="../adminboard/adminboard_list.do">정보성 게시판</a></li>
+                            <li><a href="#">사료 열량 계산기</a></li>
+                        </ul>
                     </li>                         
                     <li><a href="../board/board_list.do ">커뮤니티</a></li>                    
                 </ul>

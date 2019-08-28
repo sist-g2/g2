@@ -19,54 +19,15 @@
 <script type="text/javascript">
 $(function(){
 	$('#delBtn').click(function(){
-		var pwd=$('#pwd').val();
-		if(pwd.trim()=="")
-		{
-			$('#pwd').focus();
-			return;
-		}
-		// ?no=1&pwd=1234
-		   /*
-		        HttpXMLRequest hxr;
-		        ==================== IE,기타 
-		        1) hxr.open("POST","board_delete_ok.do",true)
-		        2) hxr.onreadystatechange=callback;
-		        3) hxr.send(데이더 전송)
-		        
-		        4) function callback()
-		           {
-		        	  if(hxr.readyState==4 && hxr.status==200)
-		        	  {
-		        		  0 open전
-		        		  1 open중
-		        		  2 open완료 => 서버에 접속
-		        		  3 send중
-		        		  4 send완료 
-		        	  }
-		        	  else
-		        	  {
-		        		  
-		        	  }
-		           }
-		   */
+
 		var no=$('#no').val();
 		$.ajax({
 			type:'post',
 			url:'adminboard_delete_ok.do',
-			data:{no:no,pwd:pwd},
+			data:{no:no},
 			success:function(response)
 			{
-				var i=response.trim();
-				if(i==0)
-				{
-					alert("비밀번호가 틀립니다!!");
-					$('#pwd').val("");
-					$('#pwd').focus();
-				}
-				else
-				{
-					location.href="../adminboard/adminboard_list.do";
-				}
+				location.href="../adminboard/adminboard_list.do";
 			}
 		});
 	});
@@ -80,11 +41,11 @@ $(function(){
     <div class="row">
 	      <table class="table">
 	        <tr>
-	          <td class="text-right" width=30%>비밀번호</td>
+	          <td class="text-right" width=30%>삭제하시겠습니까?</td>
 	          <td class="text-left" width=70%>
-	            <input type=password name=pwd size=15 id="pwd">
+	           <!--  <input type=password name=pwd size=15 id="pwd"> -->
 	            <input type=hidden name=no value="${no }" id="no">
-	          </td>
+	          </td> 
 	        </tr>
 	        <tr>
 	          <td class="text-center" colspan="2">
