@@ -13,6 +13,7 @@ public class BoardDAO {
 	   {
 		   ssf=CreateSqlSessionFactory.getSsf();
 	   }
+	   
 	   // 목록 
 	   public static List<BoardVO> boardListData(Map map)
 	   {
@@ -25,6 +26,28 @@ public class BoardDAO {
 		   session.close();
 		   return list;
 	   }
+	   
+	   // 총페이지 읽기
+	   public static int boardTotalPage(int category)
+	   {
+		   int total=0;
+		   SqlSession session=ssf.openSession();
+		   total=session.selectOne("boardTotalPage", category);
+		   // id=> 대소문자 구분 
+		   session.close();
+		   return total;
+	   }
+	   // 게시쿨 전체 갯수 읽기
+	   public static int boardRowCount(int category)
+	   {
+		   int count=0;
+		   SqlSession session=ssf.openSession();
+		   count=session.selectOne("boardRowCount", category);
+		   // id=> 대소문자 구분 
+		   session.close();
+		   return count;
+	   }
+	   
 	   // 추가 
 	   public static void boardInsert(BoardVO vo)
 	   {
@@ -34,50 +57,28 @@ public class BoardDAO {
 		   session.close();
 	   }
 	   
-	   // 총페이지 읽기
-	   public static int boardTotalPage()
-	   {
-		   int total=0;
-		   SqlSession session=ssf.openSession();
-		   total=session.selectOne("boardTotalPage");
-		   // id=> 대소문자 구분 
-		   session.close();
-		   return total;
-	   }
-	   // 게시쿨 전체 갯수 읽기
-	   public static int boardRowCount()
-	   {
-		   int count=0;
-		   SqlSession session=ssf.openSession();
-		   count=session.selectOne("boardRowCount");
-		   // id=> 대소문자 구분 
-		   session.close();
-		   return count;
-	   }
-	   
-	   public static BoardVO boardDetailData(int no,String type)
+	   // 상세보기
+	   public static BoardVO boardDetailData(int no, int type)
 	   {
 		   BoardVO vo=new BoardVO();
 		   SqlSession session=ssf.openSession();
-		   if(type.equals("detail"))
-		   {
-		     session.update("hitIncrement",no);// 조회수 증가
-		     session.commit();
+		   
+		   if(type==0) {
+			   session.update("boardHitIncrement",no);// 조회수 증가
+			   session.commit();
 		   }
+		   
 		   vo=session.selectOne("boardDetailData", no);
 		   session.close();
 		   return vo;
 	   }
 	   
-	   public static int boardUpdate(BoardVO vo)
+	   // 수정하기
+	   public static void boardUpdate(BoardVO vo)
 	   {
-		   int no=0;
-		   SqlSession session=ssf.openSession();
-			     no=vo.getNo();
-			     session.update("boardUpdate",vo);
-			     session.commit();
+		   SqlSession session=ssf.openSession(true);
+		   session.update("boardUpdate",vo);
 		   session.close();
-		   return no;
 	   }
 	   
 	   // 댓글 올리기

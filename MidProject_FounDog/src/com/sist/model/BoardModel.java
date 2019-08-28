@@ -17,13 +17,17 @@ public class BoardModel {
   @RequestMapping("board/board_list.do")	
   public String board_list(Model model)
   {
+	  HttpSession session = model.getRequest().getSession(); // 세션
+	  
 	  // page를 받는다 
 	  String page=model.getRequest().getParameter("page");
 	  if(page==null)
 		  page="1";
 	  int curpage=Integer.parseInt(page);
+	  
 	  // Map에 저장 
 	  Map map=new HashMap();
+	  
 	  int rowSize=10;
 	  int start=(curpage*rowSize)-(rowSize-1);
 	  // 1~10 , 11~20 , 21....
@@ -31,6 +35,7 @@ public class BoardModel {
 	  
 	  map.put("start", start);
 	  map.put("end", end);
+	  map.put("category", 0); // 자유게시판 카테고리 : 0
 	  
 	  List<BoardVO> list=BoardDAO.boardListData(map);
 	  
@@ -39,8 +44,8 @@ public class BoardModel {
 	  
 	  // 현재 페이지 => curpage
 	  // 총페이지  => totalpage
-	  int totalpage=BoardDAO.boardTotalPage();
-	  int count=BoardDAO.boardRowCount();// 22
+	  int totalpage = BoardDAO.boardTotalPage(0);
+	  int count=BoardDAO.boardRowCount(0); // 22
 	  count=count-((curpage*rowSize)-rowSize); 
 	
 	  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -69,17 +74,16 @@ public class BoardModel {
 	  {
 		  model.getRequest().setCharacterEncoding("UTF-8");
 	  }catch(Exception ex){}
-	  HttpSession session = model.getRequest().getSession();
 	  
+	  HttpSession session = model.getRequest().getSession();
 	  String id = (String)session.getAttribute("id");
-	  // String id=model.getRequest().getParameter("id");
 	  String subject=model.getRequest().getParameter("subject");
 	  String content=model.getRequest().getParameter("content");
 	  
 	  BoardVO vo=new BoardVO();
 
-	  vo.setId(id);
 	  vo.setCategory(0);
+	  vo.setId(id);
 	  vo.setSubject(subject);
 	  vo.setContent(content);
 	  
@@ -96,25 +100,28 @@ public class BoardModel {
 	  // 요청값 받기
 	  String no=model.getRequest().getParameter("no");
 	  // DAO연결 => 결과값
-	  BoardVO vo=BoardDAO.boardDetailData(Integer.parseInt(no),"detail");
+	  BoardVO vo=BoardDAO.boardDetailData(Integer.parseInt(no), 0);
+	  // 0: 상세보기에서 접근할 경우 boardDetailData - hit 증가 O
 	  // JSP에 전송 
 	  model.addAttribute("vo", vo);
 	  // list  댓글 목록 
-	  List<BoardVO> list = BoardDAO.replyListData(Integer.parseInt(no));
+	  /*List<BoardVO> list = BoardDAO.replyListData(Integer.parseInt(no));
 	  int count=BoardDAO.replyListCount(Integer.parseInt(no));
 	  model.addAttribute("list", list);
-	  model.addAttribute("count", count);
+	  model.addAttribute("count", count);*/
 	  model.addAttribute("main_jsp", "../board/board_detail.jsp");
 	  return "../main/main.jsp";
   }
   
+  // 수정하기
   @RequestMapping("board/board_update.do")
   public String board_update(Model model)
   {
 	  // 요청값을 받는다
 	  String no=model.getRequest().getParameter("no");
 	  // DAO => 결과값 받기 
-	  BoardVO vo=BoardDAO.boardDetailData(Integer.parseInt(no), "update");
+	  BoardVO vo=BoardDAO.boardDetailData(Integer.parseInt(no), 1);
+	  // 1: 수정하기에서 접근할 경우 boardDetailData - hit 증가 X
 	  // 결과값 => JSP로 전송
 	  model.addAttribute("vo", vo);
 	  model.addAttribute("main_jsp", "../board/board_update.jsp");
@@ -129,23 +136,19 @@ public class BoardModel {
 		  model.getRequest().setCharacterEncoding("UTF-8");
 	  }catch(Exception ex){}
 	  
-	  String id=model.getRequest().getParameter("id");
+	  String no=model.getRequest().getParameter("no");
 	  String subject=model.getRequest().getParameter("subject");
 	  String content=model.getRequest().getParameter("content");
-	  String no=model.getRequest().getParameter("no");
 	  
 	  BoardVO vo=new BoardVO();
-	  vo.setId(id);
+	  vo.setNo(Integer.parseInt(no));
 	  vo.setSubject(subject);
 	  vo.setContent(content);
-	  vo.setNo(Integer.parseInt(no));
 	  
 	  // DAO 연결 ==> password
-	  int n=BoardDAO.boardUpdate(vo);
+	  BoardDAO.boardUpdate(vo);
 	  
-	  model.addAttribute("no", n);
-	  
-	  return "../board/board_update_ok.jsp";
+	  return "redirect:../board/board_detail.do?no="+no;
   }
   
   @RequestMapping("board/reply_insert.do")

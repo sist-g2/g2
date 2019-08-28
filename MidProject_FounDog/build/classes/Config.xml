@@ -17,6 +17,7 @@
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.sist.vo.DogVO" alias="DogVO" />
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO" />
+		<typeAlias type="com.sist.vo.Board_cateVO" alias="Board_cateVO" />
 		<typeAlias type="com.sist.vo.Board_DogVO" alias="Board_DogVO" />
 		<typeAlias type="com.sist.vo.Board_FAQVO" alias="Board_FAQVO" />
 		<typeAlias type="com.sist.vo.Board_ReplyVO" alias="Board_ReplyVO" />

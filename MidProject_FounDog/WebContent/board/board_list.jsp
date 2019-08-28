@@ -35,7 +35,9 @@ $(function(){
        <table class="table">
          <tr>
            <td class="text-left">
+           	<c:if test="${sessionScope.id!=null }">
              <a href="board_insert.do" class="btn btn-sm">새글</a>
+             </c:if>
            </td>
            <td class="text-right">
              ${curpage } page / ${totalpage } pages

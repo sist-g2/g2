@@ -3,6 +3,50 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.board-mapper">
+	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
+		SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, num 
+		FROM (SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, rownum as num 
+				FROM (SELECT no, category, id, subject, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, hit, group_id, group_step, group_tab, root, depth 
+						FROM board 
+						WHERE category=#{category} 
+						ORDER BY no DESC
+					  )
+			  ) WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="boardTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM board
+		WHERE category=#{category} 
+	</select>
+	<select id="boardRowCount" resultType="int"  parameterType="int">
+		SELECT COUNT(*) FROM board 
+		WHERE category=#{category} 
+	</select>
+	
+	<!-- 새 글 작성 -->
+	<insert id="boardInsert" parameterType="BoardVO">
+		INSERT INTO board (no, category, id, subject, content, group_id)
+		VALUES( board_no_seq.nextval, #{category}, #{id}, #{subject}, #{content}, (SELECT NVL(MAX(group_id)+1, 1) FROM board ))
+   </insert>
+   
+   <!-- 상세보기  -->
+	<update id="boardHitIncrement" parameterType="int">
+		UPDATE board SET
+		hit=hit+1
+		WHERE no=#{no}
+	</update>
+	<select id="boardDetailData" resultType="BoardVO" parameterType="int">
+		SELECT no, id, subject, content, TO_CHAR(regdate,'RRRR-MM-DD') as dbday, hit
+		FROM board 
+		WHERE no=#{no}
+   </select>
+	
+	<!-- 수정하기 -->
+   <update id="boardUpdate" parameterType="BoardVO">
+     UPDATE board SET
+     subject=#{subject}, content=#{content} 
+     WHERE no=#{no}
+   </update>
+
 
 <resultMap type="BoardVO" id="replyList">
  <result property="no" column="no"/>
@@ -17,53 +61,15 @@
  <result property="group_tab" column="group_tab"/>
  <result property="root" column="root"/>
  <result property="depth" column="depth"/>
- <result property="rvo.bno" column="bno"/>
 </resultMap>
  
-   <select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
  
-      SELECT no,category,id,subject,dbday,hit,num 
-      FROM (SELECT no,category,id,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,rownum as num 
-      FROM (SELECT no,category,id,subject,regdate,hit 
-      FROM board ORDER BY no DESC))
-      WHERE num BETWEEN #{start} AND #{end}
-   </select>
- 
-   <!-- 총페이지-->
-   <select id="boardTotalPage" resultType="int">
-      SELECT CEIL(COUNT(*)/10.0) FROM board
-   </select>
    <!-- 게시물 번호가 일렬로 처리  -->
-   <select id="boardRowCount" resultType="int">
-      SELECT COUNT(*) FROM board
-   </select>
-   <insert id="boardInsert" parameterType="BoardVO">
-      INSERT INTO board(no,category,id,subject,content,group_id) VALUES(
-        board_no_seq.nextval,
-		#{category},
-        #{id},
-        #{subject},
-        #{content},
-        board_group_id_seq.nextval,
-      )
-   </insert>
-   <!-- 상세보기  -->
-   <update id="hitIncrement" parameterType="int">
-     UPDATE board SET
-     hit=hit+1
-     WHERE no=#{no}
-   </update>
-   <select id="boardDetailData" resultType="BoardVO" parameterType="int">
-     SELECT no,subject,content,TO_CHAR(regdate,'RRRR-MM-DD') as dbday,hit
-     FROM board 
-     WHERE no=#{no}
-   </select>
-   <!-- 수정하기 -->
-   <update id="boardUpdate" parameterType="BoardVO">
-     UPDATE board SET
-     subject=#{subject},content=#{content}
-     WHERE no=#{no}
-   </update>
+   
+   
+   
+   
+   
    <!-- 댓글 추가 -->
    <insert id="replyInsert" parameterType="Board_ReplyVO">
     INSERT INTO Board_Reply(no,bno,id,name,content,group_id) VALUES(

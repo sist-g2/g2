@@ -2,28 +2,23 @@ package com.sist.vo;
 import java.util.*;
 
 public class BoardVO {
-	private int no; // 번호
-	private int category; // 카테고리
-	private String id; // 작성자 아이디
-	private String subject; // 제목
-	private String content; // 내용
-	private Date regdate; // 등록일
-	private String dbday;
+	private int no; // 글번호, primary key, seq 이용
+	private int category; // 카테고리 - foreign key board_cate
+	private String id; // 작성자 아이디 - foreign key member
+	private String subject; // 글제목
+	private String content; // 글 내용
+	private Date regdate; // 작성일
+	private String dbday; // 작성일 yyyy년 mm월 dd일
 	private int hit; // 조회수
-	private int group_id; // 답변 ID
-	private int group_step;// 답변 정렬순서(출력)
-	private int group_tab;// 답글 제목 여백 
-	private int root;// 상위 댓글 ==> 삭제
-	private int depth; // 댓글 갯수 ==> 삭제 
+	private int group_id; // 글 그룹 번호(NVL(MAX)) 이용 예정
+	private int group_step; // 글 그룹 내 정렬 순서
+	private int group_tab; // 글 작성 시 제목 앞 공백
+	private int root; // 원글 번호
+	private int depth; // 답글의 갯수
 	
-    private Board_ReplyVO rvo=new Board_ReplyVO();
-    
-	public Board_ReplyVO getRvo() {
-		return rvo;
-	}
-	public void setRvo(Board_ReplyVO rvo) {
-		this.rvo = rvo;
-	}
+	private Board_cateVO cvo = new Board_cateVO();
+	private MemberVO mvo = new MemberVO();
+	
 	public int getNo() {
 		return no;
 	}
@@ -59,6 +54,12 @@ public class BoardVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
 	}
 	public int getHit() {
 		return hit;
@@ -96,11 +97,17 @@ public class BoardVO {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	public String getDbday() {
-		return dbday;
+	public Board_cateVO getCvo() {
+		return cvo;
 	}
-	public void setDbday(String dbday) {
-		this.dbday = dbday;
+	public void setCvo(Board_cateVO cvo) {
+		this.cvo = cvo;
+	}
+	public MemberVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
 	}
 
 }

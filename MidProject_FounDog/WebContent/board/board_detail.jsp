@@ -82,15 +82,20 @@ $(function(){
         </tr>
         <tr>
           <td colspan="4" class="text-right">
-            <a href="board_update.do?no=${vo.no }" class="btn btn-sm">수정</a>
-            <a href="board_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
-          	<a href="#" class="btn btn-sm">답글</a>
+          	<c:if test="${sessionScope.id!=null && (sessionScope.id==vo.id || sessionScope.id=='admin' )}" >
+          		<a href="board_update.do?no=${vo.no }" class="btn btn-sm">수정</a>
+            	<a href="board_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
+          	</c:if>
+          	<c:if test="${sessionScope.id!=null}" >
+          		<a href="#" class="btn btn-sm">답글</a>
+          	</c:if>
             <a href="board_list.do" class="btn btn-sm" >목록</a>
            
           </td>
         </tr>
       </table>
     </div>
+    <%--
     <div class="row">
       <table class="table">
         <tr>
@@ -166,6 +171,7 @@ $(function(){
 	      </table>
       </c:if>
     </div>
+     --%>
   </div>
 </body>
 </html>
