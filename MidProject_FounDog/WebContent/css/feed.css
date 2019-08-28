@@ -256,7 +256,7 @@ body::-webkit-scrollbar-corner {
 	color: #808080;
 }
 
-#backList {
+.backList {
 	display: inline-block;
 	border-radius: 6px;
 	background: #bd8942;
@@ -268,7 +268,7 @@ body::-webkit-scrollbar-corner {
 	cursor: pointer;
 }
 
-#myFav {
+.rvwUpd, .rvwDel, #favIntB, #favDelB:HOVER {
 	display: inline-block;
 	border: 1px solid #808080;
 	border-radius: 12px;
@@ -281,7 +281,7 @@ body::-webkit-scrollbar-corner {
 	cursor: pointer;
 }
 
-#myFav:HOVER {
+#favDelB, #favIntB:HOVER {
 	display: inline-block;
 	border-radius: 12px;
 	background: #bd8942;
@@ -297,7 +297,7 @@ body::-webkit-scrollbar-corner {
 	display: inline-block;
 }
 
-#reviewSubmit {
+.reviewUpSub, #reviewSubmit {
 	display: inline-block;
 	border-radius: 6px;
 	background: #bd8942;
@@ -313,7 +313,7 @@ body::-webkit-scrollbar-corner {
 #cookiePrnt {
 	position: absolute;
 	top: 200px;
-	left: 1350px;
+	left: 90%;
 	width: 100px;
 	height: 300px;
 }
@@ -321,7 +321,7 @@ body::-webkit-scrollbar-corner {
 #yellowStar {
 	font-weight: 300;
 	font-size: 20px;
-	color: #fce303;
+	color: #FFBB00;
 }
 #greyStar {
 	font-weight: 300;

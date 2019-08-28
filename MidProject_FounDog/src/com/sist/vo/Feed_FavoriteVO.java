@@ -7,7 +7,14 @@ public class Feed_FavoriteVO {
 	private String fdateS;
 	private String id;
 	private int fnum;
-	private FeedVO fvo;
+	private int fnum_lowPrice;
+	public int getFnum_lowPrice() {
+		return fnum_lowPrice;
+	}
+	public void setFnum_lowPrice(int fnum_lowPrice) {
+		this.fnum_lowPrice = fnum_lowPrice;
+	}
+	private FeedVO fvo = new FeedVO();
 	private MemberVO mvo;
 	
 	public int getNo() {

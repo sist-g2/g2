@@ -95,13 +95,14 @@ public class FeedDAO {
 		return sql;
 	}
 	
-	// 상품 상세보기
+	// 상품 상세보기 - 조회수 증가
 	public static void feedHitIncrease(int no) {
 		SqlSession session = ssf.openSession(true);
 		session.update("feedHitIncrease", no);
 		session.close();
 	}
 	
+	// 상품 상세보기
 	public static FeedVO feedDetailData(int no) {
 		SqlSession session = ssf.openSession();
 		FeedVO vo = session.selectOne("feedDetailData", no);
@@ -109,6 +110,7 @@ public class FeedDAO {
 		return vo;
 	}
 	
+	// 상품 판매처 정보 가져오기
 	public static List<Feed_StoreVO> feedStoreData(int no) {
 		SqlSession session = ssf.openSession();
 		List<Feed_StoreVO> list = session.selectList("feedStoreData", no);
@@ -116,18 +118,12 @@ public class FeedDAO {
 		return list;
 	}
 	
+	// 상품 최저가 가져오기
 	public static int feedLowPrice(int no) {
 		SqlSession session = ssf.openSession();
 		int lowPrice = session.selectOne("feedLowPrice", no);
 		session.close();
 		return lowPrice;
-	}
-	
-	public static List<Feed_ReviewVO> reviewAllData(int no) {
-		SqlSession session = ssf.openSession();
-		List<Feed_ReviewVO> list = session.selectList("reviewAllData", no);
-		session.close();
-		return list;
 	}
 	
 	// 상품 찜하기
@@ -136,4 +132,97 @@ public class FeedDAO {
 		session.insert("feedFavInsert", vo);
 		session.close();
 	}
+	
+	// 찜 여부 체크
+	public static int feedFavCheck(Map map) {
+		SqlSession session = ssf.openSession();
+		int no = -1;
+		if(session.selectOne("feedFavCheck", map)==null) {
+			session.close();
+			return no;
+		} else {
+			no = session.selectOne("feedFavCheck", map);
+			session.close();
+			return no;
+		}
+	}
+	
+	// 찜 목록 가져오기
+	public static List<Feed_FavoriteVO> favListData(Map map) {
+		SqlSession session = ssf.openSession();
+		List<Feed_FavoriteVO> list = session.selectList("favListData", map);
+		session.close();
+		return list;
+	}
+	
+	// 찜 갯수 가져오기 
+	public static int feed_fav_totalNum(String id) {
+		SqlSession session = ssf.openSession();
+		int total = 0;
+		if(session.selectOne("feed_fav_totalNum", id)==null) {
+			session.close();
+			return total;
+		} else {
+			total = session.selectOne("feed_fav_totalNum", id);
+			session.close();
+			return total;
+		}
+	}
+	
+	// 찜 총페이지 가져오기
+	public static int feed_fav_totalPage(int totalNum) {
+		int totalPage = (int)Math.ceil(totalNum/20.0);
+		return totalPage;
+	}
+	
+	// 찜 삭제
+	public static void feedFavDelete(int no) {
+		SqlSession session = ssf.openSession(true);
+		session.delete("feedFavDelete", no);
+		session.close();
+	}
+	
+	// 리뷰 전체 가져오기
+	public static List<Feed_ReviewVO> reviewAllData(int no) {
+		SqlSession session = ssf.openSession();
+		List<Feed_ReviewVO> list = session.selectList("reviewAllData", no);
+		session.close();
+		return list;
+	}
+	
+	// 리뷰 입력하기(insert)
+	public static void reviewInsert(Feed_ReviewVO vo) {
+		SqlSession session = ssf.openSession(true);
+		session.insert("reviewInsert", vo);
+		session.close();
+	}
+	
+	// 리뷰 수정하기(update)
+	public static void reviewUpdate(Feed_ReviewVO vo) {
+		SqlSession session = ssf.openSession(true);
+		session.insert("reviewUpdate", vo);
+		session.close();
+	}
+	
+	// 리뷰 삭제하기(delete)
+	public static void reviewDelete(int no) {
+		SqlSession session = ssf.openSession(true);
+		session.delete("reviewDelete", no);
+		session.close();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

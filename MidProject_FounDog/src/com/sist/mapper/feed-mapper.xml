@@ -182,8 +182,28 @@
 		GROUP BY fnum 
 	</select>
 	
-	<!-- 리뷰 -->
-	<resultMap type="Feed_ReviewVO" id="reviewData">
+	<!-- 찜하기 -->
+	<insert id="feedFavInsert" parameterType="Feed_FavoriteVO">
+		INSERT INTO favorite (no, id, fnum) VALUES (
+		(SELECT NVL(MAX(no)+1, 1) FROM favorite), #{id}, #{fnum}
+		)
+	</insert>
+	
+	<!-- 찜 여부 확인 -->
+	<select id="feedFavCheck" resultType="int" parameterType="java.util.Map">
+		SELECT no FROM favorite 
+		WHERE id=#{id} 
+		AND fnum=#{fnum} 
+	</select>
+	
+	<!-- 찜 삭제 -->
+	<insert id="feedFavDelete" parameterType="int" >
+		DELETE FROM favorite 
+		WHERE no=#{no}
+	</insert>
+	
+	<!-- JOIN : 리뷰 -->
+	<resultMap type="Feed_ReviewVO" id="reviewData" >
 		<result property="no" column="no" />
 		<result property="regdate" column="regdate" />
 		<result property="rdateS" column="rdateS" />
@@ -201,15 +221,62 @@
 		SELECT r.no, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') AS rdateS, subject, content, star, dtype, fnum, r.id, m.name as name 
 		FROM review r, member m 
 		WHERE r.id=m.id 
-		 AND fnum=#{no} 
+		AND fnum=#{no} 
+		ORDER BY regdate DESC
 	</select>
 	
-	<!-- 찜하기 -->
-	<insert id="feedFavInsert" parameterType="Feed_FavoriteVO">
-		INSERT INTO favorite (no, id, fnum) 
-		VALUES ((SELECT NVL(MAX(no)+1, 1), #{id}, #{fnum})
+	<!-- 리뷰 입력하기 -->
+	<insert id="reviewInsert" parameterType="Feed_ReviewVO">
+		INSERT INTO review 
+		VALUES (
+			(SELECT NVL(MAX(no)+1, 1) FROM review), SYSDATE, #{subject}, #{content}, #{star}, #{fnum}, #{id}, #{dtype}
+		)
 	</insert>
 	
+	<!-- 리뷰 수정하기 -->
+	<update id="reviewUpdate" parameterType="Feed_ReviewVO" >
+		UPDATE review 
+		SET subject=#{subject}, content=#{content}, star=#{star}, dtype=#{dtype} 
+		WHERE no=#{no} 
+	</update>
+	
+	<!-- 리뷰 삭제하기 -->
+	<delete id="reviewDelete" parameterType="int" >
+		DELETE FROM review 
+		WHERE no=#{no}
+	</delete>
+	
+	<!-- JOIN : 찜한 상품 -->
+	<resultMap type="Feed_FavoriteVO" id="favList" >
+		<result property="no" column="no" />
+		<result property="fdate" column="fdate" />
+		<result property="id" column="id" />
+		<result property="fnum" column="fnum" />
+		<result property="fnum_lowPrice" column="fnum_lowPrice" />
+		<result property="fvo.name" column="name" />
+		<result property="fvo.feedImg" column="feedImg" />
+	</resultMap>
+	
+	<!-- 찜한 상품 목록 가져오기 -->
+	<select id="favListData" resultMap="favList" parameterType="java.util.Map" >
+		SELECT no, fdate, id, fnum, name, feedImg, fnum_lowPrice, num 
+		FROM (SELECT no, fdate, id, fnum, name, feedImg, fnum_lowPrice, rownum as num 
+			  FROM (SELECT fav.no as no, fdate, id, fnum, 
+					(SELECT name FROM feed WHERE no=fav.fnum) as name, 
+					(SELECT feedImg FROM feed WHERE no=fav.fnum) as feedImg, 
+					(SELECT MIN(price) FROM store s WHERE s.fnum=fav.fnum GROUP BY s.fnum) as fnum_lowPrice 
+				  FROM favorite fav, feed f 
+				  WHERE fav.fnum=f.no 
+				  AND id=#{id} 
+				  ORDER BY fdate DESC
+				)
+			  ) WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<!-- 찜한 상품 갯수 확인 -->
+	<select id="feed_fav_totalNum" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM favorite 
+		WHERE id=#{id} 
+	</select>
 </mapper>
 
 
