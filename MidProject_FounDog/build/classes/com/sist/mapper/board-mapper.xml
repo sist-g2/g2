@@ -1,3 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.mapper.board-mapper"></mapper>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.board-mapper">
+
+<resultMap type="BoardVO" id="replyList">
+ <result property="no" column="no"/>
+ <result property="category" column="category"/>
+ <result property="id" column="id"/>
+ <result property="subject" column="subject"/>
+ <result property="content" column="content"/>
+ <result property="regdate" column="regdate"/>
+ <result property="hit" column="hit"/>
+ <result property="group_id" column="group_id"/>
+ <result property="group_step" column="group_step"/>
+ <result property="group_tab" column="group_tab"/>
+ <result property="root" column="root"/>
+ <result property="depth" column="depth"/>
+ <result property="rvo.bno" column="bno"/>
+</resultMap>
+ 
+   <select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
+ 
+      SELECT no,category,id,subject,dbday,hit,num 
+      FROM (SELECT no,category,id,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,rownum as num 
+      FROM (SELECT no,category,id,subject,regdate,hit 
+      FROM board ORDER BY no DESC))
+      WHERE num BETWEEN #{start} AND #{end}
+   </select>
+ 
+   <!-- 총페이지-->
+   <select id="boardTotalPage" resultType="int">
+      SELECT CEIL(COUNT(*)/10.0) FROM board
+   </select>
+   <!-- 게시물 번호가 일렬로 처리  -->
+   <select id="boardRowCount" resultType="int">
+      SELECT COUNT(*) FROM board
+   </select>
+   <insert id="boardInsert" parameterType="BoardVO">
+      INSERT INTO board(no,category,id,subject,content,group_id) VALUES(
+        (SELECT NVL(MAX(no)+1, 1) FROM board),
+		#{category},
+        #{id},
+        #{subject},
+        #{content},
+        (SELECT NVL(MAX(group_id)+1, 1) FROM board)
+      )
+   </insert>
+   <!-- 상세보기  -->
+   <update id="hitIncrement" parameterType="int">
+     UPDATE board SET
+     hit=hit+1
+     WHERE no=#{no}
+   </update>
+   <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+     SELECT no,subject,content,TO_CHAR(regdate,'RRRR-MM-DD') as dbday,hit
+     FROM board 
+     WHERE no=#{no}
+   </select>
+   <!-- 수정하기 -->
+   <update id="boardUpdate" parameterType="BoardVO">
+     UPDATE board SET
+     subject=#{subject},content=#{content}
+     WHERE no=#{no}
+   </update>
+   <!-- 댓글 추가 -->
+   <insert id="replyInsert" parameterType="Board_ReplyVO">
+    INSERT INTO Board_Reply(no,bno,id,name,content,group_id) VALUES(
+      Board_Reply_no_seq.nextval,
+      #{bno},
+      #{id},
+      #{name},
+      #{content},
+      (SELECT NVL(MAX(group_id)+1,1) FROM Board_Reply WHERE board.no=board_reply.bno)
+    )
+   </insert>
+   <!-- 댓글 읽기 -->
+   <select id="replyListData" resultMap="replyList" parameterType="BoardVO">
+     SELECT no,category,bno,id,content,
+     TO_CHAR(regdate,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') as dbday,group_tab 
+     FROM board_Reply
+     WHERE bno=#{bno}
+     WHERE board.no=board_reply.bno
+     ORDER BY group_id DESC,group_step ASC
+   </select>
+   <select id="replyListCount" resultType="int" parameterType="int">
+     SELECT COUNT(*) 
+     FROM board
+     WHERE bno=#{bno}
+   </select>
+   <select id="replyParentInfo" resultType="BoardVO" parameterType="int">
+     SELECT group_id,group_step,group_tab 
+     FROM board
+     WHERE no=#{no}
+   </select>
+   <update id="replyStepIncrement" parameterType="BoardVO">
+     UPDATE board SET
+     group_step=group_step+1
+     WHERE group_id=#{group_id} AND group_step>#{group_step}
+   </update>
+   <insert id="replyReInsert" parameterType="BoardVO">
+     INSERT INTO freeReply(no,bno,id,name,content,group_id,group_step,group_tab,root) VALUES(
+      freeReply_no_seq.nextval,
+      #{no},
+      #{category},
+      #{bno},
+      #{id},
+      #{content},
+      #{group_id},
+      #{group_step},
+      #{group_tab},
+      #{root}
+    )
+     WHERE board.no=board_reply.bno
+   </insert>
+   <update id="replyDepthIncrement" parameterType="int">
+     UPDATE board SET
+     depth=depth+1
+     WHERE no=#{no}
+   </update>
+   
+   <update id="replyUpdate" parameterType="Board_ReplyVO">
+     UPDATE board_Reply SET
+     content=#{content}
+     WHERE no=#{no}
+   </update>
+   
+   <!-- SQL (DELETE) -->
+   <select id="replyGetDepth" resultType="BoardVO" parameterType="int">
+   	SELECT depth,root FROM board
+   	WHERE no=#{no}
+   </select>
+   <!-- depth=0 -->
+   <delete id="replyDelete" parameterType="int">
+    DELETE FROM board_Reply
+    WHERE no=#{no}
+   </delete>
+   <!-- depth!=0 -->
+   <update id="replyDataUpdate" parameterType="Board_ReplyVO">
+   	UPDATE board_Reply SET
+   	content=#{content}
+   	WHERE no=#{no}
+   </update>
+   <!-- depth감소 -->
+    <update id="replyDepthDecrement" parameterType="int">
+    	UPDATE board_Reply SET
+    	depth=depth-1
+    	WHERE no=#{no}
+    </update>
+    
+    <!-- 게시물 삭제 -->
+    <delete id="boardDelete" parameterType="int">
+     DELETE FROM board
+     WHERE no=#{no}
+    </delete>
+    
+    <delete id="boardReplyDelete" parameterType="int">
+     DELETE FROM Board
+     WHERE bno=#{bno}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

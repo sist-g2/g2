@@ -103,7 +103,7 @@
                             <li><a href="../template/singlecolor/portfolio-details.html">Portfolio Details</a></li>
                         </ul> -->
                     </li>                         
-                    <li><a href="../template/singlecolor/shortcodes.html ">커뮤니티</a></li>                    
+                    <li><a href="../board/board_list.do ">커뮤니티</a></li>                    
                 </ul>
             </div>
             <!-- <div class="search">

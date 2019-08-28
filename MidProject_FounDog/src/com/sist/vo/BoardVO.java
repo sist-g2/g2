@@ -8,6 +8,7 @@ public class BoardVO {
 	private String subject; // 제목
 	private String content; // 내용
 	private Date regdate; // 등록일
+	private String dbday;
 	private int hit; // 조회수
 	private int group_id; // 답변 ID
 	private int group_step;// 답변 정렬순서(출력)
@@ -15,6 +16,14 @@ public class BoardVO {
 	private int root;// 상위 댓글 ==> 삭제
 	private int depth; // 댓글 갯수 ==> 삭제 
 	
+    private Board_ReplyVO rvo=new Board_ReplyVO();
+    
+	public Board_ReplyVO getRvo() {
+		return rvo;
+	}
+	public void setRvo(Board_ReplyVO rvo) {
+		this.rvo = rvo;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -86,6 +95,12 @@ public class BoardVO {
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
 	}
 
 }
