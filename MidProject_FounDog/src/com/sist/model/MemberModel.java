@@ -56,6 +56,16 @@ public class MemberModel {
 		return "redirect:../main/main.do";
 	}
 	
+	@RequestMapping("member/member_jungbok.do")
+	public String member_jungbok(Model model){
+		String id = model.getRequest().getParameter("id");
+		int count = MemberDAO.member_jungbok(id);
+		System.out.println(count);
+		HttpSession session = model.getRequest().getSession();
+		session.setAttribute("count", count);
+		return "../member/member_jungbok.jsp";
+	}
+	
 	@RequestMapping("member/member_login.do")
 	public String member_login(Model model){
 		model.addAttribute("main_jsp", "../member/member_login.jsp");
@@ -93,6 +103,17 @@ public class MemberModel {
 	public String member_delete(Model model){
 		model.addAttribute("main_jsp", "../member/member_delete.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/member_delete_ok.do")
+	public String member_delete_ok(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id = model.getRequest().getParameter("id");
+		String pwd = model.getRequest().getParameter("pwd");
+		int res = MemberDAO.memberDelete(id, pwd);
+		model.addAttribute("res", res);
+		session.invalidate();
+		return "../member/member_delete_ok.jsp";
 	}
 	
 	@RequestMapping("member/member_mypage.do")

@@ -33,8 +33,8 @@
 	<div class="container">
 		<h4 class="page-header text-center">ㅇㅇㅇ님, 안녕하세요!</h4>
 		<div class="live-preview text-center">
-			<a href="#" class="btn btn-common uppercase">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" class="btn btn-common uppercase">회원 탈퇴</a>
+			<a href="../member/member_update.do" class="btn btn-common uppercase">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="../member/member_delete.do" class="btn btn-common uppercase">회원 탈퇴</a>
 		</div>
         
 		<div id="feature-container">
@@ -69,7 +69,7 @@
 				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="1200ms">
 					<div class="feature-inner">
 						<div class="icon-wrapper">
-							<a href="#"><i class="fa fa-2x fa-comments-o"></i></a>
+							<a href="../feed/feed_fav_List.do"><i class="fa fa-2x fa-comments-o"></i></a>
 						</div>
 						<h2>찜 목록</h2>
 					</div>

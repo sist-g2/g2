@@ -1,14 +1,33 @@
 package com.sist.vo;
 
-import java.util.Date;
-
 public class DogVO {
 	private int dno;
 	private String dname;
 	private String dtype;
-	private Date dbirth;
+	private String dbirth;
+	private String dyear;
+	private String dmonth;
+	private String dday;
 	private String dsex;
 	
+	public String getDyear() {
+		return dyear;
+	}
+	public void setDyear(String dyear) {
+		this.dyear = dyear;
+	}
+	public String getDmonth() {
+		return dmonth;
+	}
+	public void setDmonth(String dmonth) {
+		this.dmonth = dmonth;
+	}
+	public String getDday() {
+		return dday;
+	}
+	public void setDday(String dday) {
+		this.dday = dday;
+	}
 	public int getDno() {
 		return dno;
 	}
@@ -27,10 +46,10 @@ public class DogVO {
 	public void setDtype(String dtype) {
 		this.dtype = dtype;
 	}
-	public Date getDbirth() {
+	public String getDbirth() {
 		return dbirth;
 	}
-	public void setDbirth(Date dbirth) {
+	public void setDbirth(String dbirth) {
 		this.dbirth = dbirth;
 	}
 	public String getDsex() {

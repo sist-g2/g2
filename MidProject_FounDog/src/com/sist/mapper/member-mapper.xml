@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.member-mapper">
+	<!-- 아이디 여부 확인 -->
 	<select id="memberIdCount" resultType="int" parameterType="String">
 		SELECT COUNT (*)
 		FROM member
 		WHERE id=#{id}
 	</select>
+	<!-- 비밀번호 확인 -->
 	<select id="memberGetPwd" resultType="MemberVO" parameterType="String">
 		SELECT pwd, name
 		FROM member
 		WHERE id=#{id}
 	</select>
+	<!-- 회원가입 -->
 	<insert id="memberJoin" parameterType="MemberVO">
 		INSERT INTO member VALUES(
 			#{id},
@@ -25,14 +28,14 @@
 			#{addr2}
 		)
 	</insert>
-	<insert id="dogJoin" parameterType="DogVO">
-		INSERT INTO dog VALUES(
-			dog_dno_seq.nextval,
-			#{dname},
-			#{dtype},
-			#{dbirth},
-			#{dsex},
-			#{id}
-		)
-	</insert>
+	<!-- 탈퇴 비밀번호 확인 -->
+	<select id="deleteGetPwd" resultType="String" parameterType="String">
+		SELECT pwd FROM member
+		WHERE id = #{id}
+	</select>
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM member
+		WHERE id = #{id}
+	</delete>
 </mapper>

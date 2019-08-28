@@ -3,6 +3,7 @@ package com.sist.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.sist.vo.DogVO;
 import com.sist.vo.MemberVO;
 
 public class MemberDAO {
@@ -34,9 +35,31 @@ public class MemberDAO {
 		return vo;
 	}
 	
+	public static int member_jungbok(String id){
+		SqlSession session = ssf.openSession();
+		int count = session.selectOne("memberIdCount", id);
+		session.close();
+		return count;
+	}
+	
 	public static void memberJoin(MemberVO vo){
 		SqlSession session = ssf.openSession(true);
 		session.insert("memberJoin", vo);
 		session.close();
+	}
+	
+	public static int memberDelete(String id, String pwd){
+		int result = 0;
+		SqlSession session = ssf.openSession();
+		String db_pwd = session.selectOne("deleteGetPwd", id);
+		//System.out.println(db_pwd);
+		if(db_pwd.equals(pwd)){
+			result = 1;
+			session.delete("memberDelete", id);
+			session.commit();
+		}
+		//System.out.println(result);
+		session.close();
+		return result;
 	}
 }

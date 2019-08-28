@@ -6,74 +6,66 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../css/member.css" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('#overBtn').click(function(){
+		var id = $('#id').val();
+		
+		if(id.trim()==""){
+			alert("아이디를 입력해주세요.")
+			$('#id').focus();
+			return;
+		}
+		
+		$.ajax({
+			type:'post',
+			url:'../member/member_jungbok.do',
+			data:{id:id},
+			success:function(response){
+				var count = response.trim();
+				if(count==1){
+					alert("이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.");
+					$('#id').val("");
+					$('#id').focus();
+				} else if(count==0) {
+					alert("사용 가능한 ID입니다.");
+				}
+			}
+		});
+	});
+});
+</script>
 <style type="text/css">
 .rowrow{
 	margin: 0px auto;
 	width: 400px;
-	/* border: 5px;
-	border-color: gray; */
 }
-.modal1{
-  margin:25px ;
+.optionList td input+label {
+	display: inline-block;
+	border-radius: 6px;
+	background: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	color: #d29949;
 }
 
-.inline{
-  display: inline-block;
+.optionList td label {
+	font-weight: 400;
 }
-.inline + .inline{
-  margin-left:10px;
+
+.optionList td input[type=checkbox]:checked + label {
+	background: #bd8942;
+	color: #ffffff;
 }
-.radio{
-  color:#d99c4e;
-  font-size:15px;
-  position:relative;
-}
-.radio span{
-  position:relative;
-   padding-left:20px;
-}
-.radio span:after{
-  content:'';
-  width:15px;
-  height:15px;
-  border:3px solid;
-  position:absolute;
-  left:0;
-  top:1px;
-  border-radius:100%;
-  -ms-border-radius:100%;
-  -moz-border-radius:100%;
-  -webkit-border-radius:100%;
-  box-sizing:border-box;
-  -ms-box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
-}
-.radio input[type="radio"]{
-   cursor: pointer; 
-  position:absolute;
-  width:100%;
-  height:100%;
-  z-index: 1;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
-}
-.radio input[type="radio"]:checked + span{
-  color:#d99c4e;  
-}
-.radio input[type="radio"]:checked + span:before{
-  content:'';
-  width:5px;
-  height:5px;
-  position:absolute;
-  background:#d99c4e;
-  left:5px;
-  top:6px;
-  border-radius:100%;
-  -ms-border-radius:100%;
-  -moz-border-radius:100%;
-  -webkit-border-radius:100%;
+
+.optionList td input[type=radio]:checked + label {
+	background: #bd8942;
+	color: #ffffff;
 }
 </style>
 </head>
@@ -97,18 +89,17 @@
 
 <!-- main -->
 <!-- 필수 정보 -->
-<div class="rowrow">
+<div class="rowrow optionList">
 	<h3 class="text-center">필수 정보</h3>
 	<form name="frm" method="post" action="../member/member_join_ok.do">
-	
 	<table class="table table-borderless">
 		<tr>
 			<td class="text-left">아이디</td>
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=id class="form-control2" style="width:70%" placeholder="ID">&nbsp;
-				<input type=button class="btn btn-common2" style="width:28%" value="중복체크">
+				<input type=text name=id class="form-control2" style="width:70%" placeholder="ID" id="id">&nbsp;
+				<input type=button class="btn btn-common2" style="width:28%" value="중복체크" id="overBtn">
 			</td>
 		</tr>
 		<tr>
@@ -169,26 +160,25 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<label class="radio inline">
-					<input type=radio value="남자" name=sex checked="checked"><span>남자</span>
-				</label>
-				<label class="radio inline">
-					<input type=radio value="여자" name=sex><span>여자</span>
-				</label>
+				<input type=radio value="남자" name=sex checked="checked" id="sex_male" style="display: none;">
+				<label for="sex_male">&nbsp;&nbsp;남자&nbsp;&nbsp;</label>
+				<input type=radio value="여자" name=sex id="sex_female" style="display: none;">
+				<label for="sex_female">&nbsp;&nbsp;여자&nbsp;&nbsp;</label>
 			</td>
 		</tr>
+		
 		<tr>
 			<td class="text-left" >전화번호</td>
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=tel1 class="form-control2">
+				<select name=tel1 class="form-control2" style="width:31%">
 					<option>010</option>
 					<option>011</option>
 					<option>017</option>
-				</select>&nbsp;
-				<input type=text name=tel2 class="form-control2" size=10>&nbsp;&nbsp;-&nbsp;
-				<input type=text name=tel3 class="form-control2" size=10>
+				</select>&nbsp;&nbsp;&nbsp;
+				<input type=text name=tel2 class="form-control2"  style="width:31%">&nbsp;&nbsp;-&nbsp;
+				<input type=text name=tel3 class="form-control2"  style="width:31%">
 			</td>
 		</tr>
 		<tr>
@@ -204,8 +194,8 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=post class="form-control2" size=10>&nbsp;&nbsp;
-				<input type=button class="btn btn-common2 uppercase" value="우편번호 검색">
+				<input type=text name=post class="form-control2" style="width:58%">&nbsp;&nbsp;&nbsp;
+				<input type=button class="btn btn-common2 uppercase" value="우편번호 검색" style="width:38%">
 			</td>
 		</tr>
 		<tr>
@@ -221,14 +211,14 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=addr2 class="form-control">
+				<input type=text name=addr2 class="form-control" placeholder="Detailed Address">
 			</td>
 		</tr>
 	</table>
 	
 <!-- /필수 정보 -->
 <!-- 선택 정보 -->
-	<div class="rowrow"></div>
+	<div class="rowrow optionList"></div>
 	<h3 class="text-center">선택 정보</h3>
 	<table class="table table-borderless">
 		<tr>
@@ -252,12 +242,12 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=dyear class="form-control2">
+				<select name=dyear class="form-control2" style="width:27%">
 					<option></option>
 					<option>2019</option>
 					<option>2018</option>
-				</select>년&nbsp;
-				<select name=dmonth class="form-control2">
+				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
+				<select name=dmonth class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -271,12 +261,12 @@
 					<option>10</option>
 					<option>11</option>
 					<option>12</option>
-				</select>월&nbsp;
-				<select name=dday class="form-control2">
+				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
+				<select name=dday class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
-				</select>일&nbsp;
+				</select>&nbsp;일
 			</td>
 		</tr>
 		<tr>
@@ -284,12 +274,10 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<label class="radio inline">
-					<input type=radio value="수컷" name=dsex checked="checked"><span>수컷</span>
-				</label>
-				<label class="radio inline">
-					<input type=radio value="암컷" name=dsex><span>암컷</span>
-				</label>
+				<input type=radio value="수컷" name=dsex checked="checked" style="display: none;" id="dsex-male">
+				<label for="dsex-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="암컷" name=dsex style="display: none;" id="dsex-female">
+				<label for="dsex-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
 			</td>
 		</tr>
 		<tr>
