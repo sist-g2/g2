@@ -60,7 +60,7 @@ public class AdminBoardDAO {
 		SqlSession session=ssf.openSession();
 		if(type.equals("detail"))
 		{
-			session.update("hitIncrement",no);// 조회수 증가
+			session.update("adminhitIncrement",no);// 조회수 증가
 			session.commit();
 		}
 		vo=session.selectOne("adminboardDetailData", no);

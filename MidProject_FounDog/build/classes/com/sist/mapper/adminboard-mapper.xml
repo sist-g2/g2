@@ -27,7 +27,7 @@
       )
    </insert>
    <!-- 상세보기  -->
-   <update id="hitIncrement" parameterType="int">
+   <update id="adminhitIncrement" parameterType="int">
      UPDATE adminboard SET
      hit=hit+1
      WHERE no=#{no}
