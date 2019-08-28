@@ -39,12 +39,12 @@
    </select>
    <insert id="boardInsert" parameterType="BoardVO">
       INSERT INTO board(no,category,id,subject,content,group_id) VALUES(
-        (SELECT NVL(MAX(no)+1, 1) FROM board),
+        board_no_seq.nextval,
 		#{category},
         #{id},
         #{subject},
         #{content},
-        (SELECT NVL(MAX(group_id)+1, 1) FROM board)
+        board_group_id_seq.nextval,
       )
    </insert>
    <!-- 상세보기  -->
