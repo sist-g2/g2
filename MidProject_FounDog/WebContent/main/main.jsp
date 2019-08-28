@@ -74,7 +74,7 @@
                     <li class="dropdown"><a href="../feed/feed_list.do">사료비교 <!-- <i class="fa fa-angle-down"></i> --></a>
                          <ul role="menu" class="sub-menu">
                             <li><a href="../feed/feed_list.do">사료비교</a></li>
-                            <li><a href="#">찜 목록</a></li>
+                            <li><a href="../feed/feed_fav_list.do">찜 목록</a></li>
                         </ul>
                     </li>                  
                     <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
@@ -88,7 +88,12 @@
                             <li><a href="#">사료 열량 계산기</a></li>
                         </ul>
                     </li>                         
-                    <li><a href="../board/board_list.do ">커뮤니티</a></li>                    
+                    <li class="dropdown"><a href="../board/board_list.do ">커뮤니티</a>
+                        <ul role="menu" class="sub-menu">
+                            <li><a href="../board/board_list.do">자유게시판</a></li>
+                            <li><a href="#">유기견 게시판</a></li>
+                        </ul>
+                    </li>                    
                 </ul>
             </div>
             <!-- <div class="search">
