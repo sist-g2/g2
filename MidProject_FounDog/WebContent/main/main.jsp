@@ -74,18 +74,26 @@
                     <li class="dropdown"><a href="../feed/feed_list.do">사료비교 <!-- <i class="fa fa-angle-down"></i> --></a>
                          <ul role="menu" class="sub-menu">
                             <li><a href="../feed/feed_list.do">사료비교</a></li>
+                          <c:if test="${sessionScope.id!=null }">
                             <li><a href="../feed/feed_fav_list.do">찜 목록</a></li>
+                          </c:if>
                         </ul>
                     </li>                  
                     <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
                          <ul role="menu" class="sub-menu">
                             <li><a href="../hospital/hospital_list.do">병원 이용</a></li>
+                            <c:if test="${sessionScope.id!=null }">
+                            <!--  
+                            	진료 내역등 로그인해야 보여줄부분 추가시 수정
+                            <li><a href="#"></a></li>
+                            -->
+                          </c:if>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
                          <ul role="menu" class="sub-menu">
                             <li><a href="../adminboard/adminboard_list.do">정보성 게시판</a></li>
-                            <li><a href="#">사료 열량 계산기</a></li>
+                            <li><a href="../adminboard/Calc.do">사료 열량 계산기</a></li>
                         </ul>
                     </li>                         
                     <li class="dropdown"><a href="../board/board_list.do ">커뮤니티</a>

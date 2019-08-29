@@ -3,8 +3,6 @@ import java.util.*;
 
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
-import org.json.simple.parser.JSONParser; 
-import org.json.simple.parser.ParseException;
 
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
@@ -19,14 +17,13 @@ public class HospitalModel {
 	public String hospital_list(Model model){
 		
 		List<String> loc = HospitalDAO.hospitalGetLoc();
-
+	
 		model.addAttribute("loc", loc);
-		
 		model.addAttribute("main_jsp", "../hospital/hospital_list.jsp");
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("main/hospital_search_ok.do")
+	@RequestMapping("hospital/hospital_search_ok.do")
 	public String hospital_search_ok(Model model){
 	// 요청값을 받는다
 	try {
@@ -84,6 +81,7 @@ public class HospitalModel {
 		   if(page==null)
 			   page="1";
 		   // 현재 페이지 저장 
+
 		   int curpage=Integer.parseInt(page);
 		   Map map=new HashMap();
 		   int rowSize=8;
@@ -129,6 +127,13 @@ public class HospitalModel {
 		model.addAttribute("allPage", allPage);
 		
 		return "../hospital/hospital_result.jsp";
+	}
+	
+	@RequestMapping("hospital/hospital_reserve.do")
+	public String hospital_reserve(Model model){
+
+		model.addAttribute("main_jsp", "../hospital/hospital_reserve.jsp");
+		return "../main/main.jsp";
 	}
 	
 }

@@ -184,8 +184,12 @@ public class adminBoardModel {
 	  model.addAttribute("res", res);
 	  return "../adminboard/adminboard_delete_ok.jsp";
   }
-  
-  
+  @RequestMapping("adminboard/Calc.do")
+  public String Calc(Model model)
+  {
+	  model.addAttribute("main_jsp", "../adminboard/Calc.jsp");
+	  return "../main/main.jsp";
+  }
 }
 
 

@@ -53,32 +53,29 @@ var mapOption = {
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
-var geocoder = new daum.maps.services.Geocoder();
-
 $(function(){
 	$('#searchbtn').click(function(){
 		var loc=$('#searchloc').val();
 		var name=$('#searchname').val();
 		
-		$.ajax({ // 검색 결과 리스트 ajax
+		 $.ajax({ // 검색 결과 리스트 ajax
 			type:'post',
-			url:'../hospital/hospital_result.do',
+			url:'hospital_result.do',
 			data:{loc:loc,name:name},
 			success:function(response)
 			{	
-				
 				var searchResult = $(response).find('#search_result');
-				$("#hospital_result").html(searchResult);
+				$("#hospital_result").html(searchResult);	
 				
-				var searchResult = $(response).find('#totalresult');
-				$("#searchtotal").html(searchResult);
+				var totalResult = $(response).find('#totalresult');
+				$("#searchtotal").html(totalResult);
 				
 			}
-		});		
-		
+		});	 						
+	 $(function(){
 		$.ajax({ //json 파싱 ajax
 			type:'post',
-			url:'../main/hospital_search_ok.do',
+			url:'hospital_search_ok.do',
 			data:{loc:loc,name:name},
 			success:function(response) {
 				
@@ -119,19 +116,21 @@ $(function(){
 				            infowindow.open(map, marker);
 				            
 				            map.setCenter(coords);
-				            
+				        
 				        }
 				       
 				    });
-				});				
+				});
+			
 			}
 		});
+	});
 	});
 });
 
 </script>
-		<div class="col-sm-4" style="border-top: 1px solid; border-bottom: 1px solid; height: 540px; width: 460px;" id="hospital_result">
-		</div>		
+		<div class="col-sm-4" style="border-top: 1px solid; height: 470px; width: 460px;" id="hospital_result">
+		</div>	
 	</div>
 </body>
 </html>

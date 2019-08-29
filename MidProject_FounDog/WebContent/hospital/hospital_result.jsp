@@ -20,6 +20,29 @@
 			</c:choose>
 		</div>
 		<div id="search_result">
+		
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.result_page').click(function(){
+	 	var page=$(this).attr("data-page");
+	 	var loc=$('#searchloc').val();
+		var name=$('#searchname').val();
+
+	 	$.ajax({
+			type:'post',
+			url:'hospital_result.do',
+			data:{page:page,loc:loc,name:name},
+			success:function(response)
+			{								
+				var searchResult = $(response).find('#search_result');
+				$("#hospital_result").html(searchResult);	
+				
+			}
+		}); 
+	});
+});
+</script>	
 			<div style="overflow: auto; height: 470px; width: 100%">
 				<table class="table">
 					<c:choose>
@@ -37,27 +60,26 @@
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td class="text-left">${vo.name }<br> ${vo.loc }<br>
-								${vo.tel } <a href="#" class="btn btn-primary">예약</a>
+								${vo.tel } <a href="hospital_reserve.do" class="btn btn-primary">예약</a>
 							</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
-			<div class="col-sm-4"
-				style="height: 70px; width: 100%">
+			<div class="col-sm-4" style="height: 70px; width: 100%">
 				<ul class="pagination pagination-lg">
 					<c:if test="${curpage>BLOCK }">
-						<li><a href="hospital_list.do?page=1">&lt;&lt;</a></li>
-						<li><a href="hospital_list.do?page=${startPage-1 }">&lt;</a></li>
-					</c:if>
-					<c:forEach var="i" begin="${startPage }" end="${endPage }">
-						<li class=${curpage==i?"active":"" }><a
-							href="hospital_list.do?page=${i }">${i}</a></li>
-					</c:forEach>
-					<c:if test="${endPage<allPage }">
-						<li><a href="hospital_list.do?page=${endPage+1 }">&gt;</a></li>
-						<li><a href="hospital_list.do?page=${allPage }">&gt;&gt;</a></li>
-					</c:if>
+			           <li><input type="button" class="result_page" data-page="1" value="&lt;&lt;"></li>
+			           <li><input type="button" class="result_page" data-page="${startPage-1 }" value="&lt;"></li>
+			         </c:if>
+					 <c:forEach var="i" begin="${startPage }" end="${endPage }">
+					   <li class=${curpage==i?"active":"" }><input type="button" class="result_page" data-page="${i}" value="${i}"></li>
+					 </c:forEach> 
+					 <c:if test="${endPage<allPage }">
+					   <li><input type="button" class="result_page" data-page="${endPage+1 }" value="&gt;"></li>
+					   <li><input type="button" class="result_page" data-page="${allPage }" value="&gt;&gt;"></li>
+			         </c:if>
+			         <li style="margin-left: 300px"><h3>${curpage } page / ${totalpage } pages</h3></li>
 				</ul>
 			</div>
 		</div>
