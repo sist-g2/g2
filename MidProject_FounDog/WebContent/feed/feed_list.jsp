@@ -18,6 +18,14 @@
 <script type="text/javascript">
 $(function(){
 	
+	$.ajax ({
+		type: 'post', 
+		url: 'feed_read_ck.do',
+		success: function(response){
+			$('#cookiePrnt').html(response);
+		}
+	});
+	
 	$(window).scroll(function(){
 		var scrollTop = $(window).scrollTop();
 		$('#cookiePrnt').stop().animate({top:scrollTop+200+"px"}, 1);
@@ -26,14 +34,6 @@ $(function(){
 	$('#opDel').click(function(){
 		$('#cate-999').prop("checked", true);
 		$('input[type=checkbox]').prop("checked", false);
-	});
-	
-	$('#PgUp').click(function(){
-		$("html").animate({scrollTop : 0}, 500);
-	});
-	
-	$('#PgDwn').click(function(){
-		$("html").animate({scrollTop : ($(document).height())}, 500);
 	});
 	
 	var cateOp = ${category};
@@ -74,9 +74,6 @@ $(function(){
 	for(var i = 0; i < grain.length; i++) {
 		$("#grn-"+grain[i]).prop("checked", true);
 	}
-	
-	
-	
 });
 </script>
 </head>
@@ -171,11 +168,11 @@ $(function(){
 						<c:forEach var="vo" items="${fdList }">
 							<div class="fd_goods" >
 								<div class="fd_img" >
-									<a href="../feed/feed_detail.do?no=${vo.no }" ><img src="${vo.feedImg }" width=235px height=235px ></a>
+									<a href="../feed/feed_add_ck.do?no=${vo.no }&urlFlag=0" class="fd_res" ><img src="${vo.feedImg }" width=235px height=235px ></a>
 								</div>
 								<div class="fd_info" >
 									<div style="height: 55px;" >
-										<a href="../feed/feed_detail.do?no=${vo.no }" ><span class="fd_info_name" >${vo.name }</span></a>
+										<a href="../feed/feed_add_ck?no=${vo.no }&urlFlag=0" class="fd_res" ><span class="fd_info_name" >${vo.name }</span></a>
 									</div>
 									<div style="height: 35px;" >
 										<span class="fd_info_price" >최저가&nbsp;<fmt:formatNumber value="${vo.lowPrice }" pattern="#,###" />원</span>
@@ -205,20 +202,6 @@ $(function(){
 		</form>
 	</div>
 	<div id="cookiePrnt" >
-		<div style="margin: 0px auto; text-align: center; margin-bottom: 10px;" >
-			<button id="PgUp" >▲</button>
-		</div>
-		<div style="margin: 0px auto; text-align: center; margin-bottom: 5px;" >
-			<span class="simpleInfo" >최근 본 상품</span>
-		</div>
-		<c:forEach var="ck" items="${clist }">
-			<div style="border: 1px solid #c3c3c3; height: 52px; width: 52px; margin: 0px auto; margin-bottom: 5px;" >
-				<a href="../feed/feed_detail.do?no=${ck.no }" ><img src="${ck.feedImg }" height="50px" width="50px"></a>
-			</div>
-		</c:forEach>
-		<div style="margin: 0px auto; text-align: center; margin-top: 10px;" >
-			<button id="PgDwn" >▼</button>
-		</div>
 	</div>
 </div>
 </body>

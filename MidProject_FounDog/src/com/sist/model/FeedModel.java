@@ -10,6 +10,13 @@ import com.sist.dao.*;
 
 @Controller("feedModel")
 public class FeedModel {
+	// urlFlag
+	// 0: feed_list (= 뒤로)
+	// 1: feed_fav_list
+	// 2: 찜 삭제 후 feed_list
+	// 3: 기타 - feed_list
+	
+	// 목록 읽기
 	@RequestMapping("feed/feed_list.do")
 	public String feed_list(Model model) {
 		// 세션
@@ -109,14 +116,48 @@ public class FeedModel {
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+
+		model.addAttribute("opList", opList);
 		
-		// 쿠키 가져오기
+		// 페이지 이동
+		model.addAttribute("main_jsp", "../feed/feed_list.jsp");
+		return "../main/main.jsp";
+	}
+	
+	// 쿠키 추가
+	@RequestMapping("feed/feed_add_ck.do")
+	public String feed_add_cookie(Model model) {
+		// 세션
+		HttpSession session = model.getRequest().getSession();
+		
+		String id = (String)session.getAttribute("id"); // id 
+		String no = model.getRequest().getParameter("no"); // 상품번호
+		String urlFlag = model.getRequest().getParameter("urlFlag"); // 목록으로 이동 시 이동위치
+		
+		if(id==null)
+			id = "my";
+		
+		Cookie cookie = new Cookie(id+no, no);
+		model.getResponse().addCookie(cookie);
+		
+		return "redirect:../feed/feed_detail.do?no="+no+"&urlFlag="+urlFlag;
+	}
+	
+	// 쿠키 가져오기
+	@RequestMapping("feed/feed_read_ck.do")
+	public String feed_reed_cookie(Model model) {
+		// 세션
+		HttpSession session = model.getRequest().getSession();
+		
 		Cookie[] cookies = model.getRequest().getCookies();
 		List<FeedVO> clist = new ArrayList<FeedVO>();
 		if(cookies!=null) {
+			String cId = (String)session.getAttribute("id");
+			if(cId==null)
+				cId = "my";
 			if(cookies.length > 6) {
 				for (int i = cookies.length-1; i >= cookies.length-6; i--) {
-					if(cookies[i].getName().contains("my")) {
+					if(cookies[i].getName().contains(cId)) {
 						String value = cookies[i].getValue();
 						FeedVO ckvo = FeedDAO.feedDetailData(Integer.parseInt(value));
 						clist.add(ckvo);
@@ -124,7 +165,7 @@ public class FeedModel {
 				}
 			} else {
 				for (int i = cookies.length-1; i >= 0; i--) {
-					if(cookies[i].getName().contains("my")) {
+					if(cookies[i].getName().contains(cId)) {
 						String value = cookies[i].getValue();
 						FeedVO ckvo = FeedDAO.feedDetailData(Integer.parseInt(value));
 						clist.add(ckvo);
@@ -133,35 +174,15 @@ public class FeedModel {
 			}
 		}
 		model.addAttribute("clist", clist);
-
-		// 페이지 이동
-		model.addAttribute("main_jsp", "../feed/feed_list.jsp");
-		return "../main/main.jsp";
+		return "feed_cookie.jsp";
 	}
 	
+	//상세보기
 	@RequestMapping("feed/feed_detail.do")
 	public String feed_detail(Model model) {
 		// 세션
 		HttpSession session = model.getRequest().getSession();
 		
-		// 이전페이지
-		int urlPlag = -1;
-		String jsRef = model.getRequest().getParameter("ref");
-		System.out.println("js경로 : " + jsRef);
-		String referer = (String)model.getRequest().getHeader("REFERER");
-		referer = referer.substring(referer.indexOf("/", referer.indexOf("feed"))+1);
-		if(referer.indexOf("?")!=-1) {
-			referer = referer.substring(0, referer.indexOf("?"));
-		}
-		System.out.println("경로 : " + referer);
-		if(referer.equals("feed_list.do")) {
-			urlPlag = 0;
-		} else if (referer.equals("feed_fav_list.do") || referer.equals("feed_detail.do")) {
-			urlPlag = 1;
-		}
-		//System.out.println("플래그 : " + urlPlag);
-		model.addAttribute("urlPlag", urlPlag);
-				
 		String sno = model.getRequest().getParameter("no");
 		int no = Integer.parseInt(sno);
 		FeedDAO.feedHitIncrease(no); // 조회수 업데이트
@@ -170,32 +191,12 @@ public class FeedModel {
 		int lowPrice = FeedDAO.feedLowPrice(no); // 최저가 정보
 		List<Feed_ReviewVO> rlist = FeedDAO.reviewAllData(no); // 리뷰 리스트
 		
-		Cookie cookie = new Cookie("my"+sno, sno); // 쿠키 추가
-		model.getResponse().addCookie(cookie);
+		// 목록으로 버튼 이동 경로
+		String flag = model.getRequest().getParameter("urlFlag");
+		if(flag==null)
+			flag = "3";
 		
-		// 쿠키 가져오기
-		Cookie[] cookies = model.getRequest().getCookies();
-		List<FeedVO> clist = new ArrayList<FeedVO>();
-		if(cookies!=null) {
-			if(cookies.length > 6) {
-				for (int i = cookies.length-1; i >= cookies.length-6; i--) {
-					if(cookies[i].getName().contains("my")) {
-						String value = cookies[i].getValue();
-						FeedVO ckvo = FeedDAO.feedDetailData(Integer.parseInt(value));
-						clist.add(ckvo);
-					}
-				}
-			} else {
-				for (int i = cookies.length-1; i >= 0; i--) {
-					if(cookies[i].getName().contains("my")) {
-						String value = cookies[i].getValue();
-						FeedVO ckvo = FeedDAO.feedDetailData(Integer.parseInt(value));
-						clist.add(ckvo);
-					}
-				}
-			}
-		}
-		model.addAttribute("clist", clist);
+		model.addAttribute("flag", flag);
 		
 		// 찜 확인
 		Map favmap = new HashMap();
@@ -224,97 +225,7 @@ public class FeedModel {
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("feed/feed_fav_insert.do")
-	public String feed_fav_ins(Model model) {
-		String no = model.getRequest().getParameter("no");
-		HttpSession session = model.getRequest().getSession();
-		String id = (String)session.getAttribute("id");
-		
-		Feed_FavoriteVO fvo = new Feed_FavoriteVO();
-		fvo.setFnum(Integer.parseInt(no));
-		fvo.setId(id);
-		
-		FeedDAO.feedFavInsert(fvo);
-		
-		return "redirect:../feed/feed_detail.do?no="+no;
-	}
-	
-	@RequestMapping("feed/feed_fav_delete.do")
-	public String feed_fav_del(Model model) {
-		String bno = model.getRequest().getParameter("bno");
-		String no = model.getRequest().getParameter("no");
-		
-		FeedDAO.feedFavDelete(Integer.parseInt(no));
-		
-		return "redirect:../feed/feed_detail.do?no="+bno;
-	}
-	
-	@RequestMapping("feed/feed_review_ins.do")
-	public String feed_review_ins(Model model) {
-		HttpSession session = model.getRequest().getSession();
-		
-		try {
-			model.getRequest().setCharacterEncoding("UTF-8");
-		} catch (Exception ex) {}
-		
-		String subject = model.getRequest().getParameter("subject");
-		String content = model.getRequest().getParameter("content");
-		String star = model.getRequest().getParameter("star");
-		String fnum = model.getRequest().getParameter("fnum");
-		String id = (String)session.getAttribute("id");
-		String dtype = model.getRequest().getParameter("dtype");
-		
-		Feed_ReviewVO vo = new Feed_ReviewVO();
-		vo.setSubject(subject);
-		vo.setContent(content);
-		vo.setStar(Integer.parseInt(star));
-		vo.setFnum(Integer.parseInt(fnum));
-		vo.setId(id);
-		vo.setDtype(dtype);
-		
-		FeedDAO.reviewInsert(vo);
-		
-		return "redirect:../feed/feed_detail.do?no="+fnum;
-	}
-	
-	@RequestMapping("feed/feed_review_del.do")
-	public String feed_review_del(Model model) {
-		String no = model.getRequest().getParameter("no");
-		String bno = model.getRequest().getParameter("bno");
-		
-		FeedDAO.reviewDelete(Integer.parseInt(no));
-		
-		return "redirect:../feed/feed_detail.do?no="+bno;
-	}
-	
-	@RequestMapping("feed/feed_review_upd.do")
-	public String feed_review_upd(Model model) {
-		HttpSession session = model.getRequest().getSession();
-		
-		try {
-			model.getRequest().setCharacterEncoding("UTF-8");
-		} catch (Exception ex) {}
-		
-		String no = model.getRequest().getParameter("no");
-		String subject = model.getRequest().getParameter("subject");
-		String content = model.getRequest().getParameter("content");
-		String star = model.getRequest().getParameter("star");
-		String dtype = model.getRequest().getParameter("dtype");
-		String fnum = model.getRequest().getParameter("fnum");
-		
-		Feed_ReviewVO vo = new Feed_ReviewVO();
-		vo.setNo(Integer.parseInt(no));
-		vo.setSubject(subject);
-		vo.setContent(content);
-		vo.setStar(Integer.parseInt(star));
-		vo.setFnum(Integer.parseInt(fnum));
-		vo.setDtype(dtype);
-		
-		FeedDAO.reviewUpdate(vo);
-		
-		return "redirect:../feed/feed_detail.do?no="+fnum;
-	}
-	
+	// 찜 목록 읽기
 	@RequestMapping("feed/feed_fav_list.do")
 	public String feed_fav_list(Model model) {
 		Map<String, Object> opList = new HashMap<String, Object>();
@@ -376,35 +287,124 @@ public class FeedModel {
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
-		
-		// 쿠키 가져오기
-		Cookie[] cookies = model.getRequest().getCookies();
-		List<FeedVO> clist = new ArrayList<FeedVO>();
-		if(cookies!=null) {
-			if(cookies.length > 6) {
-				for (int i = cookies.length-1; i >= cookies.length-6; i--) {
-					if(cookies[i].getName().contains("my")) {
-						String value = cookies[i].getValue();
-						FeedVO ckvo = FeedDAO.feedDetailData(Integer.parseInt(value));
-						clist.add(ckvo);
-					}
-				}
-			} else {
-				for (int i = cookies.length-1; i >= 0; i--) {
-					if(cookies[i].getName().contains("my")) {
-						String value = cookies[i].getValue();
-						FeedVO ckvo = FeedDAO.feedDetailData(Integer.parseInt(value));
-						clist.add(ckvo);
-					}
-				}
-			}
-		}
-		model.addAttribute("clist", clist);
 
 		// 페이지 이동
 		model.addAttribute("main_jsp", "../feed/feed_favList.jsp");
 		return "../main/main.jsp";
 	}
+	
+	// 찜 목록 추가
+	@RequestMapping("feed/feed_fav_insert.do")
+	public String feed_fav_ins(Model model) {
+		String no = model.getRequest().getParameter("no");
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		
+		Feed_FavoriteVO fvo = new Feed_FavoriteVO();
+		fvo.setFnum(Integer.parseInt(no));
+		fvo.setId(id);
+		
+		FeedDAO.feedFavInsert(fvo);
+		
+		return "redirect:../feed/feed_detail.do?no="+no;
+	}
+	
+	// 찜 목록 삭제
+	@RequestMapping("feed/feed_fav_delete.do")
+	public String feed_fav_del(Model model) {
+		String bno = model.getRequest().getParameter("bno"); // 상품 번호
+		String no = model.getRequest().getParameter("no"); // 찜 번호
+		
+		// 이전 페이지 경로
+		int urlFlag = 2;
+		String jsRef = model.getRequest().getParameter("ref");
+		jsRef = jsRef.substring(jsRef.indexOf("/", jsRef.indexOf("feed"))+1);
+		
+		if(jsRef.equals("feed_list.do")) {
+			urlFlag = 2;
+		} else if (jsRef.equals("feed_fav_list.do")) {
+			urlFlag = 1;
+		}
+		
+		model.addAttribute("urlFlag", urlFlag);
+		
+		FeedDAO.feedFavDelete(Integer.parseInt(no));
+		
+		return "redirect:../feed/feed_detail.do?no="+bno+"&urlFlag="+urlFlag;
+	}
+	
+	// 리뷰 추가
+	@RequestMapping("feed/feed_review_ins.do")
+	public String feed_review_ins(Model model) {
+		HttpSession session = model.getRequest().getSession();
+		
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception ex) {}
+		
+		String subject = model.getRequest().getParameter("subject");
+		String content = model.getRequest().getParameter("content");
+		String star = model.getRequest().getParameter("star");
+		String fnum = model.getRequest().getParameter("fnum");
+		String id = (String)session.getAttribute("id");
+		String dtype = model.getRequest().getParameter("dtype");
+		
+		Feed_ReviewVO vo = new Feed_ReviewVO();
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setStar(Integer.parseInt(star));
+		vo.setFnum(Integer.parseInt(fnum));
+		vo.setId(id);
+		vo.setDtype(dtype);
+		
+		FeedDAO.reviewInsert(vo);
+		
+		return "redirect:../feed/feed_detail.do?no="+fnum;
+	}
+	
+	// 리뷰 삭제
+	@RequestMapping("feed/feed_review_del.do")
+	public String feed_review_del(Model model) {
+		String no = model.getRequest().getParameter("no");
+		String bno = model.getRequest().getParameter("bno");
+		
+		FeedDAO.reviewDelete(Integer.parseInt(no));
+		
+		return "redirect:../feed/feed_detail.do?no="+bno;
+	}
+	
+	// 리뷰 수정
+	@RequestMapping("feed/feed_review_upd.do")
+	public String feed_review_upd(Model model) {
+		HttpSession session = model.getRequest().getSession();
+		
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception ex) {}
+		
+		String no = model.getRequest().getParameter("no");
+		String subject = model.getRequest().getParameter("subject");
+		String content = model.getRequest().getParameter("content");
+		String star = model.getRequest().getParameter("star");
+		String dtype = model.getRequest().getParameter("dtype");
+		String fnum = model.getRequest().getParameter("fnum");
+		
+		Feed_ReviewVO vo = new Feed_ReviewVO();
+		vo.setNo(Integer.parseInt(no));
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setStar(Integer.parseInt(star));
+		vo.setFnum(Integer.parseInt(fnum));
+		vo.setDtype(dtype);
+		
+		FeedDAO.reviewUpdate(vo);
+		
+		return "redirect:../feed/feed_detail.do?no="+fnum;
+	}
+	
+	
+
+
 }
 
 

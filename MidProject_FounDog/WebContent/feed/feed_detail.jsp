@@ -23,6 +23,14 @@ var bfNo = 0;
 var no = 0;
 $(function(){
 	
+	$.ajax ({
+		type: 'post', 
+		url: 'feed_read_ck.do',
+		success: function(response){
+			$('#cookiePrnt').html(response);
+		}
+	});
+	
 	$(window).scroll(function(){
 		var scrollTop = $(window).scrollTop();
 		$('#cookiePrnt').stop().animate({top:scrollTop+200+"px"}, 1);
@@ -37,8 +45,7 @@ $(function(){
 	});
 	
 	$('#favDelB').click(function(){
-		var referrer =  document.location.href;
-		console.log(referrer);
+		var referrer =  document.referrer;
 		if(confirm("찜 목록에서 삭제하시겠어요?")) {
 			$('#ref').val(referrer);
 			$('#fav_del').submit();
@@ -138,11 +145,17 @@ $(function(){
 				<td width="150px"></td>
 				<td width="150px"></td>
 				<td width="150px">
-					<c:if test="${urlPlag==0 }" >
+					<c:if test="${flag==0 }" > <%-- 검색조건 유지, 사료 목록으로(뒤로가기 1회) --%>
 						<input type="button" class="backList" value="목록으로" onclick="javascript:history.back();" >
 					</c:if>
-					<c:if test="${urlPlag==1 }" >
+					<c:if test="${flag==1 }" > <%-- 찜 목록으로 --%>
 						<input type="button" class="backList" value="목록으로" onclick="javascript:location.href='../feed/feed_fav_list.do';" >
+					</c:if>
+					<c:if test="${flag==2 }" > <%-- 찜 삭제 후 feed_list(뒤로가기 2회) --%>
+						<input type="button" class="backList" value="목록으로" onclick="javascript:history.go(-2);" >
+					</c:if>
+					<c:if test="${flag==3 }" > <%-- 기타 - feed_list --%>
+						<input type="button" class="backList" value="목록으로" onclick="javascript:location.href='../feed/feed_list.do';" >
 					</c:if>
 				</td>
 			</tr>
@@ -348,20 +361,6 @@ $(function(){
 		<div style="height: 30px;" ></div>
 		
 		<div id="cookiePrnt" >
-			<div style="margin: 0px auto; text-align: center; margin-bottom: 10px;" >
-				<button id="PgUp" >▲</button>
-			</div>
-			<div style="margin: 0px auto; text-align: center; margin-bottom: 5px;" >
-				<span class="simpleInfo" >최근 본 상품</span>
-			</div>
-			<c:forEach var="ck" items="${clist }">
-				<div style="border: 1px solid #c3c3c3; height: 52px; width: 52px; margin: 0px auto; margin-bottom: 5px;" >
-					<a href="../feed/feed_detail.do?no=${ck.no }" ><img src="${ck.feedImg }" height="50px" width="50px"></a>
-				</div>
-			</c:forEach>
-			<div style="margin: 0px auto; text-align: center; margin-top: 10px;" >
-				<button id="PgDwn" >▼</button>
-			</div>
 		</div>
 	</div>
 </div>
