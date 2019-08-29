@@ -1,9 +1,13 @@
 package com.sist.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.vo.DogVO;
+import com.sist.vo.Feed_brandVO;
 import com.sist.vo.MemberVO;
 
 public class MemberDAO {
@@ -48,6 +52,20 @@ public class MemberDAO {
 		session.close();
 	}
 	
+	public static MemberVO memberDetailData(String id){
+		MemberVO vo = new MemberVO();
+		SqlSession session = ssf.openSession();
+		vo = session.selectOne("memberAllData", id);
+		session.close();
+		return vo;
+	}
+	
+	public static void dogJoin(DogVO dvo){
+		SqlSession session = ssf.openSession(true);
+		session.insert("dogJoin", dvo);
+		session.close();
+	}
+	
 	public static int memberDelete(String id, String pwd){
 		int result = 0;
 		SqlSession session = ssf.openSession();
@@ -61,5 +79,21 @@ public class MemberDAO {
 		//System.out.println(result);
 		session.close();
 		return result;
+	}
+	
+	public static List<DogVO> dogDetailData(String id){
+		List<DogVO> list = new ArrayList<DogVO>();
+		SqlSession session = ssf.openSession();
+		list = session.selectList("DogDetailData", id);
+		session.close();
+		return list;
+	}
+	
+	public static void dogDelete(int dno){
+		SqlSession session = ssf.openSession();
+		session.delete("dogDelete", dno);
+		session.commit();
+		session.close();
+		
 	}
 }

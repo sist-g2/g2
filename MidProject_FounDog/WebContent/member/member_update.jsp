@@ -67,8 +67,7 @@
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=id class="form-control2" style="width:70%" placeholder="ID" value="${id }">&nbsp;
-				<input type=button class="btn btn-common2" style="width:28%" value="중복체크">
+				<input type=text name=id class="form-control" placeholder="ID" value="${vo.id }" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
@@ -76,15 +75,28 @@
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=password name=pwd class="form-control" size=15 placeholder="Password">
+				<input type=password name=pwd class="form-control" size=15 placeholder="비밀번호를 입력해주세요.">
 			</td>
 		</tr>
 		<tr>
 			<td class="text-left" >이름</td>
 		</tr>
 		<tr>
-			<td >
-				<input type=text name=name class="form-control" placeholder="Name" value="${name }">
+			<td>
+				<input type=text name=name class="form-control" value="${vo.name }" readonly="readonly">
+			</td>
+		</tr>
+		<!-- <tr>
+			<td class="text-left">생년월일<font color=red> * </font></td>
+		</tr>
+		<tr>
+			<td class="text-left" >
+				<input type=text name=year class="form-control2" style="width:26%" id="year" readonly="readonly">
+				&nbsp;년&nbsp;&nbsp;&nbsp;
+				<input type=text name=month class="form-control2" style="width:26%" id="month" readonly="readonly">
+				&nbsp;월&nbsp;&nbsp;&nbsp;
+				<input type=text name=day class="form-control2" style="width:26%" id="day" readonly="readonly">
+				&nbsp;일
 			</td>
 		</tr>
 		<tr>
@@ -100,13 +112,13 @@
 				<input type=text name=tel2 class="form-control2"  style="width:31%" value="${tel2 }">&nbsp;&nbsp;-&nbsp;
 				<input type=text name=tel3 class="form-control2"  style="width:31%" value="${tel3 }">
 			</td>
-		</tr>
+		</tr> -->
 		<tr>
 			<td class="text-left">이메일</td>
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=email class="form-control" placeholder="E-mail" value="${email }">
+				<input type=text name=email class="form-control" value="${vo.email }">
 			</td>
 		</tr>
 		<tr>
@@ -114,7 +126,7 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=post class="form-control2" style="width:58%"  value="${post }">&nbsp;&nbsp;&nbsp;
+				<input type=text name=post class="form-control2" style="width:58%"  value="${vo.post }">&nbsp;&nbsp;&nbsp;
 				<input type=button class="btn btn-common2 uppercase" value="우편번호 검색" style="width:38%">
 			</td>
 		</tr>
@@ -123,7 +135,7 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=addr1 class="form-control" placeholder="Address" value="${addr1 }">
+				<input type=text name=addr1 class="form-control" value="${vo.addr1 }">
 			</td>
 		</tr>
 		<tr>
@@ -131,7 +143,7 @@
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=addr2 class="form-control" placeholder="Detailed Address" value="${addr2 }">
+				<input type=text name=addr2 class="form-control" value="${vo.addr2 }">
 			</td>
 		</tr>
 	</table>
@@ -139,72 +151,7 @@
 <!-- 필수 정보 -->
 <!-- 선택 정보 -->
 	<div class="rowrow optionList"></div>
-	<h3 class="text-center">선택 정보</h3>
 	<table class="table table-borderless">
-		<tr>
-			<td class="text-left" >반려견 이름</td>
-		</tr>
-		<tr>
-			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left" >견종</td>
-		</tr>
-		<tr>
-			<td class="text-left" >
-				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds">
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left" >반려견 생년월일</td>
-		</tr>
-		<tr>
-			<td class="text-left" >
-				<select name=dyear class="form-control2" style="width:27%">
-					<option></option>
-					<option>2019</option>
-					<option>2018</option>
-				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
-				<select name=dmonth class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left" >반려견 성별</td>
-		</tr>
-		<tr>
-			<td class="text-left" >
-				<input type=radio value="수컷" name=dsex checked="checked" style="display: none;">
-				<label for="dsex">&nbsp;&nbsp;수컷&nbsp;&nbsp;</label>
-				<input type=radio value="암컷" name=dsex style="display: none;">
-				<label for="dsex">&nbsp;&nbsp;암컷&nbsp;&nbsp;</label>
-			</td>
-		</tr>
-		<tr>
-			<td  class="text-center">
-				<input type=button class="btn btn-common2 uppercase" value="반려견 추가">
-			</td>
-		</tr>
 		<tr>
 			<td  class="text-center">
 				<input type=submit value="정보수정" class="btn btn-submit">

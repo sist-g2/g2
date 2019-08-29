@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,22 @@
 .row{
 	margin: 0px auto;
 	width: 1200px;
+}
+.paddingtable{
+	padding-left: 15px;
+	padding-right:15px;
+	display: table;
+}
+.optionList td button {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	/* margin-right: 3px; */
+	height: 30px;
+	/* line-height: 30px; */
+	text-align: center;
+	cursor: pointer;
 }
 </style>
 </head>
@@ -31,11 +48,39 @@
 
 <section id="shortcodes">
 	<div class="container">
-		<h4 class="page-header text-center">ㅇㅇㅇ님, 안녕하세요!</h4>
-		<div class="live-preview text-center">
-			<a href="../member/member_update.do" class="btn btn-common uppercase">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="../member/member_delete.do" class="btn btn-common uppercase">회원 탈퇴</a>
+	<div id="feature-container">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="page-header text-left">${name }님, 안녕하세요!</h4>
+				<a href="../member/member_update.do" class="btn btn-common2 uppercase">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="../member/member_delete.do" class="btn btn-common2 uppercase">회원 탈퇴</a>
+			</div>
 		</div>
+	</div>
+	
+	<div id="feature-container">
+		<div class="row optionList">
+			<div class="col-md-12">
+				<h4 class="page-header text-left">${name }님의 반려견</h4>
+			</div>
+			<div class="paddingtable">
+				<a href="../member/dog_insert.do"><input type=button class="btn btn-common2 uppercase" value="반려견 추가하기"></a>
+				<div style="height:20px;"></div>
+				<table class="table table-borderless" style="width:250px;">
+					<c:forEach var="dvo" items="${list}">
+						<tr>
+							<td><font color="#bd8942">${dvo.dname }</font></td>
+							<td>${dvo.dtype }</td>
+							<td style="padding-top:2px;"><button type="button">수정</button></td>
+							<td><a href="../member/dog_delete_ok.do?dno=${dvo.dno }">X</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	
         
 		<div id="feature-container">
 			<div class="row">
@@ -69,7 +114,7 @@
 				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="1200ms">
 					<div class="feature-inner">
 						<div class="icon-wrapper">
-							<a href="../feed/feed_fav_List.do"><i class="fa fa-2x fa-comments-o"></i></a>
+							<a href="../feed/feed_fav_list.do"><i class="fa fa-2x fa-comments-o"></i></a>
 						</div>
 						<h2>찜 목록</h2>
 					</div>

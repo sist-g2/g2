@@ -28,6 +28,16 @@
 			#{addr2}
 		)
 	</insert>
+	<insert id="dogJoin" parameterType="DogVO">
+		INSERT INTO dog VALUES(
+			dog_dno_seq.nextval,
+			#{dname},
+			#{dtype},
+			#{dbirth},
+			#{dsex},
+			#{id}
+		)
+	</insert>
 	<!-- 탈퇴 비밀번호 확인 -->
 	<select id="deleteGetPwd" resultType="String" parameterType="String">
 		SELECT pwd FROM member
@@ -37,5 +47,26 @@
 	<delete id="memberDelete" parameterType="String">
 		DELETE FROM member
 		WHERE id = #{id}
+	</delete>
+	
+	<!-- 마이페이지 -->
+	<select id="DogDetailData" resultType="DogVO" parameterType="String">
+		SELECT dno, dname, dtype, member.id
+		FROM dog, member
+		WHERE member.id = dog.id
+		AND member.id = #{id}
+	</select>
+	
+	<!-- 회원수정 -->
+	<select id="memberAllData" resultType="MemberVO" parameterType="String">
+		SELECT id, pwd, name, email, post, addr1, addr2
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 반려견 정보 삭제 -->
+	<delete id="dogDelete" parameterType="int">
+		DELETE FROM dog
+		WHERE dno = #{dno}
 	</delete>
 </mapper>

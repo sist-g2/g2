@@ -17,7 +17,14 @@ public class MemberVO {
 	private String post;
 	private String addr1;
 	private String addr2;
+	private DogVO dogVO = new DogVO();
 	
+	public DogVO getDogVO() {
+		return dogVO;
+	}
+	public void setDogVO(DogVO dogVO) {
+		this.dogVO = dogVO;
+	}
 	public String getBirthday() {
 		return birthday;
 	}

@@ -1,11 +1,15 @@
 package com.sist.model;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.MemberDAO;
+import com.sist.vo.DogVO;
 import com.sist.vo.MemberVO;
 
 @Controller("memberModel")
@@ -14,6 +18,16 @@ public class MemberModel {
 	public String member_join(Model model){
 		model.addAttribute("main_jsp", "../member/member_join.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/member_jungbok.do")
+	public String member_jungbok(Model model){
+		String id = model.getRequest().getParameter("id");
+		int count = MemberDAO.member_jungbok(id);
+		System.out.println(count);
+		HttpSession session = model.getRequest().getSession();
+		session.setAttribute("count", count);
+		return "../member/member_jungbok.jsp";
 	}
 	
 	@RequestMapping("member/member_join_ok.do")
@@ -48,22 +62,63 @@ public class MemberModel {
 		vo.setPost(post);
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);
-		
-		System.out.println(id);
-		
+
 		MemberDAO.memberJoin(vo);
+		
+		DogVO dvo = new DogVO();
+		String dname = model.getRequest().getParameter("dname");
+		String dtype = model.getRequest().getParameter("dtype");
+		String dyear = model.getRequest().getParameter("dyear");
+		String dmonth = model.getRequest().getParameter("dmonth");
+		String dday = model.getRequest().getParameter("dday");
+		String dsex = model.getRequest().getParameter("dsex");
+		System.out.println(dname);
+		if(dname!=""){
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+			System.out.println(dname);
+			
+			MemberDAO.dogJoin(dvo);
+		} else if(dname==""){
+			
+		}
 		
 		return "redirect:../main/main.do";
 	}
 	
-	@RequestMapping("member/member_jungbok.do")
-	public String member_jungbok(Model model){
-		String id = model.getRequest().getParameter("id");
-		int count = MemberDAO.member_jungbok(id);
-		System.out.println(count);
+	@RequestMapping("member/dog_insert.do")
+	public String dog_insert(Model model){
+		model.addAttribute("main_jsp", "../member/dog_insert.jsp");
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/dog_insert_ok.do")
+	public String dog_insert_ok(Model model){
+		try{
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		
 		HttpSession session = model.getRequest().getSession();
-		session.setAttribute("count", count);
-		return "../member/member_jungbok.jsp";
+		String id = (String)session.getAttribute("id");
+		
+		DogVO dvo = new DogVO();
+		String dname = model.getRequest().getParameter("dname");
+		String dtype = model.getRequest().getParameter("dtype");
+		String dyear = model.getRequest().getParameter("dyear");
+		String dmonth = model.getRequest().getParameter("dmonth");
+		String dday = model.getRequest().getParameter("dday");
+		String dsex = model.getRequest().getParameter("dsex");
+		dvo.setDname(dname);
+		dvo.setDtype(dtype);
+		dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+		dvo.setDsex(dsex);
+		dvo.setId(id);
+			
+		MemberDAO.dogJoin(dvo);
+		return "redirect:../member/member_mypage.do";
 	}
 	
 	@RequestMapping("member/member_login.do")
@@ -95,8 +150,17 @@ public class MemberModel {
 	
 	@RequestMapping("member/member_update.do")
 	public String member_update(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		MemberVO vo = MemberDAO.memberDetailData(id);
+		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../member/member_update.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/member_update_ok")
+	public String member_update_ok(Model model){
+		return "../member/member_update_ok.jsp";
 	}
 	
 	@RequestMapping("member/member_delete.do")
@@ -116,8 +180,19 @@ public class MemberModel {
 		return "../member/member_delete_ok.jsp";
 	}
 	
+	@RequestMapping("member/dog_delete_ok.do")
+	public String dog_delete_ok(Model model){
+		String dno = model.getRequest().getParameter("dno");
+		MemberDAO.dogDelete(Integer.parseInt(dno));
+		return "redirect:../member/member_mypage.do";
+	}
+	
 	@RequestMapping("member/member_mypage.do")
 	public String member_mypage(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		List<DogVO> list = MemberDAO.dogDetailData(id);
+		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../member/member_mypage.jsp");
 		return "../main/main.jsp";
 	}
