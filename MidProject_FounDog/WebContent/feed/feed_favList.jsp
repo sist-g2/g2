@@ -67,11 +67,11 @@ $(function(){
 						<c:forEach var="vo" items="${favList }">
 							<div class="fd_goods" >
 								<div class="fd_img" >
-									<a href="../feed/feed_add_ck.do?no=${vo.fnum }&urlFlag=1" class="fd_res" ><img src="${vo.fvo.feedImg }" width=235px height=235px ></a>
+									<a href="../feed/feed_detail.do?no=${vo.fnum }&urlFlag=1" class="fd_res" ><img src="${vo.fvo.feedImg }" width=235px height=235px ></a>
 								</div>
 								<div class="fd_info" >
 									<div style="height: 55px;" >
-										<a href="../feed/feed_add_ck.do?no=${vo.fnum }&urlFlag=1" class="fd_res" ><span class="fd_info_name" >${vo.fvo.name }</span></a>
+										<a href="../feed/feed_detail.do?no=${vo.fnum }&urlFlag=1" class="fd_res" ><span class="fd_info_name" >${vo.fvo.name }</span></a>
 									</div>
 									<div style="height: 35px;" >
 										<span class="fd_info_price" >최저가&nbsp;<fmt:formatNumber value="${vo.fnum_lowPrice }" pattern="#,###" />원</span>

@@ -124,25 +124,6 @@ public class FeedModel {
 		return "../main/main.jsp";
 	}
 	
-	// 쿠키 추가
-	@RequestMapping("feed/feed_add_ck.do")
-	public String feed_add_cookie(Model model) {
-		// 세션
-		HttpSession session = model.getRequest().getSession();
-		
-		String id = (String)session.getAttribute("id"); // id 
-		String no = model.getRequest().getParameter("no"); // 상품번호
-		String urlFlag = model.getRequest().getParameter("urlFlag"); // 목록으로 이동 시 이동위치
-		
-		if(id==null)
-			id = "my";
-		
-		Cookie cookie = new Cookie(id+no, no);
-		model.getResponse().addCookie(cookie);
-		
-		return "redirect:../feed/feed_detail.do?no="+no+"&urlFlag="+urlFlag;
-	}
-	
 	// 쿠키 가져오기
 	@RequestMapping("feed/feed_read_ck.do")
 	public String feed_reed_cookie(Model model) {
@@ -183,7 +164,7 @@ public class FeedModel {
 		// 세션
 		HttpSession session = model.getRequest().getSession();
 		
-		String sno = model.getRequest().getParameter("no");
+		String sno = model.getRequest().getParameter("no"); // 글번호
 		int no = Integer.parseInt(sno);
 		FeedDAO.feedHitIncrease(no); // 조회수 업데이트
 		FeedVO vo = FeedDAO.feedDetailData(no);  // 상품 정보
@@ -215,6 +196,12 @@ public class FeedModel {
 			}
 		}
 		model.addAttribute("favnum", favnum);
+		
+		// 쿠키 추가
+		if(id==null)
+			id = "my";
+		Cookie cookie = new Cookie(id+sno, sno);
+		model.getResponse().addCookie(cookie);
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("slist", slist);
