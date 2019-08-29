@@ -38,4 +38,12 @@ public class HospitalDAO {
 		   session.close();
 		   return total;
 	   }
+	 
+	 public static String hospitalName(int no){
+		   String hosName = "";
+		   SqlSession session = ssf.openSession();	   					  
+		   hosName = session.selectOne("hospitalName",no);
+		   session.close();
+		   return hosName;
+	   }
 }

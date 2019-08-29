@@ -60,7 +60,7 @@ $(function(){
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td class="text-left">${vo.name }<br> ${vo.loc }<br>
-								${vo.tel } <a href="hospital_reserve.do" class="btn btn-primary">예약</a>
+								${vo.tel } <a href="hospital_reserve.do?no=${vo.no }" class="btn btn-primary">예약</a>
 							</td>
 						</tr>
 					</c:forEach>

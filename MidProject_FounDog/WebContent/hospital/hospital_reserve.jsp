@@ -23,8 +23,45 @@
 
 .board_write .end {border-bottom:3px solid #2b2829;border-left:0;border-right:0}
 
+#layerPopup{
+  padding:20px; 
+  border:4px solid #ddd; 
+  position:absolute; 
+  left:800px; 
+  top:700px; 
+  background:#fff;
+}
+
+#layerPopup button{
+  cursor:pointer;
+}
+
 </style>
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	  $("#layerPopup").hide();
+	  $("#contents > a").click(function(){
+	    $("#contents > a").blur();
+	    $("#layerPopup").show();
+	    $("#layerPopup a").focus();
+	    return false;
+	  });
+	  $("#layerPopup a").keydown(function(e){
+	    if(e.shiftKey && e.keyCode == 9){ // Shift + Tab 키를 의미합니다.
+	      $("#contents > a").focus();
+	      $("#layerPopup").hide();
+	      return false;
+	    }
+	  });
+	  
+	  $("#layerPopup button").click(function(){
+	    $("#contents > a").focus();
+	    $("#layerPopup").hide();
+	  });
+	});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -92,7 +129,7 @@ shamadeo@naver.com
 				
 			</div>
 			<div id="a4" style="height: 50px;">
-				<input type="radio">개인정보 취급방침에 동의합니다.
+				<input type="checkbox">개인정보 취급방침에 동의합니다.
 			</div>
 		</div>
 		<table class="board_write">
@@ -103,13 +140,20 @@ shamadeo@naver.com
 <tbody><tr class="first bdt bdb">
 	<th><em>01.</em>진료병원</th>
 	<td>
-		ㅁㅁ 병원
+		${hosName }
 	</td>
 </tr>
 <tr>
 	<th rowspan="4"><em>02.</em>예약희망날짜</th>
 	<td style="padding:20px 0 30px 0" class="ml_28">
-		달력 들어갈곳
+		<div id="contents">
+		  <a href="#layerPopup">예약 날짜 선택</a>
+		  <div id="layerPopup">
+				달력들어갈 부분
+		    <button type="button">닫기</button>
+		  </div>
+		</div>
+		
 	</td>
 </tr>
 <tr>
@@ -133,7 +177,12 @@ shamadeo@naver.com
 <tr class="bdt">
 	<th class="end bdb" rowspan="7"><em>03.</em>기타정보입력</th>
 	<td class="ml_28">
-		이름
+		보호자 아이디 : <input type="text">
+	</td>
+</tr>
+<tr>
+	<td class="ml_28">
+		진료받는 강아지 : <input type="text">&nbsp;<input type="button" value="선택">
 	</td>
 </tr>
 <tr>

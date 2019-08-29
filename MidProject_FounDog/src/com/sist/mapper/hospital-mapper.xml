@@ -20,4 +20,10 @@
 	 FROM hospital
 	 WHERE loc LIKE '%'||#{loc}||'%' AND name LIKE '%'||#{name}||'%'
 </select>
+
+<select id="hospitalName" resultType="String" parameterType="int">
+	SELECT name
+	FROM hospital
+	WHERE no = #{no}
+</select>
 </mapper>

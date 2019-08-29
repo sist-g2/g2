@@ -131,7 +131,12 @@ public class HospitalModel {
 	
 	@RequestMapping("hospital/hospital_reserve.do")
 	public String hospital_reserve(Model model){
-
+		
+		String no = model.getRequest().getParameter("no");
+		
+		String hosName = HospitalDAO.hospitalName(Integer.parseInt(no));
+		
+		model.addAttribute("hosName", hosName);
 		model.addAttribute("main_jsp", "../hospital/hospital_reserve.jsp");
 		return "../main/main.jsp";
 	}
