@@ -2,11 +2,10 @@ package com.sist.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
 import com.sist.vo.BoardVO;
 import com.sist.vo.Board_ReplyVO;
-
 import java.util.*;
+
 public class BoardDAO {
 	   private static SqlSessionFactory ssf;
 	   static

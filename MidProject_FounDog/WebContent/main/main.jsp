@@ -39,7 +39,7 @@
         			<li><a href="../member/member_logout.do">로그아웃</a></li>
         			<li><a href="../member/member_mypage.do">마이페이지</a></li>
         			</c:if>
-        			<li><a href="#">사이트 이용안내</a></li>
+        			<li><a href="../site/site_list.do">사이트 이용안내</a></li>
         		</ul>
         	</div>
             <!-- <div class="col-sm-12 overflow">

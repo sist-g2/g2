@@ -62,7 +62,11 @@
  <result property="root" column="root"/>
  <result property="depth" column="depth"/>
 </resultMap>
- 
+<!-- FAQ -->
+ <select id="faqListData" resultType="Board_FAQVO" parameterType="int">
+		SELECT no,subject,content,category
+		FROM Board_FAQ
+	</select>
  
    <!-- 게시물 번호가 일렬로 처리  -->
    
