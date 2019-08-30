@@ -1,5 +1,9 @@
 package com.sist.model;
+import java.text.SimpleDateFormat;
+
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
@@ -8,6 +12,7 @@ import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.HospitalDAO;
+import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 
 @Controller("hospitalModel")
@@ -133,12 +138,134 @@ public class HospitalModel {
 	public String hospital_reserve(Model model){
 		
 		String no = model.getRequest().getParameter("no");
-		
 		String hosName = HospitalDAO.hospitalName(Integer.parseInt(no));
 		
+		HttpSession session=model.getRequest().getSession();
+		String id=(String)session.getAttribute("id");
+		
+		String name = HospitalDAO.memberId(id);
+		
+		model.addAttribute("name", name);
+		model.addAttribute("no", no);
 		model.addAttribute("hosName", hosName);
 		model.addAttribute("main_jsp", "../hospital/hospital_reserve.jsp");
 		return "../main/main.jsp";
 	}
+	
+	@RequestMapping("hospital/hospital_diary.do")
+	   public String hospital_diary(Model model)
+	   {
+		
+		   String strYear=model.getRequest().getParameter("year");
+		   String strMonth=model.getRequest().getParameter("month");
+		   
+		   // 현재 날짜 읽기
+		   Date date=new Date();
+		   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-M-d");//07 08  MM=>1~9 => 01,09
+		   // 자바는 숫자표현식 => 10,8(0),16(0x)
+		   StringTokenizer st=new StringTokenizer(sdf.format(date),"-");
+		   
+		   String sy=st.nextToken();
+		   String sm=st.nextToken();
+		   String day1=st.nextToken();
+		   
+		   if(strYear==null)
+		   {
+			   strYear=sy;
+		   }
+		   if(strMonth==null)
+		   {
+			   strMonth=sm;
+		   }
+		   
+		   int year=Integer.parseInt(strYear);
+		   int month=Integer.parseInt(strMonth);
+		   int day=Integer.parseInt(day1);
+		   
+		   model.addAttribute("year", year);
+		   model.addAttribute("month", month);
+		   model.addAttribute("day", day);
+		   
+		   String[] strWeek={"일","월","화","수","목","금","토"};
+		   model.addAttribute("strWeek", strWeek);
+		   
+		   // 요일 구하기
+		   int[] lastday={31,28,31,30,31,30,
+				          31,31,30,31,30,31};
+		   // 1년 1월 1일 ~ 2018년 12월 31의 총합
+		   int total=(year-1)*365
+				   +(year-1)/4
+				   -(year-1)/100
+				   +(year-1)/400;
+		   //2019년 1월 ~ 7월의 총합
+		   if((year%4==0 && year%100!=0)||(year%400==0))
+			   lastday[1]=29;
+		   else
+			   lastday[1]=28;
+		   
+		   for(int i=0;i<month-1;i++){
+			   total+=lastday[i];
+		   }
+		   
+		   total++;
+		   
+		   // 요일구하기
+		   int week=total%7;
+		   
+		   model.addAttribute("week", week);
+		   model.addAttribute("lastday", lastday[month-1]);
+		   
+		   String no=model.getRequest().getParameter("no");
+	
+		   String hosDate = HospitalDAO.hospitalReserveDate(Integer.parseInt(no));
+		   
+		   int[] reday=new int[31];
+		   StringTokenizer st1=new StringTokenizer(hosDate,",");
+		   while(st1.hasMoreTokens()){
+			   int k=Integer.parseInt(st1.nextToken());
+			   reday[k-1]=k;
+		   }	   
+			   
+		   List<Integer> rList = new ArrayList<Integer>();
+		   for(int k:reday){
+			   if(k<day) k=0;
+			   rList.add(k);
+		   }
+		 
+		   model.addAttribute("rList", rList);
+		   
+		   return "../hospital/hospital_diary.jsp";
+	   }
+	
+		@RequestMapping("hospital/hospital_time.do")
+		   public String hospital_time(Model model)
+		   {
+			   String day=model.getRequest().getParameter("day");	
+			   System.out.println(day);
+			   String time=HospitalDAO.reserveGetTime(Integer.parseInt(day));
+			   System.out.println(time);
+			
+			   List<String> list=new ArrayList<String>();
+			   StringTokenizer st=new StringTokenizer(time,",");
+	
+			   while(st.hasMoreTokens())
+			   {
+				   list.add(HospitalDAO.reserveTime(Integer.parseInt(st.nextToken())));
+			   }
+			   model.addAttribute("list", list);
+			   return "../hospital/hospital_time.jsp";
+		   }
+		
+		@RequestMapping("hospital/hospital_dog.do")
+		public String hospital_dog(Model model){
+			HttpSession session=model.getRequest().getSession();
+			String id=(String)session.getAttribute("id");
+			
+			List<DogVO> list=HospitalDAO.reserveDog(id);
+			
+			model.addAttribute("list", list);
+	
+			return "../hospital/hospital_dog.jsp";
+		}
 	
 }

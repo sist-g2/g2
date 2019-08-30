@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 
 
@@ -16,7 +17,6 @@ public class HospitalDAO {
 	public static List<HospitalVO> hospitalSearch(Map map)
 	   {
 		   SqlSession session=ssf.openSession();
-		   HospitalVO vo = new HospitalVO();
 		   
 		   List<HospitalVO> list=session.selectList("hospitalSearch",map);
 		   session.close();
@@ -46,4 +46,91 @@ public class HospitalDAO {
 		   session.close();
 		   return hosName;
 	   }
+	 
+	 public static String hospitalReserveDate(int no){
+		   String hosDate = "";
+		   SqlSession session = ssf.openSession();	   					  
+		   hosDate = session.selectOne("hospitalReserveDate",no);
+		   session.close();
+		   return hosDate;
+	   }
+	 
+	 public static String reserveGetTime(int dno)
+	   {
+		   String list="";
+		   SqlSession session=null;
+		   try
+		   {
+			   session=ssf.openSession();
+			   list=session.selectOne("reserveGetTime",dno);
+			   System.out.println(list);
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return list;
+	   }
+	 
+	 public static String reserveTime(int timeno)
+	   {
+		   String list="";
+		   SqlSession session=null;
+		   try
+		   {
+			   session=ssf.openSession();
+			   list=session.selectOne("reserveTime",timeno);
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return list;
+	   }
+	 
+	 public static String memberId(String id){
+		   String list= "";
+		   SqlSession session=null;
+		   try
+		   {
+			   session=ssf.openSession();
+			   list=session.selectOne("memberId",id);
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return list;
+	 }
+	 
+	 public static List<DogVO> reserveDog(String id){
+		   List<DogVO> list=new ArrayList<DogVO>();
+		   SqlSession session=null;
+		   try
+		   {
+			   session=ssf.openSession();
+			   list=session.selectList("reserveDog",id);
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return list;
+	 }
 }

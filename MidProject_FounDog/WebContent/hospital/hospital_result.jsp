@@ -59,8 +59,11 @@ $(function(){
 					</c:choose>
 					<c:forEach var="vo" items="${list }">
 						<tr>
-							<td class="text-left">${vo.name }<br> ${vo.loc }<br>
-								${vo.tel } <a href="hospital_reserve.do?no=${vo.no }" class="btn btn-primary">예약</a>
+							<td class="text-left">${vo.name }<br> ${vo.loc }<br>${vo.tel }
+						<form id="reserveForm" method="post" action="hospital_reserve.do">
+								<input type="hidden" name="no" value="${vo.no }">
+								 <input type="submit" class="btn btn-primary" value="예약" id="reservebtn">
+						</form>
 							</td>
 						</tr>
 					</c:forEach>

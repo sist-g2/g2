@@ -26,4 +26,35 @@
 	FROM hospital
 	WHERE no = #{no}
 </select>
+
+<select id="hospitalReserveDate" resultType="String" parameterType="int">
+    SELECT dateno 
+    FROM hospital
+    WHERE no=#{no}
+  </select>
+  
+<select id="reserveGetTime" resultType="String" parameterType="int">
+   SELECT timeno 
+   FROM dateInfo
+   WHERE dno=#{dno}
+</select>
+
+<select id="reserveTime" resultType="String" parameterType="int">
+      SELECT time
+      FROM timeInfo
+      WHERE timeno=#{timeno}
+</select>
+
+<select id="memberId" resultType="String" parameterType="String">
+		SELECT name
+		FROM member
+		WHERE id=#{id}
+</select>
+
+<select id="reserveDog" resultType="DogVO" parameterType="String">
+		SELECT dname, dtype, dbirth,dsex
+		FROM dog
+		WHERE id=#{id}
+</select>
+	
 </mapper>
