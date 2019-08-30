@@ -95,6 +95,20 @@ public class MemberModel {
 		return "../main/main.jsp";
 	}
 	
+	@RequestMapping("member/dog_update.do")
+	public String dog_update(Model model){
+		String dno = model.getRequest().getParameter("dno");
+		DogVO dvo = MemberDAO.dogUpDetailData(Integer.parseInt(dno));
+		model.addAttribute("dvo", dvo);
+		model.addAttribute("main_jsp", "../member/dog_update.jsp");
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/dog_update_ok.do")
+	public String dog_update_ok(Model model){
+		return "";
+	}
+	
 	@RequestMapping("member/dog_insert_ok.do")
 	public String dog_insert_ok(Model model){
 		try{
@@ -158,8 +172,34 @@ public class MemberModel {
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("member/member_update_ok")
+	@RequestMapping("member/member_update_ok.do")
 	public String member_update_ok(Model model){
+		try{
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		String tel1 = model.getRequest().getParameter("tel1");
+		String tel2 = model.getRequest().getParameter("tel2");
+		String tel3 = model.getRequest().getParameter("tel3");
+		String email = model.getRequest().getParameter("email");
+		String post = model.getRequest().getParameter("post");
+		String addr1 = model.getRequest().getParameter("addr1");
+		String addr2 = model.getRequest().getParameter("addr2");
+		String pwd = model.getRequest().getParameter("pwd");
+		
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		vo.setTel(tel1 + "-" + tel2 + "-" + tel3);
+		vo.setEmail(email);
+		vo.setPost(post);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setPwd(pwd);
+		
+		int count = MemberDAO.memberUpdate(vo);
+		model.addAttribute("count", count);
+		
 		return "../member/member_update_ok.jsp";
 	}
 	

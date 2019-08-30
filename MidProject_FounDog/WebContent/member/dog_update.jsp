@@ -6,21 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="../css/member.css" rel="stylesheet">
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-$(function(){
-	
-	$('#addDog').click(function(){
-		var dname = $('#dname').val();
-		
-		if(id.trim()==""){
-			alert("반려견의 이름을 입력해주세요.")
-			$('#dname').focus();
-			return;
-		}
-	});
-});
-</script>
 <style type="text/css">
 .rowrow{
 	margin: 0px auto;
@@ -58,7 +43,6 @@ tbody{
 </style>
 </head>
 <body>
-
 <!-- 상단 제목 -->
 <section id="page-breadcrumb">
 	<div class="vertical-center sun">
@@ -88,7 +72,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
+				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name" value="${dvo.dname }">
 			</td>
 		</tr>
 		<tr>
@@ -96,7 +80,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds">
+				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds" value="${dvo.dtype }">
 			</td>
 		</tr>
 		<tr>
@@ -104,49 +88,19 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=dyear class="form-control2" style="width:27%">
-					<option></option>
-					<option>2019</option>
-					<option>2018</option>
-				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
-				<select name=dmonth class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left" >반려견 성별</td>
-		</tr>
-		<tr>
-			<td class="text-left" >
-				<input type=radio value="수컷" name=dsex checked="checked" style="display: none;" id="dsex-male">
-				<label for="dsex-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
-				<input type=radio value="암컷" name=dsex style="display: none;" id="dsex-female">
-				<label for="dsex-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=text name=dyear class="form-control2" style="width:26%" value="${dvo.dbirth.substring(0,4) }">
+					&nbsp;년&nbsp;&nbsp;&nbsp;
+				<input type=text name=dmonth class="form-control2" style="width:26%" value="${dvo.dbirth.substring(5,7) }">
+					&nbsp;월&nbsp;&nbsp;&nbsp;
+				<input type=text name=dday class="form-control2" style="width:26%"  value="${dvo.dbirth.substring(8,10) }">
+					&nbsp;일
 			</td>
 		</tr>
 	</table>
 	<table class="table table-borderless" style="width:400px;">
 		<tr>
 			<td  class="text-center">
-				<input type=submit value="반려견 추가" class="btn btn-submit" id="addDog">
+				<input type=submit value="반려견 정보 변경" class="btn btn-submit" id="addDog">
 			</td>
 		</tr>
 		<tr>

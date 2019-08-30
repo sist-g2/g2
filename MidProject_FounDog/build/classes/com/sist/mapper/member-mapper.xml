@@ -57,12 +57,22 @@
 		AND member.id = #{id}
 	</select>
 	
+	<select id="DogUpDetailData" resultType="DogVO" parameterType="int">
+		SELECT dno, dname, dtype, dbirth
+		FROM dog
+		WHERE dno = #{dno}
+	</select>
+	
 	<!-- 회원수정 -->
 	<select id="memberAllData" resultType="MemberVO" parameterType="String">
-		SELECT id, pwd, name, email, post, addr1, addr2
-		FROM member
+		SELECT * FROM member
 		WHERE id = #{id}
 	</select>
+	<update id="memberUpdate" parameterType="MemberVO">
+		UPDATE member SET
+		tel = #{tel}, email = #{email}, post = #{post}, addr1 = #{addr1}, addr2 = #{addr2}
+		WHERE id = #{id}
+	</update>
 	
 	<!-- 반려견 정보 삭제 -->
 	<delete id="dogDelete" parameterType="int">

@@ -89,11 +89,34 @@ public class MemberDAO {
 		return list;
 	}
 	
+	public static DogVO dogUpDetailData(int dno){
+		DogVO dvo = new DogVO();
+		SqlSession session = ssf.openSession();
+		dvo = session.selectOne("DogUpDetailData", dno);
+		session.close();
+		return dvo;
+	}
+	
 	public static void dogDelete(int dno){
 		SqlSession session = ssf.openSession();
 		session.delete("dogDelete", dno);
 		session.commit();
 		session.close();
 		
+	}
+	
+	public static int memberUpdate(MemberVO vo){
+		int result = 0;
+		SqlSession session = ssf.openSession();
+		String db_pwd = session.selectOne("deleteGetPwd", vo.getId());
+		//System.out.println(db_pwd);
+		if(db_pwd.equals(vo.getPwd())){
+			result = 1;
+			session.update("memberUpdate", vo);
+			session.commit();
+		}
+		//System.out.println(result);
+		session.close();
+		return result;
 	}
 }

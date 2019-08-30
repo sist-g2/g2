@@ -16,14 +16,14 @@
 	padding-right:15px;
 	display: table;
 }
-.optionList td button {
+.optionList td a {
 	display: inline-block;
 	border-radius: 6px;
 	background: #bd8942;
 	color: #ffffff;
-	/* margin-right: 3px; */
+	margin-right: 3px;
 	height: 30px;
-	/* line-height: 30px; */
+	line-height: 30px;
 	text-align: center;
 	cursor: pointer;
 }
@@ -71,8 +71,8 @@
 						<tr>
 							<td><font color="#bd8942">${dvo.dname }</font></td>
 							<td>${dvo.dtype }</td>
-							<td style="padding-top:2px;"><button type="button">수정</button></td>
-							<td><a href="../member/dog_delete_ok.do?dno=${dvo.dno }">X</a></td>
+							<td><a href="../member/dog_update.do?dno=${dvo.dno }">&nbsp;&nbsp;수정&nbsp;&nbsp;</a></td>
+							<td><a href="../member/dog_delete_ok.do?dno=${dvo.dno }">&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;</a></td>
 						</tr>
 					</c:forEach>
 				</table>
