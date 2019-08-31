@@ -34,13 +34,21 @@
 
 <!-- main(Q&A/FAQ)출력 -->
  <section id="portfolio">
-       <div class="container">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default" href="../board/board_list.do" data-filter=".Q&A">Q&A</a></li>
                     <li><a class="btn btn-default active" href="../site/site_list.do" data-filter=".FAQ">FAQ</a></li>
                     </ul>
-		
+		</section>
+		 <section id="portfolio">
+                <ul class="portfolio-filter text-center">
+                    <li><a class="btn btn-default active" href="../board/board_list.do" data-filter=".회원정보">회원정보</a></li>
+                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".사료비교">사료비교</a></li>
+                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".병원이용">병원이용</a></li>
+                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".강아지와함께">강아지와함께</a></li>
+                    </ul>
+		</section>
 			<!-- FAQ 10개 -->
+			       <div class="container">
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -56,11 +64,11 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> FAQ2 </a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> {vo.subject} </a>
 								</h4>
 							</div>
 							<div id="collapseTwo" class="panel-collapse collapse">
-								<div class="panel-body">사이트 이용 안내</div>
+								<div class="panel-body">{vo.content}</div>
 							</div>
 						</div>
 						<div class="panel panel-default">

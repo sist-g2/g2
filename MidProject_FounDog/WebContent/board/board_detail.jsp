@@ -13,6 +13,18 @@
    margin: 0px auto;
    width:900px;
 }
+.btn-xs{
+	background-color:#FFF;
+	color:#A5732A;
+}
+.btn-sm{
+	background-color:#FFF;
+	color:#A5732A;
+}
+th{
+	background-color:#FFF;
+	color:#A5732A;
+}
 </style>
 <script type="text/javascript">
 var i=0;
@@ -47,9 +59,9 @@ $(function(){
 		{
 			$('#u'+no).hide();
 			u=0;
-		}
-		
+		}		
 	});
+	
 });
 </script>
 </head>
@@ -87,7 +99,7 @@ $(function(){
             	<a href="board_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
           	</c:if>
           	<c:if test="${sessionScope.id!=null}" >
-          		<a href="#" class="btn btn-sm">답글</a>
+          		<a href="rboard_reply.do?no=${vo.no }" class="btn btn-sm">답글</a>
           	</c:if>
             <a href="board_list.do" class="btn btn-sm" >목록</a>
            
@@ -95,7 +107,6 @@ $(function(){
         </tr>
       </table>
     </div>
-    <%--
     <div class="row">
       <table class="table">
         <tr>
@@ -103,53 +114,56 @@ $(function(){
         </tr>
       </table>
       <table class="table">
-        <c:forEach var="vo" items="${list }">
+        <c:forEach var="rvo" items="${list }">
           
           <table class="table">
            <tr>
              <td class="text-left">
-             <c:if test="${vo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${vo.group_tab }">
+             <c:if test="${rvo.group_tab>0 }">
+	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
 	              &nbsp;&nbsp;
 	            </c:forEach>
-	            <img src="re.gif">
+	            <img src="rereply.gif">
+	            &nbsp;
 	          </c:if>
-                             ◐<font color="blue">${vo.name }</font>&nbsp;${vo.dbday }</td>
+                <img src="reply.png"><font color="#A5732A">${rvo.id }</font>&nbsp;${rvo.dbday }</td>
              <td class="text-right">
-              <c:if test="${sessionScope.id!=null && sessionScope.id==vo.id }">
-               <a href="#" class="btn btn-xs updateBtn" value="${vo.no }">수정</a>
-               <a href="../board/reply_delete.do?no=${vo.no }&bno=${rvo.no}" class="btn btn-xs">삭제</a>
+              <c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id  }">
+             <button class="btn btn-xs updateBtn" value="${rvo.no }">수정</button>
+             </c:if>
+              <c:if test="${sessionScope.id!=null && (sessionScope.id==rvo.id || sessionScope.id=='admin' ) }">
+             <a href="../board/boardreply_Delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs">삭제</a>
               </c:if>
               <c:if test="${sessionScope.id!=null }">
-               <a href="#" class="btn btn-xs replyBtn" value="${vo.no }">댓글</a>
+               <button class="btn btn-xs replyBtn" value="${rvo.no }">댓글</button>
               </c:if>
              </td>
            </tr>
            <tr>
              <td class="text-left" colspan="2">
-             <c:if test="${vo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${vo.group_tab }">
+             <c:if test="${rvo.group_tab>0 }">
+	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
 	              &nbsp;&nbsp;
 	            </c:forEach>
 	          </c:if>
-             ${vo.content }</td>
+             ${rvo.content }</td>
            </tr>
-           <tr style="display:none" id="m${vo.no }" class="reply">
+           <tr style="display:none" id="m${rvo.no }" class="reply">
 	          <td class="text-left" colspan="2">
-	           <form name="frm" method="post" action="../board/reply_reinsert.do">
+	           <form name="frm" method="post" action="../board/boardreply_ReInsert.do">
 	            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>
-	            <input type="hidden" name="bno" value="${rvo.no }">
-	            <input type="hidden" name=no value="${vo.no }">
+	            <input type="hidden" name="bno" value="${vo.no }">
+	            <input type="hidden" name=no value="${rvo.no }">
 	            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
 	           </form>
 	          </td>
 	        </tr>
-	        <tr style="display:none" id="u${vo.no }" class="update">
+	        <tr style="display:none" id="u${rvo.no }" class="update">
 	          <td class="text-left" colspan="2">
-	           <form name="frm" method="post" action="../board/reply_update.do">
-	            <textarea rows="3" cols="100" name="content" style="float: left">${vo.content }</textarea>
-	            <input type="hidden" name="bno" value="${rvo.no }">
-	            <input type="hidden" name=no value="${vo.no }">
+	           <form name="frm" method="post" action="../board/boardreply_Update.do">
+	            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>
+	            <input type="hidden" name="bno" value="${vo.no }">
+	            <input type="hidden" name=no value="${rvo.no }">
 	            <input type="submit" class="btn btn-sm" style="height: 67px" value="수정하기">
 	           </form>
 	          </td>
@@ -161,9 +175,9 @@ $(function(){
 	      <table class="table">
 	        <tr>
 	          <td class="text-left">
-	           <form name="frm" method="post" action="../board/reply_insert.do">
+	           <form name="frm" method="post" action="../board/boardreply_Insert.do">
 	            <textarea rows="3" cols="110" name="content" style="float: left"></textarea>
-	            <input type="hidden" name="bno" value="${rvo.no }">
+	            <input type="hidden" name="bno" value="${vo.no }">
 	            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
 	           </form>
 	          </td>
@@ -171,7 +185,6 @@ $(function(){
 	      </table>
       </c:if>
     </div>
-     --%>
   </div>
 </body>
 </html>

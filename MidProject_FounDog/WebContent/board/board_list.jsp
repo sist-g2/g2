@@ -12,6 +12,15 @@
 	margin: 0px auto;
 	width: 900px;
 }
+.btn-sm{
+	background-color:#FFF;
+	color:#A5732A;
+}
+th{
+	background-color:#FFF;
+	color:#A5732A;
+}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -71,11 +80,12 @@
 			<c:forEach var="vo" items="${list }" varStatus="s">
 				<tr class="${s.index%2==0?'':'warning' }">
 					<td width=7% class="text-center">${count }</td>
-					<td width=43% class="text-left"><a
-						href="board_detail.do?no=${vo.no }">${vo.subject }</a> <c:if
-							test="${today==vo.dbday }">
-							<sup><font color=red>new</font></sup>
-						</c:if></td>
+					<td width=43% class="text-left">
+					<a href="board_detail.do?no=${vo.no }">${vo.subject }&nbsp;[${vo.count }]</a> 
+					<c:if test="${today==vo.dbday }">
+					<sup><font color=red>new</font></sup>
+					</c:if>
+					</td>
 					<td width=15% class="text-center">${vo.id }</td>
 					<td width=20% class="text-center">${vo.dbday }</td>
 					<td width=10% class="text-center">${vo.hit }</td>
@@ -109,8 +119,6 @@
 				</td>
 			</tr>
 		</table>
-	</div>
-	</div>
 	</div>
 </body>
 </html>

@@ -15,7 +15,14 @@ public class BoardVO {
 	private int group_tab; // 글 작성 시 제목 앞 공백
 	private int root; // 원글 번호
 	private int depth; // 답글의 갯수
+	private int count; //메인화면 글제목옆에 붙을 댓글갯수
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	private Board_cateVO cvo = new Board_cateVO();
 	private MemberVO mvo = new MemberVO();
 	

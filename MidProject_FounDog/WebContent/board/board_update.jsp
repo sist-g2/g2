@@ -63,8 +63,8 @@ $(function(){
 				</tr>
 				<tr>
 					<td colspan=2 class="text-center" >
-						<input type="button" value="수정" class="btn btn-sm btn-primary" id="updBtn" >
-						<input type="button" value="취소" class="btn btn-sm btn-danger" onclick="javascript:history.back()" >
+						<input type="button" value="수정" class="btn btn-sm" id="updBtn" >
+						<input type="button" value="취소" class="btn btn-sm" onclick="javascript:history.back()" >
 					</td>
 				</tr>
 			</table>

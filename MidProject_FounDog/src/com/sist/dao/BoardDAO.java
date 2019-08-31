@@ -36,7 +36,7 @@ public class BoardDAO {
 		   session.close();
 		   return total;
 	   }
-	   // 게시쿨 전체 갯수 읽기
+	   // 게시글 전체 갯수 읽기
 	   public static int boardRowCount(int category)
 	   {
 		   int count=0;
@@ -81,77 +81,125 @@ public class BoardDAO {
 	   }
 	   
 	   // 댓글 올리기
-	   public static void replyInsert(Board_ReplyVO vo)
+	   public static void boardreplyInsert(Board_ReplyVO vo)
 	   {
 		   SqlSession session=ssf.openSession(true);
-		   session.insert("replyInsert",vo);
+		   session.insert("boardreplyInsert",vo);
 		   session.close();
 	   }
 	   // 댓글 가지고 오기 
-	   public static List<BoardVO> replyListData(int bno)
+	   public static List<Board_ReplyVO> boardreplyListData(int bno)
 	   {
 		   SqlSession session=ssf.openSession(true);
-		   List<BoardVO> list=session.selectList("replyListData",bno);
+		   List<Board_ReplyVO> list=session.selectList("boardreplyListData",bno);
 		   session.close();
 		   return list;
 	   }
-	   
-	   public static int replyListCount(int bno)
+	   // 댓글 수
+	   public static int boardreplyListCount(int bno)
 	   {
 		   SqlSession session=ssf.openSession(true);
-		   int count=session.selectOne("replyListCount",bno);
+		   int count=session.selectOne("boardreplyListCount",bno);
 		   session.close();
 		   return count;
 	   }
-	   
-	   public static void replyReInsert(int root,Board_ReplyVO vo,BoardVO rvo)
+	   // 대댓글 추가하기
+	   public static void boardreplyReInsert(int root,Board_ReplyVO vo)
 	   {
 		   SqlSession session=ssf.openSession();
-		   BoardVO pvo=session.selectOne("replyParentInfo",root);
-		   session.update("replyStepIncrement",pvo);
+		   Board_ReplyVO pvo=session.selectOne("boardreplyParentInfo",root);
+		   session.update("boardreplyStepIncrement",pvo);
 		   // insert
-		   rvo.setGroup_id(pvo.getGroup_id());
-		   rvo.setGroup_step(pvo.getGroup_step()+1);
-		   rvo.setGroup_tab(pvo.getGroup_tab()+1);
-		   rvo.setRoot(root);
-		   session.insert("replyReInsert",vo);
+		   vo.setGroup_id(pvo.getGroup_id());
+		   vo.setGroup_step(pvo.getGroup_step()+1);
+		   vo.setGroup_tab(pvo.getGroup_tab()+1);
+		   vo.setRoot(root);
+		   session.insert("boardreplyReInsert",vo);
 		   // depth
-		   session.update("replyDepthIncrement",root);
+		   session.update("boardreplyDepthIncrement",root);
 		   
 		   session.commit();
 		   session.close();
 	   }
 	   
-	   public static void replyUpdate(Board_ReplyVO vo)
+	   //댓글 수정하기
+	   public static void boardreplyUpdate(Board_ReplyVO vo)
 	   {
 		   SqlSession session=ssf.openSession(true);
-		   session.update("replyUpdate",vo);
+		   session.update("boardreplyUpdate",vo);
 		   session.close();
 	   }
-	   public static void replyDelete(int no){
+	   // 댓글 삭제하기
+	   public static void boardreplyDelete(int no){
 		   SqlSession session=ssf.openSession();
-		   BoardVO vo = session.selectOne("replyGetDepth",no);
+		   Board_ReplyVO vo = session.selectOne("boardreplyGetDepth",no);
 		   if(vo.getDepth()==0){
-			   session.delete("replyDelete",no);
+			   session.delete("boardreplyDelete",no);
 		   }else{
 			   BoardVO fvo=new BoardVO();
 			   fvo.setContent("<font color=red>관리자가 삭제한 게시물입니다</font>");
 			   fvo.setNo(no);
-			   session.update("replyDataUpdate", fvo);
+			   session.update("boardreplyDataUpdate", fvo);
 		   }
-		   session.update("replyDepthDecrement",vo.getRoot());
+		   session.update("boardreplyDepthDecrement",vo.getRoot());
 		   session.commit();
 		   session.close();
 	   }
-	   public static int freeboardDelete(int no,String pwd){
+	   // 삭제하기
+	   public static int boardDelete(int no){
 		   int result=0;
 		   SqlSession session=ssf.openSession();
-			   session.delete("boardReplyDelete",no);
+			   session.delete("boardreplyDelete",no);
 			   session.delete("boardDelete",no);
 			   session.commit();
 			   session.close();
 		return result;
 	   }
+
+	   // 답글 추가하기
+	   public static void rboardreplyReInsert(int root,BoardVO vo)
+	   {
+		   SqlSession session=ssf.openSession();
+		   BoardVO pvo=session.selectOne("rboardreplyParentInfo",root);
+		   session.update("rboardreplyStepIncrement",pvo);
+		   // insert
+		   vo.setGroup_id(pvo.getGroup_id());
+		   vo.setGroup_step(pvo.getGroup_step()+1);
+		   vo.setGroup_tab(pvo.getGroup_tab()+1);
+		   vo.setRoot(root);
+		   session.insert("rboardreplyReInsert",vo);
+		   // depth
+		   session.update("rboardreplyDepthIncrement",root);
+		   
+		   session.commit();
+		   session.close();
+	   }
+	   
+	   //답글 수정하기
+	   public static void rboardreplyUpdate(BoardVO vo)
+	   {
+		   SqlSession session=ssf.openSession(true);
+		   session.update("rboardreplyUpdate",vo);
+		   session.close();
+	   }
+	   
+	   // 답글 삭제하기
+	   public static void rboardreplyDelete(int no){
+		   SqlSession session=ssf.openSession();
+		   BoardVO vo = session.selectOne("rboardreplyGetDepth",no);
+		   if(vo.getDepth()==0){
+			   session.delete("rboardreplyDelete",no);
+		   }else{
+			   BoardVO fvo=new BoardVO();
+			   fvo.setContent("<font color=red>관리자가 삭제한 게시물입니다</font>");
+			   fvo.setNo(no);
+			   session.update("rboardreplyDataUpdate", fvo);
+		   }
+		   session.update("rboardreplyDepthDecrement",vo.getRoot());
+		   session.commit();
+		   session.close();
+	   }
+	   
 }
 
 
