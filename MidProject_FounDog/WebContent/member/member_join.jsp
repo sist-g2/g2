@@ -43,18 +43,24 @@ function dogInfoDisplay(){
         con2.style.display = 'block';
         con3.style.display = 'none';
         con4.style.display = 'none';
+        $('#input').val("1");
+        
     } else if(dcount=='2마리'){
     	con2.style.display = 'block';
     	con3.style.display = 'block';
     	con4.style.display = 'none';
+    	$('#input').val("2");
     } else if(dcount=='3마리'){
     	con2.style.display = 'block';
     	con3.style.display = 'block';
     	con4.style.display = 'block';
+    	$('#input').val("3");
     }
 }
 
 $(function(){
+	
+	var jungbok = 0;
 	
 	$('#overBtn').click(function(){
 		var id = $('#id').val();
@@ -63,6 +69,8 @@ $(function(){
 			alert("아이디를 입력해주세요.")
 			$('#id').focus();
 			return;
+		} else {
+			jungbok = 1;
 		}
 		
 		$.ajax({
@@ -124,6 +132,11 @@ $(function(){
 			return;
 		} else if(post=="" || addr1==""){
 			alert("주소를 입력해주세요.")
+			return;
+		}
+		
+		if(jungbok==0){
+			alert("아이디 중복 확인을 해주세요.")
 			return;
 		}
 		
@@ -239,8 +252,11 @@ tbody{
 			<td class="text-left" >
 				<select name=year class="form-control2" style="width:27%" id="year">
 					<option></option>
-					<option>2019</option>
-					<option>2018</option>
+					<c:set var="first" value="2019"/>
+					<c:set var="end" value="1919"/>
+					<c:forEach var="i" begin="0" end="${first-end}" step="1">
+						<option>${first -i }</option>
+					</c:forEach>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
 				<select name=month class="form-control2" style="width:27%" id="month">
 					<option></option>
@@ -257,11 +273,7 @@ tbody{
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=day class="form-control2" style="width:27%" id="day">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
+				<input type=text name=day class="form-control2" style="width:27%" id="day">&nbsp;일
 			</td>
 		</tr>
 		<tr>
@@ -352,7 +364,7 @@ tbody{
 		</tr>
 		<tr>
 			<td>
-				<h5 class="text-center"><font color=red>3마리 이상은 마이페이지에서 등록해주세요.</font></h5>
+				<h5 class="text-center"><font color=red>4마리 이상은 마이페이지에서 등록해주세요.</font></h5>
 			</td>
 		</tr>
 	</table>
@@ -362,7 +374,8 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
+				<input type=text name=dname1 class="form-control" size=15 placeholder="Dog Name">
+				<input type=hidden name=input id=input value=0>
 			</td>
 		</tr>
 		<tr>
@@ -370,7 +383,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds">
+				<input type=text name=dtype1 class="form-control" size=15 placeholder="Dog breeds">
 			</td>
 		</tr>
 		<tr>
@@ -378,12 +391,15 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=dyear class="form-control2" style="width:27%">
+				<select name=dyear1 class="form-control2" style="width:27%">
 					<option></option>
-					<option>2019</option>
-					<option>2018</option>
+					<c:set var="first" value="2019"/>
+					<c:set var="end" value="1989"/>
+					<c:forEach var="i" begin="0" end="${first-end}" step="1">
+						<option>${first -i }</option>
+					</c:forEach>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
-				<select name=dmonth class="form-control2" style="width:27%">
+				<select name=dmonth1 class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -398,11 +414,7 @@ tbody{
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
+				<input type=text name=dday1 class="form-control2" style="width:27%">&nbsp;일
 			</td>
 		</tr>
 		<tr>
@@ -410,10 +422,10 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=radio value="수컷" name=dsex checked="checked" style="display: none;" id="dsex-male">
-				<label for="dsex-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
-				<input type=radio value="암컷" name=dsex style="display: none;" id="dsex-female">
-				<label for="dsex-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="수컷" name=dsex1 checked="checked" style="display: none;" id="dsex1-male">
+				<label for="dsex1-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="암컷" name=dsex1 style="display: none;" id="dsex1-female">
+				<label for="dsex1-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
 			</td>
 		</tr>
 	</table>
@@ -423,7 +435,8 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
+				<input type=text name=dname2 class="form-control" size=15 placeholder="Dog Name">
+				<input type=hidden name=input2 id=input2 value=0>
 			</td>
 		</tr>
 		<tr>
@@ -431,7 +444,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds">
+				<input type=text name=dtype2 class="form-control" size=15 placeholder="Dog breeds">
 			</td>
 		</tr>
 		<tr>
@@ -439,12 +452,15 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=dyear class="form-control2" style="width:27%">
+				<select name=dyear2 class="form-control2" style="width:27%">
 					<option></option>
-					<option>2019</option>
-					<option>2018</option>
+					<c:set var="first" value="2019"/>
+					<c:set var="end" value="1989"/>
+					<c:forEach var="i" begin="0" end="${first-end}" step="1">
+						<option>${first -i }</option>
+					</c:forEach>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
-				<select name=dmonth class="form-control2" style="width:27%">
+				<select name=dmonth2 class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -459,11 +475,7 @@ tbody{
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
+				<input type=text name=dday2 class="form-control2" style="width:27%">&nbsp;일
 			</td>
 		</tr>
 		<tr>
@@ -471,10 +483,10 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=radio value="수컷" name=dsex2 checked="checked" style="display: none;" id="dsex-male">
-				<label for="dsex-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
-				<input type=radio value="암컷" name=dsex2 style="display: none;" id="dsex-female">
-				<label for="dsex-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="수컷" name=dsex2 checked="checked" style="display: none;" id="dsex2-male">
+				<label for="dsex2-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="암컷" name=dsex2 style="display: none;" id="dsex2-female">
+				<label for="dsex2-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
 			</td>
 		</tr>
 	</table>
@@ -484,7 +496,8 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
+				<input type=text name=dname3 class="form-control" size=15 placeholder="Dog Name">
+				<input type=hidden name=input3 id=input3 value=0>
 			</td>
 		</tr>
 		<tr>
@@ -492,7 +505,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds">
+				<input type=text name=dtype3 class="form-control" size=15 placeholder="Dog breeds">
 			</td>
 		</tr>
 		<tr>
@@ -500,12 +513,15 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=dyear class="form-control2" style="width:27%">
+				<select name=dyear3 class="form-control2" style="width:27%">
 					<option></option>
-					<option>2019</option>
-					<option>2018</option>
+					<c:set var="first" value="2019"/>
+					<c:set var="end" value="1989"/>
+					<c:forEach var="i" begin="0" end="${first-end}" step="1">
+						<option>${first -i }</option>
+					</c:forEach>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
-				<select name=dmonth class="form-control2" style="width:27%">
+				<select name=dmonth3 class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -520,11 +536,7 @@ tbody{
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
+				<input type=text name=dday3 class="form-control2" style="width:27%">&nbsp;일
 			</td>
 		</tr>
 		<tr>
@@ -532,10 +544,10 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=radio value="수컷" name=dsex3 checked="checked" style="display: none;" id="dsex-male">
-				<label for="dsex-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
-				<input type=radio value="암컷" name=dsex3 style="display: none;" id="dsex-female">
-				<label for="dsex-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="수컷" name=dsex3 checked="checked" style="display: none;" id="dsex3-male">
+				<label for="dsex3-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
+				<input type=radio value="암컷" name=dsex3 style="display: none;" id="dsex3-female">
+				<label for="dsex3-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
 			</td>
 		</tr>
 	</table>

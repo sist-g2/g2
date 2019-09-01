@@ -48,6 +48,11 @@
 		DELETE FROM member
 		WHERE id = #{id}
 	</delete>
+	<!-- 회원탈퇴 시 강아지 내역 삭제 -->
+	<delete id="memberDel_dog" parameterType="String">
+		DELETE FROM dog
+		WHERE id = {id}
+	</delete>
 	
 	<!-- 마이페이지 -->
 	<select id="DogDetailData" resultType="DogVO" parameterType="String">
@@ -74,6 +79,12 @@
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 반려견 정보 수정 -->
+	<update id="dogUpdate" parameterType="DogVO">
+		UPDATE dog SET
+		dname = #{dname}, dtype = #{dtype}, dbirth = #{dbirth}
+		WHERE dno = #{dno}
+	</update>
 	<!-- 반려견 정보 삭제 -->
 	<delete id="dogDelete" parameterType="int">
 		DELETE FROM dog

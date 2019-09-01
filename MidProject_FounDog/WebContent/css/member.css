@@ -51,3 +51,11 @@
 	padding: 10px 25px;
 	background: none;
 }
+
+.btn-submit2:hover, 
+.btn-submit2:focus{
+  color: #fff;
+  outline: none;
+  box-shadow: none;
+  opacity: .8;
+}

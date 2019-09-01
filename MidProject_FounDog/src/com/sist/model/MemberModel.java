@@ -20,6 +20,12 @@ public class MemberModel {
 		return "../main/main.jsp";
 	}
 	
+	@RequestMapping("member/member_join_after.do")
+	public String member_join_after(Model model){
+		model.addAttribute("main_jsp", "../member/member_join_after.jsp");
+		return "../main/main.jsp";
+	}
+	
 	@RequestMapping("member/member_jungbok.do")
 	public String member_jungbok(Model model){
 		String id = model.getRequest().getParameter("id");
@@ -66,27 +72,129 @@ public class MemberModel {
 		MemberDAO.memberJoin(vo);
 		
 		DogVO dvo = new DogVO();
-		String dname = model.getRequest().getParameter("dname");
-		String dtype = model.getRequest().getParameter("dtype");
-		String dyear = model.getRequest().getParameter("dyear");
-		String dmonth = model.getRequest().getParameter("dmonth");
-		String dday = model.getRequest().getParameter("dday");
-		String dsex = model.getRequest().getParameter("dsex");
-		System.out.println(dname);
-		if(dname!=""){
+		
+		//System.out.println(dname);
+		
+		String input = model.getRequest().getParameter("input");
+		System.out.println("input : " + input);
+		
+		if(input.equals("1")){
+			String dname = model.getRequest().getParameter("dname1");
+			String dtype = model.getRequest().getParameter("dtype1");
+			String dyear = model.getRequest().getParameter("dyear1");
+			String dmonth = model.getRequest().getParameter("dmonth1");
+			String dday = model.getRequest().getParameter("dday1");
+			String dsex = model.getRequest().getParameter("dsex1");
+			
 			dvo.setDname(dname);
 			dvo.setDtype(dtype);
-			dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
 			dvo.setDsex(dsex);
 			dvo.setId(id);
-			System.out.println(dname);
 			
 			MemberDAO.dogJoin(dvo);
-		} else if(dname==""){
+		} else if(input.equals("2")){
+			String dname = model.getRequest().getParameter("dname1");
+			String dtype = model.getRequest().getParameter("dtype1");
+			String dyear = model.getRequest().getParameter("dyear1");
+			String dmonth = model.getRequest().getParameter("dmonth1");
+			String dday = model.getRequest().getParameter("dday1");
+			String dsex = model.getRequest().getParameter("dsex1");
 			
-		}
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+			
+			MemberDAO.dogJoin(dvo);
+			
+			dname = model.getRequest().getParameter("dname2");
+			dtype = model.getRequest().getParameter("dtype2");
+			dyear = model.getRequest().getParameter("dyear2");
+			dmonth = model.getRequest().getParameter("dmonth2");
+			dday = model.getRequest().getParameter("dday2");
+			dsex = model.getRequest().getParameter("dsex2");
+			
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+			
+			MemberDAO.dogJoin(dvo);
+		} else if(input.equals("3")){
+			String dname = model.getRequest().getParameter("dname1");
+			String dtype = model.getRequest().getParameter("dtype1");
+			String dyear = model.getRequest().getParameter("dyear1");
+			String dmonth = model.getRequest().getParameter("dmonth1");
+			String dday = model.getRequest().getParameter("dday1");
+			String dsex = model.getRequest().getParameter("dsex1");
+			
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+			
+			MemberDAO.dogJoin(dvo);
+			
+			dname = model.getRequest().getParameter("dname2");
+			dtype = model.getRequest().getParameter("dtype2");
+			dyear = model.getRequest().getParameter("dyear2");
+			dmonth = model.getRequest().getParameter("dmonth2");
+			dday = model.getRequest().getParameter("dday2");
+			dsex = model.getRequest().getParameter("dsex2");
+			
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+			
+			MemberDAO.dogJoin(dvo);
+			
+			dname = model.getRequest().getParameter("dname3");
+			dtype = model.getRequest().getParameter("dtype3");
+			dyear = model.getRequest().getParameter("dyear3");
+			dmonth = model.getRequest().getParameter("dmonth3");
+			dday = model.getRequest().getParameter("dday3");
+			dsex = model.getRequest().getParameter("dsex3");
+			
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+			
+			MemberDAO.dogJoin(dvo);
+		} else if(input.equals("0")){}
 		
-		return "redirect:../main/main.do";
+		return "redirect:../member/member_join_after.do";
 	}
 	
 	@RequestMapping("member/dog_insert.do")
@@ -106,7 +214,25 @@ public class MemberModel {
 	
 	@RequestMapping("member/dog_update_ok.do")
 	public String dog_update_ok(Model model){
-		return "";
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		String dno = model.getRequest().getParameter("dno");
+		String dname = model.getRequest().getParameter("dname");
+		String dtype = model.getRequest().getParameter("dtype");
+		String dyear = model.getRequest().getParameter("dyear");
+		String dmonth = model.getRequest().getParameter("dmonth");
+		String dday = model.getRequest().getParameter("dday");
+		
+		DogVO dvo = new DogVO();
+		dvo.setDname(dname);
+		dvo.setDno(Integer.parseInt(dno));
+		dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+		dvo.setDtype(dtype);
+		
+		MemberDAO.dogUpdate(dvo);
+		model.addAttribute("dvo", dvo);
+		return "redirect:../member/member_mypage.do";
 	}
 	
 	@RequestMapping("member/dog_insert_ok.do")
@@ -200,7 +326,7 @@ public class MemberModel {
 		int count = MemberDAO.memberUpdate(vo);
 		model.addAttribute("count", count);
 		
-		return "../member/member_update_ok.jsp";
+		return "redirect:../member/member_mypage.do";
 	}
 	
 	@RequestMapping("member/member_delete.do")
@@ -225,6 +351,12 @@ public class MemberModel {
 		String dno = model.getRequest().getParameter("dno");
 		MemberDAO.dogDelete(Integer.parseInt(dno));
 		return "redirect:../member/member_mypage.do";
+	}
+	
+	@RequestMapping("member/member_delete_after.do")
+	public String member_delete_after(Model model){
+		model.addAttribute("main_jsp", "../member/member_delete_after.jsp");
+		return "../main/main.jsp";
 	}
 	
 	@RequestMapping("member/member_mypage.do")

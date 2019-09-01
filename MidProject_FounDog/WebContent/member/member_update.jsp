@@ -46,10 +46,13 @@ $(function(){
 					$('#pwd').val("");
 					$('#pwd').focus();
 				} else if(res=="1") {
-					location.href="../member/member_mypage.do";
+					
+					/* location.href="redirect:../member/member_mypage.do"; */
 				}
 			}
 		});
+		
+		
 	});
 });
 </script>
@@ -218,7 +221,7 @@ $(function(){
 		</tr>
 		<tr>
 			<td  class="text-center">
-				<a href="../member/member_update.do">취소</a>
+				<a href="../member/member_mypage.do">취소</a>
 			</td>
 		</tr>
 	</table>

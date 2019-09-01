@@ -41,7 +41,7 @@ $(function(){
 					$('#pwd').val("");
 					$('#pwd').focus();
 				} else if(res=="1") {
-					location.href="../main/main.do";
+					location.href="../member/member_delete_after.do";
 				}
 			}
 		});

@@ -119,4 +119,11 @@ public class MemberDAO {
 		session.close();
 		return result;
 	}
+	
+	public static void dogUpdate(DogVO dvo){
+		SqlSession session = ssf.openSession();
+		session.update("dogUpdate", dvo);
+		session.commit();
+		session.close();
+	}
 }
