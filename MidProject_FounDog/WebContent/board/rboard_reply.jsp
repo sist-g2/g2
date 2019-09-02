@@ -15,6 +15,10 @@
 	background-color:#FFF;
 	color:#A5732A;
 }
+th{
+	background-color:#FFF;
+	color:#A5732A;
+}
 </style>
 </head>
 <body>

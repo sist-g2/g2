@@ -23,7 +23,7 @@ th{
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#updBtn').click(function(){
+	$('#qna_updBtn').click(function(){
 		var subject=$('#sub').val();
 		if(subject.trim()=="") {
 			$('#sub').focus();
@@ -36,7 +36,7 @@ $(function(){
 		}
 		
 		if(confirm("수정하시겠어요??")) {
-			$('#boardUpdForm').submit();
+			$('#qna_boardUpdForm').submit();
 		} else {
 			return;
 		}
@@ -48,7 +48,7 @@ $(function(){
 <div class="container" >
 	<h2 class="text-center" >수정하기</h2>
 	<div class="row" >
-		<form id="boardUpdForm" method="post" action="board_update_ok.do" >
+		<form id="qna_boardUpdForm" method="post" action="qna_board_update_ok.do" >
 			<table class="table" >
 				<tr>
 					<th class="text-right" width=20% >이름</th>
@@ -71,7 +71,7 @@ $(function(){
 				</tr>
 				<tr>
 					<td colspan=2 class="text-center" >
-						<input type="button" value="수정" class="btn btn-sm" id="updBtn" >
+						<input type="button" value="수정" class="btn btn-sm" id="qna_updBtn" >
 						<input type="button" value="취소" class="btn btn-sm" onclick="javascript:history.back()" >
 					</td>
 				</tr>

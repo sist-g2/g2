@@ -54,8 +54,8 @@ th{
 	<!-- main(자유게시판/유기견게시판)출력 -->
 	  <section id="portfolio">
                 <ul class="portfolio-filter text-center">
-                    <li><a class="btn btn-default active" href="../board/board_list.do" data-filter=".자유게시판">자유게시판</a></li>
-                    <li><a class="btn btn-default" href="../board/board_list.do" data-filter=".유기견게시판">유기견게시판</a></li>
+                    <li><a class="btn btn-default active" href="../qnaboard/qna_board_list.do" data-filter=".Q&A">Q&A</a></li>
+                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".FAQ">FAQ</a></li>
                     </ul>
  </section>
 	<div class="row">
@@ -63,7 +63,7 @@ th{
 
 			<tr>
 				<td class="text-left"><c:if test="${sessionScope.id!=null }">
-						<a href="board_insert.do" class="btn btn-sm">새글</a>
+						<a href="qna_board_insert.do" class="btn btn-sm">새글</a>
 					</c:if></td>
 				<td class="text-right">${curpage } page / ${totalpage } pages</td>
 			</tr>
@@ -85,9 +85,9 @@ th{
 						<c:forEach begin="1" end="${vo.group_tab}">
 						&nbsp;&nbsp;
 						</c:forEach>
-						<img src="rereply.gif">
+						<img src="qna_rereply.gif">
 					</c:if>
-					<a href="board_detail.do?no=${vo.no }">${vo.subject }&nbsp;${vo.count==0?'':[vo.count] }</a> 
+					<a href="qna_board_detail.do?no=${vo.no }">${vo.subject }&nbsp;${vo.count==0?'':[vo.count] }</a> 
 					<c:if test="${today==vo.dbday }">
 					<sup><font color=red>new</font></sup>
 					</c:if>
@@ -112,14 +112,14 @@ th{
 				</td>
 				<td class="text-center">
 					<ul class="pagination">
-						<li><a href="board_list.do?page=1">&lt;&lt;</a></li>
+						<li><a href="qna_board_list.do?page=1">&lt;&lt;</a></li>
 						<li><a href="#">&lt;</a></li>
 						<c:forEach var="i" begin="1" end="${totalpage }">
 							<li class="${i==curpage?'active':''}"><a
-								href="board_list.do?page=${i }">${i }</a>
+								href="qna_board_list.do?page=${i }">${i }</a>
 						</c:forEach>
 						<li><a href="#">&gt;</a></li>
-						<li><a href="board_list.do?page=${totalpage }">&gt;&gt;</a></li>
+						<li><a href="qna_board_list.do?page=${totalpage }">&gt;&gt;</a></li>
 					</ul>
 				</td>
 			</tr>

@@ -347,15 +347,3 @@ public class BoardModel {
 	  return "redirect:../board/board_list.do";
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -35,7 +35,7 @@
 <!-- main(Q&A/FAQ)출력 -->
  <section id="portfolio">
                 <ul class="portfolio-filter text-center">
-                    <li><a class="btn btn-default" href="../board/board_list.do" data-filter=".Q&A">Q&A</a></li>
+                    <li><a class="btn btn-default" href="../qnaboard/qna_board_list.do" data-filter=".Q&A">Q&A</a></li>
                     <li><a class="btn btn-default active" href="../site/site_list.do" data-filter=".FAQ">FAQ</a></li>
                     </ul>
 		</section>

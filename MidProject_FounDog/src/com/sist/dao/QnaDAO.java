@@ -6,8 +6,8 @@ import com.sist.vo.BoardVO;
 import com.sist.vo.Board_ReplyVO;
 import java.util.*;
 
-public class BoardDAO {
-	   private static SqlSessionFactory ssf;
+public class QnaDAO {
+	  private static SqlSessionFactory ssf;
 	   static
 	   {
 		   ssf=CreateSqlSessionFactory.getSsf();
@@ -200,5 +200,4 @@ public class BoardDAO {
 		   session.commit();
 		   session.close();
 	   }
-	   
 }

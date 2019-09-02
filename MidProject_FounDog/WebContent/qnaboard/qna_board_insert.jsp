@@ -25,7 +25,7 @@ th{
    <div class="container">
      <h2 class="text-center">글쓰기</h2>
      <div class="row">
-     <form method="post" action="board_insert_ok.do">
+     <form method="post" action="qna_board_insert_ok.do">
        <table class="table">
          <tr>
            <th class="text-right" width=20%>제목</th>
