@@ -14,7 +14,9 @@ import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.HospitalDAO;
 import com.sist.vo.DogVO;
+import com.sist.vo.Feed_ReviewVO;
 import com.sist.vo.HospitalVO;
+import com.sist.vo.ReserveVO;
 
 @Controller("hospitalModel")
 public class HospitalModel {
@@ -275,6 +277,33 @@ public class HospitalModel {
 		public String hospital_doginsert(Model model){
 			
 			return "../member/dog_insert.jsp";
+		}
+		
+		@RequestMapping("hospital/hospital_reserve_ok.do")
+		public String hospital_reserve_ok(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			String hosNo=model.getRequest().getParameter("hosNo");
+			String dogNo=model.getRequest().getParameter("dogNo");
+			String symptom=model.getRequest().getParameter("symptom");
+			String wr5=model.getRequest().getParameter("wr_5");
+			String reserveday=model.getRequest().getParameter("reserve_day");	
+			String state = "øπæ‡¡ﬂ";
+			ReserveVO vo = new ReserveVO();				
+			
+			vo.setReserve_date(reserveday);
+			vo.setReserve_time(wr5);
+			vo.setSymptom(symptom);
+			vo.setState(state);
+			vo.setDogno(Integer.parseInt(dogNo));
+			vo.setHosno(Integer.parseInt(hosNo));
+			
+			HospitalDAO.reserveOk(vo);		
+			
+			return "redirect:../member/member_mypage.do";
 		}
 	
 }

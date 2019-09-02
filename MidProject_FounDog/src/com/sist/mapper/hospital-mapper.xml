@@ -53,9 +53,20 @@
 </select>
 
 <select id="reserveDog" resultType="DogVO" parameterType="String">
-		SELECT dname, dtype, TO_CHAR(dbirth, 'YYYY-MM-DD') as dbirth,dsex
+		SELECT dno,dname, dtype, TO_CHAR(dbirth, 'YYYY-MM-DD') as dbirth,dsex
 		FROM dog
 		WHERE id=#{id}
 </select>
-	
+
+<insert id="reserveOk" parameterType="ReserveVO">
+	INSERT INTO reserve(no,reserve_date,reserve_time,symptom,state,dogno,hosno) VALUES(
+			reserve_no_seq.nextval,
+			#{reserve_date},
+			#{reserve_time},
+			#{symptom},
+			#{state},
+			#{dogno},
+			#{hosno}
+		)
+</insert>
 </mapper>

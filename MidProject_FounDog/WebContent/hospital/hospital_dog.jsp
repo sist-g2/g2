@@ -10,8 +10,10 @@
 <script type="text/javascript">
 $('.dogSel').click(function(){
 	var dname=$('.dogname').text();
+	var dno=$('.dno').val();
 
 	$('#dname').val(dname);
+	$('#dogNo').val(dno);
 	$("#contents2 > a").focus();
     $("#layerPopup2").hide();
 	
@@ -54,7 +56,8 @@ return false;
 				</tr>
 			<c:forEach var="vo" items="${list }">
 				<tr style="border: solid 1px;">
-					<td class="dogname">${vo.dname}</td>	
+					<td class="dogname">${vo.dname}</td>
+					<input type="hidden" class="dno" value="${vo.dno }">	
 					<td>${vo.dtype}</td>	
 					<td>${vo.dbirth}</td>	
 					<td>${vo.dsex}</td>	

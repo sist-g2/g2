@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
+import com.sist.vo.ReserveVO;
 
 
 public class HospitalDAO {
@@ -131,5 +132,12 @@ public class HospitalDAO {
 				   session.close();
 		   }
 		   return list;
+	 }
+	 
+	 public static void reserveOk(ReserveVO vo){
+		   List<ReserveVO> list=new ArrayList<ReserveVO>();
+		   SqlSession session = ssf.openSession(true);
+			session.insert("reserveOk", vo);
+			session.close();
 	 }
 }

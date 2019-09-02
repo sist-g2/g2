@@ -194,7 +194,8 @@ $(document).ready(function(){
 			<div id="a4" style="height: 50px;">
 				<input type="checkbox">개인정보 취급방침에 동의합니다.
 			</div>
-		</div>
+		</div>		
+		<form class="reserveokForm" method="post" action="hospital_reserve_ok.do">
 		<table class="board_write">
 <colgroup>
 <col width="214px">
@@ -203,7 +204,7 @@ $(document).ready(function(){
 <tbody><tr class="first bdt bdb">
 	<th><em>01.</em>진료병원</th>
 	<td>
-	<input type="hidden" id="hosNo" value="${no }">
+	<input type="hidden" name="hosNo" id="hosNo" value="${no }">
 		${hosName }
 	</td>
 </tr>
@@ -224,15 +225,14 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td class="ml_28">
-		예약희망일 : <input type="text" id="reserve_day" value="" readonly="readonly">
+		예약희망일 : <input type="text" id="reserve_day" name="reserve_day" value="" readonly="readonly">
 	</td>
 </tr>
 <tr class="bdb">
 	<td>
 		예약희망시간 
 		<select name="wr_5" id="wr_5">
-		<option value="">예약일자를 먼저 선택해주세요.</option>	
-			
+		<option value="">예약일자를 먼저 선택해주세요.</option>				
 		</select>
 		<span style="color:#f00; font-size:0.9em; margin-left:10px;"> *예약희망시간은 확정이 아니며 담당 센터에서 일정 확인 후 연락(전화 또는 메시지)을 드립니다.</span>		
 	</td>
@@ -249,7 +249,8 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td class="ml_28">
-		진료받는 강아지 : <input type="text" readonly="readonly" id="dname">&nbsp; 
+		진료받는 강아지 : <input type="text" readonly="readonly" id="dname">&nbsp;
+		<input type="hidden" name="dogNo" id="dogNo" value=""> 
 		<div id="contents2">
 		  <a href="#layerPopup2">강아지 선택</a>
 		  <div id="layerPopup2">
@@ -265,12 +266,14 @@ $(document).ready(function(){
 <tr>
 	<td class="end">
 		증상<br>
-		<textarea style="width: 600px" cols="30" rows="5" ></textarea>
+		<textarea style="width: 600px" cols="30" rows="5" name="symptom"></textarea>
 	</td>
 </tr>
-</tbody></table>
-		<input type="button" class="btn btn-primary" value="확인">
+</tbody>
+</table>
+		<input type="submit" class="btn btn-primary" value="확인">
 		<input type="button" class="btn btn-primary" value="취소">
+</form>
 	</div>		  
 </body>
 </html>
