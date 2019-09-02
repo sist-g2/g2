@@ -81,7 +81,13 @@ th{
 				<tr class="${s.index%2==0?'':'warning' }">
 					<td width=7% class="text-center">${count }</td>
 					<td width=43% class="text-left">
-					<a href="board_detail.do?no=${vo.no }">${vo.subject }&nbsp;[${vo.count }]</a> 
+					<c:if test="${vo.group_tab > 0}">
+						<c:forEach begin="1" end="${vo.group_tab}">
+						&nbsp;&nbsp;
+						</c:forEach>
+						<img src="rereply.gif">
+					</c:if>
+					<a href="board_detail.do?no=${vo.no }">${vo.subject }&nbsp;${vo.count==0?'':[vo.count] }</a> 
 					<c:if test="${today==vo.dbday }">
 					<sup><font color=red>new</font></sup>
 					</c:if>

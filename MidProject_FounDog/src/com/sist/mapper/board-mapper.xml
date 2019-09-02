@@ -15,7 +15,7 @@
 				 hit, group_id, group_step, group_tab, root, depth, (SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
 						FROM board b 
 						WHERE category=#{category} 
-						ORDER BY no DESC
+						ORDER BY group_id DESC,group_step ASC
 					  )
 			  ) WHERE num BETWEEN #{start} AND #{end}
 	</select>
@@ -152,8 +152,9 @@
 
    <!-- 답글 추가 -->
    <insert id="rboardreplyReInsert" parameterType="BoardVO">
-     INSERT INTO Board(no,id,subject,content,group_id,group_step,group_tab,root) VALUES(
+     INSERT INTO Board(no,category,id,subject,content,group_id,group_step,group_tab,root) VALUES(
       Board_no_seq.nextval,
+      #{category},
       #{id},
       #{subject},
       #{content},
@@ -207,16 +208,23 @@
    	WHERE no=#{no}
    </select>
    
-   <!-- 답글 depth=0 -->
+   <!-- 답글 depth=0 글삭제 -->
    <delete id="rboardreplyDelete" parameterType="int">
     DELETE FROM Board
     WHERE no=#{no}
    </delete>
    
+    <!-- 답글 depth=0 댓글삭제 -->
+   <delete id="reboardreplyDelete" parameterType="int">
+    DELETE FROM Board_Reply
+    WHERE bno=#{no}
+   </delete>
+   
    <!-- 답글 depth!=0 -->
    <update id="rboardreplyDataUpdate" parameterType="BoardVO">
    	UPDATE Board SET
-   	content=#{content}
+   	content=#{content},
+   	subject=#{subject}
    	WHERE no=#{no}
    </update>
    

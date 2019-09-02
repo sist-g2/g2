@@ -11,6 +11,10 @@
    margin: 0px auto;
    width:900px;
 }
+.btn-sm{
+	background-color:#FFF;
+	color:#A5732A;
+}
 </style>
 </head>
 <body>

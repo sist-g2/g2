@@ -251,9 +251,9 @@ public class BoardModel {
   @RequestMapping("board/board_delete_ok.do")
   public String board_delete_ok(Model model){
 	  String no=model.getRequest().getParameter("no");
-	  int res=BoardDAO.boardDelete(Integer.parseInt(no));
-	  model.addAttribute("res", res);
-	  return "../board/board_delete_ok.jsp";
+	  BoardDAO.rboardreplyDelete(Integer.parseInt(no));
+	  // model.addAttribute("res", res);
+	  return "redirect:../board/board_list.do";
   }
 
   //답글 추가
@@ -287,11 +287,12 @@ public class BoardModel {
 	  vo.setContent(content);
 	  vo.setId(id);
 	  vo.setSubject(subject);
+	  vo.setCategory(0);
 	  
 	  BoardDAO.rboardreplyReInsert(Integer.parseInt(pno),vo);
 	  // group_id , group_step , group_tab
 	  
-	  return "redirect:../board/board_detail.do?no="+pno;
+	  return "redirect:../board/board_list.do";
   }
   
   @RequestMapping("board/rboardreply_Update.do")
@@ -341,9 +342,9 @@ public class BoardModel {
   @RequestMapping("board/rboard_delete_ok.do")
   public String rboard_delete_ok(Model model){
 	  String no=model.getRequest().getParameter("no");
-	  int res=BoardDAO.boardDelete(Integer.parseInt(no));
-	  model.addAttribute("res", res);
-	  return "../board/board_delete_ok.jsp";
+	  BoardDAO.rboardreplyDelete(Integer.parseInt(no));
+	  // model.addAttribute("res", res);
+	  return "redirect:../board/board_list.do";
   }
 }
 

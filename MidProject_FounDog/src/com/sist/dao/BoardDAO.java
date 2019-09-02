@@ -136,12 +136,11 @@ public class BoardDAO {
 		   if(vo.getDepth()==0){
 			   session.delete("boardreplyDelete",no);
 		   }else{
-			   BoardVO fvo=new BoardVO();
-			   fvo.setContent("<font color=red>관리자가 삭제한 게시물입니다</font>");
-			   fvo.setNo(no);
-			   session.update("boardreplyDataUpdate", fvo);
+			   vo.setContent("<font color=red>삭제된 댓글입니다</font>");
+			   vo.setNo(no);
+			   session.update("boardreplyDataUpdate", vo);
 		   }
-		   session.update("boardreplyDepthDecrement",vo.getRoot());
+		   // session.update("boardreplyDepthDecrement",vo.getRoot());
 		   session.commit();
 		   session.close();
 	   }
@@ -183,19 +182,21 @@ public class BoardDAO {
 		   session.close();
 	   }
 	   
-	   // 답글 삭제하기
+	   // 글 삭제하기
 	   public static void rboardreplyDelete(int no){
 		   SqlSession session=ssf.openSession();
 		   BoardVO vo = session.selectOne("rboardreplyGetDepth",no);
 		   if(vo.getDepth()==0){
-			   session.delete("rboardreplyDelete",no);
+			   session.delete("reboardreplyDelete",no); // 댓글삭제
+			   session.delete("rboardreplyDelete",no); // 글 삭제
 		   }else{
 			   BoardVO fvo=new BoardVO();
-			   fvo.setContent("<font color=red>관리자가 삭제한 게시물입니다</font>");
+			   fvo.setSubject("<font color=red>삭제된 게시물입니다</font>");
+			   fvo.setContent("<font color=red>삭제된 게시물입니다</font>");
 			   fvo.setNo(no);
 			   session.update("rboardreplyDataUpdate", fvo);
 		   }
-		   session.update("rboardreplyDepthDecrement",vo.getRoot());
+		   // session.update("rboardreplyDepthDecrement",vo.getRoot());
 		   session.commit();
 		   session.close();
 	   }
