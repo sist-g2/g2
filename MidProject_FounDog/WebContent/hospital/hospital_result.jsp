@@ -24,6 +24,21 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
+	$('.reservebtn').click(function(){
+		var id='${id}';
+		if(id.trim()==""){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href='../member/member_login.do';
+			return;
+		}
+		  if(confirm("예약 하시겠습니까?") == true){
+		$('form').submit();		        
+		    }
+		    else{
+		        return ;
+		    }
+	});
+	
 	$('.result_page').click(function(){
 	 	var page=$(this).attr("data-page");
 	 	var loc=$('#searchloc').val();
@@ -45,25 +60,18 @@ $(function(){
 </script>	
 			<div style="overflow: auto; height: 470px; width: 100%">
 				<table class="table">
-					<c:choose>
-						<c:when test="${list eq null}">
-							<tr>
-								<td class="text-center">검색을 해주세요</td>
-							</tr>
-						</c:when>
-						<c:when test="${list.size() eq 0 }">
+						<c:if test="${list.size() eq 0 }">
 							<tr>
 								<td class="text-center">검색 결과가 없습니다.</td>
 							</tr>
-						</c:when>
-					</c:choose>
+						</c:if>					
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td class="text-left">${vo.name }<br> ${vo.loc }<br>${vo.tel }
-						<form id="reserveForm" method="post" action="hospital_reserve.do">
+						<form class="reserveForm" method="post" action="hospital_reserve.do">
 								<input type="hidden" name="no" value="${vo.no }">
-								 <input type="submit" class="btn btn-primary" value="예약" id="reservebtn">
 						</form>
+								 <input type="button" class="btn btn-primary reservebtn" value="예약">
 							</td>
 						</tr>
 					</c:forEach>
@@ -82,7 +90,6 @@ $(function(){
 					   <li><input type="button" class="result_page" data-page="${endPage+1 }" value="&gt;"></li>
 					   <li><input type="button" class="result_page" data-page="${allPage }" value="&gt;&gt;"></li>
 			         </c:if>
-			         <li style="margin-left: 300px"><h3>${curpage } page / ${totalpage } pages</h3></li>
 				</ul>
 			</div>
 		</div>

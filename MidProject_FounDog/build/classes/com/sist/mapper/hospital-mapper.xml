@@ -12,7 +12,8 @@
 	FROM (SELECT no,name,loc,tel,rownum as num
 	FROM hospital
 	WHERE loc LIKE '%'||#{loc}||'%' AND name LIKE '%'||#{name}||'%')  
-	WHERE num BETWEEN #{start} AND #{end}  
+	WHERE num BETWEEN #{start} AND #{end}
+	ORDER BY no  
 </select>
 
 <select id="hospitalTotalResult" resultType="int" parameterType="hashmap">
@@ -52,7 +53,7 @@
 </select>
 
 <select id="reserveDog" resultType="DogVO" parameterType="String">
-		SELECT dname, dtype, dbirth,dsex
+		SELECT dname, dtype, TO_CHAR(dbirth, 'YYYY-MM-DD') as dbirth,dsex
 		FROM dog
 		WHERE id=#{id}
 </select>

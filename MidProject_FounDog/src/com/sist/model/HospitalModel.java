@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 
@@ -22,7 +23,11 @@ public class HospitalModel {
 	public String hospital_list(Model model){
 		
 		List<String> loc = HospitalDAO.hospitalGetLoc();
-	
+		
+		 HttpSession session=model.getRequest().getSession();
+		 String id=(String)session.getAttribute("id");
+
+		model.addAttribute("id", id);
 		model.addAttribute("loc", loc);
 		model.addAttribute("main_jsp", "../hospital/hospital_list.jsp");
 		return "../main/main.jsp";
@@ -241,9 +246,7 @@ public class HospitalModel {
 		   public String hospital_time(Model model)
 		   {
 			   String day=model.getRequest().getParameter("day");	
-			   System.out.println(day);
 			   String time=HospitalDAO.reserveGetTime(Integer.parseInt(day));
-			   System.out.println(time);
 			
 			   List<String> list=new ArrayList<String>();
 			   StringTokenizer st=new StringTokenizer(time,",");
@@ -266,6 +269,12 @@ public class HospitalModel {
 			model.addAttribute("list", list);
 	
 			return "../hospital/hospital_dog.jsp";
+		}
+		
+		@RequestMapping("hospital/hospital_doginsert.do")
+		public String hospital_doginsert(Model model){
+			
+			return "../member/dog_insert.jsp";
 		}
 	
 }

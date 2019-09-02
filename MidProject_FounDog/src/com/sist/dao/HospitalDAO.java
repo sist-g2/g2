@@ -63,7 +63,6 @@ public class HospitalDAO {
 		   {
 			   session=ssf.openSession();
 			   list=session.selectOne("reserveGetTime",dno);
-			   System.out.println(list);
 		   }catch(Exception ex)
 		   {
 			   ex.printStackTrace();

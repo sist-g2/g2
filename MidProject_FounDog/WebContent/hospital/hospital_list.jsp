@@ -22,13 +22,13 @@
 
 			<input type="text" value="서울특별시" readonly="readonly"
 				class="form-control2"> <select name="searchloc"
-				id="searchloc" style="height: 27px" class="form-control2">
-				<option></option>
+				id="searchloc" class="form-control2">
+				<option value="">전체</option>
 				<c:forEach var="loc" items="${loc }">
 					<option>${loc }</option>
 				</c:forEach>
-			</select> <input type="text" name="searchname" id="searchname" size="10"
-				class="form-control2"> <input type="button"
+			</select> <input type="text" name="searchname" id="searchname"
+				class="form-control2" placeholder="병원이름 검색"> <input type="button"
 				class="btn btn-primary" value="검색" name="searchbtn" id="searchbtn">
 
 		</div>
@@ -47,7 +47,7 @@
 		<script>
 var mapContainer = document.getElementById('map');
 var mapOption = {
-    center: new daum.maps.LatLng(37.450701, 126.570667),
+    center: new daum.maps.LatLng(37.556538, 126.919516),
     level: 7
 };  
 
@@ -81,7 +81,7 @@ $(function(){
 				
 				var mapContainer = document.getElementById('map');
 				var mapOption = {
-				    center: new daum.maps.LatLng(37.450701, 126.570667),
+				    center: new daum.maps.LatLng(37.556538, 126.919516),
 				    level: 7
 				};  
 
@@ -129,7 +129,10 @@ $(function(){
 });
 
 </script>
-		<div class="col-sm-4" style="border-top: 1px solid; height: 470px; width: 460px;" id="hospital_result">
+		<div class="col-sm-4" style="border-top: 1px solid; height: 540px; width: 460px;" id="hospital_result">
+		<div align="center" style="position: absolute; top: 220px; border: solid 1px; width: 440px; height: 100px;">
+		검색을 해주세요
+		</div>
 		</div>	
 	</div>
 </body>

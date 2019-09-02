@@ -264,12 +264,13 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td class="end">
-		증상
+		증상<br>
 		<textarea style="width: 600px" cols="30" rows="5" ></textarea>
 	</td>
 </tr>
 </tbody></table>
-		
+		<input type="button" class="btn btn-primary" value="확인">
+		<input type="button" class="btn btn-primary" value="취소">
 	</div>		  
 </body>
 </html>
