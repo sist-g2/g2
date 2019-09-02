@@ -13,7 +13,7 @@
 }
 .clear{
 	margin: 0px auto;
-	width:600px;
+	width:400px;
 	height: 400px;
 }
 #meswei{
@@ -63,11 +63,11 @@ function dog_calorie()
 		if(isNumber(actval[1])==true)
 		{
 			var part3 = Math.round(part1 * parseFloat(actval[1]));
-			result = part2 +" - "+ part3 + " 칼로리/일";
+			result = part2 +" - "+ part3 + " calorie/Day";
 		}
 		else
 		{
-			result = part2 + " 칼로리/일";
+			result = part2 + " calorie/Day";
 		}
 		$("#result").val(result);
 	}
@@ -94,7 +94,8 @@ $(document).ready(function() {
 		<h2 align="center">칼로리 계산기</h2>
 		<div class="row">
 			<div class="clear">
-				<form name="first" class="well" style="background-color: #d29949;">
+				<form name="first" class="well" >
+				<!-- style="background-color: #d29949;" -->
 <!-- 					<div id="overlayloder" style ="top: 400px; display: none;">
 						<div class="loder">						
 						</div>
@@ -103,7 +104,7 @@ $(document).ready(function() {
 						<table align="center" border="0" cellpadding="1" cellspacing="1" id="dog_calorie">
 							<tbody>
 								<tr>
-									<td align="center" style="color:white">강아지 무게</td>
+									<td align="center">강아지 무게</td><!-- style="color:white" -->
 									<td>&nbsp;
 									<input type="text" id="weig" size="20" width="20px" height="20px" onkeyup="checnum(this)" style="text-align: center">
 									<select id="meswei">
@@ -116,7 +117,7 @@ $(document).ready(function() {
 									<td colspan="2">&nbsp;</td>
 								</tr>
 								<tr>
-									<td align="center" style="color:white">활동량</td>
+									<td align="center">활동량</td><!-- style="color:white" -->
 									<td>&nbsp;									
 									<select id="actlev">
 										<option value="110">표준체중</option>
@@ -144,7 +145,7 @@ $(document).ready(function() {
 									<td colspan="2">&nbsp;</td>								
 								</tr>
 								<tr>
-									<td align="center" style="color:white">일별 칼로리 계산</td>
+									<td align="center">일별 칼로리 계산</td><!-- style="color:white" -->
 									<td>&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" readonly id="result" style="text-align: center">								
 									</td>
@@ -153,6 +154,9 @@ $(document).ready(function() {
 						</table>
 					</div>
 				</form>
+			 <div class="row">
+        	    <a href="#"><img src="http://placehold.it/400x200/brown" alt=""></a>
+          	  </div>  
 			</div>
 		</div>
 	</div>

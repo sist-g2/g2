@@ -93,7 +93,8 @@
                     <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
                          <ul role="menu" class="sub-menu">
                             <li><a href="../adminboard/adminboard_list.do">정보성 게시판</a></li>
-                            <li><a href="../adminboard/Calc.do">사료 열량 계산기</a></li>
+                            <li><a href="../adminboard/Calc.do">사료 열량 계산기ver1</a></li>
+                            <li><a href="../adminboard/Calc2.do">사료 열량 계산기ver2</a></li>
                         </ul>
                     </li>                         
                     <li class="dropdown"><a href="../board/board_list.do ">커뮤니티</a>
