@@ -15,11 +15,14 @@
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 <!-- 제목 -->
 	<section id="page-breadcrumb">
-	<div class="vertical-center sun">
+	<div class="vertical-center">
 		<div class="container">
 			<div class="row">
 				<div class="action">
@@ -35,37 +38,35 @@
 <!-- main(Q&A/FAQ)출력 -->
  <section id="portfolio">
                 <ul class="portfolio-filter text-center">
-                    <li><a class="btn btn-default" href="../qnaboard/qna_board_list.do" data-filter=".Q&A">Q&A</a></li>
-                    <li><a class="btn btn-default active" href="../site/site_list.do" data-filter=".FAQ">FAQ</a></li>
+                    <li><a class="btn btn-default active" href="../site/site_list.do">FAQ</a></li>
+                    <li><a class="btn btn-default" href="../qnaboard/qna_board_list.do">Q&A</a></li>
                     </ul>
 		</section>
 		 <section id="portfolio">
                 <ul class="portfolio-filter text-center">
-                    <li><a class="btn btn-default active" href="../board/board_list.do" data-filter=".회원정보">회원정보</a></li>
-                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".사료비교">사료비교</a></li>
-                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".병원이용">병원이용</a></li>
-                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".강아지와함께">강아지와함께</a></li>
+                    <li><a class="btn btn-default ${cate==0?'active':'' }" href="../site/site_list.do?cate=0" >회원정보</a></li>
+                    <li><a class="btn btn-default ${cate==1?'active':'' }" href="../site/site_list.do?cate=1" >사료비교</a></li>
+                    <li><a class="btn btn-default ${cate==2?'active':'' }" href="../site/site_list.do?cate=2" >병원이용</a></li>
+                    <li><a class="btn btn-default ${cate==3?'active':'' }" href="../site/site_list.do?cate=3" >강아지와함께</a></li>
                     </ul>
 		</section>
-			<!-- FAQ 10개 -->
+		
+			<!-- FAQ -->
+			<c:forEach var="item" items="${list}">
 			       <div class="container">
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> FAQ1 </a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">${vo.subject}</a>
 								</h4>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse in">
-								<div class="panel-body">사이트이용하는법</div>
+								<div class="panel-body">${vo.content}</div>
 							</div>
 						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> {vo.subject} </a>
-								</h4>
-							</div>	
 					</div>
+					</div>
+		</c:forEach>
 </body>
 </html>

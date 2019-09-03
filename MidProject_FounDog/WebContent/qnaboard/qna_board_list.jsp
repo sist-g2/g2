@@ -39,32 +39,34 @@ th{
 <body>
 	<!-- 제목 -->
 	 	<section id="page-breadcrumb">
-	<div class="vertical-center sun">
+	<div class="vertical-center">
 		<div class="container">
 			 <div class="row">
 				<div class="action">
 					 <div class="col-sm-12">
-						<h1 class="title">자유게시판</h1>
+						<h1 class="title">Q&A</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section> 
-	<!-- main(자유게시판/유기견게시판)출력 -->
+	<!-- main(Q&A/FAQ)출력 -->
 	  <section id="portfolio">
                 <ul class="portfolio-filter text-center">
-                    <li><a class="btn btn-default active" href="../qnaboard/qna_board_list.do" data-filter=".Q&A">Q&A</a></li>
-                    <li><a class="btn btn-default" href="../site/site_list.do" data-filter=".FAQ">FAQ</a></li>
+                    <li><a class="btn btn-default" href="../site/site_list.do">FAQ</a></li>
+                    <li><a class="btn btn-default active" href="../qnaboard/qna_board_list.do">Q&A</a></li>
                     </ul>
  </section>
 	<div class="row">
 		<table class="table">
 
 			<tr>
-				<td class="text-left"><c:if test="${sessionScope.id!=null }">
+				<td class="text-left">
+				<c:if test="${sessionScope.id!=null }">
 						<a href="qna_board_insert.do" class="btn btn-sm">새글</a>
-					</c:if></td>
+					</c:if>
+					</td>
 				<td class="text-right">${curpage } page / ${totalpage } pages</td>
 			</tr>
 		</table>
@@ -102,24 +104,26 @@ th{
 		<table class="table">
 			<tr>
 				<td class="text-left">
-					<form method="post" action="find.do" id="frm">
-						Search: <select name="fs" class="input-sm">
+					<form method="post" action="qna_board_find.do" id="frm">
+						Search: 
+						<select name="fs" class="input-sm">
 							<option value="id">이름</option>
 							<option value="subject">제목</option>
-						</select> <input type=text name=ss size=15 class="input-sm" id="ss">
+						</select> 
+						<input type=text name=ss size=15 class="input-sm" id="ss">
 						<input type=button value="검색" class="btn btn-sm" id="findBtn">
 					</form>
 				</td>
 				<td class="text-center">
 					<ul class="pagination">
 						<li><a href="qna_board_list.do?page=1">&lt;&lt;</a></li>
-						<li><a href="#">&lt;</a></li>
-						<c:forEach var="i" begin="1" end="${totalpage }">
-							<li class="${i==curpage?'active':''}"><a
-								href="qna_board_list.do?page=${i }">${i }</a>
+						<li><a href="qna_board_list.do?page=${startPage-1}">&lt;</a></li>
+						<c:forEach var="i" begin="${startPage }" end="${endPage }">
+							<li class="${i==curpage?'active':''}">
+							<a href="qna_board_list.do?page=${i }">${i }</a>
 						</c:forEach>
-						<li><a href="#">&gt;</a></li>
-						<li><a href="qna_board_list.do?page=${totalpage }">&gt;&gt;</a></li>
+						<li><a href="qna_board_list.do?page=${endPage+1}">&gt;</a></li>
+						<li><a href="qna_board_list.do?page=${allPage }">&gt;&gt;</a></li>
 					</ul>
 				</td>
 			</tr>

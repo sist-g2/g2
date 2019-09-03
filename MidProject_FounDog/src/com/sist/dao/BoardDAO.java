@@ -201,4 +201,14 @@ public class BoardDAO {
 		   session.close();
 	   }
 	   
+	   // 검색하기(찾기)
+	   // <select id="boardFindData" resultType="BoardVO" parameterType="java.util.Map">
+	   public static List<BoardVO> boardFindData(Map map){
+		   List<BoardVO> list= new ArrayList<BoardVO>();
+		   SqlSession session = ssf.openSession();
+		   list=session.selectList("boardFindData",map);
+		   session.close();
+		   return list;
+	   }
+	   
 }

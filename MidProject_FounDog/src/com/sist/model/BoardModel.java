@@ -1,6 +1,8 @@
 package com.sist.model;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
@@ -23,7 +25,6 @@ public class BoardModel {
 	  
 	  // Map에 저장 
 	  Map map=new HashMap();
-	  
 	  int rowSize=10;
 	  int start=(curpage*rowSize)-(rowSize-1);
 	  // 1~10 , 11~20 , 21....
@@ -42,17 +43,53 @@ public class BoardModel {
 	  // 총페이지  => totalpage
 	  int totalpage = BoardDAO.boardTotalPage(0);
 	  int count=BoardDAO.boardRowCount(0); // 22
+	  int BLOCK=5;
+	  
+	  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+	  int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+	  int allPage=totalpage;
+	  
+	  if(endPage>allPage){
+		  endPage=allPage;
+	  }
 	  count=count-((curpage*rowSize)-rowSize); 
 	
 	  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 	  model.addAttribute("today", today);
 	  model.addAttribute("curpage", curpage);
 	  model.addAttribute("totalpage", totalpage);
+	  model.addAttribute("BLOCK", BLOCK);
+	  model.addAttribute("startPage", startPage);
+	  model.addAttribute("endPage", endPage);
+	  model.addAttribute("allPage", allPage);
 	  model.addAttribute("count", count);
 	  model.addAttribute("main_jsp", "../board/board_list.jsp");// main.jsp (include)
 	  return "../main/main.jsp";
   }
- 
+  
+  @RequestMapping("board/board_find.do")
+  public String board_find(Model model){
+
+		try{
+			model.getRequest().setCharacterEncoding("UTF-8");
+		}catch(Exception ex){}
+		
+		
+		String fs=model.getRequest().getParameter("fs");
+		String ss=model.getRequest().getParameter("ss");
+		//WHERE ${fs} LIKE '%'||#{ss}||'%'
+		Map map = new HashMap();
+		map.put("fs", fs);
+		map.put("ss", ss);
+		map.put("category", 0);
+		List<BoardVO> list = BoardDAO.boardFindData(map);
+		
+		model.getRequest().setAttribute("list", list);
+		model.getRequest().setAttribute("count", list.size());
+		
+		model.addAttribute("main_jsp", "../board/board_find.jsp");
+		return "../main/main.jsp";
+	}
   // 데이터 추가
   // 화면 
   
@@ -346,4 +383,5 @@ public class BoardModel {
 	  // model.addAttribute("res", res);
 	  return "redirect:../board/board_list.do";
   }
+ 
 }

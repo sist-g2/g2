@@ -11,10 +11,10 @@ public class FaqDAO {
 		ssf=CreateSqlSessionFactory.getSsf();
 	}
 	
-	public static List<Board_FAQVO> faqListData(Map map){
+	public static List<Board_FAQVO> faqListData(int category){
 		List<Board_FAQVO> list = new ArrayList<Board_FAQVO>();
 		SqlSession session=ssf.openSession();
-		list=session.selectList("faqListData",map);
+		list=session.selectList("faqListData",0);
 		session.close();
 		return list;
 	}

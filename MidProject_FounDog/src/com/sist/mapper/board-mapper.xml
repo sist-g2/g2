@@ -3,7 +3,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.board-mapper">
-  <!-- 자유게시판(Start) -->
+  <!-- 자유게시판/Q&A게시판(Start) -->
   <!-- 
          목록 : 블록별 처리 
          이전    1 2 3 4 5 다음
@@ -29,7 +29,7 @@
    <!-- 게시물 번호가 일렬로 처리  -->
 	<select id="boardRowCount" resultType="int"  parameterType="int">
 		SELECT COUNT(*) FROM board 
-		WHERE category=#{category} 
+ 		WHERE category=#{category}
 	</select>
 	
 	<!-- 새 글 작성 -->
@@ -241,10 +241,20 @@
      WHERE no=#{no}
     </delete>
     
+    <!-- 찾기 -->
+     <select id="boardFindData" resultType="BoardVO" parameterType="java.util.Map">
+      SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+      FROM board 
+      WHERE ${fs} LIKE '%'||#{ss}||'%' 
+      AND category=#{category}
+      </select>
+      
     <!-- FAQ -->
 	 <select id="faqListData" resultType="Board_FAQVO" parameterType="int">
 			SELECT no,subject,content,category
 			FROM Board_FAQ
+			WHERE category=#{category}
+			
 	</select>
 </mapper>
 

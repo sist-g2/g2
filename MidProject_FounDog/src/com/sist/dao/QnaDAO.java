@@ -7,7 +7,7 @@ import com.sist.vo.Board_ReplyVO;
 import java.util.*;
 
 public class QnaDAO {
-	  private static SqlSessionFactory ssf;
+	   private static SqlSessionFactory ssf;
 	   static
 	   {
 		   ssf=CreateSqlSessionFactory.getSsf();
@@ -200,4 +200,14 @@ public class QnaDAO {
 		   session.commit();
 		   session.close();
 	   }
+	   
+	   // 검색하기(찾기)
+	   public static List<BoardVO> boardFindData(Map map){
+		   List<BoardVO> list= new ArrayList<BoardVO>();
+		   SqlSession session = ssf.openSession();
+		   list=session.selectList("boardFindData",map);
+		   session.close();
+		   return list;
+	   }
+	   
 }
