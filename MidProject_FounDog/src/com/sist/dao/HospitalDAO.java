@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
+import com.sist.vo.Reserve_DetailVO;
 
 
 public class HospitalDAO {
@@ -140,4 +141,22 @@ public class HospitalDAO {
 			session.insert("reserveOk", vo);
 			session.close();
 	 }
+	 
+	 public static List<DogVO> reserveDogname(String id)
+	   {
+		   SqlSession session=ssf.openSession();
+		   
+		   List<DogVO> list=session.selectList("reserveDogname",id);
+		   session.close();
+		   return list;
+	   }
+	 
+	 public static List<Reserve_DetailVO> reserveDetail(Map map)
+	   {
+		   SqlSession session=ssf.openSession();
+		   
+		   List<Reserve_DetailVO> list=session.selectList("reserveDetail",map);
+		   session.close();
+		   return list;
+	   }
 }

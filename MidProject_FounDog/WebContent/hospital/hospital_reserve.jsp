@@ -195,7 +195,7 @@ $(document).ready(function(){
 				<input type="checkbox">개인정보 취급방침에 동의합니다.
 			</div>
 		</div>		
-		<form class="reserveokForm" method="post" action="hospital_reserve_ok.do">
+		<form class="reserveokForm" method="post" action="hospital_reserve_detail.do">
 		<table class="board_write">
 <colgroup>
 <col width="214px">

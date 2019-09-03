@@ -69,4 +69,23 @@
 			#{hosno}
 		)
 </insert>
+
+<select id="reserveDogname" resultType="String" parameterType="String">
+SELECT dname FROM dog WHERE id = #{id}
+</select>
+
+<select id="reserveDetail" resultType="Reserve_DetailVO" parameterType="hashmap">
+SELECT no,
+TO_CHAR(reception_date, 'YYYY-MM-DD') as reception_date,
+(SELECT name FROM member WHERE id = (SELECT id FROM dog WHERE dno = dogno)) as name,
+(SELECT dname FROM dog WHERE dno = dogno) as dname,
+reserve_date,
+reserve_time,
+state,
+(SELECT name FROM hospital WHERE no = hosno) as hosname
+FROM reserve
+WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
+reception_date BETWEEN TO_DATE(#{startData},'YYYY-MM-DD') 
+AND TO_DATE(#{endData}, 'YYYY-MM-DD') + 0.99999
+</select>
 </mapper>

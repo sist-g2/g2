@@ -17,6 +17,7 @@ import com.sist.vo.DogVO;
 import com.sist.vo.Feed_ReviewVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
+import com.sist.vo.Reserve_DetailVO;
 
 @Controller("hospitalModel")
 public class HospitalModel {
@@ -303,7 +304,47 @@ public class HospitalModel {
 			
 			HospitalDAO.reserveOk(vo);		
 			
-			return "redirect:../member/member_mypage.do";
+			return "../hospital/hospital_reserve_detail.do";
 		}
-	
+		
+		@RequestMapping("hospital/hospital_reserve_detail.do")
+		public String hospital_reserve_detail(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			Map map=new HashMap();
+			String dogname = model.getRequest().getParameter("selectDog");
+			System.out.println(dogname);
+			String startData = model.getRequest().getParameter("startData");
+			System.out.println(startData);
+			String endData = model.getRequest().getParameter("endData");
+			System.out.println(endData);
+			
+			if(dogname==null){
+				dogname = "";
+			}
+			if(startData==null){
+				startData = "2019-09-01";
+			}
+			if(endData==null){
+				endData = "2019-09-05";
+			}
+			map.put("dogname", dogname);			
+			map.put("startData", startData);
+			map.put("endData", endData);
+			List<Reserve_DetailVO> list = HospitalDAO.reserveDetail(map);
+			
+			HttpSession session=model.getRequest().getSession();
+			String id=(String)session.getAttribute("id");
+			
+			List<DogVO> doglist = HospitalDAO.reserveDogname(id);
+			model.addAttribute("doglist", doglist);
+			model.addAttribute("list", list);
+			model.addAttribute("main_jsp", "../hospital/hospital_reserve_detail.jsp");
+			return "../main/main.jsp";
+		}
+		
+		
 }
