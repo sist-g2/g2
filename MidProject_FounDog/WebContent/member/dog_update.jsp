@@ -6,28 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="../css/member.css" rel="stylesheet">
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#upDog').click(function(){
-		$.ajax({
-			type:'post',
-			url:'../member/dog_update_ok.do',
-			data:{dname:dname, dtype:dtype, dyear:dyear, dmonth:dmonth, dday:dday, dno:dno},
-			success:function(response){
-				var res = response.trim();
-				if(res=="0"){
-					alert("비밀번호가 틀립니다.");
-					$('#pwd').val("");
-					$('#pwd').focus();
-				} else if(res=="1") {
-					location.href="redirect:../member/member_mypage.do";
-				}
-			}
-		});
+		if(confirm("반려견 정보를 변경하시겠습니까?")) {
+			$('#dogUpdate').submit();
+		} else {
+			return;
+		}
 	});
 });
-</script> -->
+</script>
 <style type="text/css">
 .rowrow{
 	margin: 0px auto;
@@ -67,7 +57,7 @@ tbody{
 <body>
 <!-- 상단 제목 -->
 <section id="page-breadcrumb">
-	<div class="vertical-center sun">
+	<div class="vertical-center">
 		<div class="container">
 			<div class="row">
 				<div class="action">
@@ -123,7 +113,7 @@ tbody{
 	<table class="table table-borderless" style="width:400px;">
 		<tr>
 			<td  class="text-center">
-				<input type=submit value="반려견 정보 변경" class="btn btn-submit" id="upDog">
+				<input type=button value="반려견 정보 변경" class="btn btn-submit" id="upDog">
 			</td>
 		</tr>
 		<tr>

@@ -105,19 +105,11 @@ public class MemberDAO {
 		
 	}
 	
-	public static int memberUpdate(MemberVO vo){
-		int result = 0;
+	public static void memberUpdate(MemberVO vo){
 		SqlSession session = ssf.openSession();
-		String db_pwd = session.selectOne("deleteGetPwd", vo.getId());
-		//System.out.println(db_pwd);
-		if(db_pwd.equals(vo.getPwd())){
-			result = 1;
-			session.update("memberUpdate", vo);
-			session.commit();
-		}
-		//System.out.println(result);
+		session.update("memberUpdate", vo);
+		session.commit();
 		session.close();
-		return result;
 	}
 	
 	public static void dogUpdate(DogVO dvo){
@@ -126,4 +118,23 @@ public class MemberDAO {
 		session.commit();
 		session.close();
 	}
+	
+	public static int memberUpdatePwd(String id, String pwd){
+		int result = 0;
+		SqlSession session = ssf.openSession();
+		String db_pwd = session.selectOne("deleteGetPwd", id);
+		if(db_pwd.equals(pwd)){
+			result = 1;
+		}
+		session.close();
+		return result;
+	}
+	
+	public static String memberUpdateNullPwd(String id){
+		SqlSession session = ssf.openSession();
+		String pwd = session.selectOne("deleteGetPwd", id);
+		session.close();
+		return pwd;
+	}
+	
 }

@@ -194,7 +194,7 @@ tbody{
 
 <!-- 상단 제목 -->
 <section id="page-breadcrumb">
-	<div class="vertical-center sun">
+	<div class="vertical-center">
 		<div class="container">
 			<div class="row">
 				<div class="action">

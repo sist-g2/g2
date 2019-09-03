@@ -10,18 +10,18 @@
 <script type="text/javascript">
 $(function(){
 	$('#upBtn').click(function(){
-		var pwd = $('#pwd').val();
+		/* var pwd = $('#pwd').val(); */
 		var tel2 = $('#tel2').val();
 		var tel3 = $('#tel3').val();
 		var email = $('#email').val();
 		var post = $('#post').val();
 		var addr1 = $('#addr1').val();
 		
-		if(pwd.trim()==""){
+		/* if(pwd.trim()==""){
 			alert("비밀번호를 입력해주세요.")
 			$('#pwd').focus();
 			return;
-		} else if(tel2.trim()=="" || tel3.trim()==""){
+		} else */ if(tel2.trim()=="" || tel3.trim()==""){
 			alert("전화번호를 입력해주세요.")
 			return;
 		} else if(email.trim()==""){
@@ -34,24 +34,6 @@ $(function(){
 		}
 		
 		$('#update').submit();
-		
-		$.ajax({
-			type:'post',
-			url:'../member/member_update_ok.do',
-			data:{id:id, pwd:pwd, email:email, post:post, addr1:addr1, addr2:addr2, tel1:tel1, tel2:tel2, tel3:tel3},
-			success:function(response){
-				var res = response.trim();
-				if(res=="0"){
-					alert("비밀번호가 틀립니다.");
-					$('#pwd').val("");
-					$('#pwd').focus();
-				} else if(res=="1") {
-					
-					/* location.href="redirect:../member/member_mypage.do"; */
-				}
-			}
-		});
-		
 		
 	});
 });
@@ -107,7 +89,7 @@ $(function(){
 
 <!-- 상단 제목 -->
 <section id="page-breadcrumb">
-	<div class="vertical-center sun">
+	<div class="vertical-center">
 		<div class="container">
 			<div class="row">
 				<div class="action">
@@ -136,11 +118,12 @@ $(function(){
 			</td>
 		</tr>
 		<tr>
-			<td class="text-left">비밀번호</td>
+			<td class="text-left">비밀번호 변경</td>
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=password name=pwd class="form-control" size=15 placeholder="비밀번호를 입력해주세요." id=pwd>
+				<input type=password name=pwd class="form-control" size=15 placeholder="변경할 비밀번호를 입력해주세요." id=pwd><br>
+				<font color="red">비밀번호 변경을 원치 않으시다면 비워주세요.</font>
 			</td>
 		</tr>
 		<tr>

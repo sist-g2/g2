@@ -27,12 +27,37 @@
 	text-align: center;
 	cursor: pointer;
 }
+.optionList td button {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.dogDel').click(function(){
+		var dno = $(this).val();
+		if(confirm("반려견을 삭제하시겠습니까?")) {
+			location.href="../member/dog_delete_ok.do?dno="+dno;
+		} else {
+			return;
+		}
+	});
+});
+</script>
 </head>
 <body>
 <!-- 상단 제목 -->
 <section id="page-breadcrumb">
-	<div class="vertical-center sun">
+	<div class="vertical-center">
 		<div class="container">
 			<div class="row">
 				<div class="action">
@@ -52,7 +77,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4 class="page-header text-left">${name }님, 안녕하세요!</h4>
-				<a href="../member/member_update.do" class="btn btn-common2 uppercase">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="../member/member_update_pwd.do" class="btn btn-common2 uppercase">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="../member/member_delete.do" class="btn btn-common2 uppercase">회원 탈퇴</a>
 			</div>
 		</div>
@@ -72,7 +97,7 @@
 							<td><font color="#bd8942">${dvo.dname }</font></td>
 							<td>${dvo.dtype }</td>
 							<td><a href="../member/dog_update.do?dno=${dvo.dno }">&nbsp;&nbsp;수정&nbsp;&nbsp;</a></td>
-							<td><a href="../member/dog_delete_ok.do?dno=${dvo.dno }">&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;</a></td>
+							<td><button type="button" value="${dvo.dno }" class="dogDel">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</table>

@@ -75,7 +75,7 @@
 	</select>
 	<update id="memberUpdate" parameterType="MemberVO">
 		UPDATE member SET
-		tel = #{tel}, email = #{email}, post = #{post}, addr1 = #{addr1}, addr2 = #{addr2}
+		tel = #{tel}, email = #{email}, post = #{post}, addr1 = #{addr1}, addr2 = #{addr2}, pwd = #{pwd}
 		WHERE id = #{id}
 	</update>
 	

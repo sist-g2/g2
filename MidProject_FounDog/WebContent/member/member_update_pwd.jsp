@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 <link href="../css/member.css" rel="stylesheet">
 <style type="text/css">
 .rowrow{
@@ -15,7 +16,7 @@
 <script type="text/javascript">
 $(function(){
 	
-	$('#delBtn').click(function(){
+	$('#upPwdBtn').click(function(){
 		var id = $('#id').val();
 		var pwd = $('#pwd').val();
 		
@@ -32,7 +33,7 @@ $(function(){
 		
 		$.ajax({
 			type:'post',
-			url:'../member/member_delete_ok.do',
+			url:'../member/member_update_pwd_ok.do',
 			data:{id:id, pwd:pwd},
 			success:function(response){
 				var res = response.trim();
@@ -41,7 +42,7 @@ $(function(){
 					$('#pwd').val("");
 					$('#pwd').focus();
 				} else if(res=="1") {
-					location.href="../member/member_delete_after.do";
+					location.href="../member/member_update.do";
 				}
 			}
 		});
@@ -58,7 +59,7 @@ $(function(){
 			<div class="row">
 				<div class="action">
 					<div class="col-sm-12">
-						<h1 class="title">Delete</h1>
+						<h1 class="title">MyPage</h1>
 					</div>
 				</div>
 			</div>
@@ -87,7 +88,7 @@ $(function(){
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="회원 탈퇴" id="delBtn" class="btn btn-submit uppercase" style="height: 50px;">
+						<input type="submit" value="회원 수정" id="upPwdBtn" class="btn btn-submit uppercase" style="height: 50px;">
 					</td>
 				</tr>
 				<tr>

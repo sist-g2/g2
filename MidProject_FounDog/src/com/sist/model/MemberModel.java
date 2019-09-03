@@ -227,7 +227,11 @@ public class MemberModel {
 		DogVO dvo = new DogVO();
 		dvo.setDname(dname);
 		dvo.setDno(Integer.parseInt(dno));
-		dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+		if(dyear!="" && dmonth!="" && dday!=""){
+			dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+		} else if(dyear=="" || dmonth=="" || dday=="") {
+			dvo.setDbirth("");
+		}
 		dvo.setDtype(dtype);
 		
 		MemberDAO.dogUpdate(dvo);
@@ -253,7 +257,11 @@ public class MemberModel {
 		String dsex = model.getRequest().getParameter("dsex");
 		dvo.setDname(dname);
 		dvo.setDtype(dtype);
-		dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+		if(dyear!="" && dmonth!="" && dday!=""){
+			dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+		} else if(dyear=="" || dmonth=="" || dday=="") {
+			dvo.setDbirth("");
+		}
 		dvo.setDsex(dsex);
 		dvo.setId(id);
 			
@@ -298,6 +306,26 @@ public class MemberModel {
 		return "../main/main.jsp";
 	}
 	
+	@RequestMapping("member/member_update_pwd.do")
+	public String member_update_pwd(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		MemberVO vo = MemberDAO.memberDetailData(id);
+		model.addAttribute("vo", vo);
+		model.addAttribute("main_jsp", "../member/member_update_pwd.jsp");
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/member_update_pwd_ok.do")
+	public String member_update_pwd_ok(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id = model.getRequest().getParameter("id");
+		String pwd = model.getRequest().getParameter("pwd");
+		int res = MemberDAO.memberUpdatePwd(id, pwd);
+		model.addAttribute("res", res);
+		return "../member/member_update_pwd_ok.jsp";
+	}
+	
 	@RequestMapping("member/member_update_ok.do")
 	public String member_update_ok(Model model){
 		try{
@@ -305,6 +333,9 @@ public class MemberModel {
 		} catch (Exception e) {}
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
+		String pwd = MemberDAO.memberUpdateNullPwd(id);
+		System.out.println("현재 비밀번호 : " + pwd);
+		
 		String tel1 = model.getRequest().getParameter("tel1");
 		String tel2 = model.getRequest().getParameter("tel2");
 		String tel3 = model.getRequest().getParameter("tel3");
@@ -312,7 +343,9 @@ public class MemberModel {
 		String post = model.getRequest().getParameter("post");
 		String addr1 = model.getRequest().getParameter("addr1");
 		String addr2 = model.getRequest().getParameter("addr2");
-		String pwd = model.getRequest().getParameter("pwd");
+		String upPwd = model.getRequest().getParameter("pwd");
+		
+		System.out.println("변경할 비밀번호 : " + upPwd);
 		
 		MemberVO vo = new MemberVO();
 		vo.setId(id);
@@ -321,10 +354,13 @@ public class MemberModel {
 		vo.setPost(post);
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);
-		vo.setPwd(pwd);
+		if(upPwd==""){
+			vo.setPwd(pwd);
+		} else {
+			vo.setPwd(upPwd);
+		}
 		
-		int count = MemberDAO.memberUpdate(vo);
-		model.addAttribute("count", count);
+		MemberDAO.memberUpdate(vo);
 		
 		return "redirect:../member/member_mypage.do";
 	}
