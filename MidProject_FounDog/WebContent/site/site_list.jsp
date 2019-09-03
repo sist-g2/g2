@@ -13,6 +13,9 @@
 	margin: 0px auto;
 	width: 900px;
 }
+.panel-default>.panel-heading{
+	background-color:#6495ed;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -52,21 +55,21 @@
 		</section>
 		
 			<!-- FAQ -->
-			<c:forEach var="item" items="${list}">
-			       <div class="container">
-					<div class="panel-group" id="accordion">
-						<div class="panel panel-default">
-							<div class="panel-heading">
+		<div class="container">
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<c:forEach var="vo" items="${list}">
+						<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">${vo.subject}</a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse${vo.no }">${vo.subject}</a>
 								</h4>
-							</div>
-							<div id="collapseOne" class="panel-collapse collapse in">
-								<div class="panel-body">${vo.content}</div>
-							</div>
 						</div>
-					</div>
-					</div>
-		</c:forEach>
-</body>
+						<div id="collapse${vo.no }" class="panel-collapse collapse out">
+							<div class="panel-body">${vo.content}</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+	 	</div>
+	</body>
 </html>

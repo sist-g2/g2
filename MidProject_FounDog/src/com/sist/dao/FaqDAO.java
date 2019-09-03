@@ -14,7 +14,7 @@ public class FaqDAO {
 	public static List<Board_FAQVO> faqListData(int category){
 		List<Board_FAQVO> list = new ArrayList<Board_FAQVO>();
 		SqlSession session=ssf.openSession();
-		list=session.selectList("faqListData",0);
+		list=session.selectList("faqListData",category);
 		session.close();
 		return list;
 	}

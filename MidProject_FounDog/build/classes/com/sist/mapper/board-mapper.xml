@@ -241,7 +241,7 @@
      WHERE no=#{no}
     </delete>
     
-    <!-- 찾기 -->
+    <!-- 검색(찾기) -->
      <select id="boardFindData" resultType="BoardVO" parameterType="java.util.Map">
       SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
       FROM board 
@@ -254,7 +254,6 @@
 			SELECT no,subject,content,category
 			FROM Board_FAQ
 			WHERE category=#{category}
-			
 	</select>
 </mapper>
 
