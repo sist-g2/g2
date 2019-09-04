@@ -58,16 +58,16 @@
 		
         <div class="swiper-wrapper">        
             <div class="swiper-slide">
-            <a href="#"><img src="http://placehold.it/1140x487/green" alt=""></a>
+            <a href="../feed/feed_list.do"><img src="feedcompare.png" alt=""></a>
             </div>       
             <div class="swiper-slide">
-             <a href="#"><img src="http://placehold.it/1140x487/red" alt=""></a>
+             <a href="../hospital/hospital_list.do"><img src="hospital.png" alt=""></a>
             </div>        
             <div class="swiper-slide">
-            <a href="#"><img src="http://placehold.it/1140x487/yellow" alt=""></a>
+            <a href="../adminboard/adminboard_list.do"><img src="doginfo.png" alt=""></a>
             </div>        
             <div class="swiper-slide">
-            <a href="#"><img src="http://placehold.it/1140x487/black" alt=""></a>
+            <a href="../board/board_list.do"><img src="Organicdog.png" alt=""></a>
             </div>
         </div>
         </div>
