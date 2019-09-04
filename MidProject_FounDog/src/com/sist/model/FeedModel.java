@@ -19,6 +19,10 @@ public class FeedModel {
 	// 목록 읽기
 	@RequestMapping("feed/feed_list.do")
 	public String feed_list(Model model) {
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception ex) {}
+		
 		// 세션
 		HttpSession session = model.getRequest().getSession();
 		model.addAttribute("id", (String)session.getAttribute("id"));
@@ -79,9 +83,16 @@ public class FeedModel {
 		opList.put("grainList", grnOp);
 		model.addAttribute("grnOp", grnOp);
 		
+		String keyword = model.getRequest().getParameter("feedKeyword"); // 검색어
+		opList.put("keyword", keyword);
+		model.addAttribute("keyword", keyword);
+		
 		// 정렬
-		String sortOp = model.getRequest().getParameter("sort_btn");
+		String sortOp = model.getRequest().getParameter("sort_btn"); // 사료 종류
+		if(sortOp==null)
+			sortOp = "hit";
 		opList.put("sortOp", sortOp);
+		model.addAttribute("sortOp", sortOp);
 		
 		// 출력할 상품 리스트
 		List<FeedVO> feedList = FeedDAO.feedAllData(opList);
@@ -166,11 +177,12 @@ public class FeedModel {
 		
 		String sno = model.getRequest().getParameter("no"); // 글번호
 		int no = Integer.parseInt(sno);
+		model.addAttribute("no", no);
+		
 		FeedDAO.feedHitIncrease(no); // 조회수 업데이트
 		FeedVO vo = FeedDAO.feedDetailData(no);  // 상품 정보
 		List<Feed_StoreVO> slist = FeedDAO.feedStoreData(no); // 판매처 정보
 		int lowPrice = FeedDAO.feedLowPrice(no); // 최저가 정보
-		List<Feed_ReviewVO> rlist = FeedDAO.reviewAllData(no); // 리뷰 리스트
 		
 		// 목록으로 버튼 이동 경로
 		String flag = model.getRequest().getParameter("urlFlag");
@@ -206,10 +218,64 @@ public class FeedModel {
 		model.addAttribute("vo", vo);
 		model.addAttribute("slist", slist);
 		model.addAttribute("lowPrice", lowPrice);
-		model.addAttribute("rlist", rlist);
 		
 		model.addAttribute("main_jsp", "../feed/feed_detail.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("feed/feed_detail_review.do")
+	public String feed_detail_review(Model model) {
+		// 옵션 리스트
+		Map opList = new HashMap();
+		
+		String sno = model.getRequest().getParameter("bno"); // 글번호
+		int no = Integer.parseInt(sno);
+		model.addAttribute("bno", no);
+		opList.put("bno", no);
+		
+		// page
+		String page = model.getRequest().getParameter("page");
+		if(page==null)
+			page = "1";
+		int curpage = Integer.parseInt(page);
+		model.addAttribute("curpage", curpage);
+		int rowSize = 10;
+		int start = (curpage*rowSize) - (rowSize-1);
+		int end = curpage*rowSize;
+		opList.put("start", start);
+		opList.put("end", end);
+		
+		int totalNum = FeedDAO.reviewAllCnt(no);
+		int totalPage = FeedDAO.reviewAllPage(no);
+		int startPage = 0;
+		int endPage = 0;
+		
+		// 페이지 목록
+		if(totalPage <= 5) {
+			startPage = 1;
+			endPage = totalPage;
+		} else {
+			if(curpage <= 2) {
+				startPage = 1;
+				endPage = startPage+4;
+			} else if (curpage >= totalPage-2) {
+				startPage = totalPage-5;
+				endPage = totalPage;
+			} else {
+				startPage = curpage-2;
+				endPage = curpage+2;
+			}
+		}
+		
+		model.addAttribute("totalNum", totalNum);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
+		List<Feed_ReviewVO> rlist = FeedDAO.reviewAllData(opList); // 리뷰 리스트
+		model.addAttribute("rlist", rlist);
+		
+		return "feed_detail_review.jsp";
 	}
 	
 	// 찜 목록 읽기

@@ -124,6 +124,22 @@ body::-webkit-scrollbar-corner {
 	color: #ffffff;
 }
 
+.optionList td input[type=text] {
+	display: block;
+	border: 1px solid #d99c4e;
+	font-weight: 300;
+	outline: none;
+	box-shadow: none;
+	height: 40px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border-radius: 4px;
+}
+
 .optionList td button {
 	display: inline-block;
 	border-radius: 6px;
@@ -136,11 +152,36 @@ body::-webkit-scrollbar-corner {
 	cursor: pointer;
 }
 
-.list_sort_btn {
+.ListSort input {
+	display: none;
+}
+
+.ListSort input+label {
+	display: inline-block;
+	border-radius: 6px;
+	background: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	color: #000000;
+}
+
+.ListSort label {
+	font-weight: 400;
+}
+
+.ListSort input[type=radio]:checked + label {
+	background: #bd8942;
+	color: #ffffff;
+}
+
+/* .list_sort_btn {
 	border: 0;
 	background: #FFFFFF;
 	color: #000000;
-}
+} */
 
 .fdList {
 	display: inline-block;

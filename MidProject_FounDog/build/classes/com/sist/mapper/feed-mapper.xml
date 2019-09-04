@@ -74,6 +74,9 @@
 					#{grn}
 				</foreach>
 			</if>
+			<if test="keyword!=null" >
+				AND REGEXP_LIKE(name, #{keyword}) 
+			</if>
 		</where>
 		<choose>
 			<when test="sortOp=='lowP'" >
@@ -197,10 +200,10 @@
 	</select>
 	
 	<!-- 찜 삭제 -->
-	<insert id="feedFavDelete" parameterType="int" >
+	<delete id="feedFavDelete" parameterType="int" >
 		DELETE FROM favorite 
 		WHERE no=#{no}
-	</insert>
+	</delete>
 	
 	<!-- JOIN : 리뷰 -->
 	<resultMap type="Feed_ReviewVO" id="reviewData" >
@@ -217,12 +220,41 @@
 	</resultMap>
 	
 	<!-- 상품별 리뷰 정보 -->
-	<select id="reviewAllData" resultMap="reviewData" parameterType="int" >
-		SELECT r.no, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') AS rdateS, subject, content, star, dtype, fnum, r.id, m.name as name 
-		FROM review r, member m 
-		WHERE r.id=m.id 
-		AND fnum=#{no} 
-		ORDER BY regdate DESC
+	<select id="reviewAllData" resultMap="reviewData" parameterType="java.util.Map" >
+		SELECT no, rdateS, subject, content, star, dtype, fnum, id, name, num 
+		FROM (
+			SELECT no, rdateS, subject, content, star, dtype, fnum, id, name, rownum as num 
+			FROM (
+				SELECT r.no, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') AS rdateS, subject, content, star, dtype, fnum, r.id, m.name as name 
+				FROM review r, member m 
+				WHERE r.id=m.id 
+				AND fnum=#{bno} 
+				ORDER BY regdate DESC
+			)
+		) WHERE num BETWEEN #{start} AND #{end}
+		
+	</select>
+	
+	<!-- 상품별 리뷰 갯수 -->
+	<select id="reviewAllCnt" resultType="int" parameterType="int" >
+		SELECT COUNT(*) 
+		FROM (
+			SELECT r.no
+			FROM review r, member m 
+			WHERE r.id=m.id 
+			AND fnum=#{bno}
+		)
+	</select>
+	
+	<!-- 상품별 리뷰 페이지 -->
+	<select id="reviewAllPage" resultType="int" parameterType="int" >
+		SELECT CEIL(COUNT(*)/10.0)  
+		FROM (
+			SELECT r.no
+			FROM review r, member m 
+			WHERE r.id=m.id 
+			AND fnum=#{bno}
+		)
 	</select>
 	
 	<!-- 리뷰 입력하기 -->

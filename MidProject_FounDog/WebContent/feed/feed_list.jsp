@@ -34,6 +34,7 @@ $(function(){
 	$('#opDel').click(function(){
 		$('#cate-999').prop("checked", true);
 		$('input[type=checkbox]').prop("checked", false);
+		$('#feedKeyword').val(null);
 	});
 	
 	var cateOp = ${category};
@@ -74,6 +75,29 @@ $(function(){
 	for(var i = 0; i < grain.length; i++) {
 		$("#grn-"+grain[i]).prop("checked", true);
 	}
+	
+	var keyword = "${keyword}";
+	$('#feedKeyword').val(keyword);
+	
+	var sort = "${sortOp}";
+	if(sort==null || sort=="hit") {
+		$('#sort_hit').prop("checked", true);
+	} else if (sort=="lowP") {
+		$('#sort_lowP').prop("checked", true);
+	} else if (sort=="highP") {
+		$('#sort_highP').prop("checked", true);
+	} else if (sort=="fav") {
+		$('#sort_fav').prop("checked", true);
+	} else if (sort=="rvw") {
+		$('#sort_rvw').prop("checked", true);
+	} else if (sort=="star") {
+		$('#sort_star').prop("checked", true);
+	}
+	
+	$('.list_sort_btn').click(function(){
+		$('#optionListForm').submit();
+	});
+	
 });
 </script>
 </head>
@@ -133,6 +157,12 @@ $(function(){
 									</td>
 								</tr>
 								<tr>
+									<th width=10% class="text-left" ><h5>&nbsp;&nbsp;사료명</h5></th>
+									<td width=90% >
+										<input type="text" id="feedKeyword" name="feedKeyword" size="30" >
+									</td>
+								</tr>
+								<tr>
 									<td colspan=2 class="text-center" >
 										<button type="button" id="opDel" >조건 삭제</button>&nbsp;&nbsp;
 										<button type="submit" >검색</button>
@@ -143,12 +173,18 @@ $(function(){
 				
 					<div class="ListSort" >
 						<div style="height: 30px;" ></div>
-							<button type="submit" class="list_sort_btn" name="sort_btn" value="hit" >조회수 순</button>
-							<button type="submit" class="list_sort_btn" name="sort_btn" value="lowP" >낮은 가격 순</button>
-							<button type="submit" class="list_sort_btn" name="sort_btn" value="highP" >높은 가격 순</button>
-							<button type="submit" class="list_sort_btn" name="sort_btn" value="fav" >찜 많은 순</button>
-							<button type="submit" class="list_sort_btn" name="sort_btn" value="rvw" >리뷰 많은 순</button>
-							<button type="submit" class="list_sort_btn" name="sort_btn" value="star" >별점 높은 순</button>
+							<input type="radio" id="sort_hit" class="list_sort_btn" name="sort_btn" value="hit" >
+							<label for="sort_hit" >&nbsp;&nbsp;조회수 순&nbsp;&nbsp;</label>
+							<input type="radio" id="sort_lowP" class="list_sort_btn" name="sort_btn" value="lowP" >
+							<label for="sort_lowP" >&nbsp;&nbsp;낮은 가격 순&nbsp;&nbsp;</label>
+							<input type="radio" id="sort_highP" class="list_sort_btn" name="sort_btn" value="highP" >
+							<label for="sort_highP" >&nbsp;&nbsp;높은 가격 순&nbsp;&nbsp;</label>
+							<input type="radio" id="sort_fav" class="list_sort_btn" name="sort_btn" value="fav" >
+							<label for="sort_fav" >&nbsp;&nbsp;찜 많은 순&nbsp;&nbsp;</label>
+							<input type="radio" id="sort_rvw" class="list_sort_btn" name="sort_btn" value="rvw" >
+							<label for="sort_rvw" >&nbsp;&nbsp;리뷰 많은 순&nbsp;&nbsp;</label>
+							<input type="radio" id="sort_star" class="list_sort_btn" name="sort_btn" value="star" >
+							<label for="sort_star" >&nbsp;&nbsp;별점 높은 순&nbsp;&nbsp;</label>
 							<span style="font-weight: 300; font-size: 14px; float: right;" >
 								검색 결과 ${totalNum }개
 								<c:forEach begin="1" end="15" >
@@ -175,6 +211,11 @@ $(function(){
 										<a href="../feed/feed_detail?no=${vo.no }&urlFlag=0" class="fd_res" ><span class="fd_info_name" >${vo.name }</span></a>
 									</div>
 									<div style="height: 35px;" >
+										<span style="font-size: 14px; color: #808080;" >
+											찜 ${vo.favNum } 건 &nbsp;&nbsp;
+											구매후기 ${vo.rvwNum } 건 (<fmt:formatNumber value="${vo.starAvg}" pattern="0.0" />)
+										</span>
+										<br/>
 										<span class="fd_info_price" >최저가&nbsp;<fmt:formatNumber value="${vo.lowPrice }" pattern="#,###" />원</span>
 									</div>
 								</div>

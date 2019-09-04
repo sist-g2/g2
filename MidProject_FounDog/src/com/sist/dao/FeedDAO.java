@@ -183,11 +183,29 @@ public class FeedDAO {
 	}
 	
 	// ¸®ºä ÀüÃ¼ °¡Á®¿À±â
-	public static List<Feed_ReviewVO> reviewAllData(int no) {
+	public static List<Feed_ReviewVO> reviewAllData(Map map) {
 		SqlSession session = ssf.openSession();
-		List<Feed_ReviewVO> list = session.selectList("reviewAllData", no);
+		List<Feed_ReviewVO> list = session.selectList("reviewAllData", map);
 		session.close();
 		return list;
+	}
+	
+	// ¸®ºä °¹¼ö
+	public static int reviewAllCnt(int bno) {
+		int total = 0;
+		SqlSession session = ssf.openSession();
+		total = session.selectOne("reviewAllCnt", bno);
+		session.close();
+		return total;
+	}
+	
+	// ¸®ºä °¹¼ö
+	public static int reviewAllPage(int bno) {
+		int total = 0;
+		SqlSession session = ssf.openSession();
+		total = session.selectOne("reviewAllPage", bno);
+		session.close();
+		return total;
 	}
 	
 	// ¸®ºä ÀÔ·ÂÇÏ±â(insert)
