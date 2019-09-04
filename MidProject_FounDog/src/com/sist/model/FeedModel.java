@@ -88,9 +88,10 @@ public class FeedModel {
 		model.addAttribute("keyword", keyword);
 		
 		// 정렬
-		String sortOp = model.getRequest().getParameter("sort_btn"); // 사료 종류
-		if(sortOp==null)
-			sortOp = "hit";
+		String sort = model.getRequest().getParameter("sort_btn"); // 사료 종류
+		if(sort==null)
+			sort = "0";
+		int sortOp = Integer.parseInt(sort);
 		opList.put("sortOp", sortOp);
 		model.addAttribute("sortOp", sortOp);
 		

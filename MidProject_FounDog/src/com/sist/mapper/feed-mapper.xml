@@ -74,24 +74,24 @@
 					#{grn}
 				</foreach>
 			</if>
-			<if test="keyword!=null" >
+			<if test="keyword!=null and keyword!=''" >
 				AND REGEXP_LIKE(name, #{keyword}) 
 			</if>
 		</where>
 		<choose>
-			<when test="sortOp=='lowP'" >
+			<when test="sortOp==1" >
 				ORDER BY lowPrice ASC
 			</when>
-			<when test="sortOp=='highP'" >
+			<when test="sortOp==2" >
 				ORDER BY lowPrice DESC
 			</when>
-			<when test="sortOp=='fav'" >
+			<when test="sortOp==3" >
 				ORDER BY favNum DESC
 			</when>
-			<when test="sortOp=='rvw'" >
+			<when test="sortOp==4" >
 				ORDER BY rvwNum DESC
 			</when>
-			<when test="sortOp=='star'" >
+			<when test="sortOp==5" >
 				ORDER BY starAvg DESC
 			</when>
 			<otherwise>

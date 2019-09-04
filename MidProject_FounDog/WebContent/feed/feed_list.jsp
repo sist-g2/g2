@@ -79,18 +79,18 @@ $(function(){
 	var keyword = "${keyword}";
 	$('#feedKeyword').val(keyword);
 	
-	var sort = "${sortOp}";
-	if(sort==null || sort=="hit") {
+	var sort = ${sortOp};
+	if(sort==null || sort==0) {
 		$('#sort_hit').prop("checked", true);
-	} else if (sort=="lowP") {
+	} else if (sort==1) {
 		$('#sort_lowP').prop("checked", true);
-	} else if (sort=="highP") {
+	} else if (sort==2) {
 		$('#sort_highP').prop("checked", true);
-	} else if (sort=="fav") {
+	} else if (sort==3) {
 		$('#sort_fav').prop("checked", true);
-	} else if (sort=="rvw") {
+	} else if (sort==4) {
 		$('#sort_rvw').prop("checked", true);
-	} else if (sort=="star") {
+	} else if (sort==5) {
 		$('#sort_star').prop("checked", true);
 	}
 	
@@ -173,17 +173,17 @@ $(function(){
 				
 					<div class="ListSort" >
 						<div style="height: 30px;" ></div>
-							<input type="radio" id="sort_hit" class="list_sort_btn" name="sort_btn" value="hit" >
+							<input type="radio" id="sort_hit" class="list_sort_btn" name="sort_btn" value="0" >
 							<label for="sort_hit" >&nbsp;&nbsp;조회수 순&nbsp;&nbsp;</label>
-							<input type="radio" id="sort_lowP" class="list_sort_btn" name="sort_btn" value="lowP" >
+							<input type="radio" id="sort_lowP" class="list_sort_btn" name="sort_btn" value="1" >
 							<label for="sort_lowP" >&nbsp;&nbsp;낮은 가격 순&nbsp;&nbsp;</label>
-							<input type="radio" id="sort_highP" class="list_sort_btn" name="sort_btn" value="highP" >
+							<input type="radio" id="sort_highP" class="list_sort_btn" name="sort_btn" value="2" >
 							<label for="sort_highP" >&nbsp;&nbsp;높은 가격 순&nbsp;&nbsp;</label>
-							<input type="radio" id="sort_fav" class="list_sort_btn" name="sort_btn" value="fav" >
+							<input type="radio" id="sort_fav" class="list_sort_btn" name="sort_btn" value="3" >
 							<label for="sort_fav" >&nbsp;&nbsp;찜 많은 순&nbsp;&nbsp;</label>
-							<input type="radio" id="sort_rvw" class="list_sort_btn" name="sort_btn" value="rvw" >
+							<input type="radio" id="sort_rvw" class="list_sort_btn" name="sort_btn" value="4" >
 							<label for="sort_rvw" >&nbsp;&nbsp;리뷰 많은 순&nbsp;&nbsp;</label>
-							<input type="radio" id="sort_star" class="list_sort_btn" name="sort_btn" value="star" >
+							<input type="radio" id="sort_star" class="list_sort_btn" name="sort_btn" value="5" >
 							<label for="sort_star" >&nbsp;&nbsp;별점 높은 순&nbsp;&nbsp;</label>
 							<span style="font-weight: 300; font-size: 14px; float: right;" >
 								검색 결과 ${totalNum }개
