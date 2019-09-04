@@ -14,7 +14,6 @@ import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.HospitalDAO;
 import com.sist.vo.DogVO;
-import com.sist.vo.Feed_ReviewVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
 import com.sist.vo.Reserve_DetailVO;
@@ -147,7 +146,7 @@ public class HospitalModel {
 		
 		String no = model.getRequest().getParameter("no");
 		String hosName = HospitalDAO.hospitalName(Integer.parseInt(no));
-		
+		System.out.println(no);
 		HttpSession session=model.getRequest().getSession();
 		String id=(String)session.getAttribute("id");
 		
@@ -302,49 +301,65 @@ public class HospitalModel {
 			vo.setDogno(Integer.parseInt(dogNo));
 			vo.setHosno(Integer.parseInt(hosNo));
 			
+			System.out.println(reserveday);
+			System.out.println(wr5);
+			System.out.println(symptom);
+			System.out.println(state);
+			System.out.println(dogNo);
+			System.out.println(hosNo);
 			HospitalDAO.reserveOk(vo);		
 			
-			return "../hospital/hospital_reserve_detail.do";
+			return "redirect:../hospital/hospital_reserve_detail.do";
 		}
 		
 		@RequestMapping("hospital/hospital_reserve_detail.do")
 		public String hospital_reserve_detail(Model model){
-			
-			try {
-				model.getRequest().setCharacterEncoding("UTF-8");
-			} catch (Exception e) {}
-			
-			Map map=new HashMap();
-			String dogname = model.getRequest().getParameter("selectDog");
-			System.out.println(dogname);
-			String startData = model.getRequest().getParameter("startData");
-			System.out.println(startData);
-			String endData = model.getRequest().getParameter("endData");
-			System.out.println(endData);
-			
-			if(dogname==null){
-				dogname = "";
-			}
-			if(startData==null){
-				startData = "2019-09-01";
-			}
-			if(endData==null){
-				endData = "2019-09-05";
-			}
-			map.put("dogname", dogname);			
-			map.put("startData", startData);
-			map.put("endData", endData);
-			List<Reserve_DetailVO> list = HospitalDAO.reserveDetail(map);
 			
 			HttpSession session=model.getRequest().getSession();
 			String id=(String)session.getAttribute("id");
 			
 			List<DogVO> doglist = HospitalDAO.reserveDogname(id);
 			model.addAttribute("doglist", doglist);
-			model.addAttribute("list", list);
+			
 			model.addAttribute("main_jsp", "../hospital/hospital_reserve_detail.jsp");
 			return "../main/main.jsp";
 		}
 		
+		@RequestMapping("hospital/hospital_reserve_list.do")
+		public String hospital_reserve_result(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			Map map=new HashMap();
+			String dogname = model.getRequest().getParameter("dogname");
+			System.out.println(dogname);
+			String startDate = model.getRequest().getParameter("startDate");
+			System.out.println(startDate);
+			String endDate = model.getRequest().getParameter("endDate");
+			System.out.println(endDate);
+			
+			if(startDate==null || startDate==""){
+				startDate = "2019-09-01";
+			}
+			if(endDate==null || endDate==""){
+				SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+				Date date = new Date();
+				endDate = format.format(date).toString();
+				System.out.println(endDate);
+			}
+			if(dogname==null || dogname==""){
+				dogname = "";
+			}
+			map.put("dogname", dogname);			
+			map.put("startDate", startDate);
+			map.put("endDate", endDate);
+			List<Reserve_DetailVO> list = HospitalDAO.reserveDetail(map);
+			
+			model.addAttribute("list", list);
+			
+			return "../hospital/hospital_reserve_list.jsp";
+		}
 		
 }

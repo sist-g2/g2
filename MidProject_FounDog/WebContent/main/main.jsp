@@ -82,11 +82,9 @@
                     <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
                          <ul role="menu" class="sub-menu">
                             <li><a href="../hospital/hospital_list.do">병원 이용</a></li>
-                            <c:if test="${sessionScope.id!=null }">
-                            <!--  
-                            	진료 내역등 로그인해야 보여줄부분 추가시 수정
-                            <li><a href="#"></a></li>
-                            -->
+                            <c:if test="${sessionScope.id!=null }">                                                       	
+                            <li><a href="../hospital/hospital_reserve_detail.do">예약 내역</a></li>
+                           
                           </c:if>
                         </ul>
                     </li>

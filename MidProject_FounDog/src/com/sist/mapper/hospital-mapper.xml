@@ -85,7 +85,7 @@ state,
 (SELECT name FROM hospital WHERE no = hosno) as hosname
 FROM reserve
 WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
-reception_date BETWEEN TO_DATE(#{startData},'YYYY-MM-DD') 
-AND TO_DATE(#{endData}, 'YYYY-MM-DD') + 0.99999
+reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
 </select>
 </mapper>

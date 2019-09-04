@@ -23,21 +23,20 @@
 		
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-$(function(){
-	$('.reservebtn').click(function(){
+function reservedate(){
 		var id='${id}';
 		if(id.trim()==""){
 			alert("로그인이 필요한 서비스입니다.");
 			location.href='../member/member_login.do';
-			return;
+			return false;
 		}
 		  if(confirm("예약 하시겠습니까?") == true){
-		$('form').submit();		        
+			return true;        
 		    }
 		    else{
-		        return ;
+		        return false;
 		    }
-	});
+}
 	
 	$('.result_page').click(function(){
 	 	var page=$(this).attr("data-page");
@@ -56,7 +55,7 @@ $(function(){
 			}
 		}); 
 	});
-});
+
 </script>	
 			<div style="overflow: auto; height: 470px; width: 100%">
 				<table class="table">
@@ -68,10 +67,10 @@ $(function(){
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td class="text-left">${vo.name }<br> ${vo.loc }<br>${vo.tel }
-						<form class="reserveForm" method="post" action="hospital_reserve.do">
+						<form class="reserveForm" onsubmit="return reservedate();" method="post" action="hospital_reserve.do">
 								<input type="hidden" name="no" value="${vo.no }">
+								 <input type="submit" class="btn btn-primary reservebtn" value="예약">
 						</form>
-								 <input type="button" class="btn btn-primary reservebtn" value="예약">
 							</td>
 						</tr>
 					</c:forEach>
