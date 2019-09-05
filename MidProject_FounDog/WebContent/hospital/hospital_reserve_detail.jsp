@@ -8,6 +8,22 @@
 <title>Insert title here</title>
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
+.reserve_detail_row{
+	margin: 0px auto;
+	width: 900px;
+}
+#detailbtn {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-left: 5px;
+	width: 85px;
+	height: 85px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -33,57 +49,45 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+<div class="container">
+	<div class="reserve_detail_row" >
+	
 		<div id="hospitalTitle">
 			<h2 class="hostitle">예약 내역</h2>
 		</div>
-
-			<div style="width: 100%; height: 300px; border: solid 1px;">
-			<table class="board_write">
-				<colgroup>
-				<col width="214px">
-				<col width="">
-				</colgroup>	
-				<tr>
-					<th>강아지 조회</th>
-					<td>
-						<select id="selectDog" class="form-control2">
+		
+		<table class="" style="width: 100%;" >
+			<tr>
+				<th width="15%" >
+					<h4>강아지 조회</h4>
+				</th>
+				<td width="55%" style="padding: 5px;" >
+					<select id="selectDog" class="form-control2">
 						<option value="">전체</option>
 						<c:forEach var="doglist" items="${doglist }">
 							<option>${doglist}</option>
 						</c:forEach>
-						</select>				
-					</td>
-				</tr>
-				<tr>
-					<th>조회 기간</th>
-					<td>
+					</select>				
+				</td>
+				<td rowspan=2 width="30%" style="text-align: right;">
+					&nbsp;&nbsp;<input type="button" id="detailbtn" value="조회" >&nbsp;&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<th width="15%" >
+					<h4>조회 기간</h4>
+				</th>
+				<td width="55%" style="padding: 5px;" >
 					<input type="date" id="startDate">&nbsp;~&nbsp;<input type="date" id="endDate">			
-					</td>
-				</tr>		
-			</table>
-				<div style="width: 100%; height: 70px; border: solid 1px;">
-					<input type="button" id="detailbtn" value="조회" style="position:relative; top:50%; left:50%;">
-				</div>
-				<div style="width: 100%; height: 80px; border: solid 1px;">
-					${sessionScope.name }님의 예약 내역입니다.
-				</div>
-			</div>
-		
-		<div id="reservelist" style="width: 100%; height: 400px; border: solid 1px;">
-			<table>
-				<tr>
-					<th>예약 번호</th>
-					<th>의뢰일</th>
-					<th>보호자명</th>
-					<th>동물명</th>
-					<th>예약일시</th>
-					<th>예약시간</th>
-					<th>예약상태</th>
-					<th>진료병원</th>
-				</tr>
-			</table>
+				</td>
+			</tr>
+		</table>
+	
+		<div id="reservelist" style="width: 100%; height: 400px; border: solid 0px; text-align: center;">
+			<br><h4>예약 내역을 조회해보세요.</h4>
 		</div>
+		
 	</div>
+</div>
 </body>
 </html>

@@ -6,6 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="../css/hospital.css" rel="stylesheet">
+<style type="text/css">
+
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -30,31 +34,44 @@ $(function(){
 </script>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>예약 번호</th>
-			<th>의뢰일</th>
-			<th>보호자명</th>
-			<th>동물명</th>
-			<th>예약일시</th>
-			<th>예약시간</th>
-			<th>예약상태</th>
-			<th>진료병원</th>
+	<table style="width: 100%; height: 100%;">
+		<caption class="text-center" style="padding: 20px;">
+			<h3> ${sessionScope.name }님의 예약 내역입니다.</h3>
+		</caption>
+		<tr height="50px">
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약 번호</font></th>
+			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">의뢰일</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">보호자명</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">동물명</font></th>
+			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">예약일시</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약시간</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약상태</font></th>
+			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">진료병원</font></th>
 		</tr>
-			<c:forEach var="vo" items="${list }">
+		<c:forEach var="vo" items="${list }">
+			<tr>
+					<td class="text-left" width="10%" >${vo.no }</td>
+					<td class="text-left" width="12%" >${vo.reception_date }</td>
+					<td class="text-left" width="10%" >${vo.name }</td>
+					<td class="text-left" width="10%" >${vo.dname }</td>
+					<td class="text-left" width="12%" >${vo.reserve_date }</td>
+					<td class="text-left" width="10%" >${vo.reserve_time }</td>
+					<td class="text-left" width="10%" >
+						<c:if test="${vo.state=='예약중' }">
+							<font color="orange" >${vo.state }</font>
+						</c:if>
+						<c:if test="${vo.state=='진료완료' }">
+							<font color="green" >${vo.state }</font>
+						</c:if>
+						<c:if test="${vo.state=='예약취소' }">
+							<font color="red" >${vo.state }</font>
+						</c:if>
+					</td>
+					<td class="text-left" width="26%" >${vo.hosname }</td>
+			</tr>
+		</c:forEach>
 		<tr>
-				<td>${vo.no }</td>
-				<td>${vo.reception_date }</td>
-				<td>${vo.name }</td>
-				<td>${vo.dname }</td>
-				<td>${vo.reserve_date }</td>
-				<td>${vo.reserve_time }</td>
-				<td>${vo.state }</td>
-				<td>${vo.hosname }</td>
-		</tr>
-			</c:forEach>
-		<tr>
-			<td>
+			<td colspan=8 class="text-center" >
 				<div class="blog-pagination">
 					<div style="height: 30px;" ></div>
 					<ul class="pagination">
