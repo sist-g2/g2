@@ -6,7 +6,21 @@
 <head>
 <meta charset="utf-8">
 <title>주소로 장소 표시하기</title>
-<link href="../css/hospital.css" rel="stylesheet">
+<link href="../css/hospital.css" rel="stylesheet">	
+<style type="text/css">
+.searchBtn {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
@@ -14,11 +28,18 @@
 		<div id="hospitalTitle">
 			<h2 class="hostitle">동물 병원</h2>
 		</div>
-		<div class="hostab">
+		<!-- <div class="hostab">
 			<a href="#" style="border-right: 0px;" class="btn">병원 찾기</a> <a
 				href="#" class="btn">주변 병원 찾기</a>
-		</div>
-		<div style="height: 150px;" class="form-control2">
+		</div> -->
+		<div style="margin-top: 30px; margin-bottom: 30px;" class="map-best-info v1">
+			
+			본 화면의 정보는 입력시점과 검색시점의 차이로 현재 정보와 다를 수 있습니다. &nbsp;<span>방문전 반드시 유선으로 확인 하시기 바랍니다.</span><br>
+			병(의)원 기본정보 (명칭, 주소, 연락처 등)는 건강보험심사평가원에 신고된 자료로 변경정보를 매일 연계하고 있습니다.<br>
+			의료이용 편익정보(진료/점심/접수시간, 휴진, 주차정보 등)는 해당 병(의)원이 직접 입력한 정보입니다.		
+			<p>※ 해당 검진기관에서 입력한 정보가 잘못된 경우, 검색되지 않을 수 있으니 이점 양해하여 주시기 바랍니다.</p>
+			</div>
+		<div style="height:70px;">
 
 			<input type="text" value="서울특별시" readonly="readonly"
 				class="form-control2"> <select name="searchloc"
@@ -28,17 +49,12 @@
 					<option>${loc }</option>
 				</c:forEach>
 			</select> <input type="text" name="searchname" id="searchname"
-				class="form-control2" placeholder="병원이름 검색"> <input type="button"
-				class="btn btn-primary" value="검색" name="searchbtn" id="searchbtn">
+				class="form-control2" placeholder="병원이름 검색">&nbsp;&nbsp;<input type="button"
+				class="searchBtn" value="검색" name="searchbtn" id="searchbtn">
 
 		</div>
-		<div style="margin-top: 30px; margin-bottom: 30px;" class="map-best-info v1">
-			<div id="searchtotal"></div>		
-			본 화면의 정보는 입력시점과 검색시점의 차이로 현재 정보와 다를 수 있습니다. &nbsp;<span>방문전 반드시 유선으로 확인 하시기 바랍니다.</span><br>
-			병(의)원 기본정보 (명칭, 주소, 연락처 등)는 건강보험심사평가원에 신고된 자료로 변경정보를 매일 연계하고 있습니다.<br>
-			의료이용 편익정보(진료/점심/접수시간, 휴진, 주차정보 등)는 해당 병(의)원이 직접 입력한 정보입니다.		
-			<p>※ 해당 검진기관에서 입력한 정보가 잘못된 경우, 검색되지 않을 수 있으니 이점 양해하여 주시기 바랍니다.</p>
-			</div>
+		<div id="searchtotal"></div>
+		
 		<div id="map"
 			style="width: 680px; height: 540px; border: 10px solid #f2f2f2;"
 			class="col-sm-5"></div>
@@ -129,9 +145,9 @@ $(function(){
 });
 
 </script>
-		<div class="col-sm-4" style="border-top: 1px solid; height: 540px; width: 460px;" id="hospital_result">
-		<div align="center" style="position: absolute; top: 220px; border: solid 1px; width: 440px; height: 100px;">
-		검색을 해주세요
+		<div class="col-sm-4" style="height: 540px; width: 460px;" id="hospital_result">
+		<div align="center">
+		<img src="hospital_search.png">
 		</div>
 		</div>	
 	</div>

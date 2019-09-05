@@ -73,6 +73,15 @@ public class MemberDAO {
 		//System.out.println(db_pwd);
 		if(db_pwd.equals(pwd)){
 			result = 1;
+			session.delete("memDeleteVacc", id);
+			session.delete("memDeleteCare", id);
+			session.delete("memDeleteReserve", id);
+			session.delete("memDeleteDog", id);
+			session.delete("memDeleteJjim", id);
+			session.update("memDeleteReview", id);
+			session.update("memDeleteReply", id);
+			session.update("memDeleteBoardDog", id);
+			session.update("memDeleteBoard", id);
 			session.delete("memberDelete", id);
 			session.commit();
 		}

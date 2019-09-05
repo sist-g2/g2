@@ -49,7 +49,7 @@
 		WHERE id = #{id}
 	</delete>
 	<!-- 회원탈퇴 시 강아지 내역 삭제 -->
-	<delete id="memberDel_dog" parameterType="String">
+	<delete id="memDeleteDog" parameterType="String">
 		DELETE FROM dog
 		WHERE id = {id}
 	</delete>
@@ -89,5 +89,58 @@
 	<delete id="dogDelete" parameterType="int">
 		DELETE FROM dog
 		WHERE dno = #{dno}
+	</delete>
+	
+	<!-- 탈퇴 시 정보 삭제 -->
+	<!-- 찜목록 삭제 -->
+	<delete id="memDeleteJjim" parameterType="String" >
+		DELETE FROM favorite 
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 리뷰 아이디 변경 -->
+	<update id="memDeleteReview" parameterType="String" >
+		UPDATE review 
+		SET id='delete' 
+		WHERE id = #{id}
+	</update>
+	
+	<!-- board id 변경 -->
+	<update id="memDeleteBoard" parameterType="String">
+		UPDATE board
+		SET id='delete'
+		WHERE id = #{id}
+	</update>
+	
+	<!-- board_reply id 변경 -->
+	<update id="memDeleteReply" parameterType="String">
+		UPDATE board_reply
+		SET id='delete'
+		WHERE id = #{id}
+	</update>
+	
+	<!-- board_dog id 변경 -->
+	<update id="memDeleteBoardDog" parameterType="String">
+		UPDATE board_dog
+		SET id='delete'
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 예방접종 내역 삭제 -->
+	<delete id="memDeleteVacc" parameterType="String">
+		DELETE FROM vaccination
+		WHERE dogNo = (SELECT dno FROM dog WHERE id = #{id})
+	</delete>
+	
+	<!-- 진료 내역 삭제 -->
+	<delete id="memDeleteCare" parameterType="String">
+		DELETE FROM careChart
+		WHERE dogNo = (SELECT dno FROM dog WHERE id = #{id})
+	</delete>
+	
+	<!-- 진료 예약 내역 삭제 -->
+	<delete id="memDeleteReserve" parameterType="String">
+		DELETE FROM reserve
+		WHERE dogNo = (SELECT dno FROM dog WHERE id = #{id})
 	</delete>
 </mapper>

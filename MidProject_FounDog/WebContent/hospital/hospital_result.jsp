@@ -6,6 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="../css/hospital.css" rel="stylesheet">
+<style type="text/css">
+.searchBtn {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
+</style>
 </head>
 <body>
 	<div>
@@ -66,28 +81,29 @@ function reservedate(){
 						</c:if>					
 					<c:forEach var="vo" items="${list }">
 						<tr>
-							<td class="text-left">${vo.name }<br> ${vo.loc }<br>${vo.tel }
+							<td class="text-left"><font color="#bd8942"><b>${vo.name }</b></font><br> ${vo.loc }<br>${vo.tel }
+							<td style="padding-top: 22px">
 						<form class="reserveForm" onsubmit="return reservedate();" method="post" action="hospital_reserve.do">
 								<input type="hidden" name="no" value="${vo.no }">
-								 <input type="submit" class="btn btn-primary reservebtn" value="예약">
+								 <input type="submit" class="searchBtn reservebtn" value="예약">
 						</form>
 							</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
-			<div class="col-sm-4" style="height: 70px; width: 100%">
-				<ul class="pagination pagination-lg">
+			<div class="col-sm-4" style="height: 90px; width: 100%">
+				<ul class="pagination">
 					<c:if test="${curpage>BLOCK }">
-			           <li><input type="button" class="result_page" data-page="1" value="&lt;&lt;"></li>
-			           <li><input type="button" class="result_page" data-page="${startPage-1 }" value="&lt;"></li>
+			           <li><input type="button" class="result_page form-control3" data-page="1" value="&lt;&lt;"></li>
+			           <li><input type="button" class="result_page form-control3" data-page="${startPage-1 }" value="&lt;"></li>
 			         </c:if>
 					 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					   <li class=${curpage==i?"active":"" }><input type="button" class="result_page" data-page="${i}" value="${i}"></li>
+					   <li class=${curpage==i?"active":"" }><input type="button" class="result_page form-control2" data-page="${i}" value="${i}"></li>
 					 </c:forEach> 
 					 <c:if test="${endPage<allPage }">
-					   <li><input type="button" class="result_page" data-page="${endPage+1 }" value="&gt;"></li>
-					   <li><input type="button" class="result_page" data-page="${allPage }" value="&gt;&gt;"></li>
+					   <li><input type="button" class="result_page form-control3" data-page="${endPage+1 }" value="&gt;"></li>
+					   <li><input type="button" class="result_page form-control3" data-page="${allPage }" value="&gt;&gt;"></li>
 			         </c:if>
 				</ul>
 			</div>

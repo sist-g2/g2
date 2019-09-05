@@ -13,11 +13,14 @@ $(function(){
 	$('#addDog').click(function(){
 		var dname = $('#dname').val();
 		
-		if(id.trim()==""){
+		if(dname.trim()==""){
 			alert("반려견의 이름을 입력해주세요.")
 			$('#dname').focus();
 			return;
 		}
+		
+		
+		$('#dogInsert').submit();
 	});
 });
 </script>
@@ -88,7 +91,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
+				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name" id=dname>
 			</td>
 		</tr>
 		<tr>
@@ -146,7 +149,7 @@ tbody{
 	<table class="table table-borderless" style="width:400px;">
 		<tr>
 			<td  class="text-center">
-				<input type=submit value="반려견 추가" class="btn btn-submit" id="addDog">
+				<input type=button value="반려견 추가" class="btn btn-submit" id="addDog">
 			</td>
 		</tr>
 		<tr>
