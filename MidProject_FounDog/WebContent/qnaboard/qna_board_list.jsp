@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../main/css/bootstrap.min.css">
+<link href="../css/member.css" rel="stylesheet">
 <style type="text/css">
 .row {
 	margin: 0px auto;
@@ -37,20 +38,6 @@ th{
 </script>
 </head>
 <body>
-	<!-- 제목 -->
-	 	<section id="page-breadcrumb">
-	<div class="vertical-center">
-		<div class="container">
-			 <div class="row">
-				<div class="action">
-					 <div class="col-sm-12">
-						<h1 class="title">Q&A</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> 
 	<!-- main(Q&A/FAQ)출력 -->
 	  <section id="portfolio">
                 <ul class="portfolio-filter text-center">
@@ -106,11 +93,11 @@ th{
 				<td class="text-left">
 					<form method="post" action="qna_board_find.do" id="frm">
 						Search: 
-						<select name="fs" class="input-sm">
+						<select name="fs" class="input-md form-control2" >
 							<option value="id">이름</option>
 							<option value="subject">제목</option>
 						</select> 
-						<input type=text name=ss size=15 class="input-sm" id="ss">
+						<input type=text name=ss size=15 class="input-sm form-control2" id="ss">
 						<input type=button value="검색" class="btn btn-sm" id="findBtn">
 					</form>
 				</td>

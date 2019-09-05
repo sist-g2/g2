@@ -13,6 +13,18 @@
 	margin: 0px auto;
 	width: 900px;
 }
+.portfolio-filter {
+    /* margin: 40px 0; */
+    margin-top:40px;
+    margin-bottom:80px;
+    padding: 0;
+}
+.portfolio-filter2 {
+     margin: 40px 0;
+ /*    margin-top:40px;
+    margin-bottom:80px; */
+    padding: 0;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -20,24 +32,9 @@
 </script>
 </head>
 <body>
-<!-- 제목 -->
-	<section id="page-breadcrumb">
-	<div class="vertical-center">
-		<div class="container">
-			<div class="row">
-				<div class="action">
-					<div class="col-sm-12">
-						<h1 class="title">FAQ</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
 <!-- main(Q&A/FAQ)출력 -->
  <section id="portfolio">
-                <ul class="portfolio-filter text-center">
+                <ul class="portfolio-filter portfolio-filter2 text-center">
                     <li><a class="btn btn-default active" href="../site/site_list.do">FAQ</a></li>
                     <li><a class="btn btn-default" href="../qnaboard/qna_board_list.do">Q&A</a></li>
                     </ul>
@@ -51,18 +48,22 @@
                     </ul>
 		</section>
 		
-			<!-- FAQ -->
+		<!-- FAQ -->
 		<div class="container">
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
-					<c:forEach var="vo" items="${list}">
+					<c:forEach var="vo" items="${list}" varStatus="s">
 						<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapse${vo.no }">Q${vo.no}. ${vo.subject}</a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse${vo.no }">Q${s.index+1 }. ${vo.subject }</a>
+									<!-- Q1~Q(No) -->
+									<%-- <c:if test="${cate==0}">Q${vo.no-5}. ${vo.subject}</c:if>
+									<c:if test="${cate==1}">Q${vo.no+7}. ${vo.subject}
+									</c:if> --%>
 								</h4>
 						</div>
 						<div id="collapse${vo.no }" class="panel-collapse collapse out">
-							<div class="panel-body">A${vo.no}. ${vo.content}</div>
+							<div class="panel-body">A${s.index+1 }. ${vo.content}</div>
 						</div>
 					</c:forEach>
 				</div>
