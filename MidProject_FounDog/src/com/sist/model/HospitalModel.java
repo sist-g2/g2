@@ -339,6 +339,16 @@ public class HospitalModel {
 			System.out.println(startDate);
 			String endDate = model.getRequest().getParameter("endDate");
 			System.out.println(endDate);
+			String page = model.getRequest().getParameter("page");
+			if(page==null)
+				page = "1";
+			int curpage = Integer.parseInt(page);
+			model.addAttribute("curpage", curpage);
+			int rowSize = 5;
+			int start = (curpage*rowSize) - (rowSize-1);
+			int end = curpage*rowSize;
+			map.put("start", start);
+			map.put("end", end);
 			
 			if(startDate==null || startDate==""){
 				startDate = "2019-09-01";
@@ -355,9 +365,39 @@ public class HospitalModel {
 			map.put("dogname", dogname);			
 			map.put("startDate", startDate);
 			map.put("endDate", endDate);
+			
+			// 페이지 목록
+			int totalNum = HospitalDAO.reserveDetailAllCnt(map);
+			model.addAttribute("totalNum", totalNum);
+			
+			int totalPage = HospitalDAO.reserveDetailTotalPage(map);
+			int startPage = 0;
+			int endPage = 0;
+			
+			if(totalPage <= 5) {
+				startPage = 1;
+				endPage = totalPage;
+			} else {
+				if(curpage <= 2) {
+					startPage = 1;
+					endPage = startPage+4;
+				} else if (curpage >= totalPage-2) {
+					startPage = totalPage-5;
+					endPage = totalPage;
+				} else {
+					startPage = curpage-2;
+					endPage = curpage+2;
+				}
+			}
+			
 			List<Reserve_DetailVO> list = HospitalDAO.reserveDetail(map);
 			
+			
 			model.addAttribute("list", list);
+			
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
 			
 			return "../hospital/hospital_reserve_list.jsp";
 		}

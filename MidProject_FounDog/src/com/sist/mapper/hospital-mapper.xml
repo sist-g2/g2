@@ -75,17 +75,44 @@ SELECT dname FROM dog WHERE id = #{id}
 </select>
 
 <select id="reserveDetail" resultType="Reserve_DetailVO" parameterType="hashmap">
-SELECT no,
-TO_CHAR(reception_date, 'YYYY-MM-DD') as reception_date,
-(SELECT name FROM member WHERE id = (SELECT id FROM dog WHERE dno = dogno)) as name,
-(SELECT dname FROM dog WHERE dno = dogno) as dname,
-reserve_date,
-reserve_time,
-state,
-(SELECT name FROM hospital WHERE no = hosno) as hosname
+SELECT no, reception_date, name, dname, reserve_date, reserve_time, state, hosname, num
+FROM (
+	SELECT no, reception_date, name, dname, reserve_date, reserve_time, state, hosname, rownum as num
+	FROM(
+		SELECT no,
+		TO_CHAR(reception_date, 'YYYY-MM-DD') as reception_date,
+		(SELECT name FROM member WHERE id = (SELECT id FROM dog WHERE dno = dogno)) as name,
+		(SELECT dname FROM dog WHERE dno = dogno) as dname,
+		reserve_date,
+		reserve_time,
+		state,
+		(SELECT name FROM hospital WHERE no = hosno) as hosname
+		FROM reserve
+		WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
+		reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+		AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+	)
+)
+WHERE num BETWEEN #{start} AND #{end}
+
+</select>
+
+<select id="reserveDetailAllCnt" resultType="int" parameterType="hashmap" >
+SELECT COUNT(*) 
+FROM (SELECT no
 FROM reserve
 WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
 reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+)
+</select>
+<select id="reserveDetailTotalPage" resultType="int" parameterType="hashmap" >
+SELECT CEIL(COUNT(*)/5.0)  
+FROM (SELECT no
+FROM reserve
+WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
+reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+)
 </select>
 </mapper>

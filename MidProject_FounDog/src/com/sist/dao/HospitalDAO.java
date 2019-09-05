@@ -159,4 +159,22 @@ public class HospitalDAO {
 		   session.close();
 		   return list;
 	   }
+	 
+	 public static int reserveDetailAllCnt(Map map)
+	   {
+		 	int cnt = 0;
+		 	SqlSession session=ssf.openSession();
+		 	cnt = session.selectOne("reserveDetailAllCnt", map);
+		 	session.close();
+		 	return cnt;
+	   }
+	 
+	 public static int reserveDetailTotalPage(Map map)
+	   {
+		 	int total = 0;
+		 	SqlSession session=ssf.openSession();
+		 	total = session.selectOne("reserveDetailTotalPage", map);
+		 	session.close();
+		 	return total;
+	   }
 }
