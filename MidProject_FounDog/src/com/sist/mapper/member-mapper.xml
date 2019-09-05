@@ -128,19 +128,16 @@
 	
 	<!-- 예방접종 내역 삭제 -->
 	<delete id="memDeleteVacc" parameterType="String">
-		DELETE FROM vaccination
-		WHERE dogNo = (SELECT dno FROM dog WHERE id = #{id})
+		
 	</delete>
 	
 	<!-- 진료 내역 삭제 -->
 	<delete id="memDeleteCare" parameterType="String">
-		DELETE FROM careChart
-		WHERE dogNo = (SELECT dno FROM dog WHERE id = #{id})
+		
 	</delete>
 	
 	<!-- 진료 예약 내역 삭제 -->
 	<delete id="memDeleteReserve" parameterType="String">
-		DELETE FROM reserve
-		WHERE dogNo = (SELECT dno FROM dog WHERE id = #{id})
+		
 	</delete>
 </mapper>

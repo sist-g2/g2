@@ -6,19 +6,66 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../main/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/member.css">
 <style type="text/css">
+.calorieBtn{
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
+
+.form-control2 {
+  border: 1px solid #d99c4e;
+  font-weight: 300;
+  outline: none;
+  box-shadow: none;
+  height: 40px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+}
 .row {
 	margin: 0px auto;
 	width: 900px;
 }
 
 .clear {
+	border: 1px solid #d99c4e;
+	font-weight: 300;
+	outline: none;
+	box-shadow: none;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border-radius: 4px;
 	margin: 0px auto;
 	width: 400px;
-	height: 400px;
+	height: 550px;
 }
 
-#meswei {
+.well2{
+	min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: white;
+}
+
+/* #meswei {
 	width: 50px;
 	height: 27.5px;
 }
@@ -26,7 +73,7 @@
 #actlev {
 	width: 180px;
 	height: 25px;
-}
+} */
 
 .vGraph {
 	padding: 20px 0;
@@ -162,8 +209,7 @@ $(document).ready(function() {
 		<h2 align="center">칼로리 계산기</h2>
 		<div class="row">
 			<div class="clear">
-				<form name="first" class="well">
-					<!-- style="background-color: #d29949;" -->
+				<form name="first" class="well2">
 					<!-- 					<div id="overlayloder" style ="top: 400px; display: none;">
 						<div class="loder">						
 						</div>
@@ -173,11 +219,11 @@ $(document).ready(function() {
 							id="dog_calorie">
 							<tbody>
 								<tr>
-									<td align="center">강아지 무게</td>
+									<td align="left">강아지 무게</td>
 									<!-- style="color:white" -->
-									<td>&nbsp; <input type="text" id="weig" size="20"
+									<td align="right">&nbsp; <input type="text" id="weig" size="20"
 										width="20px" height="20px" onkeyup="checnum(this)"
-										style="text-align: center"> <select id="meswei">
+										style="text-align: center" class="form-control2"> <select id="meswei" class="form-control2">
 											<option value="1">kg</option>
 											<option value="0.45359237">lbs</option>
 									</select>
@@ -187,9 +233,9 @@ $(document).ready(function() {
 									<td colspan="2">&nbsp;</td>
 								</tr>
 								<tr>
-									<td align="center">활동량</td>
+									<td align="left">활동량</td>
 									<!-- style="color:white" -->
-									<td>&nbsp; <select id="actlev">
+									<td align="right">&nbsp; <select id="actlev" class="form-control2" style="width:225px;">
 											<option value="110">표준체중</option>
 											<option value="125">활동적인</option>
 											<option value="75">과체중</option>
@@ -206,20 +252,18 @@ $(document).ready(function() {
 								</tr>
 								<tr>
 									<td align="center" colspan="2"><input type="button"
-										value="Calculate" onclick="dog_calorie()" class="btn btn-sm"
-										style="background-color: #8F784B; color: white;">
-										&nbsp; <input type="reset" value="Reset" class="btn btn-sm"
-										style="background-color: #F69B94; color: white;">
+										value="Calculate" onclick="dog_calorie()" class="calorieBtn">
+										&nbsp; <input type="reset" value="Reset" class="calorieBtn">
 										<div class="errClass" id="dynErrDisp" style="display: none;"></div>
 								</tr>
 								<tr>
 									<td colspan="2">&nbsp;</td>
 								</tr>
 								<tr>
-									<td align="center">일별 칼로리 계산</td>
+									<td align="left">일별 칼로리&nbsp;&nbsp;&nbsp;</td>
 									<!-- style="color:white" -->
-									<td>&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" readonly
-										id="result" style="text-align: center">
+									<td align="right">&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" readonly
+										id="result" style="width:225px;" class="form-control2">
 									</td>
 								</tr>
 							</tbody>
