@@ -96,21 +96,20 @@ $(function(){
            <input type=button value="검색" class="btn btn-sm btn-danger" id="findBtn">
            </form>
           </td>
-          <td class="text-center">
-            <ul class="pagination">
-              <li><a href="adminboard_list.do?page=1">&lt;&lt;</a></li>
-              <li><a href="#">&lt;</a></li>
-			  <c:forEach var="i" begin="1" end="${totalpage }">
-			    <li class="${i==curpage?'active':''}"><a href="adminboard_list.do?page=${i }">${i }</a>
-			  </c:forEach>
-			  <li><a href="#">&gt;</a></li>
-			  <li><a href="adminboard_list.do?page=${totalpage }">&gt;&gt;</a></li>
-			</ul>
-          </td>
+          	<td class="text-center">
+				<ul class="pagination">
+					<li><a href="adminboard_list.do?page=1">&lt;&lt;</a></li>
+					<li><a href="adminboard_list.do?page=${startPage}">&lt;</a></li>
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
+						<li class="${i==curpage?'active':''}"><a href="adminboard_list.do?page=${i }">${i }</a>
+					</c:forEach>
+					<li><a href="adminboard_list.do?page=${endPage}">&gt;</a></li>
+					<li><a href="adminboard_list.do?page=${allPage }">&gt;&gt;</a></li>
+				</ul>
+			</td>
         </tr>
        </table>
 		</div>
      </div>
-   </div>
 </body>
 </html>

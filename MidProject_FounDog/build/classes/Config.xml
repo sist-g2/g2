@@ -43,6 +43,7 @@
 		<mapper resource="com/sist/mapper/member-mapper.xml" />
 		<mapper resource="com/sist/mapper/board-mapper.xml" />
 		<mapper resource="com/sist/mapper/adminboard-mapper.xml" />
+		<mapper resource="com/sist/mapper/dogboard-mapper.xml" />
 	</mappers>
 </configuration>
 

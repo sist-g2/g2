@@ -38,44 +38,24 @@ th{
 </script>
 </head>
 <body>
-	<!-- main(자유게시판/유기견게시판)출력 -->
-	  <section id="portfolio">
-                <ul class="portfolio-filter text-center">
-                    <li><a class="btn btn-default active" href="../board/board_list.do">자유게시판</a></li>
-                    <li><a class="btn btn-default" href="../board/board_list.do">유기견제보게시판</a></li>
-                    </ul>
- </section>
 	<div class="row">
 		<table class="table">
 
 			<tr>
 				<td class="text-left">
 				<c:if test="${sessionScope.id!=null }">
-						<a href="board_insert.do" class="btn btn-sm">새글</a>
+						<a href="dogboard_insert.do" class="btn btn-sm">새글</a>
 					</c:if>
 					</td>
 				<td class="text-right">${curpage } page / ${totalpage } pages</td>
 			</tr>
 		</table>
 		<table class="table">
-			<tr>
-				<th width=7% class="text-center">번호</th>
-				<th width=43% class="text-center">제목</th>
-				<th width=15% class="text-center">이름</th>
-				<th width=20% class="text-center">작성일</th>
-				<th width=10% class="text-center">조회수</th>
-			</tr>
 			<c:set var="count" value="${count }" />
 			<c:forEach var="vo" items="${list }" varStatus="s">
-				<tr class="${s.index%2==0?'':'warning' }">
+<%-- 				<tr class="${s.index%2==0?'':'warning' }">
 					<td width=7% class="text-center">${count }</td>
 					<td width=43% class="text-left">
-					<c:if test="${vo.group_tab > 0}">
-						<c:forEach begin="1" end="${vo.group_tab}">
-						&nbsp;&nbsp;
-						</c:forEach>
-						<img src="rereply.gif">
-					</c:if>
 					<a href="board_detail.do?no=${vo.no }">${vo.subject }&nbsp;${vo.count==0?'':[vo.count] }</a> 
 					<c:if test="${today==vo.dbday }">
 					<sup><font color=red>new</font></sup>
@@ -84,9 +64,25 @@ th{
 					<td width=15% class="text-center">${vo.id }</td>
 					<td width=20% class="text-center">${vo.dbday }</td>
 					<td width=10% class="text-center">${vo.hit }</td>
-				</tr>
+				</tr> --%>
+				<div class="col-xs-6 col-sm-4 col-md-3 portfolio-item branded logos">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-single">
+                                <div class="portfolio-thumb">                                	
+                                    <a href="#"><img src="../images/portfolio/1.jpg" class="img-responsive" alt=""></a>                                     
+                                </div>
+                            </div>
+                            <div class="portfolio-info ">
+                                <h5>${vo.dname }</h5>
+                                <h5>${vo.dage }</h5>
+                                <h5>${vo.area }</h5>
+                                <h5>${vo.regdate }</h5>
+                            </div>
+                        </div>
+                    </div>
 				<c:set var="count" value="${count-1 }" />
-			</c:forEach>
+ 			</c:forEach>
+
 		</table>
 		<table class="table">
 			<tr>

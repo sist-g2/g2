@@ -27,11 +27,11 @@ $(function(){
 		var no=$('#no').val();
 		$.ajax({
 			type:'post',
-			url:'board_delete_ok.do',
+			url:'dogboard_delete_ok.do',
 			data:{no:no},
 			success:function(response)
 			{
-				location.href="../board/board_list.do";
+				location.href="../dogboard/dogboard_list.do";
 			}
 		}); 
 		});
@@ -43,7 +43,7 @@ $(function(){
 	<div class="container">
 		<h2 class="text-center">삭제하기</h2>
 		<div class="row">
-			<form id="boardDelForm" method="post" action="board_delete_ok.do">
+			<form id="boardDelForm" method="post" action="dogboard_delete_ok.do">
 				<table class="table">
 					<tr>
 						<input type=hidden name=no value="${no }" id="no"></td>

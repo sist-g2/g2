@@ -17,7 +17,21 @@ public class Board_DogVO {
 	private String filename;
 	private int filesize;
 	private String dogimg;
+	private String dname;
+	private int dage;
 	
+	public String getDname() {
+		return dname;
+	}
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+	public int getDage() {
+		return dage;
+	}
+	public void setDage(int dage) {
+		this.dage = dage;
+	}
 	public String getTel() {
 		return tel;
 	}

@@ -19,7 +19,7 @@ import com.sist.vo.Board_DogVO;
 public class Board_DogModel {
 		
 	  @RequestMapping("dogboard/dogboard_list.do")	
-	  public String board_list(Model model){
+	  public String boarddog_list(Model model){
 		  HttpSession session = model.getRequest().getSession(); // 세션
 		  // page를 받는다 
 		  String page=model.getRequest().getParameter("page");
@@ -72,7 +72,7 @@ public class Board_DogModel {
 	  }
 	  
 	  @RequestMapping("dogboard/dogboard_find.do")
-	  public String board_find(Model model){
+	  public String boarddog_find(Model model){
 
 			try{
 				model.getRequest().setCharacterEncoding("UTF-8");
@@ -98,14 +98,14 @@ public class Board_DogModel {
 	  // 화면 
 	  
 	  @RequestMapping("dogboard/dogboard_insert.do")
-	  public String board_insert(Model model)
+	  public String boarddog_insert(Model model)
 	  {
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_insert.jsp");
 		  return "../main/main.jsp";
 	  }
 	  
 	  @RequestMapping("dogboard/dogboard_insert_ok.do")
-	  public String board_insert_ok(Model model)
+	  public String boarddog_insert_ok(Model model)
 	  {
 		  Board_DogVO vo=new Board_DogVO();
 		  try
@@ -156,7 +156,7 @@ public class Board_DogModel {
 	  
 	  // 상세보기 
 	  @RequestMapping("dogboard/dogboard_detail.do")
-	  public String board_detail(Model model)
+	  public String boarddog_detail(Model model)
 	  {
 		  // 요청값 받기
 		  String no=model.getRequest().getParameter("no");
@@ -171,7 +171,7 @@ public class Board_DogModel {
 	  
 	  // 수정하기
 	  @RequestMapping("dogboard/dogboard_update.do")
-	  public String board_update(Model model)
+	  public String boarddog_update(Model model)
 	  {
 		  // 요청값을 받는다
 		  String no=model.getRequest().getParameter("no");
@@ -185,7 +185,7 @@ public class Board_DogModel {
 	  }
 	  
 	  @RequestMapping("dogboard/dogboard_update_ok.do")
-	  public String board_update_ok(Model model)
+	  public String boarddog_update_ok(Model model)
 	  {
 		  try
 		  {
@@ -219,7 +219,7 @@ public class Board_DogModel {
 	  
 	  
 	  @RequestMapping("dogboard/dogboard_delete.do")
-	  public String board_Delete(Model model){
+	  public String boarddog_Delete(Model model){
 		  String no=model.getRequest().getParameter("no");
 		  model.addAttribute("no", no);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_delete.jsp");
@@ -228,7 +228,7 @@ public class Board_DogModel {
 	  }
 	  
 	  @RequestMapping("dogboard/dogboard_delete_ok.do")
-	  public String board_delete_ok(Model model){
+	  public String boarddog_delete_ok(Model model){
 		  String no=model.getRequest().getParameter("no");
 		  // model.addAttribute("res", res);
 		  return "redirect:../dogboard/dogboard_list.do";

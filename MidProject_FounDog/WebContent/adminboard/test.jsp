@@ -36,12 +36,6 @@
                                 <div class="portfolio-thumb">                                	
                                     <a href="#"><img src="../images/portfolio/1.jpg" class="img-responsive" alt=""></a>                                     
                                 </div>
- <!--                                <div class="portfolio-view">
-                                    <ul class="nav nav-pills">
-                                        <li><a href="portfolio-details.html"><i class="fa fa-link"></i></a></li>
-                                        <li><a href="../images/portfolio/1.jpg" data-lightbox="example-set"><i class="fa fa-eye"></i></a></li>
-                                    </ul>
-                                </div> -->
                             </div>
                             <div class="portfolio-info ">
                                 <h2>name</h2>
@@ -177,6 +171,7 @@
                             </div>
                         </div>
                     </div>
+                 </div>  
  
                 <div class="portfolio-pagination">
                     <ul class="pagination">

@@ -95,95 +95,13 @@ $(function(){
         <tr>
           <td colspan="4" class="text-right">
           	<c:if test="${sessionScope.id!=null && (sessionScope.id==vo.id || sessionScope.id=='admin' )}" >
-          		<a href="board_update.do?no=${vo.no }" class="btn btn-sm">수정</a>
-            	<a href="board_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
+          		<a href="dogboard_update.do?no=${vo.no }" class="btn btn-sm">수정</a>
+            	<a href="dogboard_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
           	</c:if>
-          	<c:if test="${sessionScope.id!=null}" >
-          		<a href="rboard_reply.do?no=${vo.no }" class="btn btn-sm">답글</a>
-          	</c:if>
-            <a href="board_list.do" class="btn btn-sm" >목록</a>
-           
+            <a href="dogboard_list.do" class="btn btn-sm" >목록</a>           
           </td>
         </tr>
       </table>
-    </div>
-    <div class="row">
-      <table class="table">
-        <tr>
-         <td class="text-left">댓글(${count })</td>
-        </tr>
-      </table>
-      <table class="table">
-        <c:forEach var="rvo" items="${list }">
-          
-          <table class="table">
-           <tr>
-             <td class="text-left">
-             <c:if test="${rvo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
-	              &nbsp;&nbsp;
-	            </c:forEach>
-	            <img src="rereply.gif">
-	            &nbsp;
-	          </c:if>
-                <img src="reply.png"><font color="#A5732A">${rvo.id }</font>&nbsp;${rvo.dbday }</td>
-             <td class="text-right">
-              <c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id  }">
-             <button class="btn btn-xs updateBtn" value="${rvo.no }">수정</button>
-             </c:if>
-              <c:if test="${sessionScope.id!=null && (sessionScope.id==rvo.id || sessionScope.id=='admin' ) }">
-             <a href="../board/boardreply_Delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs">삭제</a>
-              </c:if>
-              <c:if test="${sessionScope.id!=null }">
-               <button class="btn btn-xs replyBtn" value="${rvo.no }">댓글</button>
-              </c:if>
-             </td>
-           </tr>
-           <tr>
-             <td class="text-left" colspan="2">
-             <c:if test="${rvo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
-	              &nbsp;&nbsp;
-	            </c:forEach>
-	          </c:if>
-             ${rvo.content }</td>
-           </tr>
-           <tr style="display:none" id="m${rvo.no }" class="reply">
-	          <td class="text-left" colspan="2">
-	           <form name="frm" method="post" action="../board/boardreply_ReInsert.do">
-	            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>
-	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="hidden" name=no value="${rvo.no }">
-	            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
-	           </form>
-	          </td>
-	        </tr>
-	        <tr style="display:none" id="u${rvo.no }" class="update">
-	          <td class="text-left" colspan="2">
-	           <form name="frm" method="post" action="../board/boardreply_Update.do">
-	            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>
-	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="hidden" name=no value="${rvo.no }">
-	            <input type="submit" class="btn btn-sm" style="height: 67px" value="수정하기">
-	           </form>
-	          </td>
-	        </tr>
-          </table>
-        </c:forEach>
-      </table>
-      <c:if test="${sessionScope.id!=null }">
-	      <table class="table">
-	        <tr>
-	          <td class="text-left">
-	           <form name="frm" method="post" action="../board/boardreply_Insert.do">
-	            <textarea rows="3" cols="110" name="content" style="float: left"></textarea>
-	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
-	           </form>
-	          </td>
-	        </tr>
-	      </table>
-      </c:if>
     </div>
   </div>
 </body>

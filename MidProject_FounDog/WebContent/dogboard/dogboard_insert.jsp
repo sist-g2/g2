@@ -25,18 +25,48 @@ th{
    <div class="container">
      <h2 class="text-center">글쓰기</h2>
      <div class="row">
-     <form method="post" action="board_insert_ok.do">
+     <form method="post" action="dogboard_insert_ok.do">
        <table class="table">
          <tr>
-           <th class="text-right" width=20%>제목</th>
+           <th class="text-right" width=20%>이름</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=45 class="input-sm">
+             <input type=text name=subject size=15 class="input-sm">
            </td>
          </tr>
          <tr>
-           <th class="text-right" width=20%>내용</th>
+           <th class="text-right" width=20%>견종</th>
            <td width=80% class="text-left">
-             <textarea rows="10" cols="55" name=content></textarea>
+             <input type=text name=subject size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+           <th class="text-right" width=20%>성별</th>
+           <td width=80% class="text-left">
+             <input type=text name=subject size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+           <th class="text-right" width=20%>무게</th>
+           <td width=80% class="text-left">
+             <input type=text name=subject size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+           <th class="text-right" width=20%>색깔</th>
+           <td width=80% class="text-left">
+             <input type=text name=subject size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+           <th class="text-right" width=20%>전화번호</th>
+           <td width=80% class="text-left">
+             <input type=text name=subject size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+           <th class="text-right" width=20%>특징</th>
+           <td width=80% class="text-left">
+             <textarea rows="10" cols="25" name=content></textarea>
            </td>
          </tr>
          <tr>

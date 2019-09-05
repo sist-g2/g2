@@ -19,6 +19,7 @@ public class adminBoardModel {
 	  if(page==null)
 		  page="1";
 	  int curpage=Integer.parseInt(page);
+	  if(curpage==0) curpage=1;
 	  // Map에 저장 
 	  Map map=new HashMap();
 	  int rowSize=10;
@@ -38,30 +39,25 @@ public class adminBoardModel {
 	  // 총페이지  => totalpage
 	  int totalpage=AdminBoardDAO.adminboardTotalPage();
 	  int count=AdminBoardDAO.adminboardRowCount();// 22
-	  count=count-((curpage*rowSize)-rowSize); 
-	  // int c=count-((curpage*rowSize)-rowSize); 
-	  /*
-	   *    22 => 
-	   *    
-	   *    1 page => 22 21 .... 13
-	   *    2 page => 12 11 .... 3
-	   *    3 page => 2 1
-	   */
-	  // 블록   => 5
-	  // 블록 시작  => fromPage  1~5 => 1 
-	  // 블록 끝  => toPage     1~5 => 5
-	  // JSP로 값을 전송 
-	  /*
-	   *   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-	   *   Date date=new Date();
-	   *   String today=sdf.format(date);
-	   *   
-	   *   sdf.format(date)
-	   */
+	  int BLOCK=5;
+	  
+	  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+	  int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+	  int allPage=totalpage;
+	  
+	  if(endPage>allPage){
+		  endPage=allPage;
+	  }
+	  count=count-((curpage*rowSize)-rowSize); 	
+
 	  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 	  model.addAttribute("today", today);
 	  model.addAttribute("curpage", curpage);
 	  model.addAttribute("totalpage", totalpage);
+	  model.addAttribute("BLOCK", BLOCK);
+	  model.addAttribute("startPage", startPage);
+	  model.addAttribute("endPage", endPage);
+	  model.addAttribute("allPage", allPage);
 	  model.addAttribute("count", count);
 	  model.addAttribute("main_jsp", "../adminboard/adminboard_list.jsp");// main.jsp (include)
 	  return "../main/main.jsp";
