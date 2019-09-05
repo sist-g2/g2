@@ -13,10 +13,17 @@ public class Board_DogVO {
 	private int dkg;
 	private String dcolor;
 	private String dcharacter;
+	private String tel;
 	private String filename;
 	private int filesize;
 	private String dogimg;
 	
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 	public int getNo() {
 		return no;
 	}

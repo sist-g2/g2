@@ -190,10 +190,10 @@ public class adminBoardModel {
 	  model.addAttribute("main_jsp", "../adminboard/Calc.jsp");
 	  return "../main/main.jsp";
   }
-  @RequestMapping("adminboard/Calc2.do")
-  public String Calc2(Model model)
+  @RequestMapping("adminboard/test.do")
+  public String test(Model model)
   {
-	  model.addAttribute("main_jsp", "../adminboard/Calc2.jsp");
+	  model.addAttribute("main_jsp", "../adminboard/test.jsp");
 	  return "../main/main.jsp";
   }
 }

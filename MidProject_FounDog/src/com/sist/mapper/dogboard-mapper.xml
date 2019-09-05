@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.board-mapper">
+  <!-- 자유게시판/Q&A게시판(Start) -->
+  <!-- 
+         목록 : 블록별 처리 
+         이전    1 2 3 4 5 다음
+   -->
+	<select id="boarddogListData" resultType="Board_DogVO" parameterType="java.util.Map">
+<!-- 		SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, count, num 
+		FROM (SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, count, rownum as num 
+				FROM (SELECT no, category, id, subject, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
+				 hit, group_id, group_step, group_tab, root, depth, (SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
+						FROM board b 
+						WHERE category=#{category} 
+						ORDER BY group_id DESC,group_step ASC
+					  )
+			  ) WHERE num BETWEEN #{start} AND #{end} -->
+			  
+		SELECT no, id, area, JUBSUDATE, dtype, dsex, dkg, dcolor, dcharacter, tel
+		FROM board_dog
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 총페이지 -->
+	<select id="boarddogTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM board_dog
+	<!-- 	WHERE category=#{category}  -->
+	</select>
+	
+   <!-- 게시물 번호가 일렬로 처리  -->
+	<select id="boarddogRowCount" resultType="int"  parameterType="int">
+		SELECT COUNT(*) FROM board_dog
+ 	<!-- 	WHERE category=#{category} -->
+	</select>
+	
+	<!-- 새 글 작성 -->
+	<insert id="boarddogInsert" parameterType="Board_DogVO">
+	<!-- 	INSERT INTO board (no, category, id, subject, content, group_id)
+		VALUES( board_no_seq.nextval, #{category}, #{id}, #{subject}, #{content}, (SELECT NVL(MAX(group_id)+1, 1) FROM board )) -->
+ 		INSERT INTO board_dog (no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, FILENAME, FILESIZE )
+ 			VALUES(board_dog_no_seq.nextval, #{id}, #{area}, #{dtype}, #{dsex}, #{dkg}, #{dcolor}, #{dcharacter},
+ 			#{tel} ,#{FILENAME}, #{FILESIZE} )
+ 		FROM board_dog
+   </insert>
+   
+   <!-- 상세보기  -->
+	
+	<select id="boarddogDetailData" resultType="Board_DogVO" parameterType="int">
+<!-- 		SELECT no, id, subject, content, TO_CHAR(regdate,'RRRR-MM-DD') as dbday, hit
+		FROM board 
+		WHERE no=#{no} -->
+		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, TO_CHAR(regdate,'RRRR-MM-DD') as dbday
+		FROM board 
+		WHERE no=#{no}
+   </select>
+	
+	<!-- 수정하기 -->
+   <update id="boarddogUpdate" parameterType="Board_DogVO">
+     UPDATE board_dog SET
+     area=#{area}, dtype=#{dtype}, dsex=#{dsex}, dkg=#{dkg}, dcolor=#{dcolor}, dcharacter=#{dcharacter}, tel=#{tel}
+     WHERE no=#{no}
+   </update>
+    
+    <!-- 게시물 삭제 -->
+    <delete id="boarddogDelete" parameterType="int">
+     DELETE FROM board_dog
+     WHERE no=#{no}
+    </delete>
+
+    
+    <!-- 검색(찾기) -->
+     <select id="boarddogFindData" resultType="Board_DogVO" parameterType="java.util.Map">
+      SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday
+      FROM board_dog
+      WHERE ${fs} LIKE '%'||#{ss}||'%' 
+      AND category=#{category}
+      </select>
+
+</mapper>
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
