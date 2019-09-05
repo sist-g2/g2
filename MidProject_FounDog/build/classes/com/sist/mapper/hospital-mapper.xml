@@ -70,8 +70,8 @@
 		)
 </insert>
 
-<select id="reserveDogname" resultType="String" parameterType="String">
-SELECT dname FROM dog WHERE id = #{id}
+<select id="reserveDogname" resultType="DogVO" parameterType="String">
+SELECT dno,dname FROM dog WHERE id = #{id}
 </select>
 
 <select id="reserveDetail" resultType="Reserve_DetailVO" parameterType="hashmap">
@@ -91,11 +91,11 @@ FROM (
 		<where>
 			reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 			AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
-			<if test="dogname==''" >
+			<if test="dno=='0'" >
 				AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
 			</if>
-			<if test="dogname!=''" >
-				AND dogno = (SELECT dno FROM dog WHERE dname = #{dogname})
+			<if test="dno!='0'" >
+				AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 			</if>
 		</where>
 	)
@@ -111,11 +111,11 @@ FROM reserve
 <where>
 	reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
-	<if test="dogname==''" >
+	<if test="dno=='0'" >
 		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
 	</if>
-	<if test="dogname!=''" >
-		AND dogno = (SELECT dno FROM dog WHERE dname = #{dogname})
+	<if test="dno!='0'" >
+		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 	</if>
 </where>
 )
@@ -127,13 +127,41 @@ FROM reserve
 <where>
 	reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
-	<if test="dogname==''" >
+	<if test="dno=='0'" >
 		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
 	</if>
-	<if test="dogname!=''" >
-		AND dogno = (SELECT dno FROM dog WHERE dname = #{dogname})
+	<if test="dno!='0'" >
+		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 	</if>
 </where>
 )
+</select>
+
+<select id="carechartDetail" resultType="CareChartVO" parameterType="hashmap">
+SELECT no, caredate, prescription, doctor, dogname, hospitalname, num
+FROM (
+	SELECT no, caredate, prescription, doctor, dogname, hospitalname, rownum as num
+	FROM(
+		SELECT no,
+		TO_CHAR(caredate, 'YYYY-MM-DD') as caredate,
+		prescription,
+		doctor,
+		(SELECT dname FROM dog WHERE dno = dogno) as dogname,
+		(SELECT name FROM hospital WHERE no = hosno) as hospitalname
+		FROM carechart
+		<where>
+			reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+			AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+			<if test="dno==''" >
+				AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
+			</if>
+			<if test="dno!=''" >
+				AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
+			</if>
+		</where>
+	)
+)
+WHERE num BETWEEN #{start} AND #{end}
+
 </select>
 </mapper>

@@ -30,14 +30,14 @@
 <script type="text/javascript">
 $(function(){
 	$('#detailbtn').click(function(){
-		var dogname=$('#selectDog').val();
+		var dno=$('#selectDog option:selected').attr("data-no");
 		var startDate=$('#startDate').val();
 		var endDate=$('#endDate').val();	
 		
 		 $.ajax({ // 검색 결과 리스트 ajax
 			type:'post',
 			url:'hospital_reserve_list.do',
-			data:{dogname:dogname,startDate:startDate,endDate:endDate},
+			data:{dno:dno,startDate:startDate,endDate:endDate},
 			success:function(response)
 			{	
 				$("#reservelist").html(response);	
@@ -63,9 +63,9 @@ $(function(){
 				</th>
 				<td width="55%" style="padding: 5px;" >
 					<select id="selectDog" class="form-control2">
-						<option value="">전체</option>
-						<c:forEach var="doglist" items="${doglist }">
-							<option>${doglist}</option>
+						<option data-no="">전체</option>
+						<c:forEach var="vo" items="${doglist }">
+							<option data-no="${vo.dno }">${vo.dname}</option>
 						</c:forEach>
 					</select>				
 				</td>

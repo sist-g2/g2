@@ -98,7 +98,7 @@ $(function(){
 				var mapContainer = document.getElementById('map');
 				var mapOption = {
 				    center: new daum.maps.LatLng(37.556538, 126.919516),
-				    level: 7
+				    level: 3
 				};  
 
 				var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -109,11 +109,11 @@ $(function(){
 				var result = document.getElementById("search_result");
 				
 				var listData = new Array();
-				
+				var nameData = new Array();
 				$.each(data,function(key,value) { // 파싱된 데이터 값추출
 								
 				 listData.push(value.loc); // 배열에 위치 정보를 저장함
-				 				 				
+				 nameData.push(value.name);				 				
 				});
 				
 				listData.forEach(function(addr, index) { // 지도에 위치 정보를 넣는 부분
@@ -126,12 +126,13 @@ $(function(){
 				                position: coords
 				            });
 				            var infowindow = new daum.maps.InfoWindow({
-				                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
+				                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + nameData[index] + '</div>',
 				                disableAutoPan: true
 				            });
 				            infowindow.open(map, marker);
-				            
+				            if(index<1){
 				            map.setCenter(coords);
+				            }
 				        
 				        }
 				       
