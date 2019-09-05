@@ -88,9 +88,16 @@ FROM (
 		state,
 		(SELECT name FROM hospital WHERE no = hosno) as hosname
 		FROM reserve
-		WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
-		reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
-		AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+		<where>
+			reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+			AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+			<if test="dogname==''" >
+				AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
+			</if>
+			<if test="dogname!=''" >
+				AND dogno = (SELECT dno FROM dog WHERE dname = #{dogname})
+			</if>
+		</where>
 	)
 )
 WHERE num BETWEEN #{start} AND #{end}
@@ -101,18 +108,32 @@ WHERE num BETWEEN #{start} AND #{end}
 SELECT COUNT(*) 
 FROM (SELECT no
 FROM reserve
-WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
-reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
-AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+<where>
+	reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+	<if test="dogname==''" >
+		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
+	</if>
+	<if test="dogname!=''" >
+		AND dogno = (SELECT dno FROM dog WHERE dname = #{dogname})
+	</if>
+</where>
 )
 </select>
 <select id="reserveDetailTotalPage" resultType="int" parameterType="hashmap" >
 SELECT CEIL(COUNT(*)/5.0)  
 FROM (SELECT no
 FROM reserve
-WHERE dogno = (SELECT dno FROM dog WHERE dname = #{dogname}) AND 
-reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
-AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+<where>
+	reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+	<if test="dogname==''" >
+		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
+	</if>
+	<if test="dogname!=''" >
+		AND dogno = (SELECT dno FROM dog WHERE dname = #{dogname})
+	</if>
+</where>
 )
 </select>
 </mapper>
