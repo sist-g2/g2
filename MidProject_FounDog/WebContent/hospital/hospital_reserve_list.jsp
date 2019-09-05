@@ -8,7 +8,15 @@
 <title>Insert title here</title>
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
-
+#reserve_list_table th{
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #444444;
+	padding: 5px;
+}
+#reserve_list_table .content td{
+	border-bottom: 1px solid #444444;
+	padding: 8px;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -34,7 +42,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<table style="width: 100%; height: 100%;">
+	<table id="reserve_list_table" style="width: 100%; height: 100%;">
 		<caption class="text-center" style="padding: 20px;">
 			<h3> ${sessionScope.name }님의 예약 내역입니다.</h3>
 		</caption>
@@ -49,25 +57,25 @@ $(function(){
 			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">진료병원</font></th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
-			<tr>
-					<td class="text-left" width="10%" >${vo.no }</td>
-					<td class="text-left" width="12%" >${vo.reception_date }</td>
-					<td class="text-left" width="10%" >${vo.name }</td>
-					<td class="text-left" width="10%" >${vo.dname }</td>
-					<td class="text-left" width="12%" >${vo.reserve_date }</td>
-					<td class="text-left" width="10%" >${vo.reserve_time }</td>
-					<td class="text-left" width="10%" >
-						<c:if test="${vo.state=='예약중' }">
-							<font color="orange" >${vo.state }</font>
-						</c:if>
-						<c:if test="${vo.state=='진료완료' }">
-							<font color="green" >${vo.state }</font>
-						</c:if>
-						<c:if test="${vo.state=='예약취소' }">
-							<font color="red" >${vo.state }</font>
-						</c:if>
-					</td>
-					<td class="text-left" width="26%" >${vo.hosname }</td>
+			<tr class="content">
+				<td class="text-left" width="10%" >${vo.no }</td>
+				<td class="text-left" width="12%" >${vo.reception_date }</td>
+				<td class="text-left" width="10%" >${vo.name }</td>
+				<td class="text-left" width="10%" >${vo.dname }</td>
+				<td class="text-left" width="12%" >${vo.reserve_date }</td>
+				<td class="text-left" width="10%" >${vo.reserve_time }</td>
+				<td class="text-left" width="10%" >
+					<c:if test="${vo.state=='예약중' }">
+						<font color="orange" >${vo.state }</font>
+					</c:if>
+					<c:if test="${vo.state=='진료완료' }">
+						<font color="green" >${vo.state }</font>
+					</c:if>
+					<c:if test="${vo.state=='예약취소' }">
+						<font color="red" >${vo.state }</font>
+					</c:if>
+				</td>
+				<td class="text-left" width="26%" >${vo.hosname }</td>
 			</tr>
 		</c:forEach>
 		<tr>
