@@ -8,15 +8,9 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-
-	
-function dnameComment(dname) {	 
-alert(dname);
-}	
-
 $('.dogSel').click(function(){
-	var dname=$('.dogname').text();
-	var dno=$('.dno').val();
+	var dname=$(this).attr("data-dname");
+	var dno=$(this).attr("data-dno");
 
 	$('#dname').val(dname);
 	$('#dogNo').val(dno);
@@ -67,7 +61,7 @@ return false;
 					<td>${vo.dtype}</td>	
 					<td>${vo.dbirth}</td>	
 					<td>${vo.dsex}</td>	
-				<td><input type="button" value="선택" onclick="javascript:dnameComment(${vo.dname})"></td>
+				<td><input type="button" value="선택" data-dno="${vo.dno}" data-dname="${vo.dname}" class="dogSel"></td>
 				</tr>
 			</c:forEach>
 			</table>

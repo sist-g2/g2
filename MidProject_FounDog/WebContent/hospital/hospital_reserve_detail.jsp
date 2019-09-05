@@ -66,7 +66,7 @@ $(function(){
 					<input type="button" id="detailbtn" value="조회" style="position:relative; top:50%; left:50%;">
 				</div>
 				<div style="width: 100%; height: 80px; border: solid 1px;">
-					ㅁㅁㅁ 고객님의 예약 내역입니다.
+					${sessionScope.name }님의 예약 내역입니다.
 				</div>
 			</div>
 		

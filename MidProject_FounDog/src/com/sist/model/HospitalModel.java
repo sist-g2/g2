@@ -13,6 +13,7 @@ import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.HospitalDAO;
+import com.sist.dao.MemberDAO;
 import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
@@ -276,7 +277,37 @@ public class HospitalModel {
 		@RequestMapping("hospital/hospital_doginsert.do")
 		public String hospital_doginsert(Model model){
 			
-			return "../member/dog_insert.jsp";
+			return "../hospital/hospital_dog_insert.jsp";
+		}
+		
+		@RequestMapping("hospital/hospital_doginsert_ok.do")
+		public void hospital_doginsert_ok(Model model){
+			try{
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			HttpSession session = model.getRequest().getSession();
+			String id = (String)session.getAttribute("id");
+			
+			DogVO dvo = new DogVO();
+			String dname = model.getRequest().getParameter("dname");
+			String dtype = model.getRequest().getParameter("dtype");
+			String dyear = model.getRequest().getParameter("dyear");
+			String dmonth = model.getRequest().getParameter("dmonth");
+			String dday = model.getRequest().getParameter("dday");
+			String dsex = model.getRequest().getParameter("dsex");
+			dvo.setDname(dname);
+			dvo.setDtype(dtype);
+			if(dyear!="" && dmonth!="" && dday!=""){
+				dvo.setDbirth(dyear + "-" + dmonth + "-" + dday);
+			} else if(dyear=="" || dmonth=="" || dday=="") {
+				dvo.setDbirth("");
+			}
+			dvo.setDsex(dsex);
+			dvo.setId(id);
+				
+			MemberDAO.dogJoin(dvo);
+			
 		}
 		
 		@RequestMapping("hospital/hospital_reserve_ok.do")
@@ -307,8 +338,8 @@ public class HospitalModel {
 			System.out.println(state);
 			System.out.println(dogNo);
 			System.out.println(hosNo);
-			HospitalDAO.reserveOk(vo);		
-			
+			HospitalDAO.reserveOk(vo);	
+		
 			return "redirect:../hospital/hospital_reserve_detail.do";
 		}
 		
@@ -331,6 +362,9 @@ public class HospitalModel {
 			try {
 				model.getRequest().setCharacterEncoding("UTF-8");
 			} catch (Exception e) {}
+			
+			HttpSession session=model.getRequest().getSession();
+			String id=(String)session.getAttribute("id");
 			
 			Map map=new HashMap();
 			String dogname = model.getRequest().getParameter("dogname");
@@ -365,6 +399,7 @@ public class HospitalModel {
 			map.put("dogname", dogname);			
 			map.put("startDate", startDate);
 			map.put("endDate", endDate);
+			map.put("id", id);
 			
 			// 페이지 목록
 			int totalNum = HospitalDAO.reserveDetailAllCnt(map);
@@ -401,5 +436,7 @@ public class HospitalModel {
 			
 			return "../hospital/hospital_reserve_list.jsp";
 		}
+		
+		
 		
 }

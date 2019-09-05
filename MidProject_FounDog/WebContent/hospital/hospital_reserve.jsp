@@ -55,6 +55,39 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+function reservedate(){
+	var reserveday = $('#reserve_day').val();
+	var dname = $('#dname').val();
+	var check = $('#check').prop("checked");
+	
+	if(reserveday.trim()==""){
+		alert("날짜를 선택해주세요");
+		$("#reserve_day").focus();
+		return false;
+	}
+	
+	if(dname.trim()==""){
+		alert("강아지를 선택해주세요");
+		$("#dname").focus();
+		return false;
+	}
+	
+	if(check==false){
+		alert("개인정보취급의 동의 해주세요");
+		
+		return false;
+	}
+	
+	  if(confirm("예약 하시겠습니까?") == true){
+		 alert("예약이 완료되었습니다.");
+		 $('#reserveokForm').submit();
+		return true;        
+	    }
+	    else{
+	        return false;
+	    }
+}
+
 $(document).ready(function(){
 	  $("#layerPopup").hide();
 	  $("#layerPopup2").hide();
@@ -192,10 +225,10 @@ $(document).ready(function(){
 				
 			</div>
 			<div id="a4" style="height: 50px;">
-				<input type="checkbox">개인정보 취급방침에 동의합니다.
+				<input type="checkbox" id="check">개인정보 취급방침에 동의합니다.
 			</div>
 		</div>		
-		<form class="reserveokForm" method="post" action="hospital_reserve_ok.do">
+		<form class="reserveokForm" method="post" id="reserveokForm" action="hospital_reserve_ok.do">
 		<table class="board_write">
 <colgroup>
 <col width="214px">
@@ -271,7 +304,7 @@ $(document).ready(function(){
 </tr>
 </tbody>
 </table>
-		<input type="submit" class="btn btn-primary" value="확인">
+		<input type="button" onclick="javascript:reservedate();" class="btn btn-primary" value="확인">
 		<input type="button" class="btn btn-primary" value="취소">
 </form>
 	</div>		  
