@@ -126,16 +126,17 @@ $(function(){
 	            <img src="qna_rereply.gif">
 	            &nbsp;
 	          </c:if>
+              <c:if test="${rvo.id!='delete' }">
                 <img src="qna_reply.png"><font color="#A5732A">${rvo.id }</font>&nbsp;${rvo.dbday }</td>
              <td class="text-right">
               <c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id  }">
-             <button class="btn btn-xs qna_updateBtn" value="${rvo.no }">수정</button>
+             <button class="btn btn-xs updateBtn" value="${rvo.no }">수정</button>
              </c:if>
               <c:if test="${sessionScope.id!=null && (sessionScope.id==rvo.id || sessionScope.id=='admin' ) }">
-             <a href="../qnaboard/qna_boardreply_Delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs">삭제</a>
+             <a href="../qboard/qboardreply_Delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs">삭제</a>
               </c:if>
               <c:if test="${sessionScope.id!=null }">
-               <button class="btn btn-xs qna_replyBtn" value="${rvo.no }">댓글</button>
+               <button class="btn btn-xs replyBtn" value="${rvo.no }">댓글</button>
               </c:if>
              </td>
            </tr>
@@ -146,7 +147,23 @@ $(function(){
 	              &nbsp;&nbsp;
 	            </c:forEach>
 	          </c:if>
-             ${rvo.content }</td>
+             ${rvo.content }
+             </c:if>
+             <c:if test="${rvo.id=='delete' }">
+                <font color="red">탈퇴한 회원</font></td>
+             <td class="text-right">
+            
+             </td>
+           </tr>
+           <tr>
+             <td class="text-left" colspan="2">
+             <c:if test="${rvo.group_tab>0 }">
+	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
+	              &nbsp;&nbsp;
+	            </c:forEach>
+	          </c:if>
+					<font color="red">탈퇴한 회원의 댓글입니다.</font>
+			</c:if></td>
            </tr>
            <tr style="display:none" id="m${rvo.no }" class="reply">
 	          <td class="text-left" colspan="2">

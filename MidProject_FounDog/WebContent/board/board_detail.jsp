@@ -126,6 +126,7 @@ $(function(){
 	            <img src="rereply.gif">
 	            &nbsp;
 	          </c:if>
+	          <c:if test="${rvo.id!='delete' }">
                 <img src="reply.png"><font color="#A5732A">${rvo.id }</font>&nbsp;${rvo.dbday }</td>
              <td class="text-right">
               <c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id  }">
@@ -146,7 +147,24 @@ $(function(){
 	              &nbsp;&nbsp;
 	            </c:forEach>
 	          </c:if>
-             ${rvo.content }</td>
+             ${rvo.content }
+             </c:if>
+             <c:if test="${rvo.id=='delete' }">
+                <font color="red">탈퇴한 회원</font></td>
+             <td class="text-right">
+            
+             </td>
+           </tr>
+           <tr>
+             <td class="text-left" colspan="2">
+             <c:if test="${rvo.group_tab>0 }">
+	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
+	              &nbsp;&nbsp;
+	            </c:forEach>
+	          </c:if>
+					<font color="red">탈퇴한 회원의 댓글입니다.</font>
+			</c:if>
+             </td>
            </tr>
            <tr style="display:none" id="m${rvo.no }" class="reply">
 	          <td class="text-left" colspan="2">

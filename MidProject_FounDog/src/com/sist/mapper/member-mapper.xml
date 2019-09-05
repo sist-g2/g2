@@ -51,7 +51,7 @@
 	<!-- 회원탈퇴 시 강아지 내역 삭제 -->
 	<delete id="memDeleteDog" parameterType="String">
 		DELETE FROM dog
-		WHERE id = {id}
+		WHERE id = #{id}
 	</delete>
 	
 	<!-- 마이페이지 -->

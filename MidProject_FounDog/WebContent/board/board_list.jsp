@@ -76,7 +76,18 @@ th{
 						</c:forEach>
 						<img src="rereply.gif">
 					</c:if>
-					<a href="board_detail.do?no=${vo.no }">${vo.subject }&nbsp;${vo.count==0?'':[vo.count] }</a> 
+					<c:if test="${vo.id=='delete' }">
+					<font color="red">탈퇴한 회원의 게시글입니다.</font>
+					<%-- <c:if test="${today==vo.dbday }">
+					<sup><font color=red>new</font></sup>
+					</c:if> --%>
+					</td>
+					<td width=15% class="text-center"></td>
+					<td width=20% class="text-center"></td>
+					<td width=10% class="text-center"></td>
+					</c:if>
+					<c:if test="${vo.id!='delete' }">
+					<a href="board_detail.do?no=${vo.no }"><font color="black">${vo.subject }</font>&nbsp;${vo.count==0?'':[vo.count] }</a> 
 					<c:if test="${today==vo.dbday }">
 					<sup><font color=red>new</font></sup>
 					</c:if>
@@ -84,6 +95,8 @@ th{
 					<td width=15% class="text-center">${vo.id }</td>
 					<td width=20% class="text-center">${vo.dbday }</td>
 					<td width=10% class="text-center">${vo.hit }</td>
+					</c:if>
+					
 				</tr>
 				<c:set var="count" value="${count-1 }" />
 			</c:forEach>
@@ -92,7 +105,6 @@ th{
 			<tr>
 				<td class="text-left">
 					<form method="post" action="board_find.do" id="frm">
-						Search: 
 						<select name="fs" class="input-md form-control2">
 							<option value="id">이름</option>
 							<option value="subject">제목</option>
