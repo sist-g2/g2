@@ -136,9 +136,7 @@ public class QnaDAO {
 		   if(vo.getDepth()==0){
 			   session.delete("boardreplyDelete",no);
 		   }else{
-			   vo.setContent("<font color=red>삭제된 댓글입니다</font>");
-			   vo.setNo(no);
-			   session.update("boardreplyDataUpdate", vo);
+			   session.update("boardreplyDataUpdate", no);
 		   }
 		   // session.update("boardreplyDepthDecrement",vo.getRoot());
 		   session.commit();
@@ -190,11 +188,11 @@ public class QnaDAO {
 			   session.delete("reboardreplyDelete",no); // 댓글삭제
 			   session.delete("rboardreplyDelete",no); // 글 삭제
 		   }else{
-			   BoardVO fvo=new BoardVO();
+			   /*BoardVO fvo=new BoardVO();
 			   fvo.setSubject("<font color=red>삭제된 게시물입니다</font>");
 			   fvo.setContent("<font color=red>삭제된 게시물입니다</font>");
-			   fvo.setNo(no);
-			   session.update("rboardreplyDataUpdate", fvo);
+			   fvo.setNo(no);*/
+			   session.update("rboardreplyDataUpdate", no);
 		   }
 		   // session.update("rboardreplyDepthDecrement",vo.getRoot());
 		   session.commit();

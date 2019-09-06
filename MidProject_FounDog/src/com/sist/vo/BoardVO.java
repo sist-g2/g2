@@ -15,8 +15,15 @@ public class BoardVO {
 	private int group_tab; // 글 작성 시 제목 앞 공백
 	private int root; // 원글 번호
 	private int depth; // 답글의 갯수
+	private int delState;
 	private int count; //메인화면 글제목옆에 붙을 댓글갯수
 	
+	public int getDelState() {
+		return delState;
+	}
+	public void setDelState(int delState) {
+		this.delState = delState;
+	}
 	public int getCount() {
 		return count;
 	}

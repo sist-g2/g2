@@ -238,6 +238,17 @@ public class QnaModel {
 	  return "redirect:../qnaboard/qna_board_detail.do?no="+bno;
   }
   
+  @RequestMapping("qboard/qboardreply_Delete.do")
+  public String qboardreply_Delete(Model model)
+  {
+	  String no=model.getRequest().getParameter("no");
+	  // bno
+	  String bno=model.getRequest().getParameter("bno");
+	  // DAO
+	  QnaDAO.boardreplyDelete(Integer.parseInt(no));
+	  return "redirect:../qnaboard/qna_board_detail.do?no="+bno;
+  }
+  
   @RequestMapping("qnaboard/qna_boardreply_Update.do")
   public String boardreply_Update(Model model)
   {

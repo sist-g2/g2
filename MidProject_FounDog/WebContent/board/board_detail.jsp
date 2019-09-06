@@ -132,8 +132,10 @@ $(function(){
         </tr>
         <tr>
           <td colspan="4" class="text-right">
-          	<c:if test="${sessionScope.id!=null && (sessionScope.id==vo.id || sessionScope.id=='admin' )}" >
+          	<c:if test="${sessionScope.id!=null && sessionScope.id==vo.id}" >
           		<a href="board_update.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;수정&nbsp;&nbsp;</a>
+          	</c:if>
+          	<c:if test="${sessionScope.id!=null && (sessionScope.id==vo.id || sessionScope.id=='admin' )}" >
             	<a href="board_delete.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;삭제&nbsp;&nbsp;</a>
           	</c:if>
           	<c:if test="${sessionScope.id!=null}" >
@@ -155,76 +157,78 @@ $(function(){
         <c:forEach var="rvo" items="${list }">
           
           <table class="table">
-           <tr>
-             <td class="text-left">
-             <c:if test="${rvo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
-	              &nbsp;&nbsp;
-	            </c:forEach>
-	            <img src="rereply.gif">
-	            &nbsp;
-	          </c:if>
-	          <c:if test="${rvo.id!='delete' }">
-                <img src="reply.png"><font color="#A5732A">${rvo.id }</font>&nbsp;${rvo.dbday }</td>
-             <td class="text-right">
-              <c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id  }">
-             <button class="btn btn-xs updateBtn" value="${rvo.no }">수정</button>
-             </c:if>
-              <c:if test="${sessionScope.id!=null && (sessionScope.id==rvo.id || sessionScope.id=='admin' ) }">
-             <a href="../board/boardreply_Delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs">삭제</a>
-              </c:if>
-              <c:if test="${sessionScope.id!=null }">
-               <button class="btn btn-xs replyBtn" value="${rvo.no }">댓글</button>
-              </c:if>
-             </td>
-           </tr>
-           <tr>
-             <td class="text-left" colspan="2">
-             <c:if test="${rvo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
-	              &nbsp;&nbsp;
-	            </c:forEach>
-	          </c:if>
-             ${rvo.content }
-             </c:if>
-             <c:if test="${rvo.id=='delete' }">
-                <font color="red">탈퇴한 회원</font></td>
-             <td class="text-right">
-            
-             </td>
-           </tr>
-           <tr>
-             <td class="text-left" colspan="2">
-             <c:if test="${rvo.group_tab>0 }">
-	            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
-	              &nbsp;&nbsp;
-	            </c:forEach>
-	          </c:if>
-					<font color="red">탈퇴한 회원의 댓글입니다.</font>
-			</c:if>
-             </td>
-           </tr>
-           <tr style="display:none" id="m${rvo.no }" class="reply">
-	          <td class="text-left" colspan="2">
-	           <form name="frm" method="post" action="../board/boardreply_ReInsert.do">
-	            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>
-	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="hidden" name=no value="${rvo.no }">
-	            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
-	           </form>
-	          </td>
-	        </tr>
-	        <tr style="display:none" id="u${rvo.no }" class="update">
-	          <td class="text-left" colspan="2">
-	           <form name="frm" method="post" action="../board/boardreply_Update.do">
-	            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>
-	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="hidden" name=no value="${rvo.no }">
-	            <input type="submit" class="btn btn-sm" style="height: 67px" value="수정하기">
-	           </form>
-	          </td>
-	        </tr>
-          </table>
+			      <tr>
+				      <td class="text-left">
+					      <c:if test="${rvo.group_tab>0 }">
+					      	<c:forEach var="i" begin="1" end="${rvo.group_tab }">
+					      		&nbsp;&nbsp;
+					      	</c:forEach>
+					      	<img src="rereply.gif">&nbsp;
+					      </c:if>
+					      <c:if test="${rvo.id=='delete' }">
+					      	<font color="red">탈퇴한 회원</font>
+					      </c:if>
+					      <c:if test="${rvo.delState==1 }" >
+					      	<font color="red">삭제된 댓글</font>
+					      </c:if>
+					      <c:if test="${rvo.id!='delete' && rvo.delState!=1 }" >
+					      	<img src="reply.png"><font color="#A5732A">${rvo.id }</font>&nbsp;${rvo.dbday }
+					      </c:if>
+					  </td>
+					  <c:if test="${rvo.id!='delete' && rvo.delState!=1 }" >
+					  	<td class="text-right">
+						  	<c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id  }">
+						  		<button class="btn btn-xs updateBtn" value="${rvo.no }">수정</button>
+						  	</c:if>
+						  	<c:if test="${sessionScope.id!=null && (sessionScope.id==rvo.id || sessionScope.id=='admin' ) }">
+						  		<a href="../board/boardreply_Delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs">삭제</a>
+						  	</c:if>
+						  	<c:if test="${sessionScope.id!=null }">
+						  		<button class="btn btn-xs replyBtn" value="${rvo.no }">댓글</button>
+						  	</c:if>
+					    </td>
+					  </c:if>
+			       </tr>
+		           <tr>
+		             <td class="text-left" colspan="2">
+			             <c:if test="${rvo.group_tab>0 }">
+				            <c:forEach var="i" begin="1" end="${rvo.group_tab }">
+				              &nbsp;&nbsp;
+				            </c:forEach>
+				         </c:if>
+				         <c:if test="${rvo.id=='delete' }" >
+				         	<font color="red">탈퇴한 회원의 댓글입니다.</font>
+				         </c:if>
+				         <c:if test="${rvo.delState==1 }" >
+					      	<font color="red">삭제된 댓글입니다.</font>
+					     </c:if>
+					     <c:if test="${rvo.id!='delete' && rvo.delState!=1 }" >
+					     	${rvo.content }
+					     </c:if>
+			         </td>
+		           </tr>
+		           
+		           <tr style="display:none" id="m${rvo.no }" class="reply">
+			          <td class="text-left" colspan="2">
+			           <form name="frm" method="post" action="../board/boardreply_ReInsert.do">
+			            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>
+			            <input type="hidden" name="bno" value="${vo.no }">
+			            <input type="hidden" name=no value="${rvo.no }">
+			            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
+			           </form>
+			          </td>
+			        </tr>
+			        <tr style="display:none" id="u${rvo.no }" class="update">
+			          <td class="text-left" colspan="2">
+			           <form name="frm" method="post" action="../board/boardreply_Update.do">
+			            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>
+			            <input type="hidden" name="bno" value="${vo.no }">
+			            <input type="hidden" name=no value="${rvo.no }">
+			            <input type="submit" class="btn btn-sm" style="height: 67px" value="수정하기">
+			           </form>
+			          </td>
+			        </tr>
+		      </table>
         </c:forEach>
       </table>
       <c:if test="${sessionScope.id!=null }">

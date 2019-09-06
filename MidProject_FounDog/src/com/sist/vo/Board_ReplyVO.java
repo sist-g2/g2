@@ -13,10 +13,17 @@ public class Board_ReplyVO {
 	private int group_tab; // 글 작성 시 제목 앞 공백
 	private int root; // 원글 번호
 	private int depth; // 답글의 갯수
+	private int delState;
 	
 	private BoardVO bvo = new BoardVO();
 	private MemberVO mvo = new MemberVO();
 	
+	public int getDelState() {
+		return delState;
+	}
+	public void setDelState(int delState) {
+		this.delState = delState;
+	}
 	public int getNo() {
 		return no;
 	}

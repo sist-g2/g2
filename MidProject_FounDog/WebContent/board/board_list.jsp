@@ -64,8 +64,8 @@ th{
 	<!-- main(자유게시판/유기견게시판)출력 -->
 	  <section id="portfolio">
                 <ul class="portfolio-filter text-center">
+                    <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">유기견제보게시판</a></li>
                     <li><a class="btn btn-default active" href="../board/board_list.do">자유게시판</a></li>
-                    <li><a class="btn btn-default" href="../board/board_list.do">유기견제보게시판</a></li>
                     </ul>
  </section>
 	<div class="row">
@@ -99,25 +99,35 @@ th{
 						</c:forEach>
 						<img src="rereply.gif">
 					</c:if>
+					
 					<c:if test="${vo.id=='delete' }">
-					<font color="red">탈퇴한 회원의 게시글입니다.</font>
-					<%-- <c:if test="${today==vo.dbday }">
-					<sup><font color=red>new</font></sup>
-					</c:if> --%>
-					</td>
-					<td width=15% class="text-center"></td>
-					<td width=20% class="text-center"></td>
-					<td width=10% class="text-center"></td>
+						<font color="red">탈퇴한 회원의 게시글입니다.</font>
+						<%-- <c:if test="${today==vo.dbday }">
+						<sup><font color=red>new</font></sup>
+						</c:if> --%>
+						</td>
+						<td width=15% class="text-center"></td>
+						<td width=20% class="text-center"></td>
+						<td width=10% class="text-center"></td>
 					</c:if>
-					<c:if test="${vo.id!='delete' }">
-					<a href="board_detail.do?no=${vo.no }"><font color="black">${vo.subject }</font>&nbsp;${vo.count==0?'':[vo.count] }</a> 
-					<c:if test="${today==vo.dbday }">
-					<sup><font color=red>new</font></sup>
+					
+					<c:if test="${vo.delState==1 }" >
+						<font color="red">삭제된 게시물입니다.</font>
+						</td>
+						<td width=15% class="text-center"></td>
+						<td width=20% class="text-center"></td>
+						<td width=10% class="text-center"></td>
 					</c:if>
-					</td>
-					<td width=15% class="text-center">${vo.id }</td>
-					<td width=20% class="text-center">${vo.dbday }</td>
-					<td width=10% class="text-center">${vo.hit }</td>
+					
+					<c:if test="${vo.id!='delete' && vo.delState==0 }">
+						<a href="board_detail.do?no=${vo.no }"><font color="black">${vo.subject }</font>&nbsp;${vo.count==0?'':[vo.count] }</a> 
+						<c:if test="${today==vo.dbday }">
+						<sup><font color=red>new</font></sup>
+						</c:if>
+						</td>
+						<td width=15% class="text-center">${vo.id }</td>
+						<td width=20% class="text-center">${vo.dbday }</td>
+						<td width=10% class="text-center">${vo.hit }</td>
 					</c:if>
 					
 				</tr>

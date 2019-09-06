@@ -9,10 +9,10 @@
          이전    1 2 3 4 5 다음
    -->
 	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, count, num 
-		FROM (SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, count, rownum as num 
+		SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, delState, count, num 
+		FROM (SELECT no, category, id, subject, dbday, hit, group_id, group_step, group_tab, root, depth, delState, count, rownum as num 
 				FROM (SELECT no, category, id, subject, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
-				 hit, group_id, group_step, group_tab, root, depth, (SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
+				 hit, group_id, group_step, group_tab, root, depth, delState, (SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
 						FROM board b 
 						WHERE category=#{category} 
 						ORDER BY group_id DESC,group_step ASC
@@ -71,7 +71,7 @@
    <!-- 댓글 읽기 -->
    <select id="boardreplyListData" resultType="Board_ReplyVO" parameterType="int">
      SELECT no,id,bno,content,
-     TO_CHAR(regdate,'YYYY"." MM"." DD HH24:MI') as dbday,group_tab 
+     TO_CHAR(regdate,'YYYY"." MM"." DD HH24:MI') as dbday,group_tab, delState  
      FROM Board_Reply
      WHERE bno=#{bno}
      ORDER BY group_id DESC,group_step ASC
@@ -127,9 +127,9 @@
     WHERE no=#{no}
    </delete>
    <!-- depth!=0 -->
-   <update id="boardreplyDataUpdate" parameterType="Board_ReplyVO">
+   <update id="boardreplyDataUpdate" parameterType="int">
    	UPDATE Board_Reply SET
-   	content=#{content}
+   	delState=1 
    	WHERE no=#{no}
    </update>
    <!-- depth감소 -->
@@ -221,10 +221,9 @@
    </delete>
    
    <!-- 답글 depth!=0 -->
-   <update id="rboardreplyDataUpdate" parameterType="BoardVO">
+   <update id="rboardreplyDataUpdate" parameterType="int">
    	UPDATE Board SET
-   	content=#{content},
-   	subject=#{subject}
+   	delState=1
    	WHERE no=#{no}
    </update>
    
