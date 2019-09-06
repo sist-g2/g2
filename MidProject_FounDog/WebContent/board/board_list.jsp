@@ -117,12 +117,12 @@ th{
 				<td class="text-center">
 					<ul class="pagination">
 						<li><a href="board_list.do?page=1">&lt;&lt;</a></li>
-						<li><a href="board_list.do?page=${startPage-1}">&lt;</a></li>
+						<li><a href="board_list.do?page=${startPage}">&lt;</a></li>
 						<c:forEach var="i" begin="${startPage }" end="${endPage }">
 							<li class="${i==curpage?'active':''}">
 							<a href="board_list.do?page=${i }">${i }</a>
 						</c:forEach>
-						<li><a href="board_list.do?page=${endPage+1}">&gt;</a></li>
+						<li><a href="board_list.do?page=${endPage}">&gt;</a></li>
 						<li><a href="board_list.do?page=${allPage }">&gt;&gt;</a></li>
 					</ul>
 				</td>
