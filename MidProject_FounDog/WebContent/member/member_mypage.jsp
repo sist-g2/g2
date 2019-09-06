@@ -112,36 +112,36 @@ $(function(){
 				<div class="col-md-12">
 					<h2 class="page-header">바로가기</h2>
 				</div>
-				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-					<div class="feature-inner">
-						<div class="icon-wrapper">
-							<a href="#"><i class="fa fa-2x fa-envelope-o"></i></a>
-						</div>
-						<h2>진료 내역</h2>
-					</div>
-				</div>
 				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
 					<div class="feature-inner">
-						<div class="icon-wrapper">
-							<a href="#"><i class="fa fa-2x fa-heart-o"></i></a>
-						</div>
-						<h2>진료 예약 내역</h2>
+						<!-- <div class="icon-wrapper"> -->
+							<a href="../hospital/hospital_reserve_detail.do"><img src="../member/list.png"></a>
+						<!-- </div> -->
+						<h3>진료 예약 내역</h3>
+					</div>
+				</div>
+				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+					<div class="feature-inner">
+						<!-- <div class="icon-wrapper"> -->
+							<a href="../hospital/hospital_carechart_detail.do"><img src="../member/hospital.png"></a>
+						<!-- </div> -->
+						<h3>진료 내역</h3>
 					</div>
 				</div>
 				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="900ms">
 					<div class="feature-inner">
-						<div class="icon-wrapper">
-							<a href="#"><i class="fa fa-2x fa-star-o"></i></a>
-						</div>
-						<h2>예방접종 내역</h2>
+						<!-- <div class="icon-wrapper"> -->
+							<a href="#"><img src="../member/vacc.png"></a>
+						<!-- </div> -->
+						<h3>예방접종 내역</h3>
 					</div>
 				</div>
 				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="1200ms">
 					<div class="feature-inner">
-						<div class="icon-wrapper">
-							<a href="../feed/feed_fav_list.do"><i class="fa fa-2x fa-comments-o"></i></a>
-						</div>
-						<h2>찜 목록</h2>
+						<!-- <div class="icon-wrapper"> -->
+							<a href="../feed/feed_fav_list.do"><img src="../member/jjim.png"></a>
+						<!-- </div> -->
+						<h3>찜 목록</h3>
 					</div>
 				</div>                        
 			</div>

@@ -7,10 +7,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../main/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/member.css">
 <style type="text/css">
 .row {
    margin: 0px auto;
    width:900px;
+}
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
+th{
+	background-color:#FFF;
+	color:#A5732A;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -31,12 +48,12 @@ $(function(){
 <body>
    <div class="container">
      <div class="row">
-       <h2 class="text-center">게시판</h2>
+       <h2 class="text-center">정보성 게시판</h2>
        <table class="table">
          <tr>
     	   <c:if test="${sessionScope.id!=null && sessionScope.id=='admin' }">
            <td class="text-left">
-             <a href="adminboard_insert.do" class="btn btn-sm btn-success">새글</a>
+             <a href="adminboard_insert.do" class="btnCss">&nbsp;&nbsp;새글&nbsp;&nbsp;</a>
            </td>
             </c:if>
            <td class="text-right">
@@ -45,7 +62,7 @@ $(function(){
          </tr>
        </table>
        <table class="table">
-         <tr class="danger">
+         <tr>
           <th width=10% class="text-center">번호</th>
           <th width=45% class="text-center">제목</th>
           <th width=15% class="text-center">이름</th>
@@ -56,7 +73,7 @@ $(function(){
          <c:forEach var="vo" items="${list }" varStatus="s">
            <tr class="${s.index%2==0?'':'warning' }">
              <td width=10% class="text-center">${count }</td>
-             <td width=45% class="text-left"><a href="adminboard_detail.do?no=${vo.no }">${vo.subject }</a>
+             <td width=45% class="text-left"><a href="adminboard_detail.do?no=${vo.no }"><font color='black'>${vo.subject }</font></a>
                <%--
                      board_detail.do => DispatcherServlet => 1.(BoardModel
                                         =================    @RequestMapping("board_detail.do")
@@ -83,8 +100,7 @@ $(function(){
         <tr>
           <td class="text-left">
            <form method="post" action="find.do" id="frm">
-           Search:
-           <select name="fs" class="input-sm">
+           <select name="fs" class="input-md form-control2">
              <option value="name">이름</option>
              <option value="subject">제목</option>
              <option value="content">내용</option>
@@ -92,8 +108,8 @@ $(function(){
            <%--
                   lg => sm => md => xs
             --%>
-           <input type=text name=ss size=15 class="input-sm" id="ss">
-           <input type=button value="검색" class="btn btn-sm btn-danger" id="findBtn">
+           <input type=text name=ss size=15 class="input-sm form-control2" id="ss">
+           <input type=button value="검색" class="btnCss" id="findBtn">
            </form>
           </td>
           	<td class="text-center">

@@ -20,6 +20,10 @@
 	cursor: pointer;
 	border-style: none;
 }
+.pagination li {
+    display: inline-block;
+    margin: 0 3px;
+}
 </style>
 </head>
 <body>
@@ -86,7 +90,7 @@ function reservedate(){
 				<table class="table">
 						<c:if test="${list.size() eq 0 }">
 							<tr>
-								<td class="text-center">검색 결과가 없습니다.</td>
+								<td class="text-center"><img src="../hospital/search_nothing.png"></td>
 							</tr>
 						</c:if>					
 					<c:forEach var="vo" items="${list }">
@@ -105,15 +109,15 @@ function reservedate(){
 			<div class="col-sm-4" style="height: 90px; width: 100%">
 				<ul class="pagination">
 					<c:if test="${curpage>BLOCK }">
-			           <li><input type="button" class="result_page form-control3" data-page="1" value="&lt;&lt;"></li>
-			           <li><input type="button" class="result_page form-control3" data-page="${startPage-1 }" value="&lt;"></li>
+			           <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="1" value="&lt;&lt;"></li>
+			           <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${startPage-1 }" value="&lt;"></li>
 			         </c:if>
 					 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					   <li class=${curpage==i?"active":"" }><input type="button" class="result_page form-control2" data-page="${i}" value="${i}"></li>
+					   <li style="display: inline-block;margin: 0 3px;" class=${curpage==i?"active":"" }><input type="button" class="result_page form-control3" data-page="${i}" value="${i}"></li>
 					 </c:forEach> 
 					 <c:if test="${endPage<allPage }">
-					   <li><input type="button" class="result_page form-control3" data-page="${endPage+1 }" value="&gt;"></li>
-					   <li><input type="button" class="result_page form-control3" data-page="${allPage }" value="&gt;&gt;"></li>
+					   <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${endPage+1 }" value="&gt;"></li>
+					   <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${allPage }" value="&gt;&gt;"></li>
 			         </c:if>
 				</ul>
 			</div>

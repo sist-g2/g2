@@ -21,7 +21,18 @@ th{
 	background-color:#FFF;
 	color:#A5732A;
 }
-
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -51,7 +62,7 @@ th{
 			<tr>
 				<td class="text-left">
 				<c:if test="${sessionScope.id!=null }">
-						<a href="qna_board_insert.do" class="btn btn-sm">새글</a>
+						<a href="qna_board_insert.do" class="btnCss">&nbsp;&nbsp;새글&nbsp;&nbsp;</a>
 					</c:if>
 					</td>
 				<td class="text-right">${curpage } page / ${totalpage } pages</td>
@@ -108,8 +119,8 @@ th{
 							<option value="id">이름</option>
 							<option value="subject">제목</option>
 						</select> 
-						<input type=text name=ss size=15 class="input-sm form-control2" id="ss">
-						<input type=button value="검색" class="btn btn-sm" id="findBtn">
+						<input type=text name=ss size=15 class="input-sm form-control2" id="ss">&nbsp;&nbsp;
+						<input type=button value="검색" class="btnCss" id="findBtn">
 					</form>
 				</td>
 				<td class="text-center">
