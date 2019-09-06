@@ -117,7 +117,7 @@ public class FeedModel {
 				startPage = 1;
 				endPage = startPage+4;
 			} else if (curpage >= totalPage-2) {
-				startPage = totalPage-5;
+				startPage = totalPage-4;
 				endPage = totalPage;
 			} else {
 				startPage = curpage-2;
@@ -260,7 +260,7 @@ public class FeedModel {
 				startPage = 1;
 				endPage = startPage+4;
 			} else if (curpage >= totalPage-2) {
-				startPage = totalPage-5;
+				startPage = totalPage-4;
 				endPage = totalPage;
 			} else {
 				startPage = curpage-2;
@@ -329,7 +329,7 @@ public class FeedModel {
 					startPage = 1;
 					endPage = startPage+4;
 				} else if (curpage >= totalPage-2) {
-					startPage = totalPage-5;
+					startPage = totalPage-4;
 					endPage = totalPage;
 				} else {
 					startPage = curpage-2;
