@@ -85,6 +85,7 @@
                             <c:if test="${sessionScope.id!=null }">                                                       	
                             <li><a href="../hospital/hospital_reserve_detail.do">예약 내역</a></li>
                             <li><a href="../hospital/hospital_carechart_detail.do">진료 내역</a></li>                           
+                            <li><a href="../hospital/hospital_vaccination_detail.do">예방접종 내역</a></li>                           
                           </c:if>
                         </ul>
                     </li>

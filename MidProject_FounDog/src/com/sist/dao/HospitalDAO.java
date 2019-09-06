@@ -10,6 +10,7 @@ import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
 import com.sist.vo.Reserve_DetailVO;
+import com.sist.vo.VaccinationVO;
 
 
 public class HospitalDAO {
@@ -163,6 +164,32 @@ public class HospitalDAO {
 		 	int total = 0;
 		 	SqlSession session=ssf.openSession();
 		 	total = session.selectOne("carechartDetailTotalPage", map);
+		 	session.close();
+		 	return total;
+	   }
+	 
+	 public static List<VaccinationVO> vaccinationDetail(Map map)
+	   {
+		   SqlSession session=ssf.openSession();		   
+		   List<VaccinationVO> list=session.selectList("vaccinationDetail",map);
+		   session.close();
+		   return list;
+	   }
+	 
+	 public static int vaccinationDetailAllCnt(Map map)
+	   {
+		 	int cnt = 0;
+		 	SqlSession session=ssf.openSession();
+		 	cnt = session.selectOne("vaccinationDetailAllCnt", map);
+		 	session.close();
+		 	return cnt;
+	   }
+	 
+	 public static int vaccinationDetailTotalPage(Map map)
+	   {
+		 	int total = 0;
+		 	SqlSession session=ssf.openSession();
+		 	total = session.selectOne("vaccinationDetailTotalPage", map);
 		 	session.close();
 		 	return total;
 	   }

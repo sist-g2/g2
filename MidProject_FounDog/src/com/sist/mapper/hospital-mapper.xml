@@ -138,7 +138,7 @@ FROM reserve
 </select>
 
 <update id="reserveDelete" parameterType="int">
-	UPDATE reserve SET state='?덉빟痍⑥냼'
+	UPDATE reserve SET state='예약취소'
 	WHERE no = #{no}
 </update>
 
@@ -198,6 +198,61 @@ FROM carechart
 	</if>
 	<if test="dno!=''" >
 		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
+	</if>
+</where>
+)
+</select>
+
+<select id="vaccinationDetail" resultType="VaccinationVO" parameterType="hashmap">
+SELECT no, vaccination_name, last_date, schedule_date, vacc_no, dogname, num
+FROM (
+	SELECT no, vaccination_name, last_date , schedule_date, vacc_no, dogname, rownum as num
+	FROM(
+		SELECT no,
+        vaccination_name,
+		TO_CHAR(last_date,'YYYY-MM-DD') as last_date,
+		TO_CHAR(schedule_date,'YYYY-MM-DD') as schedule_date,
+		vacc_no,
+		(SELECT dname FROM dog WHERE dno = dogno) as dogname
+		FROM vaccination
+		<where>
+			<if test="dno==''" >
+				dogno IN (SELECT dno FROM dog WHERE id = #{id})
+			</if>
+			<if test="dno!=''" >
+				dogno = (SELECT dno FROM dog WHERE dno = #{dno})
+			</if>
+		</where>
+	)
+)
+WHERE num BETWEEN #{start} AND #{end}
+
+</select>
+
+<select id="vaccinationDetailAllCnt" resultType="int" parameterType="hashmap" >
+SELECT COUNT(*) 
+FROM (SELECT no
+FROM vaccination
+<where>
+	<if test="dno==''" >
+		dogno IN (SELECT dno FROM dog WHERE id = #{id})
+	</if>
+	<if test="dno!=''" >
+		dogno = (SELECT dno FROM dog WHERE dno = #{dno})
+	</if>
+</where>
+)
+</select>
+<select id="vaccinationDetailTotalPage" resultType="int" parameterType="hashmap" >
+SELECT CEIL(COUNT(*)/5.0)  
+FROM (SELECT no
+FROM vaccination
+<where>
+	<if test="dno==''" >
+		dogno IN (SELECT dno FROM dog WHERE id = #{id})
+	</if>
+	<if test="dno!=''" >
+		dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 	</if>
 </where>
 )

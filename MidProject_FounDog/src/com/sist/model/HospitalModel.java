@@ -19,6 +19,7 @@ import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
 import com.sist.vo.Reserve_DetailVO;
+import com.sist.vo.VaccinationVO;
 
 @Controller("hospitalModel")
 public class HospitalModel {
@@ -290,7 +291,7 @@ public class HospitalModel {
 			String id = (String)session.getAttribute("id");
 			
 			DogVO dvo = new DogVO();
-			String dname = model.getRequest().getParameter("dname");
+			String dname = model.getRequest().getParameter("dogname");
 			String dtype = model.getRequest().getParameter("dtype");
 			String dyear = model.getRequest().getParameter("dyear");
 			String dmonth = model.getRequest().getParameter("dmonth");
@@ -307,8 +308,12 @@ public class HospitalModel {
 			dvo.setId(id);
 				
 			MemberDAO.dogJoin(dvo);
+						
+			List<DogVO> list=HospitalDAO.reserveDog(id);
 			
-			return "../hospital/hospital_dog_insert.jsp";
+			model.addAttribute("list", list);
+			
+			return "../hospital/hospital_dog.jsp";
 		}
 		
 		@RequestMapping("hospital/hospital_reserve_ok.do")
@@ -532,6 +537,86 @@ public class HospitalModel {
 			model.addAttribute("endPage", endPage);
 			
 			return "../hospital/hospital_carechart_list.jsp";
+		}
+		
+		@RequestMapping("hospital/hospital_vaccination_detail.do")
+		public String hospital_vaccination_detail(Model model){
+			
+			HttpSession session=model.getRequest().getSession();
+			String id=(String)session.getAttribute("id");
+			
+			List<DogVO> doglist = HospitalDAO.reserveDogname(id);
+			model.addAttribute("doglist", doglist);
+			
+			model.addAttribute("main_jsp", "../hospital/hospital_vaccination_detail.jsp");
+			return "../main/main.jsp";
+		}
+		
+		@RequestMapping("hospital/hospital_vaccination_list.do")
+		public String hospital_vaccination_list(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			HttpSession session=model.getRequest().getSession();
+			String id=(String)session.getAttribute("id");
+			
+			Map map=new HashMap();
+			String dno = model.getRequest().getParameter("dno");		
+			String page = model.getRequest().getParameter("page");
+			
+			if(page==null)
+				page = "1";
+			int curpage = Integer.parseInt(page);
+			model.addAttribute("curpage", curpage);
+			int rowSize = 5;
+			int start = (curpage*rowSize) - (rowSize-1);
+			int end = curpage*rowSize;
+			map.put("start", start);
+			map.put("end", end);
+			
+			if(dno==null || dno==""){
+				dno = "";
+				map.put("dno", dno);	
+			}else{
+				
+				map.put("dno", Integer.parseInt(dno));			
+			}			
+			map.put("id", id);
+			
+			// 페이지 목록
+			int totalNum = HospitalDAO.vaccinationDetailAllCnt(map);
+			model.addAttribute("totalNum", totalNum);
+			
+			int totalPage = HospitalDAO.vaccinationDetailTotalPage(map);
+			int startPage = 0;
+			int endPage = 0;
+			
+			if(totalPage <= 5) {
+				startPage = 1;
+				endPage = totalPage;
+			} else {
+				if(curpage <= 2) {
+					startPage = 1;
+					endPage = startPage+4;
+				} else if (curpage >= totalPage-2) {
+					startPage = totalPage-5;
+					endPage = totalPage;
+				} else {
+					startPage = curpage-2;
+					endPage = curpage+2;
+				}
+			}
+			
+			List<VaccinationVO> list = HospitalDAO.vaccinationDetail(map);
+						
+			model.addAttribute("list", list);			
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			
+			return "../hospital/hospital_vaccination_list.jsp";
 		}
 		
 }

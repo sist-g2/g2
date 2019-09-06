@@ -26,9 +26,7 @@ $("#dogInsert").click(function(){
 		url:'hospital_dog_insert.do',
 		success:function(response)
 		{	
-			var dogInsert = $(response).find('.optionList');
-			$("#PopupDog").html(dogInsert);
-			
+			$("#PopupDog").html(response);
 		}
 	});
     
@@ -57,11 +55,12 @@ return false;
 			<c:forEach var="vo" items="${list }">
 				<tr style="border: solid 1px;">
 					<td class="dogname">${vo.dname}</td>
-					<input type="hidden" class="dno" value="${vo.dno }">	
+					
 					<td>${vo.dtype}</td>	
 					<td>${vo.dbirth}</td>	
 					<td>${vo.dsex}</td>	
-				<td><input type="button" value="선택" data-dno="${vo.dno}" data-dname="${vo.dname}" class="dogSel"></td>
+				<td><input type="hidden" class="dno" value="${vo.dno }">
+				<input type="button" value="선택" data-dno="${vo.dno}" data-dname="${vo.dname}" class="dogSel"></td>
 				</tr>
 			</c:forEach>
 			</table>

@@ -1,25 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset=UTF-8>
 <title>Insert title here</title>
 <link href="../css/member.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	alert("성공");
 	$('#addDog').click(function(){
-		alert("성공");
-		var dname = $('#dname').val();
-		
-		if(dname.trim()==""){
-			alert("반려견의 이름을 입력해주세요.")
-			$('#dname').focus();
+		var dogname = $('#dogname').val();
+		var dtype = $('#dtype').val();
+		var dyear = $('#dyear').val();
+		var dmonth = $('#dmonth').val();
+		var dday = $('#dday').val();
+		var dsex = $("input[name='dsex']:checked").val();
+	
+		if(dogname.trim()==""){
+			alert("반려견의 이름을 입력해주세요");
+			$('#dogname').focus();
 			return;
 		}
-		$('#hospitaldogInsert').submit();
+			
+		 $.ajax({ 
+				type:'post',
+				url:'hospital_dog_insert_ok.do',
+				data:{dogname:dogname,dtype:dtype,dyear:dyear,dmonth:dmonth,dday:dday,dsex:dsex},
+				success:function(response)
+				{	
+					$("#PopupDog").html(response);				
+				}
+			});
+		 $("#contents2 > a").blur();
+		 $("#layerPopup2").show();
+		 $("#layerPopup2 a").focus();
+
+
+		 return false;
 	});
 });
 </script>
@@ -28,7 +46,10 @@ $(function(){
 	margin: 0px auto;
 	width: 400px;
 }
-.optionList td input+label {
+.dsexSelect input {
+	display: none;
+}
+.dsexSelect input+label {
 	display: inline-block;
 	border-radius: 6px;
 	background: #ffffff;
@@ -40,28 +61,24 @@ $(function(){
 	color: #d29949;
 }
 
-.optionList td label {
+.dsexSelect label {
 	font-weight: 400;
 }
 
-.optionList td input[type=checkbox]:checked + label {
+.dsexSelect input[type=checkbox]:checked + label {
 	background: #bd8942;
 	color: #ffffff;
 }
 
-.optionList td input[type=radio]:checked + label {
+.dsexSelect input[type=radio]:checked + label {
 	background: #bd8942;
 	color: #ffffff;
 }
-tbody{
-	width: 400px !important;
-	display: table;
-}
+
 </style>
 </head>
 <body>
 
-<form id="hospitaldogInsert" name="frm" method="post" action="../hospital/hospital_dog_insert_ok.do">
 <div class="rowrow optionList">
 	<table class="table table-borderless rowrow" style="width:400px">
 		<tr>
@@ -74,7 +91,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name" id="dname">
+				<input type=text id="dogname" name=dogname class="form-control" size=15 placeholder="Dog Name" >
 			</td>
 		</tr>
 		<tr>
@@ -82,7 +99,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<input type=text name=dtype class="form-control" size=15 placeholder="Dog breeds">
+				<input type=text name=dtype id="dtype" class="form-control" size=15 placeholder="Dog breeds">
 			</td>
 		</tr>
 		<tr>
@@ -90,12 +107,12 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left" >
-				<select name=dyear class="form-control2" style="width:27%">
+				<select name=dyear id="dyear" class="form-control2" style="width:27%">
 					<option></option>
 					<option>2019</option>
 					<option>2018</option>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
-				<select name=dmonth class="form-control2" style="width:27%">
+				<select name=dmonth id="dmonth" class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -110,7 +127,7 @@ tbody{
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
+				<select name=dday id="dday" class="form-control2" style="width:27%">
 					<option></option>
 					<option>1</option>
 					<option>2</option>
@@ -121,10 +138,10 @@ tbody{
 			<td class="text-left" >반려견 성별</td>
 		</tr>
 		<tr>
-			<td class="text-left" >
-				<input type=radio value="수컷" name=dsex checked="checked" style="display: none;" id="dsex-male">
+			<td class="text-left dsexSelect" >
+				<input type=radio value="수컷" name=dsex checked="checked" id="dsex-male" class="dsex">
 				<label for="dsex-male">&nbsp;&nbsp;&nbsp;수컷&nbsp;&nbsp;&nbsp;</label>
-				<input type=radio value="암컷" name=dsex style="display: none;" id="dsex-female">
+				<input type=radio value="암컷" name=dsex id="dsex-female" class="dsex">
 				<label for="dsex-female">&nbsp;&nbsp;&nbsp;암컷&nbsp;&nbsp;&nbsp;</label>
 			</td>
 		</tr>
@@ -137,6 +154,5 @@ tbody{
 		</tr>
 	</table>
 </div>
-</form>
 </body>
 </html>
