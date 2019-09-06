@@ -33,6 +33,18 @@ th{
 	cursor: pointer;
 	border-style: none;
 }
+.btnSearchCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 37px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -119,9 +131,9 @@ th{
 						<select name="fs" class="input-md form-control2">
 							<option value="id">이름</option>
 							<option value="subject">제목</option>
-						</select> 
+						</select>&nbsp;
 						<input type=text name=ss size=15 class="input-sm form-control2" id="ss">&nbsp;&nbsp;
-						<input type=button value="검색" class="btnCss" id="findBtn">
+						<input type=button value="검색" class="btnSearchCss" id="findBtn">
 					</form>
 				</td>
 				<!-- 5p씩 나누기 -->

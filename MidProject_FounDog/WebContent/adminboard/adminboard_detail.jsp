@@ -13,6 +13,22 @@
    margin: 0px auto;
    width:900px;
 }
+th{
+	background-color:#FFF;
+	color:#A5732A;
+}
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 </style>
 </head>
 <body>
@@ -24,22 +40,22 @@
     <div class="row">
       <table class="table">
         <tr>
-          <th class="text-center success" width=20%>번호</th>
-          <td class="text-center" width=30%>${vo.no }</td>
-          <th class="text-center success" width=20%>작성일</th>
-          <td class="text-center" width=30%>
+          <th class="text-center" width=20%>번호</th>
+          <td class="text-left" width=30%>${vo.no }</td>
+          <th class="text-center" width=20%>작성일</th>
+          <td class="text-left" width=30%>
             ${vo.dbday }
             <%-- <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> --%>
           </td>
         </tr>
         <tr>
-          <th class="text-center success" width=20%>이름</th>
-          <td class="text-center" width=30%>${vo.name }</td>
-          <th class="text-center success" width=20%>조회수</th>
-          <td class="text-center" width=30%>${vo.hit }</td>
+          <th class="text-center" width=20%>이름</th>
+          <td class="text-left" width=30%>${vo.name }</td>
+          <th class="text-center" width=20%>조회수</th>
+          <td class="text-left" width=30%>${vo.hit }</td>
         </tr>
         <tr>
-          <th class="text-center success" width=20%>제목</th>
+          <th class="text-center" width=20%>제목</th>
           <td class="text-left" colspan="3">${vo.subject }</td>
         </tr>
         <tr>
@@ -48,10 +64,10 @@
         <tr>
           <td colspan="4" class="text-right">
           <c:if test="${sessionScope.id!=null && sessionScope.id=='admin' }">
-            <a href="adminboard_update.do?no=${vo.no }" class="btn btn-sm btn-success">수정</a>
-            <a href="adminboard_delete.do?no=${vo.no }" class="btn btn-sm btn-info">삭제</a>
+            <a href="adminboard_update.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;수정&nbsp;&nbsp;</a>
+            <a href="adminboard_delete.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;삭제&nbsp;&nbsp;</a>
           </c:if>
-            <a href="adminboard_list.do" class="btn btn-sm btn-warning">목록</a>
+            <a href="adminboard_list.do" class="btnCss">&nbsp;&nbsp;목록&nbsp;&nbsp;</a>
           </td>
         </tr>
       </table>

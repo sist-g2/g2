@@ -25,6 +25,44 @@ th{
 	background-color:#FFF;
 	color:#A5732A;
 }
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
+.btnCss2 {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 74px;
+	width: 80px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
+textarea {
+  border: 1px solid #d99c4e;
+  font-weight: 300;
+  outline: none;
+  box-shadow: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+}
 </style>
 <script type="text/javascript">
 var i=0;
@@ -95,13 +133,13 @@ $(function(){
         <tr>
           <td colspan="4" class="text-right">
           	<c:if test="${sessionScope.id!=null && (sessionScope.id==vo.id || sessionScope.id=='admin' )}" >
-          		<a href="board_update.do?no=${vo.no }" class="btn btn-sm">수정</a>
-            	<a href="board_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
+          		<a href="board_update.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;수정&nbsp;&nbsp;</a>
+            	<a href="board_delete.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;삭제&nbsp;&nbsp;</a>
           	</c:if>
           	<c:if test="${sessionScope.id!=null}" >
-          		<a href="rboard_reply.do?no=${vo.no }" class="btn btn-sm">답글</a>
+          		<a href="rboard_reply.do?no=${vo.no }" class="btnCss">&nbsp;&nbsp;답글&nbsp;&nbsp;</a>
           	</c:if>
-            <a href="board_list.do" class="btn btn-sm" >목록</a>
+            <a href="board_list.do" class="btnCss" >&nbsp;&nbsp;목록&nbsp;&nbsp;</a>
            
           </td>
         </tr>
@@ -194,9 +232,9 @@ $(function(){
 	        <tr>
 	          <td class="text-left">
 	           <form name="frm" method="post" action="../board/boardreply_Insert.do">
-	            <textarea rows="3" cols="110" name="content" style="float: left"></textarea>
+	            <textarea rows="3" cols="110" name="content" style="float: left"></textarea>&nbsp;&nbsp;
 	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
+	            <input type="submit" class="btnCss2" value="댓글쓰기">
 	           </form>
 	          </td>
 	        </tr>

@@ -113,7 +113,7 @@ function reservedate(){
 			           <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${startPage-1 }" value="&lt;"></li>
 			         </c:if>
 					 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					   <li style="display: inline-block;margin: 0 3px;" class=${curpage==i?"active":"" }><input type="button" class="result_page form-control3" data-page="${i}" value="${i}"></li>
+					   <li style="display: inline-block;margin: 3px 3px;" class=${curpage==i?"active":"" }><input type="button" class="result_page form-control3" data-page="${i}" value="${i}"></li>
 					 </c:forEach> 
 					 <c:if test="${endPage<allPage }">
 					   <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${endPage+1 }" value="&gt;"></li>

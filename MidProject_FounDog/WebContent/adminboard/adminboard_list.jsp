@@ -25,6 +25,18 @@
 	cursor: pointer;
 	border-style: none;
 }
+.btnSearchCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 37px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 th{
 	background-color:#FFF;
 	color:#A5732A;
@@ -104,12 +116,12 @@ $(function(){
              <option value="name">이름</option>
              <option value="subject">제목</option>
              <option value="content">내용</option>
-           </select>
+           </select>&nbsp;
            <%--
                   lg => sm => md => xs
             --%>
-           <input type=text name=ss size=15 class="input-sm form-control2" id="ss">
-           <input type=button value="검색" class="btnCss" id="findBtn">
+           <input type=text name=ss size=15 class="input-sm form-control2" id="ss">&nbsp;&nbsp;
+           <input type=button value="검색" class="btnSearchCss" id="findBtn">
            </form>
           </td>
           	<td class="text-center">
