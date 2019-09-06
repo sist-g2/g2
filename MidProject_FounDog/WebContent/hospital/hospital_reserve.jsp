@@ -8,10 +8,9 @@
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
 
-.board_write { width: 100%; border-collapse: collapse; border-top: 3px solid #232021; margin-top:20px }
-.board_write th, .board_write td { border-bottom: 1px solid #cdcdcd; border-top: 1px solid #cdcdcd; padding: 10px 0; background: #fff }
-.board_write th { background: #efefef; font-weight: bold; text-align: left; font-size: 13px;border: 1px solid #cdcdcd;border-left:0;border-right:0;vertical-align:top;padding-top:12px }
-.board_write th em {font-family:'Verdana';font-size:1.1em;padding-right:5px;padding-left:10px}
+.board_write { width: 100%; border-collapse: collapse; border-top: 3px solid #d99c4e; margin-top:20px }
+.board_write th, .board_write td {padding: 10px 0; background: #fff }
+.board_write th { background: #fff4e5; font-weight: bold; text-align: left; font-size: 13px;border: 1px solid #cdcdcd;border-left:0;border-right:0;vertical-align:top;padding-top:12px }
 .board_write td { padding-left: 30px }
 .board_write .spacer {border:0}
 .board_write .label {font-weight:bold; display:inline-block; width:105px}
@@ -20,9 +19,9 @@
 .board_write .bdt{border-top:1px solid #cdcdcd;}
 .board_write .bdb{border-bottom:1px solid #cdcdcd;}
 .board_write td,.board_write th{border:0;}
-.board_write > tbody > tr > td.ml_28{padding-left:0;margin-left:28px;display:block;border-bottom:1px solid #cdcdcd;}
+.board_write > tbody > tr > td.ml_28{padding-left:0;margin-left:28px;display:block;}
 
-.board_write .end {border-bottom:3px solid #2b2829;border-left:0;border-right:0}
+.board_write .end {border-bottom:3px solid #d99c4e;border-left:0;border-right:0}
 
 #layerPopup{
   padding:20px; 
@@ -50,7 +49,20 @@
   cursor:pointer;
 }
 
-
+.form-control2 {
+  border: 1px solid #d99c4e;
+  font-weight: 300;
+  outline: none;
+  box-shadow: none;
+  height: 40px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+}
 </style>
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -179,7 +191,7 @@ $(document).ready(function(){
 		<h3>개인정보취급 동의</h3>
 		</div>
 		<div id="a2" style="height: 200px;">
-			<div id="a3" style="height: 150px; border: solid; overflow: auto;">
+			<div id="a3" style="height: 150px; border: 1px solid #d99c4e; overflow: auto; padding:8px">
 				파운독은 귀하의 개인정보보호를 매우 중요시하며, 개인정보보호방침을 통하여 귀하께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 개인정보 수집에 대한 동의
 파운독은 귀하께 회원가입시 개인정보보호방침 또는 이용약관의 내용을 공지하며 회원가입버튼을 클릭하면 개인정보 수집에 대해 동의하신 것으로 봅니다.
@@ -235,7 +247,7 @@ $(document).ready(function(){
 본 개인정보보호정책은 2019년 9월 01일부터 시행합니다.
 				
 			</div>
-			<div id="a4" style="height: 50px;">
+			<div id="a4" style="height: 50px;" class="text-right">
 				<input type="checkbox" id="check">개인정보 취급방침에 동의합니다.
 			</div>
 		</div>		
@@ -246,14 +258,14 @@ $(document).ready(function(){
 <col width="">
 </colgroup>
 <tbody><tr class="first bdt bdb">
-	<th><em>01.</em>진료병원</th>
+	<th>01. 진료병원</th>
 	<td>
 	<input type="hidden" name="hosNo" id="hosNo" value="${no }">
 		${hosName }
 	</td>
 </tr>
 <tr>
-	<th rowspan="4"><em>02.</em>예약희망날짜</th>
+	<th rowspan="3">02. 예약희망날짜</th>
 	<td style="padding:20px 0 30px 0" class="ml_28">
 		<div id="contents">
 		  <a href="#layerPopup">예약 날짜 선택</a>
@@ -269,31 +281,27 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td class="ml_28">
-		예약희망일 : <input type="text" id="reserve_day" name="reserve_day" value="" readonly="readonly">
+		예약희망일 : <input type="text" class="form-control2" id="reserve_day" name="reserve_day" value="" readonly="readonly">
 	</td>
 </tr>
 <tr class="bdb">
 	<td>
 		예약희망시간 
-		<select name="wr_5" id="wr_5">
+		<select name="wr_5" class="form-control2" id="wr_5">
 		<option value="">예약일자를 먼저 선택해주세요.</option>				
 		</select>
 		<span style="color:#f00; font-size:0.9em; margin-left:10px;"> *예약희망시간은 확정이 아니며 담당 센터에서 일정 확인 후 연락(전화 또는 메시지)을 드립니다.</span>		
 	</td>
 </tr>
-<tr>
-	<th style="background:#fff;height:20px"></th>
-	<td></td>
-</tr>
 <tr class="bdt">
-	<th class="end bdb" rowspan="7"><em>03.</em>기타정보입력</th>
+	<th class="end bdb" rowspan="7">03. 기타정보입력</th>
 	<td class="ml_28">
-		보호자 명 : <input type="text" readonly="readonly" value="${name }">
+		보호자 명 : <input type="text" class="form-control2" readonly="readonly" value="${name }">
 	</td>
 </tr>
 <tr>
 	<td class="ml_28">
-		진료받는 강아지 : <input type="text" readonly="readonly" id="dname">&nbsp;
+		진료받는 강아지 : <input type="text" class="form-control2" readonly="readonly" id="dname">&nbsp;
 		<input type="hidden" name="dogNo" id="dogNo" value=""> 
 		<div id="contents2">
 		  <a href="#layerPopup2">강아지 선택</a>
