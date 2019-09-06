@@ -8,16 +8,16 @@
 <title>Insert title here</title>
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
-.reserve_detail_row{	
+.carechart_detail_row{	
 	height: 750px;
 }
 
-#reserve_list_table th{
+#carechart_list_table th{
 	border-top: 1px solid #444444;
 	border-bottom: 1px solid #444444;
 	padding: 5px;
 }
-#reserve_list_table .content td{
+#carechart_list_table .content td{
 	border-bottom: 1px solid #444444;
 	padding: 8px;
 }
@@ -25,19 +25,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.cancelbtn').click(function(){
-		var rno = $(this).attr('data-rno');
-		
-		 if(confirm("예약을 취소하시겠습니까?") == true){
-			 alert("예약이 취소되었습니다.");
-			 location.href='hospital_reserve_delete.do?rno='+rno;
-			return true;        
-		    }
-		    else{
-		        return false;
-		    }
-		 
-	});
 	$('.pageBtn').click(function(){
 		var page = $(this).val();
 		var dogname=$('#selectDog').val();
@@ -46,11 +33,11 @@ $(function(){
 		
 		 $.ajax({ // 검색 결과 리스트 ajax
 			type:'post',
-			url:'hospital_reserve_list.do',
+			url:'hospital_carechart_list.do',
 			data:{dogname:dogname,startDate:startDate,endDate:endDate,page:page},
 			success:function(response)
 			{	
-				$("#reservelist").html(response);	
+				$("#carechartlist").html(response);	
 			
 			}
 		});
@@ -59,41 +46,24 @@ $(function(){
 </script>
 </head>
 <body>
-	<table id="reserve_list_table" style="width: 100%; height: 100%;">
+	<table id="carechart_list_table" style="width: 100%; height: 100%;">
 		<caption class="text-center" style="padding: 20px;">
-			<h3> ${sessionScope.name }님의 예약 내역입니다.</h3>
+			<h3> ${sessionScope.name }님의 진료 내역입니다.</h3>
 		</caption>
 		<tr height="50px">
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약 번호</font></th>
-			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">의뢰일</font></th>
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">보호자명</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">진료 번호</font></th>
+			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">진료날짜</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">의사명</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">동물명</font></th>
-			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">예약일시</font></th>
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약시간</font></th>
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약상태</font></th>
 			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">진료병원</font></th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
-			<tr class="content">
+			<tr class="content" height="50px">
 				<td class="text-left" width="10%" >${vo.no }</td>
-				<td class="text-left" width="12%" >${vo.reception_date }</td>
-				<td class="text-left" width="10%" >${vo.name }</td>
-				<td class="text-left" width="10%" >${vo.dname }</td>
-				<td class="text-left" width="12%" >${vo.reserve_date }</td>
-				<td class="text-left" width="10%" >${vo.reserve_time }</td>
-				<td class="text-left" width="10%" >
-					<c:if test="${vo.state=='예약중' }">
-						<font color="orange" >${vo.state }</font>
-						<input type="button" class="cancelbtn" value="예약취소" data-rno="${vo.no }" style="color: #ffffff; background: #bd8942; width: 70px; height: 25px;">
-					</c:if>
-					<c:if test="${vo.state=='진료완료' }">
-						<font color="green" >${vo.state }</font>
-					</c:if>
-					<c:if test="${vo.state=='예약취소' }">
-						<font color="red" >${vo.state }</font>
-					</c:if>
-				</td>
-				<td class="text-left" width="26%" >${vo.hosname }</td>
+				<td class="text-left" width="12%" >${vo.caredate }</td>
+				<td class="text-left" width="10%" >${vo.doctor }</td>
+				<td class="text-left" width="10%" >${vo.dogname }</td>
+				<td class="text-left" width="26%" >${vo.hospitalname }</td>
 			</tr>
 		</c:forEach>
 		<tr>

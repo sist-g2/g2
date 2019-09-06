@@ -64,7 +64,7 @@
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.556538, 126.919516),
-    level: 7
+    level: 5
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -94,51 +94,8 @@ $(function(){
 			url:'hospital_search_ok.do',
 			data:{loc:loc,name:name},
 			success:function(response) {
+				$("#map").html(response);
 				
-				var mapContainer = document.getElementById('map');
-				var mapOption = {
-				    center: new daum.maps.LatLng(37.556538, 126.919516),
-				    level: 3
-				};  
-
-				var map = new daum.maps.Map(mapContainer, mapOption); 
-
-				var geocoder = new daum.maps.services.Geocoder();
-				
-				var data = JSON.parse(response); // response로 보내진 json데이터 파싱							
-				var result = document.getElementById("search_result");
-				
-				var listData = new Array();
-				var nameData = new Array();
-				$.each(data,function(key,value) { // 파싱된 데이터 값추출
-								
-				 listData.push(value.loc); // 배열에 위치 정보를 저장함
-				 nameData.push(value.name);				 				
-				});
-				
-				listData.forEach(function(addr, index) { // 지도에 위치 정보를 넣는 부분
-				    geocoder.addressSearch(addr, function(result, status) {
-				        if (status === daum.maps.services.Status.OK) {
-				            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-				            var marker = new daum.maps.Marker({
-				                map: map,
-				                position: coords
-				            });
-				            var infowindow = new daum.maps.InfoWindow({
-				                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + nameData[index] + '</div>',
-				                disableAutoPan: true
-				            });
-				            infowindow.open(map, marker);
-				            if(index<1){
-				            map.setCenter(coords);
-				            }
-				        
-				        }
-				       
-				    });
-				});
-			
 			}
 		});
 	});

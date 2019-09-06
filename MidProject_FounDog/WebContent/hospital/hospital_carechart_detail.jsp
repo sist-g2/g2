@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
-.reserve_detail_row{
+.carechart_detail_row{
 	margin: 0px auto;
 	width: 900px;
 }
@@ -36,11 +36,11 @@ $(function(){
 	
 		 $.ajax({ // 검색 결과 리스트 ajax
 			type:'post',
-			url:'hospital_reserve_list.do',
+			url:'hospital_carechart_list.do',
 			data:{dno:dno,startDate:startDate,endDate:endDate},
 			success:function(response)
 			{	
-				$("#reservelist").html(response);	
+				$("#carechartlist").html(response);	
 			
 			}
 		});
@@ -50,10 +50,10 @@ $(function(){
 </head>
 <body>
 <div class="container">
-	<div class="reserve_detail_row" >
+	<div class="carechart_detail_row" >
 	
 		<div id="hospitalTitle">
-			<h2 class="hostitle">예약 내역</h2>
+			<h2 class="hostitle">진료 내역</h2>
 		</div>
 		
 		<table class="" style="width: 100%;" >
@@ -83,8 +83,8 @@ $(function(){
 			</tr>
 		</table>
 	
-		<div id="reservelist" style="width: 100%; height: 400px; border: solid 0px; text-align: center;">
-			<br><h4>예약 내역을 조회해보세요.</h4>
+		<div id="carechartlist" style="width: 100%; height: 400px; border: solid 0px; text-align: center;">
+			<br><h4>진료 내역을 조회해보세요.</h4>
 		</div>
 		
 	</div>

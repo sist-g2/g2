@@ -9,11 +9,12 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	
+	alert("성공");
 	$('#addDog').click(function(){
+		alert("성공");
 		var dname = $('#dname').val();
 		
-		if(id.trim()==""){
+		if(dname.trim()==""){
 			alert("반려견의 이름을 입력해주세요.")
 			$('#dname').focus();
 			return;
@@ -64,7 +65,7 @@ tbody{
 <div class="rowrow optionList">
 	<table class="table table-borderless rowrow" style="width:400px">
 		<tr>
-			<td class="text-center"><h3 class="text-center">반려견 정보</h3></td>
+			<td class="text-center"><h3 class="text-center">반려견 정보</h3>123</td>
 		</tr>
 	</table>
 	<table class="table table-borderless" style="width:400px">
@@ -73,7 +74,7 @@ tbody{
 		</tr>
 		<tr>
 			<td class="text-left">
-				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name">
+				<input type=text name=dname class="form-control" size=15 placeholder="Dog Name" id="dname">
 			</td>
 		</tr>
 		<tr>

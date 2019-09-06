@@ -23,7 +23,7 @@ $("#dogInsert").click(function(){
 	    
     $.ajax({ 
 		type:'post',
-		url:'hospital_doginsert.do',
+		url:'hospital_dog_insert.do',
 		success:function(response)
 		{	
 			var dogInsert = $(response).find('.optionList');

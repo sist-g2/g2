@@ -91,10 +91,10 @@ FROM (
 		<where>
 			reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 			AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
-			<if test="dno=='0'" >
+			<if test="dno==''" >
 				AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
 			</if>
-			<if test="dno!='0'" >
+			<if test="dno!=''" >
 				AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 			</if>
 		</where>
@@ -111,10 +111,10 @@ FROM reserve
 <where>
 	reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
-	<if test="dno=='0'" >
+	<if test="dno==''" >
 		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
 	</if>
-	<if test="dno!='0'" >
+	<if test="dno!=''" >
 		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 	</if>
 </where>
@@ -127,15 +127,20 @@ FROM reserve
 <where>
 	reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
-	<if test="dno=='0'" >
+	<if test="dno==''" >
 		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
 	</if>
-	<if test="dno!='0'" >
+	<if test="dno!=''" >
 		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 	</if>
 </where>
 )
 </select>
+
+<update id="reserveDelete" parameterType="int">
+	UPDATE reserve SET state='?덉빟痍⑥냼'
+	WHERE no = #{no}
+</update>
 
 <select id="carechartDetail" resultType="CareChartVO" parameterType="hashmap">
 SELECT no, caredate, prescription, doctor, dogname, hospitalname, num
@@ -147,10 +152,10 @@ FROM (
 		prescription,
 		doctor,
 		(SELECT dname FROM dog WHERE dno = dogno) as dogname,
-		(SELECT name FROM hospital WHERE no = hosno) as hospitalname
+		(SELECT name FROM hospital WHERE no = (SELECT hosno FROM reserve WHERE no = resno)) as hospitalname
 		FROM carechart
 		<where>
-			reception_date BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+			caredate BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
 			AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
 			<if test="dno==''" >
 				AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
@@ -164,4 +169,38 @@ FROM (
 WHERE num BETWEEN #{start} AND #{end}
 
 </select>
+
+<select id="carechartDetailAllCnt" resultType="int" parameterType="hashmap" >
+SELECT COUNT(*) 
+FROM (SELECT no
+FROM carechart
+<where>
+	caredate BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+	<if test="dno==''" >
+		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
+	</if>
+	<if test="dno!=''" >
+		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
+	</if>
+</where>
+)
+</select>
+<select id="carechartDetailTotalPage" resultType="int" parameterType="hashmap" >
+SELECT CEIL(COUNT(*)/5.0)  
+FROM (SELECT no
+FROM carechart
+<where>
+	caredate BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') 
+	AND TO_DATE(#{endDate}, 'YYYY-MM-DD') + 0.99999
+	<if test="dno==''" >
+		AND dogno IN (SELECT dno FROM dog WHERE id = #{id})
+	</if>
+	<if test="dno!=''" >
+		AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
+	</if>
+</where>
+)
+</select>
+
 </mapper>

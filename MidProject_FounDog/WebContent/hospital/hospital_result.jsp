@@ -27,7 +27,7 @@
 		<div id="totalresult">
 			<c:choose>
 				<c:when test="${list ne null && list.size() ne 0}">
-					<h3>전체 ${totalResult}건의 검색 결과가 있습니다.</h3>
+					<h3>전체<b> ${totalResult}</b>건의 검색 결과가 있습니다.</h3>
 				</c:when>
 				<c:when test="${list.size() eq 0}">
 					<h3>검색 결과가 없습니다.</h3>
@@ -57,7 +57,17 @@ function reservedate(){
 	 	var page=$(this).attr("data-page");
 	 	var loc=$('#searchloc').val();
 		var name=$('#searchname').val();
-
+		
+		$.ajax({
+			type:'post',
+			url:'hospital_search_ok.do',
+			data:{page:page,loc:loc,name:name},
+			success:function(response) {
+				$("#map").html(response);
+						
+			}
+		});	
+		 
 	 	$.ajax({
 			type:'post',
 			url:'hospital_result.do',

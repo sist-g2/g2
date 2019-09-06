@@ -80,11 +80,11 @@
                         </ul>
                     </li>                  
                     <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
-                         <ul role="menu" class="sub-menu">
+                          <ul role="menu" class="sub-menu">
                             <li><a href="../hospital/hospital_list.do">병원 이용</a></li>
                             <c:if test="${sessionScope.id!=null }">                                                       	
                             <li><a href="../hospital/hospital_reserve_detail.do">예약 내역</a></li>
-                           
+                            <li><a href="../hospital/hospital_carechart_detail.do">진료 내역</a></li>                           
                           </c:if>
                         </ul>
                     </li>

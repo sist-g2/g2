@@ -14,6 +14,7 @@ import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.HospitalDAO;
 import com.sist.dao.MemberDAO;
+import com.sist.vo.CareChartVO;
 import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
@@ -147,7 +148,6 @@ public class HospitalModel {
 		
 		String no = model.getRequest().getParameter("no");
 		String hosName = HospitalDAO.hospitalName(Integer.parseInt(no));
-		System.out.println(no);
 		HttpSession session=model.getRequest().getSession();
 		String id=(String)session.getAttribute("id");
 		
@@ -274,14 +274,14 @@ public class HospitalModel {
 			return "../hospital/hospital_dog.jsp";
 		}
 		
-		@RequestMapping("hospital/hospital_doginsert.do")
+		@RequestMapping("hospital/hospital_dog_insert.do")
 		public String hospital_doginsert(Model model){
 			
 			return "../hospital/hospital_dog_insert.jsp";
 		}
 		
-		@RequestMapping("hospital/hospital_doginsert_ok.do")
-		public void hospital_doginsert_ok(Model model){
+		@RequestMapping("hospital/hospital_dog_insert_ok.do")
+		public String hospital_doginsert_ok(Model model){
 			try{
 				model.getRequest().setCharacterEncoding("UTF-8");
 			} catch (Exception e) {}
@@ -308,6 +308,7 @@ public class HospitalModel {
 				
 			MemberDAO.dogJoin(dvo);
 			
+			return "../hospital/hospital_dog_insert.jsp";
 		}
 		
 		@RequestMapping("hospital/hospital_reserve_ok.do")
@@ -332,12 +333,6 @@ public class HospitalModel {
 			vo.setDogno(Integer.parseInt(dogNo));
 			vo.setHosno(Integer.parseInt(hosNo));
 			
-			System.out.println(reserveday);
-			System.out.println(wr5);
-			System.out.println(symptom);
-			System.out.println(state);
-			System.out.println(dogNo);
-			System.out.println(hosNo);
 			HospitalDAO.reserveOk(vo);	
 		
 			return "redirect:../hospital/hospital_reserve_detail.do";
@@ -369,12 +364,10 @@ public class HospitalModel {
 			
 			Map map=new HashMap();
 			String dno = model.getRequest().getParameter("dno");
-			System.out.println(dno);
 			String startDate = model.getRequest().getParameter("startDate");
-			System.out.println(startDate);
 			String endDate = model.getRequest().getParameter("endDate");
-			System.out.println(endDate);
 			String page = model.getRequest().getParameter("page");
+			
 			if(page==null)
 				page = "1";
 			int curpage = Integer.parseInt(page);
@@ -392,12 +385,14 @@ public class HospitalModel {
 				SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 				Date date = new Date();
 				endDate = format.format(date).toString();
-				System.out.println(endDate);
 			}
 			if(dno==null || dno==""){
-				dno = "0";
+				dno = "";
+				map.put("dno", dno);	
+			}else{
+				
+				map.put("dno", Integer.parseInt(dno));			
 			}
-			map.put("dno", Integer.parseInt(dno));			
 			map.put("startDate", startDate);
 			map.put("endDate", endDate);
 			map.put("id", id);
@@ -438,6 +433,15 @@ public class HospitalModel {
 			return "../hospital/hospital_reserve_list.jsp";
 		}
 		
+		@RequestMapping("hospital/hospital_reserve_delete.do")
+		public String hospital_reserve_delete(Model model){
+			String no = model.getRequest().getParameter("rno");
+			
+			HospitalDAO.reserveDelete(Integer.parseInt(no));
+			
+			return "redirect:../hospital/hospital_reserve_detail.do";
+		}
+		
 		@RequestMapping("hospital/hospital_carechart_detail.do")
 		public String hospital_carechart_detail(Model model){
 			
@@ -463,12 +467,10 @@ public class HospitalModel {
 			
 			Map map=new HashMap();
 			String dno = model.getRequest().getParameter("dno");
-			System.out.println(dno);
-			String startDate = model.getRequest().getParameter("startDate");
-			System.out.println(startDate);
-			String endDate = model.getRequest().getParameter("endDate");
-			System.out.println(endDate);
+			String startDate = model.getRequest().getParameter("startDate");		
+			String endDate = model.getRequest().getParameter("endDate");		
 			String page = model.getRequest().getParameter("page");
+			
 			if(page==null)
 				page = "1";
 			int curpage = Integer.parseInt(page);
@@ -486,22 +488,23 @@ public class HospitalModel {
 				SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 				Date date = new Date();
 				endDate = format.format(date).toString();
-				System.out.println(endDate);
 			}
 			if(dno==null || dno==""){
 				dno = "";
-			
-			}
-			map.put("dno", dno);			
+				map.put("dno", dno);	
+			}else{
+				
+				map.put("dno", Integer.parseInt(dno));			
+			}			
 			map.put("startDate", startDate);
 			map.put("endDate", endDate);
 			map.put("id", id);
 			
 			// 페이지 목록
-			int totalNum = HospitalDAO.reserveDetailAllCnt(map);
+			int totalNum = HospitalDAO.carechartDetailAllCnt(map);
 			model.addAttribute("totalNum", totalNum);
 			
-			int totalPage = HospitalDAO.reserveDetailTotalPage(map);
+			int totalPage = HospitalDAO.carechartDetailTotalPage(map);
 			int startPage = 0;
 			int endPage = 0;
 			
@@ -521,11 +524,9 @@ public class HospitalModel {
 				}
 			}
 			
-			List<Reserve_DetailVO> list = HospitalDAO.reserveDetail(map);
-			
-			
-			model.addAttribute("list", list);
-			
+			List<CareChartVO> list = HospitalDAO.carechartDetail(map);
+						
+			model.addAttribute("list", list);			
 			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);

@@ -88,6 +88,17 @@ function reservedate(){
 	    }
 }
 
+function cancel(){
+	
+	  if(confirm("취소 하시겠습니까?") == true){
+		 history.back();
+		return true;        
+	    }
+	    else{
+	        return false;
+	    }
+}
+
 $(document).ready(function(){
 	  $("#layerPopup").hide();
 	  $("#layerPopup2").hide();
@@ -305,7 +316,7 @@ $(document).ready(function(){
 </tbody>
 </table>
 		<input type="button" onclick="javascript:reservedate();" class="btn btn-primary" value="확인">
-		<input type="button" class="btn btn-primary" value="취소">
+		<input type="button" class="btn btn-primary" value="취소" onclick="javascript:cancel();">
 </form>
 	</div>		  
 </body>
