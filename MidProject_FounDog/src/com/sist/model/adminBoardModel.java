@@ -19,8 +19,7 @@ public class adminBoardModel {
 	  if(page==null)
 		  page="1";
 	  int curpage=Integer.parseInt(page);
-	  if(curpage==0) curpage=1;
-	  // Map¿¡ ÀúÀå 
+	  // Map?? ???? 
 	  Map map=new HashMap();
 	  int rowSize=10;
 	  int start=(curpage*rowSize)-(rowSize-1);

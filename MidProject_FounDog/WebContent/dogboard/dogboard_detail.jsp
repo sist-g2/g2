@@ -80,17 +80,15 @@ $(function(){
  		 </td>
         </tr>
         <tr>
-          <th class="text-center" width=20%>이름</th>
+          <th class="text-center" width=20%>회원아이디</th>
           <td class="text-left" width=30%>${vo.id }</td>
-          <th class="text-center" width=20%>조회수</th>
-          <td class="text-left" width=30%>${vo.hit }</td>
         </tr>
         <tr>
-          <th class="text-center" width=20%>제목</th>
-          <td class="text-left" colspan="3">${vo.subject }</td>
+          <th class="text-center" width=20%>이름</th>
+          <td class="text-left" colspan="3">${vo.dname }</td>
         </tr>
         <tr>
-          <td colspan="4" class="text-left" valign="top" height="200">${vo.content }</td>
+          <td colspan="4" class="text-left" valign="top" height="200">${vo.dcharacter }</td>
         </tr>
         <tr>
           <td colspan="4" class="text-right">

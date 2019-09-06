@@ -69,14 +69,14 @@ th{
                         <div class="portfolio-wrapper">
                             <div class="portfolio-single">
                                 <div class="portfolio-thumb">                                	
-                                    <a href="#"><img src="../images/portfolio/1.jpg" class="img-responsive" alt=""></a>                                     
+                                    <a href="dogboard_detail.do?no=${vo.no }"><img src="upload/${vo.filename }" class="img-responsive" alt=""></a>                                     
                                 </div>
                             </div>
                             <div class="portfolio-info ">
                                 <h5>${vo.dname }</h5>
                                 <h5>${vo.dage }</h5>
                                 <h5>${vo.area }</h5>
-                                <h5>${vo.regdate }</h5>
+                                <h5>${vo.dbday }</h5>
                             </div>
                         </div>
                     </div>

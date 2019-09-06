@@ -31,23 +31,23 @@ public class Board_DogDAO {
 		   return list;
 	   }
 	   
-	   // 총페이지 읽기
-	   public static int boarddogTotalPage(int category)
+	   // ???????? ?б?
+	   public static int boarddogTotalPage()
 	   {
 		   int total=0;
 		   SqlSession session=ssf.openSession();
-		   total=session.selectOne("boarddogTotalPage", category);
-		   // id=> 대소문자 구분 
+		   total=session.selectOne("boarddogTotalPage");
+		   // id=> ?????? ???? 
 		   session.close();
 		   return total;
 	   }
-	   // 게시글 전체 갯수 읽기
-	   public static int boarddogRowCount(int category)
+	   // ??n? ??u ???? ?б?
+	   public static int boarddogRowCount()
 	   {
 		   int count=0;
 		   SqlSession session=ssf.openSession();
-		   count=session.selectOne("boarddogRowCount", category);
-		   // id=> 대소문자 구분 
+		   count=session.selectOne("boarddogRowCount");
+		   // id=> ?????? ???? 
 		   session.close();
 		   return count;
 	   }
@@ -76,7 +76,7 @@ public class Board_DogDAO {
 	   public static void boarddogUpdate(Board_DogVO vo)
 	   {
 		   SqlSession session=ssf.openSession(true);
-		   session.update("boardUpdate",vo);
+		   session.update("boarddogUpdate",vo);
 		   session.close();
 	   }
 

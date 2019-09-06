@@ -11,6 +11,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
+import com.sist.dao.AdminBoardDAO;
 import com.sist.dao.Board_DogDAO;
 import com.sist.vo.Board_DogVO;
 
@@ -20,33 +21,33 @@ public class Board_DogModel {
 		
 	  @RequestMapping("dogboard/dogboard_list.do")	
 	  public String boarddog_list(Model model){
-		  HttpSession session = model.getRequest().getSession(); // ¼¼¼Ç
-		  // page¸¦ ¹Þ´Â´Ù 
+		  HttpSession session = model.getRequest().getSession(); // ï¿½ï¿½ï¿½ï¿½
+		  // pageï¿½ï¿½ ï¿½Þ´Â´ï¿½ 
 		  String page=model.getRequest().getParameter("page");
 		  if(page==null)
 			  page="1";
 		  int curpage=Integer.parseInt(page);
 		  
-		  // Map¿¡ ÀúÀå 
+		  // Mapï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		  Map map=new HashMap();
-		  int rowSize=10;
+		  int rowSize=8;
 		  int start=(curpage*rowSize)-(rowSize-1);
 		  // 1~10 , 11~20 , 21....
 		  int end=curpage*rowSize;
 		  
 		  map.put("start", start);
 		  map.put("end", end);
-		  map.put("category", 0); // ÀÚÀ¯°Ô½ÃÆÇ Ä«Å×°í¸® : 0
+		  map.put("category", 0); // ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ Ä«ï¿½×°ï¿½ : 0
 		  
 		  List<Board_DogVO> list=Board_DogDAO.boarddogListData(map);
 		  
-		  // ¸ñ·Ï Àü¼Û 
+		  // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		  model.addAttribute("list", list);
 		  
-		  // ÇöÀç ÆäÀÌÁö => curpage
-		  // ÃÑÆäÀÌÁö  => totalpage
-		  int totalpage = Board_DogDAO.boarddogTotalPage(0);
-		  int count=Board_DogDAO.boarddogRowCount(0); // 22
+		  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => curpage
+		  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  => totalpage
+		  int totalpage = Board_DogDAO.boarddogTotalPage();
+		  int count=Board_DogDAO.boarddogRowCount(); // 22
 		  int BLOCK=5;
 		  
 		  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -94,8 +95,8 @@ public class Board_DogModel {
 			model.addAttribute("main_jsp", "../dogboard/dogboard_find.jsp");
 			return "../main/main.jsp";
 		}
-	  // µ¥ÀÌÅÍ Ãß°¡
-	  // È­¸é 
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+	  // È­ï¿½ï¿½ 
 	  
 	  @RequestMapping("dogboard/dogboard_insert.do")
 	  public String boarddog_insert(Model model)
@@ -107,24 +108,28 @@ public class Board_DogModel {
 	  @RequestMapping("dogboard/dogboard_insert_ok.do")
 	  public String boarddog_insert_ok(Model model)
 	  {
-		  Board_DogVO vo=new Board_DogVO();
 		  try
 		  {
+			  Board_DogVO vo=new Board_DogVO();
 			  model.getRequest().setCharacterEncoding("UTF-8");
 			  HttpSession session = model.getRequest().getSession();
 			  String path="C:\\midProject\\g2\\MidProject_FounDog\\WebContent\\dogboard\\upload";
 			  String enctype="UTF-8";
 			  int size=100*1024*1024;
+			  System.out.println("size = "+size );
 			  MultipartRequest mr =new MultipartRequest(model.getRequest(), path,size,enctype,
 					  new DefaultFileRenamePolicy());
+
 			  String id = (String)session.getAttribute("id");
-			  String area=model.getRequest().getParameter("area");
-			  String dtype=model.getRequest().getParameter("dtype");
-			  String dsex =model.getRequest().getParameter("dsex");
-			  String dkg = (String)model.getRequest().getParameter("dkg");
-			  String dcolor =model.getRequest().getParameter("dcolor");
-			  String dcharacter =model.getRequest().getParameter("dcharacter");
-			  String tel =model.getRequest().getParameter("tel");
+			  String area = mr.getParameter("area");
+			  String dtype=mr.getParameter("dtype");
+			  String dsex =mr.getParameter("dsex");
+			  String dkg = mr.getParameter("dkg");
+			  String dcolor =mr.getParameter("dcolor");
+			  String dcharacter =mr.getParameter("dcharacter");
+			  String tel =mr.getParameter("tel");
+			  String dname = mr.getParameter("dname");
+			  String dage = mr.getParameter("dage");
 			  
 			  vo.setId(id);
 			  vo.setArea(area);
@@ -134,6 +139,8 @@ public class Board_DogModel {
 			  vo.setDcolor(dcolor);
 			  vo.setDcharacter(dcharacter);
 			  vo.setTel(tel);
+			  vo.setDname(dname);
+			  vo.setDage(Integer.parseInt(dage));
 			  
 			  String filename = mr.getOriginalFileName("upload");
 				if(filename==null){
@@ -142,43 +149,42 @@ public class Board_DogModel {
 				}
 				else{
 					File file = new File(path+"\\"+filename);
-					vo.setFilename(filename);
+					vo.setFilename(filename);				
 					vo.setFilesize((int)file.length());
-					System.out.println("file:"+file);
+					Board_DogDAO.boarddogInsert(vo);
 				}
-		  }catch(Exception ex){}  
-		 
-		  // DAO·Î Àü¼Û 
-		  Board_DogDAO.boarddogInsert(vo);
+		  }catch(Exception ex){
+			  ex.printStackTrace();
+		  }    
 		  
 		  return "redirect:../dogboard/dogboard_list.do";
 	  }
 	  
-	  // »ó¼¼º¸±â 
+	  // ï¿½ó¼¼ºï¿½ï¿½ï¿½ 
 	  @RequestMapping("dogboard/dogboard_detail.do")
 	  public String boarddog_detail(Model model)
 	  {
-		  // ¿äÃ»°ª ¹Þ±â
+		  // ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Þ±ï¿½
 		  String no=model.getRequest().getParameter("no");
-		  // DAO¿¬°á => °á°ú°ª
+		  // DAOï¿½ï¿½ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½ï¿½
 		  Board_DogVO vo=Board_DogDAO.boarddogDetailData(Integer.parseInt(no));
-		  // 0: »ó¼¼º¸±â¿¡¼­ Á¢±ÙÇÒ °æ¿ì boardDetailData - hit Áõ°¡ O
-		  // JSP¿¡ Àü¼Û 
+		  // 0: ï¿½ó¼¼ºï¿½ï¿½â¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ boardDetailData - hit ï¿½ï¿½ï¿½ï¿½ O
+		  // JSPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		  model.addAttribute("vo", vo);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_detail.jsp");
 		  return "../main/main.jsp";
 	  }
 	  
-	  // ¼öÁ¤ÇÏ±â
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	  @RequestMapping("dogboard/dogboard_update.do")
 	  public String boarddog_update(Model model)
 	  {
-		  // ¿äÃ»°ªÀ» ¹Þ´Â´Ù
+		  // ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½
 		  String no=model.getRequest().getParameter("no");
-		  // DAO => °á°ú°ª ¹Þ±â 
+		  // DAO => ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½ 
 		  Board_DogVO vo=Board_DogDAO.boarddogDetailData(Integer.parseInt(no));
-		  // 1: ¼öÁ¤ÇÏ±â¿¡¼­ Á¢±ÙÇÒ °æ¿ì boardDetailData - hit Áõ°¡ X
-		  // °á°ú°ª => JSP·Î Àü¼Û
+		  // 1: ï¿½ï¿½ï¿½ï¿½ï¿½Ï±â¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ boardDetailData - hit ï¿½ï¿½ï¿½ï¿½ X
+		  // ï¿½ï¿½ï¿½ï¿½ï¿½ => JSPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		  model.addAttribute("vo", vo);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_update.jsp");
 		  return "../main/main.jsp";
@@ -187,12 +193,58 @@ public class Board_DogModel {
 	  @RequestMapping("dogboard/dogboard_update_ok.do")
 	  public String boarddog_update_ok(Model model)
 	  {
+		  String no ="";
 		  try
 		  {
+			  Board_DogVO vo=new Board_DogVO();
 			  model.getRequest().setCharacterEncoding("UTF-8");
-		  }catch(Exception ex){}
+			  HttpSession session = model.getRequest().getSession();
+			  String path="C:\\midProject\\g2\\MidProject_FounDog\\WebContent\\dogboard\\upload";
+			  String enctype="UTF-8";
+			  int size=100*1024*1024;
+			  MultipartRequest mr =new MultipartRequest(model.getRequest(), path,size,enctype,
+					  new DefaultFileRenamePolicy());
+			  
+			  no=mr.getParameter("no");
+			  String id = (String)session.getAttribute("id");
+			  String area = mr.getParameter("area");
+			  String dtype=mr.getParameter("dtype");
+			  String dsex =mr.getParameter("dsex");
+			  String dkg = mr.getParameter("dkg");
+			  String dcolor =mr.getParameter("dcolor");
+			  String dcharacter =mr.getParameter("dcharacter");
+			  String tel =mr.getParameter("tel");
+			  String dname = mr.getParameter("dname");
+			  String dage = mr.getParameter("dage");
+			  
+			  vo.setNo(Integer.parseInt(no));
+			  vo.setId(id);
+			  vo.setArea(area);
+			  vo.setDtype(dtype);
+			  vo.setDsex(dsex);
+			  vo.setDkg(Integer.parseInt(dkg));
+			  vo.setDcolor(dcolor);
+			  vo.setDcharacter(dcharacter);
+			  vo.setTel(tel);
+			  vo.setDname(dname);
+			  vo.setDage(Integer.parseInt(dage));
+			  
+
+			  String filename = mr.getOriginalFileName("upload");
+				if(filename==null){
+					vo.setFilename("");
+					vo.setFilesize(0);
+				}
+				else{
+					System.out.println("ìš”ê¸°");
+					File file = new File(path+"\\"+filename);
+					vo.setFilename(filename);				
+					vo.setFilesize((int)file.length());
+					Board_DogDAO.boarddogUpdate(vo);
+				}
+		  }catch(Exception ex){	  }
 		  
-		  String no=model.getRequest().getParameter("no");
+/*		  String no=model.getRequest().getParameter("no");
 		  String area=model.getRequest().getParameter("area");
 		  String dtype=model.getRequest().getParameter("dtype");
 		  String dsex =model.getRequest().getParameter("dsex");
@@ -211,9 +263,8 @@ public class Board_DogModel {
 		  vo.setDcharacter(dcharacter);
 		  vo.setTel(tel);
 		  
-		  // DAO ¿¬°á ==> password
-		  Board_DogDAO.boarddogUpdate(vo);
-		  
+		  // DAO ï¿½ï¿½ï¿½ï¿½ ==> password
+		  Board_DogDAO.boarddogUpdate(vo);*/
 		  return "redirect:../dogboard/dogboard_detail.do?no="+no;
 	  }
 	  
@@ -224,13 +275,14 @@ public class Board_DogModel {
 		  model.addAttribute("no", no);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_delete.jsp");
 		  return "../main/main.jsp";
-		  // »èÁ¦Ã¢À¸·Î ÀÌµ¿
+		  // ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	  }
 	  
 	  @RequestMapping("dogboard/dogboard_delete_ok.do")
 	  public String boarddog_delete_ok(Model model){
 		  String no=model.getRequest().getParameter("no");
-		  // model.addAttribute("res", res);
+		  int res=Board_DogDAO.boarddogDelete(Integer.parseInt(no));
+		  model.addAttribute("res", res);
 		  return "redirect:../dogboard/dogboard_list.do";
 	  }
 

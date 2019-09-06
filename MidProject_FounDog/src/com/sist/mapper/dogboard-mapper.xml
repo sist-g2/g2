@@ -19,14 +19,18 @@
 					  )
 			  ) WHERE num BETWEEN #{start} AND #{end} -->
 			  
-		SELECT no, id, area, JUBSUDATE, dtype, dsex, dkg, dcolor, dcharacter, tel
-		FROM board_dog
-		<!-- WHERE num BETWEEN #{start} AND #{end} -->
+		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, dname, dage,FILENAME,FILESIZE, dbday, count, num
+		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter, tel, dname, dage,FILENAME,FILESIZE, dbday, count, rownum as num
+			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
+				(SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
+		FROM board_dog b)		
+		)WHERE num BETWEEN #{start} AND #{end}
+		ORDER BY no DESC
 	</select>
 	
 	<!-- 총페이지 -->
 	<select id="boarddogTotalPage" resultType="int" parameterType="int">
-		SELECT CEIL(COUNT(*)/10.0) FROM board_dog
+		SELECT CEIL(COUNT(*)/8.0) FROM board_dog
 	<!-- 	WHERE category=#{category}  -->
 	</select>
 	
@@ -40,10 +44,9 @@
 	<insert id="boarddogInsert" parameterType="Board_DogVO">
 	<!-- 	INSERT INTO board (no, category, id, subject, content, group_id)
 		VALUES( board_no_seq.nextval, #{category}, #{id}, #{subject}, #{content}, (SELECT NVL(MAX(group_id)+1, 1) FROM board )) -->
- 		INSERT INTO board_dog (no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, FILENAME, FILESIZE )
+ 		INSERT INTO board_dog (no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, FILENAME, FILESIZE,dname ,dage )
  			VALUES(board_dog_no_seq.nextval, #{id}, #{area}, #{dtype}, #{dsex}, #{dkg}, #{dcolor}, #{dcharacter},
- 			#{tel} ,#{FILENAME}, #{FILESIZE} )
- 		FROM board_dog
+ 			#{tel} ,#{filename}, #{filesize},#{dname},#{dage} )
    </insert>
    
    <!-- 상세보기  -->
@@ -52,15 +55,17 @@
 <!-- 		SELECT no, id, subject, content, TO_CHAR(regdate,'RRRR-MM-DD') as dbday, hit
 		FROM board 
 		WHERE no=#{no} -->
-		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, TO_CHAR(regdate,'RRRR-MM-DD') as dbday
-		FROM board 
+		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, dname,TO_CHAR(regdate,'RRRR-MM-DD') as dbday
+		FROM board_dog 
 		WHERE no=#{no}
    </select>
 	
 	<!-- 수정하기 -->
    <update id="boarddogUpdate" parameterType="Board_DogVO">
      UPDATE board_dog SET
-     area=#{area}, dtype=#{dtype}, dsex=#{dsex}, dkg=#{dkg}, dcolor=#{dcolor}, dcharacter=#{dcharacter}, tel=#{tel}
+     area=#{area}, dtype=#{dtype}, dsex=#{dsex}, dkg=#{dkg}, dcolor=#{dcolor},
+      dcharacter=#{dcharacter}, tel=#{tel}, dname=#{dname}, filename=#{filename}, filesize=#{filesize},
+      dage=#{dage}
      WHERE no=#{no}
    </update>
     

@@ -19,7 +19,15 @@ public class Board_DogVO {
 	private String dogimg;
 	private String dname;
 	private int dage;
+	private String dbday;
 	
+	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public String getDname() {
 		return dname;
 	}

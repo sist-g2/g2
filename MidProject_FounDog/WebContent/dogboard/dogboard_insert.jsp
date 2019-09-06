@@ -25,48 +25,66 @@ th{
    <div class="container">
      <h2 class="text-center">글쓰기</h2>
      <div class="row">
-     <form method="post" action="dogboard_insert_ok.do">
+     <form method="post" action="dogboard_insert_ok.do" enctype="multipart/form-data">
        <table class="table">
          <tr>
            <th class="text-right" width=20%>이름</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=15 class="input-sm">
+             <input type=text name=dname size=15 class="input-sm">
            </td>
          </tr>
          <tr>
+           <th class="text-right" width=20%>지역</th>
+           <td width=80% class="text-left">
+             <input type=text name=area size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+			<th class="text-right info" width=20%>첨부파일</th>
+			<td width=80% class="text-left">
+				<input type=file name=upload size=20 class="input-sm">
+			</td>
+		</tr>
+         <tr>
            <th class="text-right" width=20%>견종</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=15 class="input-sm">
+             <input type=text name=dtype size=15 class="input-sm">
            </td>
          </tr>
          <tr>
            <th class="text-right" width=20%>성별</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=15 class="input-sm">
+             <input type=text name=dsex size=15 class="input-sm">
            </td>
          </tr>
          <tr>
            <th class="text-right" width=20%>무게</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=15 class="input-sm">
+             <input type=text name=dkg size=15 class="input-sm">
            </td>
          </tr>
          <tr>
            <th class="text-right" width=20%>색깔</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=15 class="input-sm">
+             <input type=text name=dcolor size=15 class="input-sm">
            </td>
          </tr>
          <tr>
            <th class="text-right" width=20%>전화번호</th>
            <td width=80% class="text-left">
-             <input type=text name=subject size=15 class="input-sm">
+             <input type=text name=tel size=15 class="input-sm">
+           </td>
+         </tr>
+         <tr>
+           <th class="text-right" width=20%>나이</th>
+           <td width=80% class="text-left">
+             <input type=text name=dage size=15 class="input-sm">
            </td>
          </tr>
          <tr>
            <th class="text-right" width=20%>특징</th>
            <td width=80% class="text-left">
-             <textarea rows="10" cols="25" name=content></textarea>
+             <textarea rows="10" cols="25" name=dcharacter></textarea>
            </td>
          </tr>
          <tr>
