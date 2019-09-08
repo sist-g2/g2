@@ -82,6 +82,15 @@ th{
            </td>
          </tr>
          <tr>
+           <th class="text-right" width=20%>카테고리</th>
+				<td align="left">&nbsp;
+					 <select id="category" class="form-control2" name=category>
+						<option value="0">찾습니다</option>
+						<option value="1">발견했습니다</option>
+					</select>
+				</td>
+         </tr>
+         <tr>
            <th class="text-right" width=20%>특징</th>
            <td width=80% class="text-left">
              <textarea rows="10" cols="25" name=dcharacter></textarea>

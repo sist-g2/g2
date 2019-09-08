@@ -127,11 +127,15 @@ $(function(){
           	<td class="text-center">
 				<ul class="pagination">
 					<li><a href="adminboard_list.do?page=1">&lt;&lt;</a></li>
-					<li><a href="adminboard_list.do?page=${startPage}">&lt;</a></li>
+					<c:if test="${curpage != startPage }">
+					<li><a href="adminboard_list.do?page=${curpage-1}">&lt;</a></li>
+					</c:if>
 					<c:forEach var="i" begin="${startPage }" end="${endPage }">
 						<li class="${i==curpage?'active':''}"><a href="adminboard_list.do?page=${i }">${i }</a>
 					</c:forEach>
-					<li><a href="adminboard_list.do?page=${endPage}">&gt;</a></li>
+					<c:if test="${curpage != endPage }">
+					<li><a href="adminboard_list.do?page=${curpage+1}">&gt;</a></li>
+					</c:if>
 					<li><a href="adminboard_list.do?page=${allPage }">&gt;&gt;</a></li>
 				</ul>
 			</td>

@@ -118,7 +118,16 @@ $(function(){
 						<input type="text" name="dage" size=45 value="${vo.dage }" id="dage">
 					</td>
 				</tr>
-				<tr>
+   		      <tr>
+    		       <th class="text-right" width=20%>카테고리</th>
+					<td align="left">&nbsp;
+					 <select id="category" class="form-control2" name=category>
+						<option value="0">제보</option>
+						<option value="1">찾음</option>
+						</select>
+					</td>
+   		      </tr>
+					<tr>
 					<th class="text-right" width=20% >특징</th>
 					<td width=80% class="text-left">
 						<textarea rows="10" cols="55" name="dcharacter" id="dchar" >${vo.dcharacter }</textarea>

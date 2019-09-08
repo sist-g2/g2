@@ -19,9 +19,9 @@
 					  )
 			  ) WHERE num BETWEEN #{start} AND #{end} -->
 			  
-		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, dname, dage,FILENAME,FILESIZE, dbday, count, num
-		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter, tel, dname, dage,FILENAME,FILESIZE, dbday, count, rownum as num
-			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
+		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, count, num
+		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, count, rownum as num
+			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
 				(SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
 		FROM board_dog b)		
 		)WHERE num BETWEEN #{start} AND #{end}
@@ -44,8 +44,8 @@
 	<insert id="boarddogInsert" parameterType="Board_DogVO">
 	<!-- 	INSERT INTO board (no, category, id, subject, content, group_id)
 		VALUES( board_no_seq.nextval, #{category}, #{id}, #{subject}, #{content}, (SELECT NVL(MAX(group_id)+1, 1) FROM board )) -->
- 		INSERT INTO board_dog (no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, FILENAME, FILESIZE,dname ,dage )
- 			VALUES(board_dog_no_seq.nextval, #{id}, #{area}, #{dtype}, #{dsex}, #{dkg}, #{dcolor}, #{dcharacter},
+ 		INSERT INTO board_dog (no, id, area, dtype, dsex, dkg, dcolor,category, dcharacter, tel, FILENAME, FILESIZE,dname ,dage )
+ 			VALUES(board_dog_no_seq.nextval, #{id}, #{area}, #{dtype}, #{dsex}, #{dkg}, #{dcolor},#{category}, #{dcharacter},
  			#{tel} ,#{filename}, #{filesize},#{dname},#{dage} )
    </insert>
    
@@ -55,7 +55,7 @@
 <!-- 		SELECT no, id, subject, content, TO_CHAR(regdate,'RRRR-MM-DD') as dbday, hit
 		FROM board 
 		WHERE no=#{no} -->
-		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter, tel, dname,TO_CHAR(regdate,'RRRR-MM-DD') as dbday
+		SELECT no, id, area, dtype, dsex, dkg, dcolor,category, dcharacter, tel, dname, dage, filename,TO_CHAR(regdate,'RRRR-MM-DD') as dbday
 		FROM board_dog 
 		WHERE no=#{no}
    </select>
@@ -63,7 +63,7 @@
 	<!-- 수정하기 -->
    <update id="boarddogUpdate" parameterType="Board_DogVO">
      UPDATE board_dog SET
-     area=#{area}, dtype=#{dtype}, dsex=#{dsex}, dkg=#{dkg}, dcolor=#{dcolor},
+     area=#{area}, dtype=#{dtype}, dsex=#{dsex}, dkg=#{dkg}, dcolor=#{dcolor}, category=#{category},
       dcharacter=#{dcharacter}, tel=#{tel}, dname=#{dname}, filename=#{filename}, filesize=#{filesize},
       dage=#{dage}
      WHERE no=#{no}
@@ -78,10 +78,32 @@
     
     <!-- 검색(찾기) -->
      <select id="boarddogFindData" resultType="Board_DogVO" parameterType="java.util.Map">
-      SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday
+<!--       SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday
       FROM board_dog
       WHERE ${fs} LIKE '%'||#{ss}||'%' 
-      AND category=#{category}
+      AND category=#{category} -->
+      SELECT no,dname,dtype,area,filename,category,TO_CHAR(regdate,'YYYY-MM-DD') as dbday
+      FROM board_dog
+      WHERE ${fs} LIKE '%'||#{ss}||'%' 
+<!--       AND category=#{category} -->
+      </select>
+     <select id="boarddogReportData" resultType="Board_DogVO" parameterType="java.util.Map">
+		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, count, num
+		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, count, rownum as num
+			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
+				(SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
+		FROM board_dog b WHERE category=0)		
+		)WHERE num BETWEEN #{start} AND #{end}
+		ORDER BY no DESC
+      </select>
+     <select id="boarddogLookData" resultType="Board_DogVO" parameterType="java.util.Map">
+		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, count, num
+		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, count, rownum as num
+			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday,
+				(SELECT COUNT(*) FROM board_reply WHERE bno=b.no) as count 
+		FROM board_dog b WHERE category=1)		
+		)WHERE num BETWEEN #{start} AND #{end}
+		ORDER BY no DESC
       </select>
 
 </mapper>

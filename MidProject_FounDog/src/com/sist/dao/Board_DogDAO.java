@@ -99,5 +99,19 @@ public class Board_DogDAO {
 		   session.close();
 		   return list;
 	   }
+	   public static List<Board_DogVO> boarddogReportData(Map map){
+		   List<Board_DogVO> list= new ArrayList<Board_DogVO>();
+		   SqlSession session = ssf.openSession();
+		   list=session.selectList("boarddogReportData",map);
+		   session.close();
+		   return list;
+	   }
+	   public static List<Board_DogVO> boarddogLookData(Map map){
+		   List<Board_DogVO> list= new ArrayList<Board_DogVO>();
+		   SqlSession session = ssf.openSession();
+		   list=session.selectList("boarddogLookData",map);
+		   session.close();
+		   return list;
+	   }
 	   
 }

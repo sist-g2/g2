@@ -75,20 +75,40 @@ $(function(){
           <th class="text-center" width=20%>번호</th>
           <td class="text-left" width=30%>${vo.no }</td>
           <th class="text-center" width=20%>작성일</th>
-          <td class="text-left" width=30%>
-            ${vo.dbday }
- 		 </td>
+          <td class="text-left" width=30%>${vo.dbday }</td>
         </tr>
         <tr>
           <th class="text-center" width=20%>회원아이디</th>
           <td class="text-left" width=30%>${vo.id }</td>
-        </tr>
-        <tr>
           <th class="text-center" width=20%>이름</th>
-          <td class="text-left" colspan="3">${vo.dname }</td>
+          <td class="text-left" width=30%>${vo.dname }</td>
         </tr>
         <tr>
-          <td colspan="4" class="text-left" valign="top" height="200">${vo.dcharacter }</td>
+          <th class="text-center" width=20%>지역</th>
+          <td class="text-left" width=30%>${vo.area }</td>
+          <th class="text-center" width=20%>견종</th>
+          <td class="text-left" width=30%>${vo.dtype }</td>
+        </tr>
+        <tr>
+          <th class="text-center" width=20%>성별</th>
+          <td class="text-left" width=30%>${vo.dsex }</td>
+          <th class="text-center" width=20%>무게</th>
+          <td class="text-left" width=30%>${vo.dkg }</td>
+        </tr>
+        <tr>
+          <th class="text-center" width=20%>색깔</th>
+          <td class="text-left" width=30%>${vo.dcolor }</td>
+          <th class="text-center" width=20%>전화번호</th>
+          <td class="text-left" width=30%>${vo.tel }</td>
+        </tr>
+        <tr>
+          <th class="text-center" width=20%>나이</th>
+          <td class="text-left" colspan="3">${vo.dage }</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="text-left" valign="top" height="200">
+          <p style="text-align:center;"><img src="upload/${vo.filename }" class="img-responsive"></p>
+          ${vo.dcharacter }</td>
         </tr>
         <tr>
           <td colspan="4" class="text-right">

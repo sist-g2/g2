@@ -21,14 +21,14 @@ public class Board_DogModel {
 		
 	  @RequestMapping("dogboard/dogboard_list.do")	
 	  public String boarddog_list(Model model){
-		  HttpSession session = model.getRequest().getSession(); // ����
-		  // page�� �޴´� 
+		  HttpSession session = model.getRequest().getSession(); // 占쏙옙占쏙옙
+		  // page占쏙옙 占쌨는댐옙 
 		  String page=model.getRequest().getParameter("page");
 		  if(page==null)
 			  page="1";
 		  int curpage=Integer.parseInt(page);
 		  
-		  // Map�� ���� 
+		  // Map占쏙옙 占쏙옙占쏙옙 
 		  Map map=new HashMap();
 		  int rowSize=8;
 		  int start=(curpage*rowSize)-(rowSize-1);
@@ -37,15 +37,15 @@ public class Board_DogModel {
 		  
 		  map.put("start", start);
 		  map.put("end", end);
-		  map.put("category", 0); // �����Խ��� ī�װ� : 0
+		  map.put("category", 0); // 占쏙옙占쏙옙占쌉쏙옙占쏙옙 카占쌓곤옙 : 0
 		  
 		  List<Board_DogVO> list=Board_DogDAO.boarddogListData(map);
 		  
-		  // ��� ���� 
+		  // 占쏙옙占� 占쏙옙占쏙옙 
 		  model.addAttribute("list", list);
 		  
-		  // ���� ������ => curpage
-		  // ��������  => totalpage
+		  // 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 => curpage
+		  // 占쏙옙占쏙옙占쏙옙占쏙옙  => totalpage
 		  int totalpage = Board_DogDAO.boarddogTotalPage();
 		  int count=Board_DogDAO.boarddogRowCount(); // 22
 		  int BLOCK=5;
@@ -82,11 +82,12 @@ public class Board_DogModel {
 			
 			String fs=model.getRequest().getParameter("fs");
 			String ss=model.getRequest().getParameter("ss");
+			String category = model.getRequest().getParameter("category");
 			//WHERE ${fs} LIKE '%'||#{ss}||'%'
 			Map map = new HashMap();
 			map.put("fs", fs);
 			map.put("ss", ss);
-			map.put("category", 0);
+
 			List<Board_DogVO> list = Board_DogDAO.boarddogFindData(map);
 			
 			model.getRequest().setAttribute("list", list);
@@ -95,8 +96,120 @@ public class Board_DogModel {
 			model.addAttribute("main_jsp", "../dogboard/dogboard_find.jsp");
 			return "../main/main.jsp";
 		}
-	  // ������ �߰�
-	  // ȭ�� 
+	  @RequestMapping("dogboard/dogboard_report.do")
+	  public String boarddog_Report(Model model){
+		  
+		  try{
+			  model.getRequest().setCharacterEncoding("UTF-8");
+		  }catch(Exception ex){}
+		  
+		  HttpSession session = model.getRequest().getSession(); // 占쏙옙占쏙옙
+		  // page占쏙옙 占쌨는댐옙 
+		  String page=model.getRequest().getParameter("page");
+		  if(page==null)
+			  page="1";
+		  int curpage=Integer.parseInt(page);
+		  
+		  // Map占쏙옙 占쏙옙占쏙옙 
+		  Map map=new HashMap();
+		  int rowSize=8;
+		  int start=(curpage*rowSize)-(rowSize-1);
+		  // 1~10 , 11~20 , 21....
+		  int end=curpage*rowSize;
+		  
+		  map.put("start", start);
+		  map.put("end", end);
+		  map.put("category", 0); // 占쏙옙占쏙옙占쌉쏙옙占쏙옙 카占쌓곤옙 : 0
+		  
+	  
+		  // 占쏙옙占� 占쏙옙占쏙옙 
+
+		  
+		  int totalpage = Board_DogDAO.boarddogTotalPage();
+		  int count=Board_DogDAO.boarddogRowCount(); // 22
+		  int BLOCK=5;
+		  
+		  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		  int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		  int allPage=totalpage;
+		  
+		  if(endPage>allPage){
+			  endPage=allPage;
+		  }
+		  count=count-((curpage*rowSize)-rowSize); 
+
+		  List<Board_DogVO> list = Board_DogDAO.boarddogReportData(map);
+		  model.addAttribute("list", list);
+		  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		  model.addAttribute("today", today);
+		  model.addAttribute("curpage", curpage);
+		  model.addAttribute("totalpage", totalpage);
+		  model.addAttribute("BLOCK", BLOCK);
+		  model.addAttribute("startPage", startPage);
+		  model.addAttribute("endPage", endPage);
+		  model.addAttribute("allPage", allPage);
+		  model.addAttribute("count", count);
+		  model.addAttribute("main_jsp", "../dogboard/dogboard_report.jsp");
+		  return "../main/main.jsp";
+	  }
+	  @RequestMapping("dogboard/dogboard_look.do")
+	  public String boarddog_look(Model model){
+		  
+		  try{
+			  model.getRequest().setCharacterEncoding("UTF-8");
+		  }catch(Exception ex){}
+		  
+		  HttpSession session = model.getRequest().getSession(); // 占쏙옙占쏙옙
+		  // page占쏙옙 占쌨는댐옙 
+		  String page=model.getRequest().getParameter("page");
+		  if(page==null)
+			  page="1";
+		  int curpage=Integer.parseInt(page);
+		  
+		  // Map占쏙옙 占쏙옙占쏙옙 
+		  Map map=new HashMap();
+		  int rowSize=8;
+		  int start=(curpage*rowSize)-(rowSize-1);
+		  // 1~10 , 11~20 , 21....
+		  int end=curpage*rowSize;
+		  
+		  map.put("start", start);
+		  map.put("end", end);
+		  map.put("category", 1); // 占쏙옙占쏙옙占쌉쏙옙占쏙옙 카占쌓곤옙 : 0
+		  
+	  
+		  // 占쏙옙占� 占쏙옙占쏙옙 
+
+		  
+		  int totalpage = Board_DogDAO.boarddogTotalPage();
+		  int count=Board_DogDAO.boarddogRowCount(); // 22
+		  int BLOCK=5;
+		  
+		  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		  int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		  int allPage=totalpage;
+		  
+		  if(endPage>allPage){
+			  endPage=allPage;
+		  }
+		  count=count-((curpage*rowSize)-rowSize); 
+
+		  List<Board_DogVO> list = Board_DogDAO.boarddogLookData(map);
+		  model.addAttribute("list", list);
+		  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		  model.addAttribute("today", today);
+		  model.addAttribute("curpage", curpage);
+		  model.addAttribute("totalpage", totalpage);
+		  model.addAttribute("BLOCK", BLOCK);
+		  model.addAttribute("startPage", startPage);
+		  model.addAttribute("endPage", endPage);
+		  model.addAttribute("allPage", allPage);
+		  model.addAttribute("count", count);
+		  model.addAttribute("main_jsp", "../dogboard/dogboard_look.jsp");
+		  return "../main/main.jsp";
+	  }
+	  // 占쏙옙占쏙옙占쏙옙 占쌩곤옙
+	  // 화占쏙옙 
 	  
 	  @RequestMapping("dogboard/dogboard_insert.do")
 	  public String boarddog_insert(Model model)
@@ -130,6 +243,7 @@ public class Board_DogModel {
 			  String tel =mr.getParameter("tel");
 			  String dname = mr.getParameter("dname");
 			  String dage = mr.getParameter("dage");
+			  String category = mr.getParameter("category");
 			  
 			  vo.setId(id);
 			  vo.setArea(area);
@@ -141,7 +255,8 @@ public class Board_DogModel {
 			  vo.setTel(tel);
 			  vo.setDname(dname);
 			  vo.setDage(Integer.parseInt(dage));
-			  
+			  vo.setCategory(Integer.parseInt(category));
+
 			  String filename = mr.getOriginalFileName("upload");
 				if(filename==null){
 					vo.setFilename("");
@@ -160,31 +275,31 @@ public class Board_DogModel {
 		  return "redirect:../dogboard/dogboard_list.do";
 	  }
 	  
-	  // �󼼺��� 
+	  // 占쏢세븝옙占쏙옙 
 	  @RequestMapping("dogboard/dogboard_detail.do")
 	  public String boarddog_detail(Model model)
 	  {
-		  // ��û�� �ޱ�
+		  // 占쏙옙청占쏙옙 占쌨깍옙
 		  String no=model.getRequest().getParameter("no");
-		  // DAO���� => �����
+		  // DAO占쏙옙占쏙옙 => 占쏙옙占쏙옙占�
 		  Board_DogVO vo=Board_DogDAO.boarddogDetailData(Integer.parseInt(no));
-		  // 0: �󼼺��⿡�� ������ ��� boardDetailData - hit ���� O
-		  // JSP�� ���� 
+		  // 0: 占쏢세븝옙占썩에占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占� boardDetailData - hit 占쏙옙占쏙옙 O
+		  // JSP占쏙옙 占쏙옙占쏙옙 
 		  model.addAttribute("vo", vo);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_detail.jsp");
 		  return "../main/main.jsp";
 	  }
 	  
-	  // �����ϱ�
+	  // 占쏙옙占쏙옙占싹깍옙
 	  @RequestMapping("dogboard/dogboard_update.do")
 	  public String boarddog_update(Model model)
 	  {
-		  // ��û���� �޴´�
+		  // 占쏙옙청占쏙옙占쏙옙 占쌨는댐옙
 		  String no=model.getRequest().getParameter("no");
-		  // DAO => ����� �ޱ� 
+		  // DAO => 占쏙옙占쏙옙占� 占쌨깍옙 
 		  Board_DogVO vo=Board_DogDAO.boarddogDetailData(Integer.parseInt(no));
-		  // 1: �����ϱ⿡�� ������ ��� boardDetailData - hit ���� X
-		  // ����� => JSP�� ����
+		  // 1: 占쏙옙占쏙옙占싹기에占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占� boardDetailData - hit 占쏙옙占쏙옙 X
+		  // 占쏙옙占쏙옙占� => JSP占쏙옙 占쏙옙占쏙옙
 		  model.addAttribute("vo", vo);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_update.jsp");
 		  return "../main/main.jsp";
@@ -236,7 +351,7 @@ public class Board_DogModel {
 					vo.setFilesize(0);
 				}
 				else{
-					System.out.println("요기");
+					System.out.println("�슂湲�");
 					File file = new File(path+"\\"+filename);
 					vo.setFilename(filename);				
 					vo.setFilesize((int)file.length());
@@ -263,7 +378,7 @@ public class Board_DogModel {
 		  vo.setDcharacter(dcharacter);
 		  vo.setTel(tel);
 		  
-		  // DAO ���� ==> password
+		  // DAO 占쏙옙占쏙옙 ==> password
 		  Board_DogDAO.boarddogUpdate(vo);*/
 		  return "redirect:../dogboard/dogboard_detail.do?no="+no;
 	  }
@@ -275,7 +390,7 @@ public class Board_DogModel {
 		  model.addAttribute("no", no);
 		  model.addAttribute("main_jsp", "../dogboard/dogboard_delete.jsp");
 		  return "../main/main.jsp";
-		  // ����â���� �̵�
+		  // 占쏙옙占쏙옙창占쏙옙占쏙옙 占싱듸옙
 	  }
 	  
 	  @RequestMapping("dogboard/dogboard_delete_ok.do")
