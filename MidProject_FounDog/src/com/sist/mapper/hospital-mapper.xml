@@ -40,10 +40,10 @@
    WHERE dno=#{dno}
 </select>
 
-<select id="reserveTime" resultType="String" parameterType="int">
+<select id="reserveTime" resultType="String" parameterType="String">
       SELECT time
       FROM timeInfo
-      WHERE timeno=#{timeno}
+      WHERE REGEXP_LIKE(timeno, #{timeno})
 </select>
 
 <select id="memberId" resultType="String" parameterType="String">

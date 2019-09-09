@@ -44,6 +44,7 @@ $(function() {
 	});
 	
 	$('.dates').click(function(){
+		var date = new Date();
 		var year=$(this).attr("data-year");
 		var month=$(this).attr("data-month");
 		var day=$(this).text();
@@ -57,7 +58,7 @@ $(function() {
 			success:function(response){
 				$("#contents > a").focus();
 			    $("#layerPopup").hide();
-				$('#wr_5').html(response);
+				$('#wr_5_div').html(response);
 			}
 		})
 	});

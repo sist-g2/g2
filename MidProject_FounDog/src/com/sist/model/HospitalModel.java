@@ -253,14 +253,10 @@ public class HospitalModel {
 			   String day=model.getRequest().getParameter("day");	
 			   String time=HospitalDAO.reserveGetTime(Integer.parseInt(day));
 			   System.out.println("time="+time);
-			   List<String> list=new ArrayList<String>();
-			   StringTokenizer st=new StringTokenizer(time,",");
-	
-			   while(st.hasMoreTokens())
-			   {
-				   list.add(HospitalDAO.reserveTime(Integer.parseInt(st.nextToken())));
-				   System.out.println(list);
-			   }
+			   String timeno = time.replace(",", "|");
+			   List<String> list = new ArrayList<String>();
+			   list = HospitalDAO.reserveTime(timeno);
+			   
 			   model.addAttribute("list", list);
 			   return "../hospital/hospital_time.jsp";
 		   }

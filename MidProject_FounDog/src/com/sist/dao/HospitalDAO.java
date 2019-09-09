@@ -68,11 +68,12 @@ public class HospitalDAO {
 		   return list;
 	   }
 	 
-	 public static String reserveTime(int timeno)
+	 public static List<String> reserveTime(String timeno)
 	   {
-		   String list="";
+		 List<String> list= new ArrayList<String>();
 		   SqlSession session = ssf.openSession();
-		   list=session.selectOne("reserveTime",timeno);	  
+		   System.out.println("timeno : " + timeno);
+		   list=session.selectList("reserveTime",timeno);	  
 		   return list;
 	   }
 	 

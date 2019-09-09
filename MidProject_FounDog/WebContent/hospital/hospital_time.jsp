@@ -8,8 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<select name="wr_5" class="form-control2" id="wr_5">
 	<c:forEach var="vo" items="${list }">
-	<option value="${vo }">${vo }</option>
-	</c:forEach>
+		<option value="${vo }">${vo }</option>
+	</c:forEach>	
+</select>
+	
 </body>
 </html>

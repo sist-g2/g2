@@ -326,9 +326,12 @@ $(document).ready(function(){
 		예약희망시간 
 	</td>
 	<td colspan="2">
-		<select name="wr_5" class="form-control2" id="wr_5">
+		<div id="wr_5_div" >
+			예약일자를 먼저 선택해주세요!
+		</div>
+		<%-- <select name="wr_5" class="form-control2" id="wr_5">
 		<option value="">예약일자를 먼저 선택해주세요.</option>				
-		</select>
+		</select> --%>
 	</td>
 </tr>
 <tr class="bdb">
