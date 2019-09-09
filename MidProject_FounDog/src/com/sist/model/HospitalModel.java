@@ -627,4 +627,29 @@ public class HospitalModel {
 			
 			return "../hospital/hospital_carechart_certificate.jsp";
 		}
+		
+		@RequestMapping("hospital/hospital_vaccination_insert.do")
+		public String hospital_vaccination_insert(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			String dname = model.getRequest().getParameter("dname");
+			String vname = model.getRequest().getParameter("vname");
+			String vdate = model.getRequest().getParameter("vdate");
+			String id = model.getRequest().getParameter("id");
+			
+			VaccinationVO vo = new VaccinationVO();
+
+			vo.setVaccination_name(vname);
+			vo.setLast_date(vdate);
+			vo.setSchedule_date(vdate);
+			vo.setDogname(dname);
+			vo.setId(id);
+			
+			HospitalDAO.vaccinationInsert(vo);
+			
+			return "redirect:../hospital/hospital_vaccination_detail.do";
+		}
 }

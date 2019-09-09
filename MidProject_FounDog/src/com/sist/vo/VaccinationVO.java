@@ -5,8 +5,15 @@ public class VaccinationVO {
 	private String vaccination_name;
 	private String last_date;
 	private String schedule_date;
-	private int vacc_no;
 	private String dogname;
+	private String id;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -30,12 +37,6 @@ public class VaccinationVO {
 	}
 	public void setSchedule_date(String schedule_date) {
 		this.schedule_date = schedule_date;
-	}
-	public int getVacc_no() {
-		return vacc_no;
-	}
-	public void setVacc_no(int vacc_no) {
-		this.vacc_no = vacc_no;
 	}
 	public String getDogname() {
 		return dogname;

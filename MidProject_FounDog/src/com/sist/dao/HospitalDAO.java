@@ -204,4 +204,12 @@ public class HospitalDAO {
 		   return list;
 	   }
 	 
+	 public static void vaccinationInsert(VaccinationVO vo){
+		   List<VaccinationVO> list = new ArrayList<VaccinationVO>();
+		   SqlSession session = ssf.openSession();
+			session.insert("vaccinationInsert", vo);
+			session.commit();
+			session.close();
+	 }
+	 
 }

@@ -11,7 +11,14 @@ public class CertificateVO {
 	private String dbirth;
 	private String name;
 	private String tel;
+	private String vaccination_care;
 	
+	public String getVaccination_care() {
+		return vaccination_care;
+	}
+	public void setVaccination_care(String vaccination_care) {
+		this.vaccination_care = vaccination_care;
+	}
 	public int getNo() {
 		return no;
 	}

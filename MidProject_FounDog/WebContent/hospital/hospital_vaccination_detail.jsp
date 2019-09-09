@@ -22,10 +22,52 @@
 	cursor: pointer;
 }
 
+#layerPopup{
+  padding:20px; 
+  border:4px solid #ddd; 
+  position:absolute; 
+  left:100px; 
+  top:100px; 
+  background:#fff;
+}
+
+#layerPopup button{
+  cursor:pointer;
+}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	  $("#layerPopup").hide();
+	  $("#layerPopup2").hide();
+	  $("#contents > a").click(function(){
+		    
+	    $("#contents > a").blur();
+	    $("#layerPopup").show();
+	    $("#layerPopup a").focus();
+	   
+	    
+	    return false;
+	  });
+	    
+	  $("#layerPopup a").keydown(function(e){
+	    if(e.shiftKey && e.keyCode == 9){ // Shift + Tab 키를 의미합니다.
+	      $("#contents > a").focus();
+	      $("#layerPopup").hide();
+	      return false;
+	    }
+	  });
+	  
+	  $("#layerPopup button").click(function(){
+		    $("#contents > a").focus();
+		    $("#layerPopup").hide();	 					  	
+	  });
+	  
+	});
+	
 $(function(){
+	
 	$('#detailbtn').click(function(){
 		var dno=$('#selectDog option:selected').attr("data-no");
 	
@@ -74,8 +116,39 @@ $(function(){
 						<c:forEach var="vo" items="${doglist }">
 							<option data-no="${vo.dno }">${vo.dname}</option>
 						</c:forEach>
-					</select>				
+					</select>									
 				</td>
+				<div id="contents">
+		  		<a href="#layerPopup">&nbsp;&nbsp;접종내역 추가하기&nbsp;&nbsp;</a>
+				  <div id="layerPopup">
+						<div id="PopupDiary">
+						<form method="post" id="vaccinationForm" action="hospital_vaccination_insert.do">
+							<div style="height: 100px;width: 500px">
+							<div style="width: 100%">														
+								<span>추가할 강아지 : </span><input type="hidden" value="${sessionScope.id }" name="id">							
+								<select name="dname">
+									<c:forEach var="vo" items="${doglist }">
+										<option data-no="${vo.dno }">${vo.dname}</option>
+									</c:forEach>
+								</select>															
+								<span>추가할 접종백신 : </span>
+									<select name="vname">									
+										<option>종합백신</option>
+										<option>켄넬코프</option>
+										<option>인플루엔자</option>
+										<option>광견병</option>
+										<option>심장사상충</option>
+									</select>
+								</div>
+									<br>
+									<span>접종일 : </span><input type="date" name="vdate">&nbsp;&nbsp;
+									<input type="submit" value="추가하기">						
+							</div>
+						</form>
+						</div>
+				    <button type="button">닫기</button>
+				  </div>
+				</div>				
 				<td rowspan=2 width="30%" style="text-align: right;">
 					&nbsp;&nbsp;<input type="button" id="detailbtn" value="조회" >&nbsp;&nbsp;
 				</td>

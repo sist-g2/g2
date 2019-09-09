@@ -204,15 +204,14 @@ FROM carechart
 </select>
 
 <select id="vaccinationDetail" resultType="VaccinationVO" parameterType="hashmap">
-SELECT no, vaccination_name, last_date, schedule_date, vacc_no, dogname, num
+SELECT no, vaccination_name, last_date, schedule_date, dogname, num
 FROM (
-	SELECT no, vaccination_name, last_date , schedule_date, vacc_no, dogname, rownum as num
+	SELECT no, vaccination_name, last_date , schedule_date, dogname, rownum as num
 	FROM(
 		SELECT no,
         vaccination_name,
 		TO_CHAR(last_date,'YYYY-MM-DD') as last_date,
 		TO_CHAR(schedule_date,'YYYY-MM-DD') as schedule_date,
-		vacc_no,
 		(SELECT dname FROM dog WHERE dno = dogno) as dogname
 		FROM vaccination
 		<where>
@@ -273,4 +272,15 @@ TO_CHAR((SELECT dbirth FROM dog WHERE dno = dogno), 'YYYY-MM-DD') as dbirth,
 FROM carechart)
 WHERE no=#{no}
 </select>
+
+<insert id="vaccinationInsert" parameterType="VaccinationVO">
+	INSERT INTO vaccination VALUES(
+			vaccination_no_seq.nextval,
+			#{vaccination_name},		
+			#{last_date},
+			TO_DATE(#{schedule_date},'YYYY-MM-DD')+365,
+			(SELECT dno FROM dog WHERE dname = #{dogname} AND id = #{id})
+		)
+</insert>
+
 </mapper>

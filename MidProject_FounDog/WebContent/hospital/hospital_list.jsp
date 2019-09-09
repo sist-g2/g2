@@ -53,7 +53,10 @@
 				class="searchBtn" value="검색" name="searchbtn" id="searchbtn">
 
 		</div>
-		<div id="searchtotal"></div>
+		<div id="searchtotal">
+		<c:if test="${list eq null}">
+		<h3>병원을 검색해주세요</h3></c:if>
+		</div>
 		
 		<div id="map"
 			style="width: 680px; height: 540px; border: 10px solid #f2f2f2;"
