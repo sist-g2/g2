@@ -42,13 +42,13 @@
 		<div style="height:70px;">
 
 			<input type="text" value="서울특별시" readonly="readonly"
-				class="form-control2"> <select name="searchloc"
+				class="form-control2">&nbsp;&nbsp;<select name="searchloc"
 				id="searchloc" class="form-control2">
 				<option value="">전체</option>
 				<c:forEach var="loc" items="${loc }">
 					<option>${loc }</option>
 				</c:forEach>
-			</select> <input type="text" name="searchname" id="searchname"
+			</select>&nbsp; <input type="text" name="searchname" id="searchname"
 				class="form-control2" placeholder="병원이름 검색">&nbsp;&nbsp;<input type="button"
 				class="searchBtn" value="검색" name="searchbtn" id="searchbtn">
 

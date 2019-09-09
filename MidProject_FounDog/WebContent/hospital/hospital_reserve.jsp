@@ -63,6 +63,40 @@
   background-image: none;
   border-radius: 4px;
 }
+textarea {
+  border: 1px solid #d99c4e;
+  font-weight: 300;
+  outline: none;
+  box-shadow: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+}
+table a{
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+.btn-common2 {
+	font-size: 14px;
+	color: #d29948;
+	border: 1px solid #dbb075;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	padding: 10px 25px;
+	background: none;
+	border-radius: 4px;
+}
 </style>
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -259,16 +293,16 @@ $(document).ready(function(){
 </colgroup>
 <tbody><tr class="first bdt bdb">
 	<th>01. 진료병원</th>
-	<td>
+	<td colspan="3">
 	<input type="hidden" name="hosNo" id="hosNo" value="${no }">
 		${hosName }
 	</td>
 </tr>
 <tr>
-	<th rowspan="3">02. 예약희망날짜</th>
-	<td style="padding:20px 0 30px 0" class="ml_28">
+	<th rowspan="4">02. 예약희망날짜</th>
+	<td colspan="2" style="padding:20px 0 30px 0" class="ml_28">
 		<div id="contents">
-		  <a href="#layerPopup">예약 날짜 선택</a>
+		  <a href="#layerPopup">&nbsp;&nbsp;예약 날짜 선택&nbsp;&nbsp;</a>
 		  <div id="layerPopup">
 				<div id="PopupDiary">
 				
@@ -280,31 +314,48 @@ $(document).ready(function(){
 	</td>
 </tr>
 <tr>
-	<td class="ml_28">
-		예약희망일 : <input type="text" class="form-control2" id="reserve_day" name="reserve_day" value="" readonly="readonly">
+	<td class="ml_28" style="width:120px">
+		예약희망일
+	</td>
+	<td colspan="2" class="text-left">
+		<input type="text" class="form-control2" id="reserve_day" name="reserve_day" value="" readonly="readonly">
 	</td>
 </tr>
-<tr class="bdb">
-	<td>
+<tr>
+	<td style="width:120px">
 		예약희망시간 
+	</td>
+	<td colspan="2">
 		<select name="wr_5" class="form-control2" id="wr_5">
 		<option value="">예약일자를 먼저 선택해주세요.</option>				
 		</select>
-		<span style="color:#f00; font-size:0.9em; margin-left:10px;"> *예약희망시간은 확정이 아니며 담당 센터에서 일정 확인 후 연락(전화 또는 메시지)을 드립니다.</span>		
+	</td>
+</tr>
+<tr class="bdb">
+	<td colspan="3">
+		<span style="color:#f00; font-size:0.9em;"> *예약희망시간은 확정이 아니며 담당 센터에서 일정 확인 후 연락(전화 또는 메시지)을 드립니다.</span>
 	</td>
 </tr>
 <tr class="bdt">
 	<th class="end bdb" rowspan="7">03. 기타정보입력</th>
-	<td class="ml_28">
-		보호자 명 : <input type="text" class="form-control2" readonly="readonly" value="${name }">
+	<td class="ml_28" style="width:120px">
+		보호자 명
+	</td>
+	<td colspan="2">
+		<input type="text" class="form-control2" readonly="readonly" value="${name }">
 	</td>
 </tr>
 <tr>
-	<td class="ml_28">
-		진료받는 강아지 : <input type="text" class="form-control2" readonly="readonly" id="dname">&nbsp;
-		<input type="hidden" name="dogNo" id="dogNo" value=""> 
+	<td colspan="2" class="ml_28" style="width:120px">
+		진료받는 강아지
+	</td>
+	<td style="width:150px">
+		<input type="text" class="form-control2" readonly="readonly" id="dname">&nbsp;
+		<input type="hidden" name="dogNo" id="dogNo" value="">
+	</td>
+	<td>
 		<div id="contents2">
-		  <a href="#layerPopup2">강아지 선택</a>
+		  <a href="#layerPopup2">&nbsp;&nbsp;강아지 선택&nbsp;&nbsp;</a>
 		  <div id="layerPopup2">
 				<div id="PopupDog">
 				
@@ -316,15 +367,17 @@ $(document).ready(function(){
 	</td>
 </tr>
 <tr>
-	<td class="end">
+	<td class="end" colspan="3">
 		증상<br>
-		<textarea style="width: 600px" cols="30" rows="5" name="symptom"></textarea>
+		<textarea style="width: 600px;margin-top:10px" cols="30" rows="5" name="symptom"></textarea>
 	</td>
 </tr>
 </tbody>
 </table>
-		<input type="button" onclick="javascript:reservedate();" class="btn btn-primary" value="확인">
-		<input type="button" class="btn btn-primary" value="취소" onclick="javascript:cancel();">
+	<table class="table-borderless" style="width:1140px;margin-top:30px;"><tr><td class="text-center">
+		<input type="button" onclick="javascript:reservedate();" class="btn-common2" value="예약">&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" class="btn-common2" value="취소" onclick="javascript:cancel();">
+	</td></tr></table>
 </form>
 	</div>		  
 </body>
