@@ -51,7 +51,7 @@ th{
 			<c:if test="${count>0 }">
 			<table class="table">
 				<tr>
-					<th width=10% class="text-center">번호</th>
+					<th width=10% class="text-center">글번호</th>
 					<th width=45% class="text-center">제목</th>
 					<th width=15% class="text-center">이름</th>
 					<th width=20% class="text-center">작성일</th>
@@ -64,7 +64,8 @@ th{
 						<a href="board_detail.do?no=${vo.no }"><font color="black">${vo.subject }</font></a></td>
 						<td width=15% class="text-center">${vo.id }</td>
 						<td width=20% class="text-center">
-						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
+						${vo.dbday }
+						<%-- <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /> --%></td>
 						<%--
                   SimpleDateFormat = fmt:formatDate
                --%>
@@ -74,14 +75,21 @@ th{
 					<!-- 5p씩 나누기 -->
 				<td colspan=5 class="text-center">
 	               <ul class="pagination">
-	                  <li><a href="board_find.do?page=1">&lt;&lt;</a></li>
-	                  <li><a href="board_find.do?page=${curpage<=5?1:startPage-1}">&lt;</a></li>
+	                  <li><a href="board_find.do?fs=${fs}&ss=${ss }&page=1">&lt;&lt;</a></li>
+	                  <li><a href="board_find.do?fs=${fs}&ss=${ss }&page=${curpage<=5?1:startPage-1}">&lt;</a></li>
 	                  <c:forEach var="i" begin="${startPage }" end="${endPage }">
 	                     <li class="${i==curpage?'active':''}">
-	                     <a href="board_find.do?page=${i }">${i }</a>
+	                     <a href="board_find.do?fs=${fs}&ss=${ss }&page=${i }">${i }</a>
 	                  </c:forEach>
-	                  <li><a href="board_find.do?page=${curpage>allPage-(allPage%BLOCK)?endPage:endPage+1}">&gt;</a></li>
-	                  <li><a href="board_find.do?page=${allPage }">&gt;&gt;</a></li>
+	                  <li>
+	                  	<c:if test="${allPage%BLOCK==0 }" >
+	                  		<a href="board_find.do?fs=${fs}&ss=${ss}&page=${curpage<=(allPage-BLOCK)?endPage+1:endPage}">&gt;</a>
+	                  	</c:if>
+	                  	<c:if test="${allPage%BLOCK!=0 }" >
+	                  		<a href="board_find.do?fs=${fs}&ss=${ss}&page=${curpage>allPage-(allPage%BLOCK)?endPage:endPage+1}">&gt;</a>
+	                  	</c:if>
+	                  </li>
+	                  <li><a href="board_find.do?fs=${fs}&ss=${ss }&page=${allPage }">&gt;&gt;</a></li>
 	               </ul>
 	            </td>
 			</table>

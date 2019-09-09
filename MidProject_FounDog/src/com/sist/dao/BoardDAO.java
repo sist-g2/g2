@@ -210,4 +210,20 @@ public class BoardDAO {
 		   return list;
 	   }
 	   
+	   public static int boardFindTotalPage(Map map) {
+		   int totalPage = 0;
+		   SqlSession session = ssf.openSession();
+		   totalPage = session.selectOne("boardFindTotalPage", map);
+		   session.close();
+		   return totalPage;
+	   }
+	   
+	   public static int boardFindRowCount(Map map) {
+		   int totalCnt = 0;
+		   SqlSession session = ssf.openSession();
+		   totalCnt = session.selectOne("boardFindRowCount", map);
+		   session.close();
+		   return totalCnt;
+	   }
+	   
 }

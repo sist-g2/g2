@@ -155,7 +155,14 @@ th{
 	                     <li class="${i==curpage?'active':''}">
 	                     <a href="board_list.do?page=${i }">${i }</a>
 	                  </c:forEach>
-	                  <li><a href="board_list.do?page=${curpage>allPage-(allPage%BLOCK)?endPage:endPage+1}">&gt;</a></li>
+	                  <li>
+	                  	<c:if test="${allPage%BLOCK==0 }" >
+	                  		<a href="board_list.do?page=${curpage<=(allPage-BLOCK)?endPage+1:endPage}">&gt;</a>
+	                  	</c:if>
+	                  	<c:if test="${allPage%BLOCK!=0 }" >
+	                  		<a href="board_list.do?page=${curpage>allPage-(allPage%BLOCK)?endPage:endPage+1}">&gt;</a>
+	                  	</c:if>
+	                  </li>
 	                  <li><a href="board_list.do?page=${allPage }">&gt;&gt;</a></li>
 	               </ul>
 	            </td>

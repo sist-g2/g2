@@ -100,8 +100,8 @@ public class QnaModel {
 
 		// 현재 페이지 => curpage
 		// 총페이지  => totalpage
-		int totalpage = BoardDAO.boardTotalPage(1);
-		int count=BoardDAO.boardRowCount(1); // 22
+		int totalpage = BoardDAO.boardFindTotalPage(map);
+		int count=BoardDAO.boardFindRowCount(map); // 22
 		int BLOCK=5;
 		  
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -115,6 +115,8 @@ public class QnaModel {
 		  
 		model.getRequest().setAttribute("list", list);
 		model.getRequest().setAttribute("count", list.size());
+		model.addAttribute("fs", fs);
+		model.addAttribute("ss", ss);
 		model.addAttribute("today", today);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);

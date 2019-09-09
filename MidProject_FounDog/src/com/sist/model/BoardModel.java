@@ -83,7 +83,6 @@ public class BoardModel {
 	  if(page==null)
 		  page="1";
 	  int curpage=Integer.parseInt(page);
-	  
 	  // Map에 저장 
 	  Map map=new HashMap();
 	  int rowSize=10;
@@ -97,15 +96,16 @@ public class BoardModel {
 	  map.put("ss", ss);
 	  map.put("category", 0); // 자유게시판 카테고리 : 0
 	  
-	  List<BoardVO> list=BoardDAO.boardListData(map);
+	  List<BoardVO> list=BoardDAO.boardFindData(map);
 	  
 	  // 목록 전송 
 	  model.addAttribute("list", list);
 	  
 	  // 현재 페이지 => curpage
 	  // 총페이지  => totalpage
-	  int totalpage = BoardDAO.boardTotalPage(0);
-	  int count=BoardDAO.boardRowCount(0); // 22
+	  int totalpage = BoardDAO.boardFindTotalPage(map);
+	  System.out.println("총페이지 : " + totalpage);
+	  int count=BoardDAO.boardFindRowCount(map); // 22
 	  int BLOCK=5;
 	  
 	  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -119,6 +119,8 @@ public class BoardModel {
 	
 		model.getRequest().setAttribute("list", list);
 		model.getRequest().setAttribute("count", list.size());
+		model.addAttribute("fs", fs);
+		model.addAttribute("ss", ss);
 		model.addAttribute("today", today);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalpage", totalpage);
