@@ -44,7 +44,7 @@
                     <li><a class="btn btn-default ${cate==0?'active':'' }" href="../site/site_list.do?cate=0" >회원정보</a></li>
                     <li><a class="btn btn-default ${cate==1?'active':'' }" href="../site/site_list.do?cate=1" >사료비교</a></li>
                     <li><a class="btn btn-default ${cate==2?'active':'' }" href="../site/site_list.do?cate=2" >병원이용</a></li>
-                    <li><a class="btn btn-default ${cate==3?'active':'' }" href="../site/site_list.do?cate=3" >강아지와함께</a></li>
+                    <li><a class="btn btn-default ${cate==3?'active':'' }" href="../site/site_list.do?cate=3" >커뮤니티</a></li>
                     </ul>
 		</section>
 		

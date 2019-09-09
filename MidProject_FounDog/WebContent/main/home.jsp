@@ -67,7 +67,7 @@
             <a href="../adminboard/adminboard_list.do"><img src="doginfo.png" alt=""></a>
             </div>        
             <div class="swiper-slide">
-            <a href="../board/board_list.do"><img src="Organicdog.png" alt=""></a>
+            <a href="../dogboard/dogboard_list.do"><img src="Organicdog.png" alt=""></a>
             </div>
         </div>
         </div>
