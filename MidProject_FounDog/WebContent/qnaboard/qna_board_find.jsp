@@ -68,6 +68,18 @@ th{
 						<td width=10% class="text-center">${vo.hit }</td>
 					</tr>
 				</c:forEach>
+					<td colspan=5 class="text-center">
+	               <ul class="pagination">
+	                  <li><a href="qna_board_find.do?page=1">&lt;&lt;</a></li>
+	                  <li><a href="qna_board_find.do?page=${curpage<=5?1:startPage-1}">&lt;</a></li>
+	                  <c:forEach var="i" begin="${startPage }" end="${endPage }">
+	                     <li class="${i==curpage?'active':''}">
+	                     <a href="qna_board_find.do?page=${i }">${i }</a>
+	                  </c:forEach>
+	                  <li><a href="qna_board_find.do?page=${curpage>allPage-(allPage%BLOCK)?endPage:endPage+1}">&gt;</a></li>
+	                  <li><a href="qna_board_find.do?page=${allPage }">&gt;&gt;</a></li>
+	               </ul>
+	            </td>
 			</table>
 			</c:if>
 			</div>

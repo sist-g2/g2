@@ -69,24 +69,64 @@ public class BoardModel {
   
   @RequestMapping("board/board_find.do")
   public String board_find(Model model){
-
-		try{
-			model.getRequest().setCharacterEncoding("UTF-8");
-		}catch(Exception ex){}
-		
-		
-		String fs=model.getRequest().getParameter("fs");
-		String ss=model.getRequest().getParameter("ss");
-		//WHERE ${fs} LIKE '%'||#{ss}||'%'
-		Map map = new HashMap();
-		map.put("fs", fs);
-		map.put("ss", ss);
-		map.put("category", 0);
-		List<BoardVO> list = BoardDAO.boardFindData(map);
-		
+	
+			try{
+				model.getRequest().setCharacterEncoding("UTF-8");
+			}catch(Exception ex){}
+			
+	  // page를 받는다 
+	  String page=model.getRequest().getParameter("page");
+      String fs=model.getRequest().getParameter("fs");
+	  String ss=model.getRequest().getParameter("ss");
+	  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	  
+	  if(page==null)
+		  page="1";
+	  int curpage=Integer.parseInt(page);
+	  
+	  // Map에 저장 
+	  Map map=new HashMap();
+	  int rowSize=10;
+	  int start=(curpage*rowSize)-(rowSize-1);
+	  // 1~10 , 11~20 , 21....
+	  int end=curpage*rowSize;
+	  
+	  map.put("start", start);
+	  map.put("end", end);
+	  map.put("fs", fs);
+	  map.put("ss", ss);
+	  map.put("category", 0); // 자유게시판 카테고리 : 0
+	  
+	  List<BoardVO> list=BoardDAO.boardListData(map);
+	  
+	  // 목록 전송 
+	  model.addAttribute("list", list);
+	  
+	  // 현재 페이지 => curpage
+	  // 총페이지  => totalpage
+	  int totalpage = BoardDAO.boardTotalPage(0);
+	  int count=BoardDAO.boardRowCount(0); // 22
+	  int BLOCK=5;
+	  
+	  int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+	  int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+	  int allPage=totalpage;
+	  
+	  if(endPage>allPage){
+		  endPage=allPage;
+	  }
+	  count=count-((curpage*rowSize)-rowSize); 
+	
 		model.getRequest().setAttribute("list", list);
 		model.getRequest().setAttribute("count", list.size());
-		
+		model.addAttribute("today", today);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("BLOCK", BLOCK);
+		model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+		model.addAttribute("allPage", allPage);
+		model.addAttribute("count", count);
 		model.addAttribute("main_jsp", "../board/board_find.jsp");
 		return "../main/main.jsp";
 	}
