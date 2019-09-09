@@ -6,10 +6,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../main/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/member.css">
 <style type="text/css">
 .row {
    margin: 0px auto;
    width:900px;
+}
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
 }
 </style>
 <!-- 
@@ -39,19 +52,17 @@ $(function(){
   <div class="container">
     <h2 class="text-center">삭제하기</h2>
     <div class="row">
-	      <table class="table">
+	      <table class="table table-borderless">
 	        <tr>
-	          <td class="text-right" width=30%>삭제하시겠습니까?</td>
-	          <td class="text-left" width=70%>
+	          <td class="text-center" colspan="2">삭제하시겠습니까?
 	           <!--  <input type=password name=pwd size=15 id="pwd"> -->
-	            <input type=hidden name=no value="${no }" id="no">
-	          </td> 
+	            <input type=hidden name=no value="${no }" id="no"></td>
 	        </tr>
 	        <tr>
 	          <td class="text-center" colspan="2">
-	            <input type=button value="삭제" class="btn btn-sm btn-danger" id="delBtn">
-	            <input type=button value="취소" class="btn btn-sm btn-primary"
-	              onclick="javascript:history.back()"
+	            <input type=button value="삭제" class="btnCss" id="delBtn">&nbsp;&nbsp;&nbsp;
+	            <input type=button value="취소" class="btnCss"
+	              onclick="javascript:history.back();"
 	            >
 	          </td>
 	        </tr>
