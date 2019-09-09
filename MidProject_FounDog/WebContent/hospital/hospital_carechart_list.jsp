@@ -78,7 +78,7 @@ $('.detailbtn').click(function(){
 				<td class="text-left" width="10%" >${vo.doctor }</td>
 				<td class="text-left" width="10%" >${vo.dogname }</td>
 				<td class="text-left" width="15%" >${vo.hospitalname }</td>
-				<td class="text-left" width="10%" ><input type="button" value="상세보기" class="detailbtn"data-no="${vo.no }"></td>
+				<td class="text-left" width="10%" ><input type="button" value="상세보기" style="color: #ffffff; background: #bd8942; width: 70px; height: 25px; border-style: none; border-radius: 4px;" class="detailbtn"data-no="${vo.no }"></td>
 			</tr>
 		</c:forEach>
 		<tr>

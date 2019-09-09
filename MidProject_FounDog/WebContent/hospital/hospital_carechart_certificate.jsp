@@ -7,7 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
-
+<style type="text/css">
+td{
+	padding-left: 5px;
+	padding-right:5px;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -19,13 +24,13 @@
 		</div>
 		<table style="border: solid 1px; height: 300px; width: 100%">
 			<tr style="border: solid 1px; height: 50px">
-				<td style="border: solid 1px; width: 100px">보호자 명</td>
+				<td style="border: solid 1px; width: 120px">보호자 명</td>
 				<td colspan="3">${list.name }</td>
 				<td style="border: solid 1px; width: 100px">전화번호</td>
 				<td>${list.tel}</td>
 			</tr>
 			<tr style="border: solid 1px; height: 50px">
-				<td style="border: solid 1px; width: 100px">진료받은 강아지</td>
+				<td style="border: solid 1px; width: 120px">진료받은 강아지</td>
 				<td>${list.dogname }</td>
 				<td style="border: solid 1px;">견종</td>
 				<td>${list.dtype }</td>
@@ -33,11 +38,11 @@
 				<td>${list.dbirth }</td>
 			</tr>
 			<tr style="border: solid 1px; height: 50px">
-				<td style="border: solid 1px; width: 100px">진료일</td>
+				<td style="border: solid 1px; width: 120px">진료일</td>
 				<td colspan="5">${list.caredate }</td>
 			</tr>
 			<tr style="border: solid 1px; height: 150px">
-				<td style="border: solid 1px; width: 100px">진료내용</td>
+				<td style="border: solid 1px; width: 120px">진료내용</td>
 				<td colspan="5">${list.prescription }</td>
 			</tr>
 			<tr>

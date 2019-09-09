@@ -6,10 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../main/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/member.css">
 <style type="text/css">
 .row {
    margin: 0px auto;
-   width:900px;
+   width:540px;
 }
 .btn-sm{
 	background-color:#FFF;
@@ -19,6 +20,19 @@ th{
 	background-color:#FFF;
 	color:#A5732A;
 }
+textarea {
+  border: 1px solid #d99c4e;
+  font-weight: 300;
+  outline: none;
+  box-shadow: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+}
 </style>
 </head>
 <body>
@@ -26,81 +40,90 @@ th{
      <h2 class="text-center">글쓰기</h2>
      <div class="row">
      <form method="post" action="dogboard_insert_ok.do" enctype="multipart/form-data">
-       <table class="table">
+       <table class="table table-borderless">
          <tr>
-           <th class="text-right" width=20%>이름</th>
-           <td width=80% class="text-left">
-             <input type=text name=dname size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>지역</th>
-           <td width=80% class="text-left">
-             <input type=text name=area size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-			<th class="text-right info" width=20%>첨부파일</th>
-			<td width=80% class="text-left">
-				<input type=file name=upload size=20 class="input-sm">
-			</td>
-		</tr>
-         <tr>
-           <th class="text-right" width=20%>견종</th>
-           <td width=80% class="text-left">
-             <input type=text name=dtype size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>성별</th>
-           <td width=80% class="text-left">
-             <input type=text name=dsex size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>무게</th>
-           <td width=80% class="text-left">
-             <input type=text name=dkg size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>색깔</th>
-           <td width=80% class="text-left">
-             <input type=text name=dcolor size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>전화번호</th>
-           <td width=80% class="text-left">
-             <input type=text name=tel size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>나이</th>
-           <td width=80% class="text-left">
-             <input type=text name=dage size=15 class="input-sm">
-           </td>
-         </tr>
-         <tr>
-           <th class="text-right" width=20%>카테고리</th>
-				<td align="left">&nbsp;
+           <th colspan="2">카테고리&nbsp;&nbsp;&nbsp;&nbsp;
 					 <select id="category" class="form-control2" name=category>
 						<option value="0">찾습니다</option>
 						<option value="1">발견했습니다</option>
 					</select>
-				</td>
+					</th>
          </tr>
          <tr>
-           <th class="text-right" width=20%>특징</th>
-           <td width=80% class="text-left">
-             <textarea rows="10" cols="25" name=dcharacter></textarea>
+         	<th>이름</th>
+         	<th style="width:187px;">지역</th>
+         </tr>
+         <tr>
+           <td>
+             <input type=text name=dname size=25 class="form-control2">
+           </td>
+           <td class="text-right">
+             <input type=text name=area size=25 class="form-control2">
+           </td>
+         </tr>
+         <tr>
+           <th>견종</th>
+           <th style="width:187px;">성별</th>
+         </tr>
+         <tr>
+           <td>
+             <input type=text name=dtype size=25 class="form-control2">
+           </td>
+           <td>
+             <input type=text name=dsex size=25 class="form-control2">
+           </td>
+         </tr>
+         <tr>
+           <th>무게</th>
+           <th style="width:187px;">색깔</th>
+           
+         </tr>
+         <tr>
+           <td>
+             <input type=text name=dkg size=25 class="form-control2">
+           </td>
+           <td>
+             <input type=text name=dcolor size=25 class="form-control2">
+           </td>
+         </tr>
+         <tr>
+           <th>전화번호</th>
+           <th style="width:187px;">나이</th>
+           
+         </tr>
+         <tr>
+           <td>
+             <input type=text name=tel size=25 class="form-control2">
+           </td>
+           <td style="width:187px;">
+             <input type=text name=dage size=25 class="form-control2">
+           </td>
+         </tr>
+         <tr>
+			<th colspan="2">첨부파일</th>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input type=file name=upload size=25 class="input-sm">
+			</td>
+		</tr>
+         <tr>
+           <th colspan="2">특징</th>
+         </tr>
+         <tr>
+           <td colspan="2">
+             <textarea rows="12" cols="80" name=dcharacter></textarea>
            </td>
          </tr>
          <tr>
            <td colspan="2" class="text-center">
-             <input type="submit" value="글쓰기" class="btn btn-sm">
-             <input type="button" value="취소" class="btn btn-sm" onclick="javascript:history.back()">
+             <input type="submit" value="글쓰기" style="width:200px;" class="btn-submit2">
            </td>
+         </tr>
+         <tr>
+         	<td colspan="2" class="text-center">
+         		<input type="button" value="취소" style="font-size:10pt;" class="btn btn-sm" onclick="javascript:history.back()">
+         	</td>
          </tr>
        </table>
        </form>

@@ -89,7 +89,7 @@ $(function(){
 				<td class="text-left" width="10%" >
 					<c:if test="${vo.state=='예약중' }">
 						<font color="orange" >${vo.state }</font>
-						<input type="button" class="cancelbtn" value="예약취소" data-rno="${vo.no }" style="color: #ffffff; background: #bd8942; width: 70px; height: 25px;">
+						<input type="button" class="cancelbtn" value="예약취소" data-rno="${vo.no }" style="color: #ffffff; background: #bd8942; width: 70px; height: 25px; border-style: none; border-radius: 4px;">
 					</c:if>
 					<c:if test="${vo.state=='진료완료' }">
 						<font color="green" >${vo.state }</font>

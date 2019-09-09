@@ -242,11 +242,40 @@
     
     <!-- 검색(찾기) -->
      <select id="boardFindData" resultType="BoardVO" parameterType="java.util.Map">
-      SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
-      FROM board 
-      WHERE ${fs} LIKE '%'||#{ss}||'%' 
-      AND category=#{category}
+     <!-- TO_CHAR(regdate,'YYYY-MM-DD') as dbday -->
+      SELECT no, subject, id, dbday, hit, num
+      FROM (SELECT no, subject, id, dbday, hit, rownum as num  
+		      FROM (SELECT no, subject, id, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, hit 
+				      FROM board 
+				      WHERE ${fs} LIKE '%'||#{ss}||'%' 
+				      AND category=#{category}
+				      AND delState=0 
+				      ORDER BY no DESC 
+				    )
+			) WHERE num BETWEEN #{start} AND #{end}
       </select>
+      
+      <!-- 검색 총페이지 -->
+		<select id="boardFindTotalPage" resultType="int" parameterType="java.util.Map">
+			SELECT CEIL(COUNT(*)/10.0) 
+			FROM (SELECT no, subject, id, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, hit 
+					FROM board 
+					WHERE ${fs} LIKE '%'||#{ss}||'%' 
+					AND category=#{category}
+					AND delState=0 
+					)
+		</select>
+		
+	   <!-- 검색 게시물 번호가 일렬로 처리  -->
+		<select id="boardFindRowCount" resultType="int"  parameterType="java.util.Map">
+			SELECT COUNT(*)
+			FROM (SELECT no, subject, id, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, hit 
+					FROM board 
+					WHERE ${fs} LIKE '%'||#{ss}||'%' 
+					AND category=#{category}
+					AND delState=0 
+					)
+		</select>
       
     <!-- FAQ -->
 	 <select id="faqListData" resultType="Board_FAQVO" parameterType="int">
