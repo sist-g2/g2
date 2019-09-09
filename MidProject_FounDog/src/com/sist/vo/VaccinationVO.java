@@ -2,47 +2,47 @@ package com.sist.vo;
 
 public class VaccinationVO {
 	private int no;
-	private String vaccinationName;
-	private String lastDate;
-	private String scheduleDate;
-	private int vaccNo;
-	private String dogName;
-	
+	private String vaccination_name;
+	private String last_date;
+	private String schedule_date;
+	private int vacc_no;
+	private String dogname;
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getVaccinationName() {
-		return vaccinationName;
+	public String getVaccination_name() {
+		return vaccination_name;
 	}
-	public void setVaccinationName(String vaccinationName) {
-		this.vaccinationName = vaccinationName;
+	public void setVaccination_name(String vaccination_name) {
+		this.vaccination_name = vaccination_name;
 	}
-	public String getLastDate() {
-		return lastDate;
+	public String getLast_date() {
+		return last_date;
 	}
-	public void setLastDate(String lastDate) {
-		this.lastDate = lastDate;
+	public void setLast_date(String last_date) {
+		this.last_date = last_date;
 	}
-	public String getScheduleDate() {
-		return scheduleDate;
+	public String getSchedule_date() {
+		return schedule_date;
 	}
-	public void setScheduleDate(String scheduleDate) {
-		this.scheduleDate = scheduleDate;
+	public void setSchedule_date(String schedule_date) {
+		this.schedule_date = schedule_date;
 	}
-	public int getVaccNo() {
-		return vaccNo;
+	public int getVacc_no() {
+		return vacc_no;
 	}
-	public void setVaccNo(int vaccNo) {
-		this.vaccNo = vaccNo;
+	public void setVacc_no(int vacc_no) {
+		this.vacc_no = vacc_no;
 	}
-	public String getDogName() {
-		return dogName;
+	public String getDogname() {
+		return dogname;
 	}
-	public void setDogName(String dogName) {
-		this.dogName = dogName;
+	public void setDogname(String dogname) {
+		this.dogname = dogname;
 	}
+	
 	
 }

@@ -18,6 +18,7 @@
 		<typeAlias type="com.sist.vo.Reserve_DetailVO" alias="Reserve_DetailVO" />
 		<typeAlias type="com.sist.vo.CareChartVO" alias="CareChartVO" />
 		<typeAlias type="com.sist.vo.VaccinationVO" alias="VaccinationVO" />
+		<typeAlias type="com.sist.vo.CertificateVO" alias="CertificateVO" />
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.sist.vo.DogVO" alias="DogVO" />
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO" />

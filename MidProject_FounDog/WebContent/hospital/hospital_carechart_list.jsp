@@ -24,7 +24,15 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+
 $(function(){
+$('.detailbtn').click(function(){
+	var no = $(this).attr("data-no");
+
+	var wintype = "toolbar=no,width=800,height=600,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
+	var childWin = window.open("hospital_carechart_certificate.do?no="+no, "childWin", wintype);
+
+	});
 	$('.pageBtn').click(function(){
 		var page = $(this).val();
 		var dogname=$('#selectDog').val();
@@ -56,14 +64,21 @@ $(function(){
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">의사명</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">동물명</font></th>
 			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">진료병원</font></th>
+			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">상세보기</font></th>
 		</tr>
+		<c:if test="${empty list}">
+			<tr class="content" height="50px">
+				<td class="text-left" width="10%" colspan="6" style="text-align: center;" >조회된 내역이 없습니다.</td>
+			</tr>
+		</c:if>
 		<c:forEach var="vo" items="${list }">
 			<tr class="content" height="50px">
 				<td class="text-left" width="10%" >${vo.no }</td>
 				<td class="text-left" width="12%" >${vo.caredate }</td>
 				<td class="text-left" width="10%" >${vo.doctor }</td>
 				<td class="text-left" width="10%" >${vo.dogname }</td>
-				<td class="text-left" width="26%" >${vo.hospitalname }</td>
+				<td class="text-left" width="15%" >${vo.hospitalname }</td>
+				<td class="text-left" width="10%" ><input type="button" value="상세보기" class="detailbtn"data-no="${vo.no }"></td>
 			</tr>
 		</c:forEach>
 		<tr>

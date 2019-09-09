@@ -46,24 +46,29 @@ $(function(){
 <body>
 	<table id="vaccination_list_table" style="width: 100%; height: 100%;">
 		<caption class="text-center" style="padding: 20px;">
-			<h3> ${sessionScope.name }님의 진료 내역입니다.</h3>
+			<h3> ${sessionScope.name }님의 예방접종 내역입니다.</h3>
 		</caption>
 		<tr height="50px">
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예방접종 번호</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">번호</font></th>
 			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">예방접종 이름</font></th>
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">최종접종일</font></th>
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예정접종일</font></th>
-			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">회차</font></th>
-			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">강아지명</font></th>
+			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">최종접종일</font></th>
+			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">예정접종일</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">회차</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">강아지명</font></th>
 		</tr>
+		<c:if test="${empty list}">
+			<tr class="content" height="50px">
+				<td class="text-left" width="10%" colspan="6" style="text-align: center;" >조회된 내역이 없습니다.</td>
+			</tr>
+		</c:if>
 		<c:forEach var="vo" items="${list }">
 			<tr class="content" height="50px">
 				<td class="text-left" width="10%" >${vo.no }</td>
-				<td class="text-left" width="12%" >${vo.vaccinationName }</td>
-				<td class="text-left" width="10%" >${vo.lastDate }</td>
-				<td class="text-left" width="10%" >${vo.scheduleDate }</td>
-				<td class="text-left" width="26%" >${vo.vaccNo }</td>
-				<td class="text-left" width="26%" >${vo.dogName }</td>
+				<td class="text-left" width="12%" >${vo.vaccination_name }</td>
+				<td class="text-left" width="20%" >${vo.last_date }</td>
+				<td class="text-left" width="20%" >${vo.schedule_date }</td>
+				<td class="text-left" width="15%" >${vo.vacc_no }</td>
+				<td class="text-left" width="15%" >${vo.dogname }</td>
 			</tr>
 		</c:forEach>
 		<tr>

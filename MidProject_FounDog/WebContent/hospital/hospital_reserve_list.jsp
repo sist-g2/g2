@@ -73,6 +73,11 @@ $(function(){
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약상태</font></th>
 			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">진료병원</font></th>
 		</tr>
+		<c:if test="${empty list}">
+			<tr class="content" height="50px">
+				<td class="text-left" width="10%" colspan="8" style="text-align: center;" >조회된 내역이 없습니다.</td>
+			</tr>
+		</c:if>
 		<c:forEach var="vo" items="${list }">
 			<tr class="content">
 				<td class="text-left" width="10%" >${vo.no }</td>

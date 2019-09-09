@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.vo.CareChartVO;
+import com.sist.vo.CertificateVO;
 import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
@@ -184,7 +185,7 @@ public class HospitalDAO {
 		 	session.close();
 		 	return cnt;
 	   }
-	 
+	
 	 public static int vaccinationDetailTotalPage(Map map)
 	   {
 		 	int total = 0;
@@ -193,4 +194,13 @@ public class HospitalDAO {
 		 	session.close();
 		 	return total;
 	   }
+	 
+	 public static CertificateVO certificateData(int no)
+	   {
+		   SqlSession session=ssf.openSession();		   
+		   CertificateVO list=session.selectOne("certificateData",no);
+		   session.close();
+		   return list;
+	   }
+	 
 }

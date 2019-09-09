@@ -98,7 +98,7 @@ FROM (
 				AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 			</if>
 		</where>
-	)
+	ORDER BY reception_date)
 )
 WHERE num BETWEEN #{start} AND #{end}
 
@@ -164,7 +164,7 @@ FROM (
 				AND dogno = (SELECT dno FROM dog WHERE dno = #{dno})
 			</if>
 		</where>
-	)
+	ORDER BY caredate)
 )
 WHERE num BETWEEN #{start} AND #{end}
 
@@ -258,4 +258,19 @@ FROM vaccination
 )
 </select>
 
+<select id="certificateData" resultType="CertificateVO" parameterType="int">
+SELECT no, caredate, prescription, doctor, dogname, hospitalname,dtype,dbirth,name,tel
+FROM (	SELECT no,
+TO_CHAR(caredate, 'YYYY-MM-DD') as caredate,
+prescription,
+doctor,
+(SELECT dname FROM dog WHERE dno = dogno) as dogname,
+(SELECT name FROM hospital WHERE no = (SELECT hosno FROM reserve WHERE no = resno)) as hospitalname,
+(SELECT dtype FROM dog WHERE dno = dogno) as dtype,
+TO_CHAR((SELECT dbirth FROM dog WHERE dno = dogno), 'YYYY-MM-DD') as dbirth,
+(SELECT name FROM member WHERE id = (SELECT id FROM dog WHERE dno = dogno)) as name,
+(SELECT tel FROM member WHERE id = (SELECT id FROM dog WHERE dno = dogno)) as tel
+FROM carechart)
+WHERE no=#{no}
+</select>
 </mapper>

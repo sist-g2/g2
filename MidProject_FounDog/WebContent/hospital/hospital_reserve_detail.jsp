@@ -8,10 +8,7 @@
 <title>Insert title here</title>
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
-.reserve_detail_row{
-	margin: 0px auto;
-	width: 900px;
-}
+
 #detailbtn {
 	display: inline-block;
 	border-radius: 6px;
@@ -29,6 +26,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
+	var today = new Date();
+	var prev_7day = new Date(); 
+	prev_7day.setDate(prev_7day.getDate() - 7);
+	document.getElementById('startDate').valueAsDate = prev_7day;
+	document.getElementById('endDate').valueAsDate = today;
 	$('#detailbtn').click(function(){
 		var dno=$('#selectDog option:selected').attr("data-no");
 		var startDate=$('#startDate').val();
@@ -51,11 +53,22 @@ $(function(){
 <body>
 <div class="container">
 	<div class="reserve_detail_row" >
-	
 		<div id="hospitalTitle">
 			<h2 class="hostitle">예약 내역</h2>
 		</div>
-		
+		<div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">                           
+                        <div class="sidebar-item categories">
+                            <h3>병원 이용</h3>
+                            <ul class="nav navbar-stacked">
+                                <li class="active"><a href="../hospital/hospital_reserve_detail.do">예약 내역<span class="pull-right"></span></a></li>
+                                <li><a href="../hospital/hospital_carechart_detail.do">진료 내역<span class="pull-right"></span></a></li>
+                                <li><a href="../hospital/hospital_vaccination_detail.do">예방접종 내역<span class="pull-right"></span></a></li>
+                            </ul>
+                        </div>                                        
+                    </div>
+                </div>	
+                <div class="col-md-9 col-sm-7">	
 		<table class="" style="width: 100%;" >
 			<tr>
 				<th width="15%" >
@@ -86,7 +99,7 @@ $(function(){
 		<div id="reservelist" style="width: 100%; height: 400px; border: solid 0px; text-align: center;">
 			<br><h4>예약 내역을 조회해보세요.</h4>
 		</div>
-		
+		</div>
 	</div>
 </div>
 </body>

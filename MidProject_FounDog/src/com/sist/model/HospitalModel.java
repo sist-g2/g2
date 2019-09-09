@@ -15,6 +15,7 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.HospitalDAO;
 import com.sist.dao.MemberDAO;
 import com.sist.vo.CareChartVO;
+import com.sist.vo.CertificateVO;
 import com.sist.vo.DogVO;
 import com.sist.vo.HospitalVO;
 import com.sist.vo.ReserveVO;
@@ -251,13 +252,14 @@ public class HospitalModel {
 		   {
 			   String day=model.getRequest().getParameter("day");	
 			   String time=HospitalDAO.reserveGetTime(Integer.parseInt(day));
-			
+			   System.out.println("time="+time);
 			   List<String> list=new ArrayList<String>();
 			   StringTokenizer st=new StringTokenizer(time,",");
 	
 			   while(st.hasMoreTokens())
 			   {
 				   list.add(HospitalDAO.reserveTime(Integer.parseInt(st.nextToken())));
+				   System.out.println(list);
 			   }
 			   model.addAttribute("list", list);
 			   return "../hospital/hospital_time.jsp";
@@ -619,4 +621,14 @@ public class HospitalModel {
 			return "../hospital/hospital_vaccination_list.jsp";
 		}
 		
+		@RequestMapping("hospital/hospital_carechart_certificate.do")
+		public String hospital_carechart_certificate(Model model){
+			String no = model.getRequest().getParameter("no");
+		
+			CertificateVO list = HospitalDAO.certificateData(Integer.parseInt(no));
+			
+			model.addAttribute("list", list);
+			
+			return "../hospital/hospital_carechart_certificate.jsp";
+		}
 }
