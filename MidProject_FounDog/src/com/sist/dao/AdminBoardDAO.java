@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.vo.AdminBoardVO;
+import com.sist.vo.Board_DogVO;
 
 import java.util.*;
 public class AdminBoardDAO {
@@ -12,44 +13,44 @@ public class AdminBoardDAO {
 	{
 		ssf=CreateSqlSessionFactory.getSsf();
 	}
-	// ¸ñ·Ï 
+	// ï¿½ï¿½ï¿½ 
 	public static List<AdminBoardVO> adminboardListData(Map map)
 	{
 		List<AdminBoardVO> list=new ArrayList<AdminBoardVO>();
-		// DB¿¬°á
+		// DBï¿½ï¿½ï¿½ï¿½
 		SqlSession session=ssf.openSession();
 		list=session.selectList("adminboardListData",map);
 		//                          XML => id , #{} => map => #{start} : map.get("start")
-		// ¹ÝÈ¯ 
+		// ï¿½ï¿½È¯ 
 		session.close();
 		return list;
 	}
-	// Ãß°¡ 
+	// ï¿½ß°ï¿½ 
 	public static void adminboardInsert(AdminBoardVO vo)
 	{
 		SqlSession session=ssf.openSession(true); // setAutoCommit(true)
-		// Ã³¸®
+		// Ã³ï¿½ï¿½
 		session.insert("adminboardInsert",vo);
 		session.close();
 	}
 
-	// ÃÑÆäÀÌÁö ÀÐ±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
 	public static int adminboardTotalPage()
 	{
 		int total=0;
 		SqlSession session=ssf.openSession();
 		total=session.selectOne("adminboardTotalPage");
-		// id=> ´ë¼Ò¹®ÀÚ ±¸ºÐ 
+		// id=> ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		session.close();
 		return total;
 	}
-	// °Ô½ÃÄð ÀüÃ¼ °¹¼ö ÀÐ±â
+	// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
 	public static int adminboardRowCount()
 	{
 		int count=0;
 		SqlSession session=ssf.openSession();
 		count=session.selectOne("adminboardRowCount");
-		// id=> ´ë¼Ò¹®ÀÚ ±¸ºÐ 
+		// id=> ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		session.close();
 		return count;
 	}
@@ -60,7 +61,7 @@ public class AdminBoardDAO {
 		SqlSession session=ssf.openSession();
 		if(type.equals("detail"))
 		{
-			session.update("adminhitIncrement",no);// Á¶È¸¼ö Áõ°¡
+			session.update("adminhitIncrement",no);// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			session.commit();
 		}
 		vo=session.selectOne("adminboardDetailData", no);
@@ -73,7 +74,7 @@ public class AdminBoardDAO {
 		int no=0;
 		SqlSession session=ssf.openSession();
 
-		// ºñ¹Ð¹øÈ£ 
+		// ï¿½ï¿½Ð¹ï¿½È£ 
 		no=vo.getNo();
 		session.update("adminboardUpdate",vo);
 		session.commit();
@@ -91,6 +92,14 @@ public class AdminBoardDAO {
 
 		session.close();
 		return no;
+	}
+	
+	public static List<AdminBoardVO> adminboardFindData(Map map){
+		   List<AdminBoardVO> list= new ArrayList<AdminBoardVO>();
+		   SqlSession session = ssf.openSession();
+		   list=session.selectList("adminboardFindData",map);
+		   session.close();
+		   return list;
 	}
 }
 

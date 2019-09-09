@@ -8,13 +8,15 @@ import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.AdminBoardDAO;
+import com.sist.dao.BoardDAO;
 import com.sist.vo.AdminBoardVO;
+import com.sist.vo.BoardVO;
 @Controller("boardModel")
 public class adminBoardModel {
   @RequestMapping("adminboard/adminboard_list.do")	
   public String adminboard_list(Model model)
   {
-	  // page¸¦ ¹Þ´Â´Ù 
+	  // pageï¿½ï¿½ ï¿½Þ´Â´ï¿½ 
 	  String page=model.getRequest().getParameter("page");
 	  if(page==null)
 		  page="1";
@@ -31,11 +33,11 @@ public class adminBoardModel {
 	  
 	  List<AdminBoardVO> list=AdminBoardDAO.adminboardListData(map);
 	  
-	  // ¸ñ·Ï Àü¼Û 
+	  // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	  model.addAttribute("list", list);
 	  
-	  // ÇöÀç ÆäÀÌÁö => curpage
-	  // ÃÑÆäÀÌÁö  => totalpage
+	  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => curpage
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  => totalpage
 	  int totalpage=AdminBoardDAO.adminboardTotalPage();
 	  int count=AdminBoardDAO.adminboardRowCount();// 22
 	  int BLOCK=5;
@@ -62,15 +64,15 @@ public class adminBoardModel {
 	  return "../main/main.jsp";
   }
   /*
-   *     1. È­¸é ÀÌµ¿
-   *        sendRedirect() => request¸¦ ¹«½ÃÇÏ°í ÀÌµ¿ (requestÃÊ±âÈ­) : ¼ø¼öÇÏ°Ô ÀÌµ¿ 
+   *     1. È­ï¿½ï¿½ ï¿½Ìµï¿½
+   *        sendRedirect() => requestï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ìµï¿½ (requestï¿½Ê±ï¿½È­) : ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ìµï¿½ 
    *                          _ok
-   *        forward()  => request¸¦ Æ÷ÇÔ (request°¡ ÃÊ±âÈ­ µÇÁö ¾Ê´Â´Ù) : È­¸é¿¡ µ¥ÀÌÅÍ¸¦ Ãâ·ÂÇÒ ¸ñÀû
-   *     2. Æ÷ÇÔ 
-   *         => ÀüÃ¼ ¸ÞÀÎÈ­¸é => ºÎºÐÀûÀ¸·Î È­¸é Ãâ·Â => include (request¸¦ °øÀ¯)
+   *        forward()  => requestï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (requestï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½) : È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+   *     2. ï¿½ï¿½ï¿½ï¿½ 
+   *         => ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ => ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ => include (requestï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
    */
-  // µ¥ÀÌÅÍ Ãß°¡
-  // È­¸é 
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+  // È­ï¿½ï¿½ 
   @RequestMapping("adminboard/adminboard_insert.do")
   public String adminboard_insert(Model model)
   {
@@ -102,23 +104,23 @@ public class adminBoardModel {
 	  vo.setSubject(subject);
 	  vo.setContent(content);
 	  
-	  // DAO·Î Àü¼Û 
+	  // DAOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	  AdminBoardDAO.adminboardInsert(vo);
 	  
 	  return "redirect:../adminboard/adminboard_list.do";
   }
   
-  // »ó¼¼º¸±â 
+  // ï¿½ó¼¼ºï¿½ï¿½ï¿½ 
   @RequestMapping("adminboard/adminboard_detail.do")
   public String adminboard_detail(Model model)
   {
-	  // ¿äÃ»°ª ¹Þ±â
+	  // ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Þ±ï¿½
 	  String no=model.getRequest().getParameter("no");
-	  // DAO¿¬°á => °á°ú°ª
+	  // DAOï¿½ï¿½ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½ï¿½
 	  AdminBoardVO vo=AdminBoardDAO.adminboardDetailData(Integer.parseInt(no),"detail");
-	  // JSP¿¡ Àü¼Û 
+	  // JSPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	  model.addAttribute("vo", vo);
-	  // list  ´ñ±Û ¸ñ·Ï 
+	  // list  ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	  model.addAttribute("main_jsp", "../adminboard/adminboard_detail.jsp");
 	  return "../main/main.jsp";
   }
@@ -126,11 +128,11 @@ public class adminBoardModel {
   @RequestMapping("adminboard/adminboard_update.do")
   public String adminboard_update(Model model)
   {
-	  // ¿äÃ»°ªÀ» ¹Þ´Â´Ù
+	  // ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½
 	  String no=model.getRequest().getParameter("no");
-	  // DAO => °á°ú°ª ¹Þ±â 
+	  // DAO => ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½ 
 	  AdminBoardVO vo=AdminBoardDAO.adminboardDetailData(Integer.parseInt(no), "update");
-	  // °á°ú°ª => JSP·Î Àü¼Û
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½ => JSPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  model.addAttribute("vo", vo);
 	  model.addAttribute("main_jsp", "../adminboard/adminboard_update.jsp");
 	  return "../main/main.jsp";
@@ -155,7 +157,7 @@ public class adminBoardModel {
 	  vo.setContent(content);
 	  vo.setNo(Integer.parseInt(no));
 	  
-	  // DAO ¿¬°á ==> password
+	  // DAO ï¿½ï¿½ï¿½ï¿½ ==> password
 	  int n=AdminBoardDAO.adminboardUpdate(vo);
 	  
 	  model.addAttribute("no", n);
@@ -191,6 +193,29 @@ public class adminBoardModel {
 	  model.addAttribute("main_jsp", "../adminboard/test.jsp");
 	  return "../main/main.jsp";
   }
+  @RequestMapping("adminboard/adminboard_find.do")
+  public String adminboard_find(Model model){
+
+		try{
+			model.getRequest().setCharacterEncoding("UTF-8");
+		}catch(Exception ex){}
+		
+		
+		String fs=model.getRequest().getParameter("fs");
+		String ss=model.getRequest().getParameter("ss");
+		//WHERE ${fs} LIKE '%'||#{ss}||'%'
+		Map map = new HashMap();
+		map.put("fs", fs);
+		map.put("ss", ss);
+		map.put("category", 0);
+		List<AdminBoardVO> list = AdminBoardDAO.adminboardFindData(map);
+		
+		model.getRequest().setAttribute("list", list);
+		model.getRequest().setAttribute("count", list.size());
+		
+		model.addAttribute("main_jsp", "../adminboard/adminboard_find.jsp");
+		return "../main/main.jsp";
+	}
 }
 
 

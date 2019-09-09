@@ -40,9 +40,9 @@ th{
 <body>
 	<section id="portfolio">
                 <ul class="portfolio-filter text-center">
+                    <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">모두보기</a></li>
                     <li><a class="btn btn-default" href="../dogboard/dogboard_report.do">찾습니다</a></li>
                     <li><a class="btn btn-default" href="../dogboard/dogboard_look.do">발견 또는 보호중</a></li>
-                    <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">모두보기</a></li>
                    </ul>
  	</section>
 	<div class="row">
@@ -88,8 +88,7 @@ th{
 		<table class="table">
 			<tr>
 				<td class="text-left">
-					<form method="post" action="dogboard_find.do" id="frm">
-						Search: 
+					<form method="post" action="dogboard_find.do" id="frm">						 
 						<select name="fs" class="input-md form-control2">
 							<option value="dname">이름</option>
 							<option value="dtype">견종</option>
@@ -102,18 +101,18 @@ th{
 				<!-- 5p씩 나누기 -->
 				<td class="text-center">
 					<ul class="pagination">
-						<li><a href="dogboard_list.do?page=1">&lt;&lt;</a></li>
+						<li><a href="dogboard_report.do?page=1">&lt;&lt;</a></li>
 						<c:if test="${curpage != startPage }">
-						<li><a href="dogboard_list.do?page=${curpage-1}">&lt;</a></li>
+						<li><a href="dogboard_report.do?page=${curpage-1}">&lt;</a></li>
 						</c:if>
 						<c:forEach var="i" begin="${startPage }" end="${endPage }">
 							<li class="${i==curpage?'active':''}">
-							<a href="dogboard_list.do?page=${i }">${i }</a>
+							<a href="dogboard_report.do?page=${i }">${i }</a>
 						</c:forEach>
 						<c:if test="${curpage != endPage }">
-						<li><a href="dogboard_list.do?page=${curpage+1}">&gt;</a></li>
+						<li><a href="dogboard_report.do?page=${curpage+1}">&gt;</a></li>
 						</c:if>
-						<li><a href="dogboard_list.do?page=${allPage }">&gt;&gt;</a></li>
+						<li><a href="dogboard_report.do?page=${allPage }">&gt;&gt;</a></li>
 					</ul>
 				</td>
 			</tr>

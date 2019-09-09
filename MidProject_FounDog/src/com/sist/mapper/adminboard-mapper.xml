@@ -53,6 +53,12 @@
      DELETE FROM adminboard 
      WHERE no=#{no}
    </delete>
+   
+	<select id="adminboardFindData" resultType="AdminBoardVO" parameterType="java.util.Map">
+      SELECT no,subject,id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+      FROM adminboard 
+      WHERE ${fs} LIKE '%'||#{ss}||'%' 
+     </select>
 </mapper>
 
 

@@ -40,9 +40,9 @@ th{
 <body>
 	<section id="portfolio">
                 <ul class="portfolio-filter text-center">
+                    <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">모두보기</a></li>
                     <li><a class="btn btn-default" href="../dogboard/dogboard_report.do">찾습니다</a></li>
                     <li><a class="btn btn-default" href="../dogboard/dogboard_look.do">발견 또는 보호중</a></li>
-                    <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">모두보기</a></li>
                    </ul>
  	</section>
 	<div class="row">
@@ -88,8 +88,7 @@ th{
 		<table class="table">
 			<tr>
 				<td class="text-left">
-					<form method="post" action="dogboard_find.do" id="frm">
-						Search: 
+					<form method="post" action="dogboard_find.do" id="frm">						 
 						<select name="fs" class="input-md form-control2">
 							<option value="dname">이름</option>
 							<option value="dtype">견종</option>

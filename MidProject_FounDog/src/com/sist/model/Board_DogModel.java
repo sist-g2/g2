@@ -32,12 +32,13 @@ public class Board_DogModel {
 		  Map map=new HashMap();
 		  int rowSize=8;
 		  int start=(curpage*rowSize)-(rowSize-1);
+		  System.out.println("start = " + start);
+		  System.out.println("rowSize = " + rowSize);
 		  // 1~10 , 11~20 , 21....
 		  int end=curpage*rowSize;
 		  
 		  map.put("start", start);
 		  map.put("end", end);
-		  map.put("category", 0); // 占쏙옙占쏙옙占쌉쏙옙占쏙옙 카占쌓곤옙 : 0
 		  
 		  List<Board_DogVO> list=Board_DogDAO.boarddogListData(map);
 		  
@@ -257,15 +258,18 @@ public class Board_DogModel {
 			  vo.setDage(Integer.parseInt(dage));
 			  vo.setCategory(Integer.parseInt(category));
 
-			  String filename = mr.getOriginalFileName("upload");
-				if(filename==null){
+			  Enumeration filename = mr.getFileNames();
+			  String str = (String)filename.nextElement();
+			  String files = mr.getFilesystemName(str);
+				if(files==null){
 					vo.setFilename("");
 					vo.setFilesize(0);
 				}
 				else{
-					File file = new File(path+"\\"+filename);
-					vo.setFilename(filename);				
+					File file = new File(path+"\\"+files);
+					vo.setFilename(files);				
 					vo.setFilesize((int)file.length());
+					System.out.println("files = " + files);
 					Board_DogDAO.boarddogInsert(vo);
 				}
 		  }catch(Exception ex){
@@ -345,15 +349,16 @@ public class Board_DogModel {
 			  vo.setDage(Integer.parseInt(dage));
 			  
 
-			  String filename = mr.getOriginalFileName("upload");
+			  Enumeration filename = mr.getFileNames();
+			  String str = (String)filename.nextElement();
+			  String files = mr.getFilesystemName(str);
 				if(filename==null){
 					vo.setFilename("");
 					vo.setFilesize(0);
 				}
 				else{
-					System.out.println("�슂湲�");
-					File file = new File(path+"\\"+filename);
-					vo.setFilename(filename);				
+					File file = new File(path+"\\"+files);
+					vo.setFilename(files);				
 					vo.setFilesize((int)file.length());
 					Board_DogDAO.boarddogUpdate(vo);
 				}

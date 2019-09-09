@@ -35,12 +35,12 @@ $(function(){
 			return;
 		}
 		
-/* 		var filename=$('#filename').val();
+		var filename=$('#filename').val();
 		console.log("filename" + filename);
 		if(filename.trim()=="") {
 			$('#filename').focus();
 			return;
-		} */
+		}
 		
 		if(confirm("수정하시겠어요??")) {
 			$('#boardUpdForm').submit();

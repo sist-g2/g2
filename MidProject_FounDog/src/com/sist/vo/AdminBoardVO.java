@@ -2,12 +2,20 @@ package com.sist.vo;
 import java.util.*;
 public class AdminBoardVO {
 	private int no;
-    private String name;
+	private String id;
+    private String name;    
     private String subject;
     private String content;
     private Date regdate;
     private int hit;
     private String dbday;
+    
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getNo() {
 		return no;
 	}

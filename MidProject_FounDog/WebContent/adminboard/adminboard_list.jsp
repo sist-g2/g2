@@ -111,7 +111,7 @@ $(function(){
        <table class="table">
         <tr>
           <td class="text-left">
-           <form method="post" action="find.do" id="frm">
+           <form method="post" action="adminboard_find.do" id="frm">
            <select name="fs" class="input-md form-control2">
              <option value="name">이름</option>
              <option value="subject">제목</option>
