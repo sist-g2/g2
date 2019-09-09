@@ -49,7 +49,7 @@ textarea {
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.btn-primary').click(function(){
+	$('.btn-submit2').click(function(){
 		var name=$('#name').val();
 		if(name.trim()=="")
 		{
