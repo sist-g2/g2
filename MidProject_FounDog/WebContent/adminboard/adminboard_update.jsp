@@ -114,26 +114,28 @@ $(function(){
      <form method="post" action="adminboard_update_ok.do">
        <table class="table table-borderless">
        <tr>
-       	<th class="text-right info" width=20%>이름</th>
+       	<th class="text-left" width=20%>이름</th>
        </tr>
          <tr>
            <td width=80% class="text-left">
-             <input type=text name=name size=15 class="input-sm" value="${vo.name }" id=name>
+             <input type=text name=name size=15 class="form-control" value="${vo.name }" id=name readonly="readonly">
              <input type=hidden name=no value="${vo.no }" id="no">
            </td>
          </tr>
          <tr>
-         	<th class="text-right info" width=20%>제목</th>
+         	<th class="text-left" width=20%>제목</th>
          </tr>
          <tr>
            <td width=80% class="text-left">
-             <input type=text name=subject size=45 class="input-sm" value="${vo.subject }" id="sub">
+             <input type=text name=subject size=45 class="form-control" value="${vo.subject }" id="sub">
            </td>
          </tr>
          <tr>
-           <th class="text-right info" width=20%>내용</th>
+         	<th class="text-left" width=20%>내용</th>
+         </tr>
+         <tr>
            <td width=80% class="text-left">
-             <textarea rows="10" cols="55" name=content id="cont">${vo.content }</textarea>
+             <textarea rows="12" cols="80" name=content id="cont">${vo.content }</textarea>
            </td>
          </tr>
 <!--          <tr>
@@ -144,8 +146,8 @@ $(function(){
          </tr> -->
          <tr>
            <td colspan="2" class="text-center">
-             <input type="button" value="수정" class="btn btn-sm btn-primary">
-             <input type="button" value="취소" class="btn btn-sm btn-danger"
+             <input type="button" value="수정하기" style="width:200px" class="btn-submit2"><br>
+             <input type="button" value="취소"  style="margin-top:10px;font-size: 14px;" class="btn btn-sm"
                onclick="javascript:history.back()"
              >
            </td>
