@@ -127,7 +127,7 @@ th{
 						<select name="fs" class="input-md form-control2" >
 							<option value="id">이름</option>
 							<option value="subject">제목</option>
-						</select> 
+						</select>&nbsp;
 						<input type=text name=ss size=15 class="input-sm form-control2" id="ss">&nbsp;&nbsp;
 						<input type=button value="검색" class="btnCss" id="findBtn">
 					</form>

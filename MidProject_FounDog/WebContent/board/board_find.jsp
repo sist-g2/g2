@@ -13,6 +13,22 @@
 	margin: 0px auto;
 	width: 900px;
 }
+th{
+	background-color:#FFF;
+	color:#A5732A;
+}
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 </style>
 </head>
 <body>
@@ -22,7 +38,7 @@
 			<table class="table">
 				<tr>
 					<td class="text-left">
-					<a href="board_list.do" class="btn btn-sm">목록</a>
+					<a href="board_list.do" class="btnCss">&nbsp;&nbsp;목록&nbsp;&nbsp;</a>
 				</tr>
 			</table>
 			<c:if test="${count==0 }">
@@ -34,7 +50,7 @@
 			</c:if>
 			<c:if test="${count>0 }">
 			<table class="table">
-				<tr class="danger">
+				<tr>
 					<th width=10% class="text-center">번호</th>
 					<th width=45% class="text-center">제목</th>
 					<th width=15% class="text-center">이름</th>
@@ -45,7 +61,7 @@
 					<tr class="${s.index%2==0?'':'warning' }">
 						<td width=10% class="text-center">${vo.no }</td>
 						<td width=45% class="text-left">
-						<a href="board_detail.do?no=${vo.no }">${vo.subject }</a></td>
+						<a href="board_detail.do?no=${vo.no }"><font color="black">${vo.subject }</font></a></td>
 						<td width=15% class="text-center">${vo.id }</td>
 						<td width=20% class="text-center">
 						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
@@ -57,3 +73,7 @@
 				</c:forEach>
 			</table>
 			</c:if>
+			</div>
+			</div>
+			</body>
+</html>

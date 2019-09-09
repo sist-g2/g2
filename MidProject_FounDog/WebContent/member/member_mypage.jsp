@@ -91,7 +91,7 @@ $(function(){
 			<div class="paddingtable">
 				<a href="../member/dog_insert.do"><input type=button class="btn btn-common2 uppercase" value="반려견 추가하기"></a>
 				<div style="height:20px;"></div>
-				<table class="table table-borderless" style="width:250px;">
+				<table class="table table-borderless" style="width:300px;">
 					<c:forEach var="dvo" items="${list}">
 						<tr>
 							<td><font color="#bd8942">${dvo.dname }</font></td>
@@ -112,7 +112,7 @@ $(function(){
 				<div class="col-md-12">
 					<h2 class="page-header">바로가기</h2>
 				</div>
-				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
+				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
 					<div class="feature-inner">
 						<!-- <div class="icon-wrapper"> -->
 							<a href="../hospital/hospital_reserve_detail.do"><img src="../member/list.png"></a>
@@ -120,7 +120,7 @@ $(function(){
 						<h3>진료 예약 내역</h3>
 					</div>
 				</div>
-				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
 					<div class="feature-inner">
 						<!-- <div class="icon-wrapper"> -->
 							<a href="../hospital/hospital_carechart_detail.do"><img src="../member/hospital.png"></a>

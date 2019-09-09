@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -109,8 +110,11 @@ tbody{
 			<td class="text-left" >
 				<select name=dyear class="form-control2" style="width:27%">
 					<option></option>
-					<option>2019</option>
-					<option>2018</option>
+					<c:set var="first" value="2019"/>
+					<c:set var="end" value="1989"/>
+					<c:forEach var="i" begin="0" end="${first-end}" step="1">
+						<option>${first -i }</option>
+					</c:forEach>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
 				<select name=dmonth class="form-control2" style="width:27%">
 					<option></option>
@@ -127,11 +131,7 @@ tbody{
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
+				<input type=text name=dday class="form-control2" style="width:27%" id="day">&nbsp;일
 			</td>
 		</tr>
 		<tr>

@@ -163,7 +163,7 @@ $(function(){
 					      	<c:forEach var="i" begin="1" end="${rvo.group_tab }">
 					      		&nbsp;&nbsp;
 					      	</c:forEach>
-					      	<img src="rereply.gif">&nbsp;
+					      	<img src="rereply.gif">&nbsp;&nbsp;
 					      </c:if>
 					      <c:if test="${rvo.id=='delete' }">
 					      	<font color="red">탈퇴한 회원</font>
@@ -211,20 +211,20 @@ $(function(){
 		           <tr style="display:none" id="m${rvo.no }" class="reply">
 			          <td class="text-left" colspan="2">
 			           <form name="frm" method="post" action="../board/boardreply_ReInsert.do">
-			            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>
+			            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>&nbsp;&nbsp;
 			            <input type="hidden" name="bno" value="${vo.no }">
 			            <input type="hidden" name=no value="${rvo.no }">
-			            <input type="submit" class="btn btn-sm" style="height: 67px" value="댓글쓰기">
+			            <input type="submit" class="btnCss2" value="댓글쓰기">
 			           </form>
 			          </td>
 			        </tr>
 			        <tr style="display:none" id="u${rvo.no }" class="update">
 			          <td class="text-left" colspan="2">
 			           <form name="frm" method="post" action="../board/boardreply_Update.do">
-			            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>
+			            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>&nbsp;&nbsp;
 			            <input type="hidden" name="bno" value="${vo.no }">
 			            <input type="hidden" name=no value="${rvo.no }">
-			            <input type="submit" class="btn btn-sm" style="height: 67px" value="수정하기">
+			            <input type="submit" class="btnCss2" value="수정하기">
 			           </form>
 			          </td>
 			        </tr>
