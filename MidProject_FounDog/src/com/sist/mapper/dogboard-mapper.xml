@@ -22,9 +22,8 @@
 		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, num
 		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, rownum as num
 			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday
-			FROM board_dog b)		
+			FROM board_dog b ORDER BY no DESC)		
 		)WHERE num BETWEEN #{start} AND #{end}
-		ORDER BY no DESC
 	</select>
 	
 	<!-- 총페이지 -->
@@ -90,17 +89,16 @@
 		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, num
 		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, rownum as num
 			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday
-		FROM board_dog b WHERE category=0)		
+		FROM board_dog b WHERE category=0 ORDER BY no DESC)		
 		)WHERE num BETWEEN #{start} AND #{end}
-		ORDER BY no DESC
+		
       </select>
      <select id="boarddogLookData" resultType="Board_DogVO" parameterType="java.util.Map">
 		SELECT no, id, area, dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, num
 		FROM (SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, dbday, rownum as num
 			FROM(SELECT no, id, area,  dtype, dsex, dkg, dcolor, dcharacter,category, tel, dname, dage,FILENAME,FILESIZE, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday
- 		FROM board_dog b WHERE category=1)		
+ 		FROM board_dog b WHERE category=1 ORDER BY no DESC)		
 		)WHERE num BETWEEN #{start} AND #{end}
-		ORDER BY no DESC
       </select>
 
 </mapper>
