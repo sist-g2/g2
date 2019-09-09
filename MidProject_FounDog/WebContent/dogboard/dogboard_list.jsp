@@ -78,24 +78,29 @@ th{
 		<table class="table">
 			<c:set var="count" value="${count }" />
 			<c:forEach var="vo" items="${list }" varStatus="s">
-				<div class="col-xs-6 col-sm-4 col-md-3 portfolio-item branded logos">
+				<div class="col-xs-6 col-sm-4 col-md-3 portfolio-item branded logos" style="width: 225px; height: 370px;">
 						<c:choose>
 							<c:when test="${vo.category == 0 }">
 							<h5 style="text-align: center">찾습니다</h5></c:when>
 							<c:when test="${vo.category == 1 }">
 							<h5 style="text-align: center">발견했습니다</h5></c:when>							
 						</c:choose>
-                        <div class="portfolio-wrapper" style="border: 1px solid gray">
+                        <div class="portfolio-wrapper" style="border: 1px solid gray; width: 200px; height: 330px;">
                             <div class="portfolio-single">
                                 <div class="portfolio-thumb">                                	
-                                    <a href="dogboard_detail.do?no=${vo.no }"><img src="upload/${vo.filename }" class="img-responsive" alt=""></a>                                     
+                                    <a href="dogboard_detail.do?no=${vo.no }"><img src="upload/${vo.filename }" class="img" style="width: 198px; height: 198px;" ></a>                                     
                                 </div>
                             </div>
                             <div class="portfolio-info">
                                 <h5>이름 : ${vo.dname }</h5>
                                 <h5>견종 : ${vo.dtype }</h5>
                                 <h5>실종위치 : ${vo.area }</h5>
-                                <h5>실종날짜 : ${vo.DLFDATE }</h5>
+                             <c:choose>
+                                <c:when test="${vo.category == 0 }">
+                                <h5>실종날짜 : ${vo.DLFDATE }</h5></c:when>
+                                <c:when test="${vo.category == 1 }">
+                            	<h5>제보날짜 : ${vo.DLFDATE }</h5></c:when>
+                             </c:choose>
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../main/css/bootstrap.min.css">
+<link href="../css/hospital.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/member.css">
 <style type="text/css">
 .row {
@@ -33,7 +34,45 @@ textarea {
   background-image: none;
   border-radius: 4px;
 }
+#detailbtn {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-left: 5px;
+	width: 85px;
+	height: 85px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	var today = new Date();
+	var prev_7day = new Date(); 
+	prev_7day.setDate(prev_7day.getDate() - 7);
+	document.getElementById('startDate').valueAsDate = prev_7day;
+	document.getElementById('endDate').valueAsDate = today;
+	$('#detailbtn').click(function(){
+		var dno=$('#selectDog option:selected').attr("data-no");
+		var startDate=$('#startDate').val();
+		var endDate=$('#endDate').val();	
+	
+		 $.ajax({ // 검색 결과 리스트 ajax
+			type:'post',
+			url:'hospital_reserve_list.do',
+			data:{dno:dno,startDate:startDate,endDate:endDate},
+			success:function(response)
+			{	
+				$("#reservelist").html(response);	
+			
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
    <div class="container">
@@ -47,8 +86,14 @@ textarea {
 						<option value="0">찾습니다</option>
 						<option value="1">발견했습니다</option>
 					</select>
-					</th>
-         </tr>
+			</th>
+   		</tr>
+        <tr>
+				<th>제보날짜</th>
+				<td>
+					<input type="date" id="startDate" name=lfdate size=25 class="form-control2">			
+				</td>
+			</tr>
          <tr>
          	<th>이름</th>
          	<th style="width:187px;">지역</th>

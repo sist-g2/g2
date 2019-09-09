@@ -103,7 +103,9 @@ $(function(){
         </tr>
         <tr>
           <th class="text-center" width=20%>나이</th>
-          <td class="text-left" colspan="3">${vo.dage }</td>
+          <td class="text-left" width="30%">${vo.dage }</td>
+          <th class="text-center" width=20%>제보날짜</th>
+          <td class="text-left" width="30%">${vo.DLFDATE }</td>
         </tr>
         <tr>
           <td colspan="4" class="text-left" valign="top" height="200">

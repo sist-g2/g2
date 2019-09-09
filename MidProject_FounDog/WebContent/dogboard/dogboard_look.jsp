@@ -94,7 +94,7 @@ th{
                                 <h5>이름 : ${vo.dname }</h5>
                                 <h5>견종 : ${vo.dtype }</h5>
                                 <h5>실종위치 : ${vo.area }</h5>
-                                <h5>실종날짜 : ${vo.lfdate }</h5>
+                                <h5>실종날짜 : ${vo.DLFDATE }</h5>
                             </div>
                         </div>
                     </div>

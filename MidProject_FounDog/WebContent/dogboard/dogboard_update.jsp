@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="../main/css/bootstrap.min.css" >
 <style type="text/css">
 .row {
-	margin: 0px auto;
-	width: 900px;
+   margin: 0px auto;
+   width:540px;
 }
 .btn-sm{
 	background-color:#FFF;
@@ -18,6 +18,19 @@
 th{
 	background-color:#FFF;
 	color:#A5732A;
+}
+textarea {
+  border: 1px solid #d99c4e;
+  font-weight: 300;
+  outline: none;
+  box-shadow: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -116,6 +129,12 @@ $(function(){
 					<th class="text-right" width=20% >나이</th>
 					<td width=80% class="text-left">
 						<input type="text" name="dage" size=45 value="${vo.dage }" id="dage">
+					</td>
+				</tr>
+				<tr>
+					<th class="text-right" width=20% >제보날짜</th>
+					<td width=80% class="text-left">
+						<input type="date" name="dage" size=45 value="${vo.DLFDATE }" id="dage">
 					</td>
 				</tr>
    		      <tr>

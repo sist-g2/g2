@@ -228,7 +228,6 @@ public class Board_DogModel {
 			  String path="C:\\midProject\\g2\\MidProject_FounDog\\WebContent\\dogboard\\upload";
 			  String enctype="UTF-8";
 			  int size=100*1024*1024;
-			  System.out.println("size = "+size );
 			  MultipartRequest mr =new MultipartRequest(model.getRequest(), path,size,enctype,
 					  new DefaultFileRenamePolicy());
 
@@ -243,6 +242,7 @@ public class Board_DogModel {
 			  String dname = mr.getParameter("dname");
 			  String dage = mr.getParameter("dage");
 			  String category = mr.getParameter("category");
+			  String lfdate = mr.getParameter("lfdate");
 			  
 			  vo.setId(id);
 			  vo.setArea(area);
@@ -255,6 +255,7 @@ public class Board_DogModel {
 			  vo.setDname(dname);
 			  vo.setDage(Integer.parseInt(dage));
 			  vo.setCategory(Integer.parseInt(category));
+			  vo.setLfdate(lfdate);
 
 			  Enumeration filename = mr.getFileNames();
 			  String str = (String)filename.nextElement();
@@ -267,7 +268,6 @@ public class Board_DogModel {
 					File file = new File(path+"\\"+files);
 					vo.setFilename(files);				
 					vo.setFilesize((int)file.length());
-					System.out.println("files = " + files);
 					Board_DogDAO.boarddogInsert(vo);
 				}
 		  }catch(Exception ex){

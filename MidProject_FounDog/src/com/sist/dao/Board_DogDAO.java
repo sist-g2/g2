@@ -58,6 +58,7 @@ public class Board_DogDAO {
 		   SqlSession session=ssf.openSession(true); // setAutoCommit(true)
 		   // Ã³¸®
 		   session.insert("boarddogInsert",vo);
+		   System.out.println("getLfdate : " + vo.getLfdate());
 		   session.close();
 	   }
 	   

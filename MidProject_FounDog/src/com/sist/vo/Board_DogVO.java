@@ -20,7 +20,7 @@ public class Board_DogVO {
 	private String dname;
 	private int dage;
 	private String dbday;
-	private Date lfdate;
+	private String lfdate;
 	private String DLFDATE;
 	
 	
@@ -30,10 +30,10 @@ public class Board_DogVO {
 	public void setDLFDATE(String dLFDATE) {
 		DLFDATE = dLFDATE;
 	}
-	public Date getLfdate() {
+	public String getLfdate() {
 		return lfdate;
 	}
-	public void setLfdate(Date lfdate) {
+	public void setLfdate(String lfdate) {
 		this.lfdate = lfdate;
 	}
 	public String getDbday() {
