@@ -32,8 +32,6 @@ public class Board_DogModel {
 		  Map map=new HashMap();
 		  int rowSize=8;
 		  int start=(curpage*rowSize)-(rowSize-1);
-		  System.out.println("start = " + start);
-		  System.out.println("rowSize = " + rowSize);
 		  // 1~10 , 11~20 , 21....
 		  int end=curpage*rowSize;
 		  
@@ -352,7 +350,7 @@ public class Board_DogModel {
 			  Enumeration filename = mr.getFileNames();
 			  String str = (String)filename.nextElement();
 			  String files = mr.getFilesystemName(str);
-				if(filename==null){
+				if(files==null){
 					vo.setFilename("");
 					vo.setFilesize(0);
 				}

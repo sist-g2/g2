@@ -187,12 +187,7 @@ public class adminBoardModel {
 	  model.addAttribute("main_jsp", "../adminboard/Calc.jsp");
 	  return "../main/main.jsp";
   }
-  @RequestMapping("adminboard/test.do")
-  public String test(Model model)
-  {
-	  model.addAttribute("main_jsp", "../adminboard/test.jsp");
-	  return "../main/main.jsp";
-  }
+
   @RequestMapping("adminboard/adminboard_find.do")
   public String adminboard_find(Model model){
 

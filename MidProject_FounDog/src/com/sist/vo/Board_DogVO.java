@@ -20,8 +20,22 @@ public class Board_DogVO {
 	private String dname;
 	private int dage;
 	private String dbday;
+	private Date lfdate;
+	private String DLFDATE;
 	
 	
+	public String getDLFDATE() {
+		return DLFDATE;
+	}
+	public void setDLFDATE(String dLFDATE) {
+		DLFDATE = dLFDATE;
+	}
+	public Date getLfdate() {
+		return lfdate;
+	}
+	public void setLfdate(Date lfdate) {
+		this.lfdate = lfdate;
+	}
 	public String getDbday() {
 		return dbday;
 	}

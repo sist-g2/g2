@@ -21,7 +21,18 @@ th{
 	background-color:#FFF;
 	color:#A5732A;
 }
-
+.portfolio-filter {
+    /* margin: 40px 0; */
+    margin-top:40px;
+    margin-bottom:40px;
+    padding: 0;
+}
+.portfolio-filter2 {
+     margin: 40px 0;
+ /*    margin-top:40px;
+    margin-bottom:80px; */
+    padding: 0;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -39,10 +50,16 @@ th{
 </head>
 <body>
 	<section id="portfolio">
+	  <ul class="portfolio-filter protfolio-filter2 text-center">
+	                 <li><a class="btn btn-default active" href="../dogboard/dogboard_list.do">유기견제보게시판</a></li>
+                    <li><a class="btn btn-default" href="../board/board_list.do">자유게시판</a></li>
+           </ul>
+     </section>
+     <section id="portfolio">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">모두보기</a></li>
                     <li><a class="btn btn-default" href="../dogboard/dogboard_report.do">찾습니다</a></li>
-                    <li><a class="btn btn-default" href="../dogboard/dogboard_look.do">발견 또는 보호중</a></li>
+                    <li><a class="btn btn-default active" href="../dogboard/dogboard_look.do">발견 또는 보호중</a></li>                   
                    </ul>
  	</section>
 	<div class="row">
@@ -77,7 +94,7 @@ th{
                                 <h5>이름 : ${vo.dname }</h5>
                                 <h5>견종 : ${vo.dtype }</h5>
                                 <h5>실종위치 : ${vo.area }</h5>
-                                <h5>실종날짜 : ${vo.dbday }</h5>
+                                <h5>실종날짜 : ${vo.lfdate }</h5>
                             </div>
                         </div>
                     </div>

@@ -62,7 +62,7 @@ th{
 						<td width=10% class="text-center">${vo.no }</td>
 						<td width=45% class="text-left">
 						<a href="adminboard_detail.do?no=${vo.no }"><font color="black">${vo.subject }</font></a></td>
-						<td width=15% class="text-center">${vo.id }</td>
+						<td width=15% class="text-center">${vo.name }</td>
 						<td width=20% class="text-center">
 						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
 						<%--
