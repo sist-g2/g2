@@ -95,10 +95,10 @@
                             <li><a href="../adminboard/Calc.do">사료 열량 계산기</a></li>
                         </ul>
                     </li>                         
-                    <li class="dropdown"><a href="../board/board_list.do">커뮤니티</a>
+                    <li class="dropdown"><a href="../dogboard/dogboard_list.do">커뮤니티</a>
                         <ul role="menu" class="sub-menu">
-                            <li><a href="../board/board_list.do">자유게시판</a></li>
                             <li><a href="../dogboard/dogboard_list.do">유기견제보게시판</a></li>
+                            <li><a href="../board/board_list.do">자유게시판</a></li>
                         </ul>
                     </li>                    
                 </ul>
