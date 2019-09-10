@@ -59,7 +59,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<table id="reserve_list_table" style="width: 100%; height: 100%;">
+	<table id="reserve_list_table" style="width: 100%;">
 		<caption class="text-center" style="padding: 20px;">
 			<h3> ${sessionScope.name }님의 예약 내역입니다.</h3>
 		</caption>
@@ -78,47 +78,54 @@ $(function(){
 				<td class="text-left" width="10%" colspan="8" style="text-align: center;" >조회된 내역이 없습니다.</td>
 			</tr>
 		</c:if>
-		<c:forEach var="vo" items="${list }">
-			<tr class="content">
-				<td class="text-left" width="10%" >${vo.no }</td>
-				<td class="text-left" width="12%" >${vo.reception_date }</td>
-				<td class="text-left" width="10%" >${vo.name }</td>
-				<td class="text-left" width="10%" >${vo.dname }</td>
-				<td class="text-left" width="12%" >${vo.reserve_date }</td>
-				<td class="text-left" width="10%" >${vo.reserve_time }</td>
-				<td class="text-left" width="10%" >
-					<c:if test="${vo.state=='예약중' }">
-						<font color="orange" >${vo.state }</font>
-						<input type="button" class="cancelbtn" value="예약취소" data-rno="${vo.no }" style="color: #ffffff; background: #bd8942; width: 70px; height: 25px; border-style: none; border-radius: 4px;">
-					</c:if>
-					<c:if test="${vo.state=='진료완료' }">
-						<font color="green" >${vo.state }</font>
-					</c:if>
-					<c:if test="${vo.state=='예약취소' }">
-						<font color="red" >${vo.state }</font>
-					</c:if>
+		<c:if test="${!empty list}">
+			<c:forEach var="vo" items="${list }">
+				<tr class="content">
+					<td class="text-left" width="10%" >${vo.no }</td>
+					<td class="text-left" width="12%" >${vo.reception_date }</td>
+					<td class="text-left" width="10%" >${vo.name }</td>
+					<td class="text-left" width="10%" >${vo.dname }</td>
+					<td class="text-left" width="12%" >${vo.reserve_date }</td>
+					<td class="text-left" width="10%" >${vo.reserve_time }</td>
+					<td class="text-left" width="10%" >
+						<c:if test="${vo.state=='예약중' }">
+							<font color="orange" >${vo.state }</font>
+							<input type="button" class="cancelbtn" value="예약취소" data-rno="${vo.no }" style="color: #ffffff; background: #bd8942; width: 70px; height: 25px; border-style: none; border-radius: 4px;">
+						</c:if>
+						<c:if test="${vo.state=='진료완료' }">
+							<font color="green" >${vo.state }</font>
+						</c:if>
+						<c:if test="${vo.state=='예약취소' }">
+							<font color="red" >${vo.state }</font>
+						</c:if>
+					</td>
+					<td class="text-left" width="26%" >${vo.hosname }</td>
+				</tr>
+			</c:forEach>
+			<tr>
+				<td colspan=8 class="text-center" >
+					<div class="blog-pagination">
+						<div style="height: 30px;" ></div>
+						<ul class="pagination">
+							<li><button type="button" class="pageBtn" name="page" value="1">&lt;&lt;</button></li>
+							<li><button type="button" class="pageBtn" name="page" value="${curpage<=5?1:startPage-1}">&lt;</button></li>
+							<c:forEach var="i" begin="${startPage }" end="${endPage }" >
+								<li class="${i==curpage?'active':'' }" ><button type="button" class="pageBtn" name="page" value="${i }">${i }</button></li>
+							</c:forEach>
+							<li>
+			                  <c:if test="${totalPage%BLOCK==0 }" >
+			                  	<button type="button" class="pageBtn" name="page" value="${curpage<=(totalPage-BLOCK)?endPage+1:endPage}" >&gt;</button>
+			                  </c:if>
+			                  <c:if test="${totalPage%BLOCK!=0 }" >
+			                  	<button type="button" class="pageBtn" name="page" value="${curpage>totalPage-(totalPage%BLOCK)?endPage:endPage+1}" >&gt;</button>
+			                  </c:if>
+			                </li>
+							<li><button type="button" class="pageBtn" name="page" value="${totalPage }">&gt;&gt;</button></li>
+						</ul>
+					</div>
 				</td>
-				<td class="text-left" width="26%" >${vo.hosname }</td>
 			</tr>
-		</c:forEach>
-		<tr>
-			<td colspan=8 class="text-center" >
-				<div class="blog-pagination">
-					<div style="height: 30px;" ></div>
-					<ul class="pagination">
-						<c:if test="${curpage>3 }" >
-							<li><button type="button" class="pageBtn" id="firstPage" name="page" value="1"></button></li>
-						</c:if>
-						<c:forEach var="i" begin="${startPage }" end="${endPage }" >
-							<li class="${i==curpage?'active':'' }" ><button type="button" class="pageBtn" name="page" value="${i }">${i }</button></li>
-						</c:forEach>
-						<c:if test="${curpage<totalPage-2 }" >
-							<li><button type="button" class="pageBtn" id="lastPage" name="page" value="${totalPage }"></button></li>
-						</c:if>
-					</ul>
-				</div>
-			</td>
-		</tr>
+		</c:if>
 	</table>
 </body>
 </html>

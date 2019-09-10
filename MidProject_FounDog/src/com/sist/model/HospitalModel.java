@@ -405,24 +405,13 @@ public class HospitalModel {
 			model.addAttribute("totalNum", totalNum);
 			
 			int totalPage = HospitalDAO.reserveDetailTotalPage(map);
-			int startPage = 0;
-			int endPage = 0;
+			int BLOCK=5;
+			int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+			int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			
-			if(totalPage <= 5) {
-				startPage = 1;
-				endPage = totalPage;
-			} else {
-				if(curpage <= 2) {
-					startPage = 1;
-					endPage = startPage+4;
-				} else if (curpage >= totalPage-2) {
-					startPage = totalPage-5;
-					endPage = totalPage;
-				} else {
-					startPage = curpage-2;
-					endPage = curpage+2;
-				}
-			}
+			if(endPage>totalPage){
+				  endPage=totalPage;
+			  }
 			
 			List<Reserve_DetailVO> list = HospitalDAO.reserveDetail(map);
 			
@@ -432,6 +421,7 @@ public class HospitalModel {
 			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
+			model.addAttribute("BLOCK", BLOCK);
 			
 			return "../hospital/hospital_reserve_list.jsp";
 		}
@@ -508,23 +498,12 @@ public class HospitalModel {
 			model.addAttribute("totalNum", totalNum);
 			
 			int totalPage = HospitalDAO.carechartDetailTotalPage(map);
-			int startPage = 0;
-			int endPage = 0;
+			int BLOCK=5;
+			int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+			int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			
-			if(totalPage <= 5) {
-				startPage = 1;
-				endPage = totalPage;
-			} else {
-				if(curpage <= 2) {
-					startPage = 1;
-					endPage = startPage+4;
-				} else if (curpage >= totalPage-2) {
-					startPage = totalPage-5;
-					endPage = totalPage;
-				} else {
-					startPage = curpage-2;
-					endPage = curpage+2;
-				}
+			if(endPage>totalPage){
+				  endPage=totalPage;
 			}
 			
 			List<CareChartVO> list = HospitalDAO.carechartDetail(map);
@@ -533,6 +512,7 @@ public class HospitalModel {
 			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
+			model.addAttribute("BLOCK", BLOCK);
 			
 			return "../hospital/hospital_carechart_list.jsp";
 		}
@@ -588,31 +568,22 @@ public class HospitalModel {
 			model.addAttribute("totalNum", totalNum);
 			
 			int totalPage = HospitalDAO.vaccinationDetailTotalPage(map);
-			int startPage = 0;
-			int endPage = 0;
+			int BLOCK=5;
+			int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+			int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			
-			if(totalPage <= 5) {
-				startPage = 1;
-				endPage = totalPage;
-			} else {
-				if(curpage <= 2) {
-					startPage = 1;
-					endPage = startPage+4;
-				} else if (curpage >= totalPage-2) {
-					startPage = totalPage-5;
-					endPage = totalPage;
-				} else {
-					startPage = curpage-2;
-					endPage = curpage+2;
-				}
+			if(endPage>totalPage){
+				  endPage=totalPage;
 			}
 			
 			List<VaccinationVO> list = HospitalDAO.vaccinationDetail(map);
 						
 			model.addAttribute("list", list);			
+			model.addAttribute("totalNum", totalNum);
 			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
+			model.addAttribute("BLOCK", BLOCK);
 			
 			return "../hospital/hospital_vaccination_list.jsp";
 		}
