@@ -46,6 +46,25 @@ textarea {
 	border-style: none;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#replyBtn').click(function(){
+		var subject = $('#subject').val();
+		var content = $('#content').val();
+		
+		if(subject.trim()==""){
+			alert("제목을 입력해주세요.")
+			$('#subject').focus();
+			return;
+		} else if(content.trim()==""){
+			alert("내용을 입력해주세요.")
+			$('#content').focus();
+			return;
+		}
+	});
+});
+</script>
 </head>
 <body>
    <div class="container">
@@ -59,7 +78,7 @@ textarea {
          <tr>
            <td width=80% class="text-left">
            <input type="hidden" name=no value="${no }">
-             <input type=text name=subject size=45 class="form-control">
+             <input type=text name=subject size=45 class="form-control" id=subject>
            </td>
          </tr>
          <tr>
@@ -67,12 +86,12 @@ textarea {
          </tr>
          <tr>
            <td width=80% class="text-left">
-             <textarea rows="12" cols="80" name=content></textarea>
+             <textarea rows="12" cols="80" name=content id=content></textarea>
            </td>
          </tr>
          <tr>
            <td colspan="2" class="text-center">
-             <input type="submit" value="답글쓰기" style="width:200px" class="btn-submit2"><br>
+             <input type="submit" value="답글쓰기" style="width:200px" class="btn-submit2" id="replyBtn"><br>
              <input type="button" value="취소" style="margin-top:10px;font-size: 14px;" class="btn btn-sm" onclick="javascript:history.back()">
            </td>
          </tr>

@@ -99,7 +99,33 @@ $(function(){
 			u=0;
 		}		
 	});
-	
+	$('.reInsertBtn').click(function(){
+		var reInsert = $('.reInsert').val();
+		if(reInsert.trim()==""){
+			alert("내용을 입력해주세요.");
+			$('.reInsert').focus();
+			return;
+		}
+		$('#boardreply_ReInsert').submit();
+	});
+	$('.reUpdBtn').click(function(){
+		var reInsert = $('.reUpdate').val();
+		if(reInsert.trim()==""){
+			alert("내용을 입력해주세요.");
+			$('.reUpdate').focus();
+			return;
+		}
+		$('#boardreply_Update').submit();
+	});
+	$('.replyBtn2').click(function(){
+		var reInsert = $('#reply').val();
+		if(reInsert.trim()==""){
+			alert("내용을 입력해주세요.");
+			$('#reply').focus();
+			return;
+		}
+		$('#boardreply_Insert').submit();
+	});
 });
 </script>
 </head>
@@ -210,21 +236,21 @@ $(function(){
 		           
 		           <tr style="display:none" id="m${rvo.no }" class="reply">
 			          <td class="text-left" colspan="2">
-			           <form name="frm" method="post" action="../board/boardreply_ReInsert.do">
-			            <textarea rows="3" cols="100" name="content" style="float: left"></textarea>&nbsp;&nbsp;
+			           <form id="boardreply_ReInsert" name="frm" method="post" action="../board/boardreply_ReInsert.do">
+			            <textarea rows="3" cols="100" name="content" style="float: left" class="reInsert"></textarea>&nbsp;&nbsp;
 			            <input type="hidden" name="bno" value="${vo.no }">
 			            <input type="hidden" name=no value="${rvo.no }">
-			            <input type="submit" class="btnCss2" value="댓글쓰기">
+			            <input type="button" class="btnCss2 reInsertBtn" value="댓글쓰기">
 			           </form>
 			          </td>
 			        </tr>
 			        <tr style="display:none" id="u${rvo.no }" class="update">
 			          <td class="text-left" colspan="2">
-			           <form name="frm" method="post" action="../board/boardreply_Update.do">
-			            <textarea rows="3" cols="100" name="content" style="float: left">${rvo.content }</textarea>&nbsp;&nbsp;
+			           <form id="boardreply_Update" name="frm" method="post" action="../board/boardreply_Update.do">
+			            <textarea rows="3" cols="100" name="content" style="float: left" class="reUpdate">${rvo.content }</textarea>&nbsp;&nbsp;
 			            <input type="hidden" name="bno" value="${vo.no }">
 			            <input type="hidden" name=no value="${rvo.no }">
-			            <input type="submit" class="btnCss2" value="수정하기">
+			            <input type="button" class="btnCss2 reUpdBtn" value="수정하기">
 			           </form>
 			          </td>
 			        </tr>
@@ -235,10 +261,10 @@ $(function(){
 	      <table class="table">
 	        <tr>
 	          <td class="text-left">
-	           <form name="frm" method="post" action="../board/boardreply_Insert.do">
-	            <textarea rows="3" cols="110" name="content" style="float: left"></textarea>&nbsp;&nbsp;
+	           <form id="boardreply_Insert" name="frm" method="post" action="../board/boardreply_Insert.do">
+	            <textarea rows="3" cols="110" name="content" style="float: left" id="reply"></textarea>&nbsp;&nbsp;
 	            <input type="hidden" name="bno" value="${vo.no }">
-	            <input type="submit" class="btnCss2" value="댓글쓰기">
+	            <input type="button" class="btnCss2 replyBtn2" value="댓글쓰기">
 	           </form>
 	          </td>
 	        </tr>

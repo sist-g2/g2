@@ -46,19 +46,39 @@ textarea {
 	border-style: none;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#insertBtn').click(function(){
+		var subject=$('#subject').val();
+		if(subject.trim()=="") {
+			alert("제목을 입력해주세요.");
+			$('#subject').focus();
+			return;
+		}
+		var content=$('#content').val();
+		if(content.trim()=="") {
+			alert("내용을 입력해주세요.");
+			$('#content').focus();
+			return;
+		}
+		$('#insertform').submit();
+	});
+});
+</script>
 </head>
 <body>
    <div class="container">
      <h2 class="text-center">글쓰기</h2>
      <div class="row">
-     <form method="post" action="qna_board_insert_ok.do">
+     <form id="insertform" method="post" action="qna_board_insert_ok.do">
        <table class="table table-borderless">
        <tr>
       	 <th class="text-left" width=20%>제목</th>
        </tr>
          <tr>
            <td width=80% class="text-left">
-             <input type=text name=subject size=45 class="form-control">
+             <input type=text name=subject size=45 class="form-control" id=subject>
            </td>
          </tr>
          <tr>
@@ -66,12 +86,12 @@ textarea {
          </tr>
          <tr>
            <td width=80% class="text-left">
-             <textarea rows="12" cols="80" name=content></textarea>
+             <textarea rows="12" cols="80" name=content id=content></textarea>
            </td>
          </tr>
          <tr>
            <td class="text-center">
-             <input type="submit" value="글쓰기" style="width:200px" class="btn-submit2"><br>
+             <input type="button" value="글쓰기" style="width:200px" class="btn-submit2" id="insertBtn"><br>
              <input type="button" value="취소" style="margin-top:10px;font-size: 14px;" class="btn btn-sm" onclick="javascript:history.back()">
            </td>
          </tr>
