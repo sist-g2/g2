@@ -83,7 +83,7 @@ $(function() {
 			</tr>
 		</table>
 		<table class="table">
-			<tr class="success">
+			<tr>
 				<c:set var="color" value="black" />
 				<c:forEach var="sw" items="${strWeek }" varStatus="s">
 					<c:choose>
@@ -97,7 +97,7 @@ $(function() {
 							<c:set var="color" value="black" />
 						</c:otherwise>
 					</c:choose>
-					<td class="text-center"><b style="color:${color}">${sw }</b></td>
+					<td  style="background-color:#fff4e5;" class="text-center"><b style="color:${color}">${sw }</b></td>
 				</c:forEach>
 			</tr>
 			<c:set var="week" value="${week }" />
@@ -110,11 +110,11 @@ $(function() {
 				</c:if>
 				
 					 <c:if test="${i==day }">
-	           <td width=40 height=40 class="text-center danger"><div id="circle" style="color:${color};padding-top:15px">${i }</div></td>
+	           <td width=40 height=40 class="text-center" style="background-color:#fff4e5;"><div id="circle" style="color:${color};padding-top:15px">${i }</div></td>
 	          </c:if>
 	          <c:if test="${i!=day && i==rList[i-1]}">
 	           <td width=40 height=40 class="text-center"><div id="circle" style="color:${color};padding-top:15px;"
-	            class="dates" data-year="${year }" data-month="${month }">${i }<img src="../hospital/icon_reserve.gif"></div></td>
+	            class="dates" data-year="${year }" data-month="${month }">${i }<img src="../hospital/icon_reserve.png"></div></td>
 	          </c:if>
 	          <c:if test="${i!=day && i!=rList[i-1]}">
 	           <td width=40 height=40 class="text-center"><div id="circle" style="color:${color};padding-top:15px">${i }</span></td>

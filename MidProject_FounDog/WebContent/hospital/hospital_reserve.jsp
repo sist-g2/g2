@@ -97,6 +97,15 @@ table a{
 	background: none;
 	border-radius: 4px;
 }
+.closeBtn {
+	font-size: 14px;
+	color: #d29948;
+	border: 1px solid #dbb075;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	background: none;
+	border-radius: 4px;
+}
 </style>
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -310,7 +319,7 @@ $(document).ready(function(){
 				<div id="PopupDiary">
 				
 				</div>
-		    <button type="button">닫기</button>
+		    <button type="button" class="closeBtn">닫기</button>
 		  </div>
 		</div>
 		
@@ -366,7 +375,7 @@ $(document).ready(function(){
 				<div id="PopupDog">
 				
 				</div>
-		    <button type="button">닫기</button>
+		    <button type="button" class="closeBtn">닫기</button>
 		  </div>
 		</div>
 		
