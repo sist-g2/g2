@@ -36,8 +36,8 @@ th{
 }
 .portfolio-filter {
     /* margin: 40px 0; */
-    margin-top:40px;
-    margin-bottom:40px;
+    margin-top:0px;
+    margin-bottom:15px;
     padding: 0;
 }
 .portfolio-filter2 {

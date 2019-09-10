@@ -36,8 +36,8 @@ th{
 }
 .portfolio-filter {
     /* margin: 40px 0; */
-    margin-top:40px;
-    margin-bottom:40px;
+    margin-top:0px;
+    margin-bottom:15px;
     padding: 0;
 }
 .portfolio-filter2 {
@@ -72,7 +72,7 @@ th{
                     <div class="sidebar blog-sidebar">                           
                         <div class="sidebar-item categories" style="margin-top: 10px">
                             <h3>유기견접수게시판</h3>
-                            <ul class="nav navbar-stacked" style="margin-top: 0px">
+                            <ul class="nav navbar-stacked">
                                 <li class="active"><a href="../dogboard/dogboard_list.do">유기견접수게시판<span class="pull-right"></span></a></li>
                                 <li><a href="../board/board_list.do">자유게시판<span class="pull-right"></span></a></li>
                             </ul>

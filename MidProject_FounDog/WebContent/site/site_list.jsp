@@ -15,7 +15,7 @@
 }
 .portfolio-filter {
     /* margin: 40px 0; */
-    margin-top:40px;
+    margin-top:0px;
     margin-bottom:80px;
     padding: 0;
 }
