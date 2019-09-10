@@ -25,10 +25,11 @@ $(function(){
 	$('#delBtn').click(function(){
 
 		var no=$('#no').val();
+		var filename=$('#filename').val();
 		$.ajax({
 			type:'post',
 			url:'dogboard_delete_ok.do',
-			data:{no:no},
+			data:{no:no,filename:filename},
 			success:function(response)
 			{
 				location.href="../dogboard/dogboard_list.do";
@@ -47,6 +48,7 @@ $(function(){
 				<table class="table">
 					<tr>
 						<input type=hidden name=no value="${no }" id="no"></td>
+						<input type=hidden name=filename value="${filename }" id="filename"></td>
 					</tr>
 					<tr>
 						<td class="text-center" >

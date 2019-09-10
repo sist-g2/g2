@@ -116,7 +116,7 @@ $(function(){
           <td colspan="4" class="text-right">
           	<c:if test="${sessionScope.id!=null && (sessionScope.id==vo.id || sessionScope.id=='admin' )}" >
           		<a href="dogboard_update.do?no=${vo.no }" class="btn btn-sm">수정</a>
-            	<a href="dogboard_delete.do?no=${vo.no }" class="btn btn-sm" >삭제</a>
+            	<a href="dogboard_delete.do?no=${vo.no }&filename=${vo.filename}" class="btn btn-sm" >삭제</a>
           	</c:if>
             <a href="dogboard_list.do" class="btn btn-sm" >목록</a>           
           </td>

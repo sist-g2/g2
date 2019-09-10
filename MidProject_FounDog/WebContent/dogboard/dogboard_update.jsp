@@ -49,8 +49,7 @@ $(function(){
 			return;
 		}
 		
-		var filename=$('#filename').val();
-		console.log("filename" + filename);
+		var filename=$('#filename').val();		
 		if(filename.trim()=="") {
 			$('#filename').focus();
 			return;
@@ -87,7 +86,7 @@ $(function(){
    		      </tr>
    		      <tr>
 					<th>제보날짜　&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="date" name="dage" size=25 value="${vo.DLFDATE }" id="dage" class="form-control2">
+						<input type="date" name="lfdate" size=25 value="${vo.DLFDATE }" id="lfdate" class="form-control2">
 					</th>
 				</tr>
 				<tr>

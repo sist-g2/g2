@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.mapper.board-mapper">
+<mapper namespace="com.sist.mapper.dogboard-mapper">
   <!-- 자유게시판/Q&A게시판(Start) -->
   <!-- 
          목록 : 블록별 처리 
@@ -43,11 +43,22 @@
 	
 	<!-- 수정하기 -->
    <update id="boarddogUpdate" parameterType="Board_DogVO">
-     UPDATE board_dog SET
-     area=#{area}, dtype=#{dtype}, dsex=#{dsex}, dkg=#{dkg}, dcolor=#{dcolor}, category=#{category},
-      dcharacter=#{dcharacter}, tel=#{tel}, dname=#{dname}, filename=#{filename}, filesize=#{filesize},
-      dage=#{dage}, lfdate=#{lfdate}
-     WHERE no=#{no}
+	UPDATE board_dog SET
+		  id = #{id}
+		, area = #{area}
+		, dtype = #{dtype}
+		, dsex = #{dsex}
+		, dkg = #{dkg}
+		, dcolor = #{dcolor}
+		, dcharacter = #{dcharacter}
+		, tel = #{tel}
+		, filename = #{filename}
+		, filesize = #{filesize}
+		, dname = #{dname}
+		, dage = #{dage}
+		, category = #{category}
+		, lfdate = #{lfdate}
+	WHERE no=#{no}
    </update>
     
     <!-- 게시물 삭제 -->
