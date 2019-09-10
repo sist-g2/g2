@@ -50,13 +50,33 @@ th{
 </head>
 <body>
 	<!-- main(Q&A/FAQ)출력 -->
-	  <section id="portfolio">
+	<div class="container">
+<div class="qna_board_list_row" >
+	
+		<div id="qboardTitle">
+			<h2 class="qbodtitle">Q&A</h2>
+		</div>
+		<div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">                           
+                        <div class="sidebar-item categories" style="margin-top: 10px">
+                            <h3>Q&A</h3>
+                            <ul class="nav navbar-stacked" style="margin-top: 0px">
+                                <li><a href="../site/site_list.do">FAQ<span class="pull-right"></span></a></li>
+                                <li class="active"><a href="../qnaboard/qna_board_list.do">Q&A<span class="pull-right"></span></a></li>
+                            </ul>
+                        </div>                                        
+                    </div>
+                </div>	
+	  <!-- <section id="portfolio">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default" href="../site/site_list.do">FAQ</a></li>
                     <li><a class="btn btn-default active" href="../qnaboard/qna_board_list.do">Q&A</a></li>
                     </ul>
  </section>
-	<div class="row">
+ 
+ -->	
+ <div class="col-md-9 col-sm-7">
+ <div class="row" style="margin-top: 40px">
 		<table class="table">
 
 			<tr>
@@ -153,6 +173,8 @@ th{
 				</td>
 			</tr>
 		</table>
+	</div>
+	</div>
 	</div>
 </body>
 </html>

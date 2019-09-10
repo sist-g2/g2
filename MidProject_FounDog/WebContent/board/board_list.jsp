@@ -61,14 +61,32 @@ th{
 </script>
 </head>
 <body>
+<div class="container">
+	<div class="board_list_row" >
+	
+		<div id="boardTitle">
+			<h2 class="bodtitle">자유게시판</h2>
+		</div>
 	<!-- main(자유게시판/유기견게시판)출력 -->
-	  <section id="portfolio">
+		<div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">                           
+                        <div class="sidebar-item categories" style="margin-top: 10px">
+                            <h3>자유게시판</h3>
+                            <ul class="nav navbar-stacked">
+                                <li><a href="../dogboard/dogboard_list.do">유기견 접수 게시판<span class="pull-right"></span></a></li>
+                                <li class="active"><a href="../board/board_list.do">자유게시판<span class="pull-right"></span></a></li>
+                            </ul>
+                        </div>                                        
+                    </div>
+                </div>	
+	<!--   <section id="portfolio">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">유기견제보게시판</a></li>
                     <li><a class="btn btn-default active" href="../board/board_list.do">자유게시판</a></li>
                     </ul>
- </section>
-	<div class="row">
+ </section> -->
+  <div class="col-md-9 col-sm-7">	
+	<div class="row" style="margin-top: 40px">
 		<table class="table">
 
 			<tr>
@@ -164,10 +182,12 @@ th{
 	                  	</c:if>
 	                  </li>
 	                  <li><a href="board_list.do?page=${allPage }">&gt;&gt;</a></li>
-	               </ul>
-	            </td>
-			</tr>
-		</table>
+	              	 </ul>
+	            	</td>
+				</tr>
+			</table>
+		</div>
 	</div>
+</div>
 </body>
 </html>

@@ -32,13 +32,30 @@
 </script>
 </head>
 <body>
+<div class="container">
+<div class="dogboard_list_row" >
+	
+		<div id="dboardTitle">
+			<h2 class="dbodtitle">FAQ</h2>
+		</div>
+		<div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">                           
+                        <div class="sidebar-item categories" style="margin-top: 10px">
+                            <h3>FAQ</h3>
+                            <ul class="nav navbar-stacked" style="margin-top: 0px">
+                                <li class="active"><a href="../site/site_list.do">FAQ<span class="pull-right"></span></a></li>
+                                <li><a href="../qnaboard/qna_board_list.do">Q&A<span class="pull-right"></span></a></li>
+                            </ul>
+                        </div>                                        
+                    </div>
+                </div>	
 <!-- main(Q&A/FAQ)출력 -->
- <section id="portfolio">
+ <!-- <section id="portfolio">
                 <ul class="portfolio-filter portfolio-filter2 text-center">
                     <li><a class="btn btn-default active" href="../site/site_list.do">FAQ</a></li>
                     <li><a class="btn btn-default" href="../qnaboard/qna_board_list.do">Q&A</a></li>
                     </ul>
-		</section>
+		</section> -->
 		 <section id="portfolio">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default ${cate==0?'active':'' }" href="../site/site_list.do?cate=0" >회원정보</a></li>
@@ -50,6 +67,7 @@
 		
 		<!-- FAQ -->
 		<div class="container">
+		<div class="col-md-9 col-sm-7">
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<c:forEach var="vo" items="${list}" varStatus="s">
@@ -68,6 +86,9 @@
 					</c:forEach>
 				</div>
 			</div>
+	 	</div>
+	 	</div>
+	 	</div>
 	 	</div>
 	</body>
 </html>

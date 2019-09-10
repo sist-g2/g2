@@ -62,12 +62,29 @@ th{
 </script>
 </head>
 <body>
-	<section id="portfolio">
+ <div class="container">
+<div class="dogboard_list_row" >
+	
+		<div id="dboardTitle">
+			<h2 class="dbodtitle">유기견접수게시판</h2>
+		</div>
+		<div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">                           
+                        <div class="sidebar-item categories" style="margin-top: 10px">
+                            <h3>유기견접수게시판</h3>
+                            <ul class="nav navbar-stacked" style="margin-top: 0px">
+                                <li class="active"><a href="../dogboard/dogboard_list.do">유기견접수게시판<span class="pull-right"></span></a></li>
+                                <li><a href="../board/board_list.do">자유게시판<span class="pull-right"></span></a></li>
+                            </ul>
+                        </div>                                        
+                    </div>
+                </div>	
+	<!-- <section id="portfolio">
 	  <ul class="portfolio-filter protfolio-filter2 text-center">
 	                 <li><a class="btn btn-default active" href="../dogboard/dogboard_list.do">유기견제보게시판</a></li>
                     <li><a class="btn btn-default" href="../board/board_list.do">자유게시판</a></li>
            </ul>
-     </section>
+     </section> -->
      <section id="portfolio">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default" href="../dogboard/dogboard_list.do">모두보기</a></li>
@@ -75,6 +92,7 @@ th{
                     <li><a class="btn btn-default active" href="../dogboard/dogboard_look.do">발견 또는 보호중</a></li>                   
                    </ul>
  	</section>
+ 	<div class="col-md-9 col-sm-7">
 	<div class="row">
 		<table class="table">
 
@@ -147,6 +165,9 @@ th{
 				</td>
 			</tr>
 		</table>
+		</div>
+</div> 
 	</div>
+
 </body>
 </html>
