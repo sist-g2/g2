@@ -45,6 +45,13 @@ th{
 	cursor: pointer;
 	border-style: none;
 }
+.container2 {
+    width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -61,17 +68,16 @@ th{
 </script>
 </head>
 <body>
-<div class="container">
-	<div class="board_list_row" >
-	
+<div class="container2">
+	<div class="board_list_row">
 		<div id="boardTitle">
 			<h2 class="bodtitle">자유게시판</h2>
 		</div>
 	<!-- main(자유게시판/유기견게시판)출력 -->
 		<div class="col-md-3 col-sm-5">
                     <div class="sidebar blog-sidebar">                           
-                        <div class="sidebar-item categories" style="margin-top: 10px">
-                            <h3>자유게시판</h3>
+                        <div class="sidebar-item categories" style="margin-top: 40px">
+                            <h3>커뮤니티</h3>
                             <ul class="nav navbar-stacked">
                                 <li><a href="../dogboard/dogboard_list.do">유기견 접수 게시판<span class="pull-right"></span></a></li>
                                 <li class="active"><a href="../board/board_list.do">자유게시판<span class="pull-right"></span></a></li>
@@ -85,10 +91,10 @@ th{
                     <li><a class="btn btn-default active" href="../board/board_list.do">자유게시판</a></li>
                     </ul>
  </section> -->
-  <div class="col-md-9 col-sm-7">	
-	<div class="row" style="margin-top: 40px">
+ <div class="container">
+ <div class="col-md-9 col-sm-7">
+	<div class="row">
 		<table class="table">
-
 			<tr>
 				<td class="text-left">
 				<c:if test="${sessionScope.id!=null }">
@@ -123,15 +129,13 @@ th{
 						<%-- <c:if test="${today==vo.dbday }">
 						<sup><font color=red>new</font></sup>
 						</c:if> --%>
-						</td>
 						<td width=15% class="text-center"></td>
 						<td width=20% class="text-center"></td>
 						<td width=10% class="text-center"></td>
 					</c:if>
-					
+
 					<c:if test="${vo.delState==1 }" >
 						<font color="red">삭제된 게시물입니다.</font>
-						</td>
 						<td width=15% class="text-center"></td>
 						<td width=20% class="text-center"></td>
 						<td width=10% class="text-center"></td>
@@ -142,7 +146,6 @@ th{
 						<c:if test="${today==vo.dbday }">
 						<sup><font color=red>new</font></sup>
 						</c:if>
-						</td>
 						<td width=15% class="text-center">${vo.id }</td>
 						<td width=20% class="text-center">${vo.dbday }</td>
 						<td width=10% class="text-center">${vo.hit }</td>
@@ -187,7 +190,9 @@ th{
 				</tr>
 			</table>
 		</div>
-	</div>
-</div>
-</body>
+ 					</div>
+ 				</div>
+			</div>
+		</div>
+	</body>
 </html>

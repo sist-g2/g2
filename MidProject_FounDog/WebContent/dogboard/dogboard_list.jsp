@@ -58,6 +58,13 @@ th{
 	cursor: pointer;
 	border-style: none;
 }
+.container2 {
+    width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -74,17 +81,16 @@ th{
 </script>
 </head>
 <body>
-<div class="container">
+<div class="container2">
 <div class="dogboard_list_row" >
-	
 		<div id="dboardTitle">
 			<h2 class="dbodtitle">유기견접수게시판</h2>
 		</div>
 		<div class="col-md-3 col-sm-5">
                     <div class="sidebar blog-sidebar">                           
-                        <div class="sidebar-item categories" style="margin-top: 10px">
-                            <h3>유기견접수게시판</h3>
-                            <ul class="nav navbar-stacked" style="margin-top: 0px">
+                        <div class="sidebar-item categories" style="margin-top: 40px">
+                            <h3>커뮤니티</h3>
+                            <ul class="nav navbar-stacked">
                                 <li class="active"><a href="../dogboard/dogboard_list.do">유기견접수게시판<span class="pull-right"></span></a></li>
                                 <li><a href="../board/board_list.do">자유게시판<span class="pull-right"></span></a></li>
                             </ul>
@@ -104,6 +110,7 @@ th{
                     <li><a class="btn btn-default" href="../dogboard/dogboard_look.do">발견 또는 보호중</a></li>                   
                    </ul>
  	</section>
+ 	 <div class="container">
    <div class="col-md-9 col-sm-7">
 	<div class="row">
 		<table class="table">
@@ -164,24 +171,26 @@ th{
 					</form>
 				</td>
 				<!-- 5p씩 나누기 -->
-				<td class="text-center">
-					<ul class="pagination">
-						<li><a href="dogboard_list.do?page=1">&lt;&lt;</a></li>
-						<c:if test="${curpage != startPage }">
-						<li><a href="dogboard_list.do?page=${curpage-1}">&lt;</a></li>
-						</c:if>
-						<c:forEach var="i" begin="${startPage }" end="${endPage }">
-							<li class="${i==curpage?'active':''}">
-							<a href="dogboard_list.do?page=${i }">${i }</a>
-						</c:forEach>
-						<c:if test="${curpage != endPage }">
-						<li><a href="dogboard_list.do?page=${curpage+1}">&gt;</a></li>
-						</c:if>
-						<li><a href="dogboard_list.do?page=${allPage }">&gt;&gt;</a></li>
-					</ul>
-				</td>
-			</tr>
-		</table>
+					<td class="text-center">
+						<ul class="pagination">
+							<li><a href="dogboard_list.do?page=1">&lt;&lt;</a></li>
+							<c:if test="${curpage != startPage }">
+							<li><a href="dogboard_list.do?page=${curpage-1}">&lt;</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${startPage }" end="${endPage }">
+								<li class="${i==curpage?'active':''}">
+								<a href="dogboard_list.do?page=${i }">${i }</a>
+							</c:forEach>
+								<c:if test="${curpage != endPage }">
+									<li><a href="dogboard_list.do?page=${curpage+1}">&gt;</a></li>
+								</c:if>
+									<li><a href="dogboard_list.do?page=${allPage }">&gt;&gt;</a></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
   </div>

@@ -33,6 +33,13 @@ th{
 	cursor: pointer;
 	border-style: none;
 }
+.container2 {
+    width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -50,17 +57,16 @@ th{
 </head>
 <body>
 	<!-- main(Q&A/FAQ)출력 -->
-	<div class="container">
+	<div class="container2">
 <div class="qna_board_list_row" >
-	
 		<div id="qboardTitle">
 			<h2 class="qbodtitle">Q&A</h2>
 		</div>
 		<div class="col-md-3 col-sm-5">
                     <div class="sidebar blog-sidebar">                           
-                        <div class="sidebar-item categories" style="margin-top: 10px">
-                            <h3>Q&A</h3>
-                            <ul class="nav navbar-stacked" style="margin-top: 0px">
+                        <div class="sidebar-item categories" style="margin-top: 40px">
+                            <h3>사이트이용안내</h3>
+                            <ul class="nav navbar-stacked">
                                 <li><a href="../site/site_list.do">FAQ<span class="pull-right"></span></a></li>
                                 <li class="active"><a href="../qnaboard/qna_board_list.do">Q&A<span class="pull-right"></span></a></li>
                             </ul>
@@ -75,10 +81,10 @@ th{
  </section>
  
  -->	
+  <div class="container">
  <div class="col-md-9 col-sm-7">
- <div class="row" style="margin-top: 40px">
+ <div class="row">
 		<table class="table">
-
 			<tr>
 				<td class="text-left">
 				<c:if test="${sessionScope.id!=null }">
@@ -112,7 +118,6 @@ th{
 						<%-- <c:if test="${today==vo.dbday }">
 						<sup><font color=red>new</font></sup>
 						</c:if> --%>
-						</td>
 						<td width=15% class="text-center"></td>
 						<td width=20% class="text-center"></td>
 						<td width=10% class="text-center"></td>
@@ -120,7 +125,6 @@ th{
 					
 					<c:if test="${vo.delState==1 }" >
 						<font color="red">삭제된 게시물입니다.</font>
-						</td>
 						<td width=15% class="text-center"></td>
 						<td width=20% class="text-center"></td>
 						<td width=10% class="text-center"></td>
@@ -131,7 +135,6 @@ th{
 						<c:if test="${today==vo.dbday }">
 						<sup><font color=red>new</font></sup>
 						</c:if>
-						</td>
 						<td width=15% class="text-center">${vo.id }</td>
 						<td width=20% class="text-center">${vo.dbday }</td>
 						<td width=10% class="text-center">${vo.hit }</td>
@@ -173,6 +176,8 @@ th{
 				</td>
 			</tr>
 		</table>
+	</div>
+	</div>
 	</div>
 	</div>
 	</div>
