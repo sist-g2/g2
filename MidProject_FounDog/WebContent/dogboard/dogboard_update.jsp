@@ -80,8 +80,8 @@ $(function(){
 				<tr>
     		       <th>카테고리　&nbsp;&nbsp;&nbsp;&nbsp;
 					 <select id="category" class="form-control2" name=category class="form-control2">
-						<option value="0">제보</option>
-						<option value="1">찾음</option>
+						<option value="0">찾습니다</option>
+						<option value="1">발견했습니다</option>
 						</select>
 					</th>
    		      </tr>

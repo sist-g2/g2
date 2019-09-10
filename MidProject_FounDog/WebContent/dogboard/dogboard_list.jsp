@@ -18,6 +18,18 @@
 	background-color:#FFF;
 	color:#A5732A;
 }
+.btnCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 th{
 	background-color:#FFF;
 	color:#A5732A;
@@ -69,7 +81,7 @@ th{
 			<tr>
 				<td class="text-left">
 				<c:if test="${sessionScope.id!=null }">
-						<a href="dogboard_insert.do" class="btn btn-sm">새글</a>
+						<a href="dogboard_insert.do" class="btnCss">&nbsp;&nbsp;새글&nbsp;&nbsp;</a>
 					</c:if>
 					</td>
 				<td class="text-right">${curpage } page / ${totalpage } pages</td>
@@ -81,9 +93,9 @@ th{
 				<div class="col-xs-6 col-sm-4 col-md-3 portfolio-item branded logos" style="width: 225px; height: 370px;">
 						<c:choose>
 							<c:when test="${vo.category == 0 }">
-							<h5 style="text-align: center">찾습니다</h5></c:when>
+							<h5 style="text-align: center; color: red;">찾습니다</h5></c:when>
 							<c:when test="${vo.category == 1 }">
-							<h5 style="text-align: center">발견했습니다</h5></c:when>							
+							<h5 style="text-align: center; color: blue;">발견했습니다</h5></c:when>							
 						</c:choose>
                         <div class="portfolio-wrapper" style="border: 1px solid gray; width: 200px; height: 330px;">
                             <div class="portfolio-single">

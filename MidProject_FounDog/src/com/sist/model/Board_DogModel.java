@@ -248,12 +248,12 @@ public class Board_DogModel {
 			  vo.setArea(area);
 			  vo.setDtype(dtype);
 			  vo.setDsex(dsex);
-			  vo.setDkg(Integer.parseInt(dkg));
+			  vo.setDkg(dkg);
 			  vo.setDcolor(dcolor);
 			  vo.setDcharacter(dcharacter);
 			  vo.setTel(tel);
 			  vo.setDname(dname);
-			  vo.setDage(Integer.parseInt(dage));
+			  vo.setDage(dage);
 			  vo.setCategory(Integer.parseInt(category));
 			  vo.setLfdate(lfdate);
 
@@ -339,12 +339,12 @@ public class Board_DogModel {
 			  vo.setArea(area);
 			  vo.setDtype(dtype);
 			  vo.setDsex(dsex);
-			  vo.setDkg(Integer.parseInt(dkg));
+			  vo.setDkg(dkg);
 			  vo.setDcolor(dcolor);
 			  vo.setDcharacter(dcharacter);
 			  vo.setTel(tel);
 			  vo.setDname(dname);
-			  vo.setDage(Integer.parseInt(dage));
+			  vo.setDage(dage);
 			  
 
 			  Enumeration filename = mr.getFileNames();

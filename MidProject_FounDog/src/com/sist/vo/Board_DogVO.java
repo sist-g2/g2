@@ -10,7 +10,7 @@ public class Board_DogVO {
 	private String jubsuDate;
 	private String dtype;
 	private String dsex;
-	private int dkg;
+	private String dkg;
 	private String dcolor;
 	private String dcharacter;
 	private String tel;
@@ -18,12 +18,24 @@ public class Board_DogVO {
 	private int filesize;
 	private String dogimg;
 	private String dname;
-	private int dage;
+	private String dage;
 	private String dbday;
 	private String lfdate;
 	private String DLFDATE;
 	
 	
+	public String getDkg() {
+		return dkg;
+	}
+	public void setDkg(String dkg) {
+		this.dkg = dkg;
+	}
+	public String getDage() {
+		return dage;
+	}
+	public void setDage(String dage) {
+		this.dage = dage;
+	}
 	public String getDLFDATE() {
 		return DLFDATE;
 	}
@@ -48,12 +60,7 @@ public class Board_DogVO {
 	public void setDname(String dname) {
 		this.dname = dname;
 	}
-	public int getDage() {
-		return dage;
-	}
-	public void setDage(int dage) {
-		this.dage = dage;
-	}
+
 	public String getTel() {
 		return tel;
 	}
@@ -108,12 +115,7 @@ public class Board_DogVO {
 	public void setDsex(String dsex) {
 		this.dsex = dsex;
 	}
-	public int getDkg() {
-		return dkg;
-	}
-	public void setDkg(int dkg) {
-		this.dkg = dkg;
-	}
+
 	public String getDcolor() {
 		return dcolor;
 	}

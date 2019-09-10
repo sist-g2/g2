@@ -18,20 +18,20 @@ public class Board_DogDAO {
 		   ssf=CreateSqlSessionFactory.getSsf();
 	   }
 	   
-	   // ¸ñ·Ï 
+	   // ï¿½ï¿½ï¿½ 
 	   public static List<Board_DogVO> boarddogListData(Map map)
 	   {
 		   List<Board_DogVO> list=new ArrayList<Board_DogVO>();
-		   // DB¿¬°á
+		   // DBï¿½ï¿½ï¿½ï¿½
 		   SqlSession session=ssf.openSession();
 		   list=session.selectList("boarddogListData",map);
 		   //                          XML => id , #{} => map => #{start} : map.get("start")
-		   // ¹ÝÈ¯ 
+		   // ï¿½ï¿½È¯ 
 		   session.close();
 		   return list;
 	   }
 	   
-	   // ???????? ?¬Ò?
+	   // ???????? ?ï¿½ï¿½?
 	   public static int boarddogTotalPage()
 	   {
 		   int total=0;
@@ -41,7 +41,7 @@ public class Board_DogDAO {
 		   session.close();
 		   return total;
 	   }
-	   // ??n? ??u ???? ?¬Ò?
+	   // ??n? ??u ???? ?ï¿½ï¿½?
 	   public static int boarddogRowCount()
 	   {
 		   int count=0;
@@ -52,17 +52,16 @@ public class Board_DogDAO {
 		   return count;
 	   }
 	   
-	   // Ãß°¡ 
+	   // ï¿½ß°ï¿½ 
 	   public static void boarddogInsert(Board_DogVO vo)
 	   {
 		   SqlSession session=ssf.openSession(true); // setAutoCommit(true)
-		   // Ã³¸®
+		   // Ã³ï¿½ï¿½
 		   session.insert("boarddogInsert",vo);
-		   System.out.println("getLfdate : " + vo.getLfdate());
 		   session.close();
 	   }
 	   
-	   // »ó¼¼º¸±â
+	   // ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	   public static Board_DogVO boarddogDetailData(int no)
 	   {
 		   Board_DogVO vo=new Board_DogVO();
@@ -73,7 +72,7 @@ public class Board_DogDAO {
 		   return vo;
 	   }
 	   
-	   // ¼öÁ¤ÇÏ±â
+	   // ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	   public static void boarddogUpdate(Board_DogVO vo)
 	   {
 		   SqlSession session=ssf.openSession(true);
@@ -81,7 +80,7 @@ public class Board_DogDAO {
 		   session.close();
 	   }
 
-	   // »èÁ¦ÇÏ±â
+	   // ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	   public static int boarddogDelete(int no){
 		   int result=0;
 		   SqlSession session=ssf.openSession();
@@ -91,7 +90,7 @@ public class Board_DogDAO {
 		return result;
 	   }
 	   
-	   // °Ë»öÇÏ±â(Ã£±â)
+	   // ï¿½Ë»ï¿½ï¿½Ï±ï¿½(Ã£ï¿½ï¿½)
 	   // <select id="boardFindData" resultType="Board_DogVO" parameterType="java.util.Map">
 	   public static List<Board_DogVO> boarddogFindData(Map map){
 		   List<Board_DogVO> list= new ArrayList<Board_DogVO>();
