@@ -60,7 +60,7 @@ $(function(){
 <body>
    <div class="container">
      <div class="row">
-       <h2 class="text-center">정보성 게시판</h2>
+       <h2 class="text-center">애견상식</h2>
        <table class="table">
          <tr>
     	   <c:if test="${sessionScope.id!=null && sessionScope.id=='admin' }">

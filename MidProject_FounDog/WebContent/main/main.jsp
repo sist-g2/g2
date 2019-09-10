@@ -71,17 +71,17 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="../main/main.do">Home</a></li>
-                    <li class="dropdown"><a href="../feed/feed_list.do">사료비교 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../feed/feed_list.do">상품정보</a><!-- <i class="fa fa-angle-down"></i> -->
                          <ul role="menu" class="sub-menu">
-                            <li><a href="../feed/feed_list.do">사료비교</a></li>
+                            <li><a href="../feed/feed_list.do">사료 가격비교</a></li>
                           <c:if test="${sessionScope.id!=null }">
                             <li><a href="../feed/feed_fav_list.do">찜 목록</a></li>
                           </c:if>
                         </ul>
                     </li>                  
-                    <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../hospital/hospital_list.do">병원이용</a><!-- <i class="fa fa-angle-down"></i> -->
                           <ul role="menu" class="sub-menu">
-                            <li><a href="../hospital/hospital_list.do">병원 이용</a></li>
+                            <li><a href="../hospital/hospital_list.do">병원 예약</a></li>
                             <c:if test="${sessionScope.id!=null }">                                                       	
                             <li><a href="../hospital/hospital_reserve_detail.do">예약 내역</a></li>
                             <li><a href="../hospital/hospital_carechart_detail.do">진료 내역</a></li>                           
@@ -89,15 +89,15 @@
                           </c:if>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께 <!-- <i class="fa fa-angle-down"></i> --></a>
+                    <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께</a><!-- <i class="fa fa-angle-down"></i> -->
                          <ul role="menu" class="sub-menu">
-                            <li><a href="../adminboard/adminboard_list.do">정보성 게시판</a></li>
+                            <li><a href="../adminboard/adminboard_list.do">애견 상식</a></li>
                             <li><a href="../adminboard/Calc.do">사료 열량 계산기</a></li>
                         </ul>
                     </li>                         
                     <li class="dropdown"><a href="../dogboard/dogboard_list.do">커뮤니티</a>
                         <ul role="menu" class="sub-menu">
-                            <li><a href="../dogboard/dogboard_list.do">유기견제보게시판</a></li>
+                            <li><a href="../dogboard/dogboard_list.do">유기견 제보게시판</a></li>
                             <li><a href="../board/board_list.do">자유게시판</a></li>
                         </ul>
                     </li>                    
@@ -118,6 +118,8 @@
 
 <jsp:include page="${main_jsp }" ></jsp:include>
 
+<div style="height: 30px" >
+</div>
 <footer id="footer">
     <div class="container">
         <div class="row">
@@ -186,7 +188,9 @@
             </div> -->
             <div class="col-sm-12">
                 <div class="copyright-text text-center">
-                    <p>&copy; Your Company 2014. All Rights Reserved.</p>
+                    <p>&copy; SIST G강의장 2조 2019 MidProject. All Rights Reserved.</p>
+                    <p>박채림, 하현수, 김우진, 유미희, 전대현.</p>
+                    <p><a target="_blank" href="https://github.com/sist-g2/g2" >https://github.com/sist-g2/g2</a>
                     <p>Designed by <a target="_blank" href="http://www.themeum.com">Themeum</a></p>
                 </div>
             </div>
