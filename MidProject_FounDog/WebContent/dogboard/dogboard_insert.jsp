@@ -89,10 +89,9 @@ $(function(){
 			</th>
    		</tr>
         <tr>
-				<th>제보날짜</th>
-				<td>
-					<input type="date" id="startDate" name=lfdate size=25 class="form-control2">			
-				</td>
+				<th colspan="2">제보날짜&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="date" id="startDate" name=lfdate size=25 class="form-control2">	
+				</th>		
 			</tr>
          <tr>
          	<th>이름</th>
