@@ -105,7 +105,7 @@ $(function(){
 				</tr>
 				<tr>
 					<td colspan=2 class="text-center" >
-						<input type="button" value="수정하기" style="width:200px" class="btn-submit2"><br>
+						<input type="button" value="수정하기" style="width:200px" class="btn-submit2" id="updBtn"><br>
 						<input type="button" value="취소" style="margin-top:10px;font-size: 14px;" class="btn btn-sm" onclick="javascript:history.back()" >
 					</td>
 				</tr>
