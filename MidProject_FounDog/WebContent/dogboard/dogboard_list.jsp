@@ -46,6 +46,18 @@ th{
     margin-bottom:80px; */
     padding: 0;
 }
+.btnSearchCss {
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 37px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-style: none;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -148,7 +160,7 @@ th{
 							<option value="area">지역</option>
 						</select> 
 						<input type=text name=ss size=15 class="input-sm form-control2" id="ss">
-						<input type=button value="검색" class="btn btn-sm" id="findBtn">
+						<input type=button value="검색" class="btnSearchCss" id="findBtn">
 					</form>
 				</td>
 				<!-- 5p씩 나누기 -->

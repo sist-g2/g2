@@ -83,7 +83,7 @@ tbody{
 <div class="rowrow optionList">
 	<table class="table table-borderless rowrow" style="width:400px">
 		<tr>
-			<td class="text-center"><h3 class="text-center">반려견 정보</h3></td>
+			<td class="text-center"><h3 class="text-center">반려견 정보 추가</h3></td>
 		</tr>
 	</table>
 	<table class="table table-borderless" style="width:400px">
