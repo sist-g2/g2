@@ -108,7 +108,14 @@ $(function(){
 					<table class="table reviewList" >
 						<tr>
 							<td class="text-right" width=8% >작성자</td>
-							<td class="text-left" width=10% >&nbsp;${rvw.mvo.name }</td>
+							<td class="text-left" width=10% >
+								<c:if test="${rvw.id=='delete' }" >
+									&nbsp;<font color="grey">(탈퇴)</font>
+								</c:if>
+								<c:if test="${rvw.id!='delete' }" >
+									&nbsp;${rvw.mvo.name }
+								</c:if>
+							</td>
 							<td class="text-right" width=8% >작성일</td>
 							<td class="text-left" width=14% >&nbsp;${rvw.rdateS }</td>
 							<td class="text-right" width=8% >별점</td>
@@ -117,7 +124,14 @@ $(function(){
 								<font style="color:#808080;" ><c:forEach begin="1" end="${5-rvw.star }">☆</c:forEach></font> (${rvw.star }.0)
 							</td>
 							<td class="text-right" width=8% >견종</td>
-							<td class="text-left" width=12% >&nbsp;${rvw.dtype }</td>
+							<td class="text-left" width=12% >
+								<c:if test="${rvw.dtype==null || rvw.dtype=='' }" >
+									&nbsp;<font color="grey">(없음)</font>
+								</c:if>
+								<c:if test="${rvw.dtype!=null || rvw.dtype!='' }" >
+									&nbsp;${rvw.dtype }
+								</c:if>
+							</td>
 							<td class="text-right" width=18% >
 								<c:if test="${sessionScope.id!=null && rvw.id==sessionScope.id }" >
 									<button type="button" class="rvwUpd" value="${rvw.no },${rvw.star}" >수정</button>&nbsp;

@@ -84,6 +84,8 @@ public class FeedModel {
 		model.addAttribute("grnOp", grnOp);
 		
 		String keyword = model.getRequest().getParameter("feedKeyword"); // °Ë»ö¾î
+		if(keyword!=null)
+			keyword = keyword.trim();
 		opList.put("keyword", keyword);
 		model.addAttribute("keyword", keyword);
 		
