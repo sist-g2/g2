@@ -94,7 +94,7 @@ $(function(){
 			<div class="row">
 				<div class="action">
 					<div class="col-sm-12">
-						<h1 class="title">Update</h1>
+						<h1 class="title">MyPage</h1>
 					</div>
 				</div>
 			</div>

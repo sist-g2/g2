@@ -93,7 +93,7 @@ $(function(){
 				</tr>
 				<tr>
 					<td>
-						<a href="../main/main.do">취소</a>
+						<a href="../member/member_mypage.do">취소</a>
 					</td>
 				</tr>
 			</table>
