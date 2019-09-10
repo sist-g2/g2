@@ -29,7 +29,7 @@ $(function(){
 $('.detailbtn').click(function(){
 	var no = $(this).attr("data-no");
 
-	var wintype = "toolbar=no,width=800,height=600,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
+	var wintype = "toolbar=no,width=800,height=550,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
 	var childWin = window.open("hospital_carechart_certificate.do?no="+no, "childWin", wintype);
 
 	});

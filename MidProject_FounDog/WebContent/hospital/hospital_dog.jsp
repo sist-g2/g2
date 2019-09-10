@@ -6,6 +6,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+#dogInsert{
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.dogSel{
+display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $('.dogSel').click(function(){

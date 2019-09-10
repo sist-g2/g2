@@ -15,7 +15,7 @@ td{
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin-top: 20px">
 		<div style="height: 70px; width: 100%; text-align: center; border: solid 1px;">
 		<h2>진료 내역서</h2>
 		</div>
@@ -51,8 +51,8 @@ td{
 			</tr>
 		</table>
 		<div style="text-align: center; padding: 10px;">
-		<input type="button" onclick="javascript:window.print()" value="출력" class="btn btn-mg">
-		<input type="button" onclick="javascript:window.close()" value="닫기" class="btn btn-mg">
+		<input type="button" onclick="javascript:window.print()" value="출력" class="btn btn-lg" style="margin-right: 30px">
+		<input type="button" onclick="javascript:window.close()" value="닫기" class="btn btn-lg">
 		</div>
 	</div>
 </body>
