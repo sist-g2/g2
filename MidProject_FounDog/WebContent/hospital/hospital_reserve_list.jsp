@@ -64,7 +64,7 @@ $(function(){
 			<h3> ${sessionScope.name }님의 예약 내역입니다.</h3>
 		</caption>
 		<tr height="50px">
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">예약 번호</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">번호</font></th>
 			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">의뢰일</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">보호자명</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">동물명</font></th>
@@ -81,7 +81,7 @@ $(function(){
 		<c:if test="${!empty list}">
 			<c:forEach var="vo" items="${list }">
 				<tr class="content">
-					<td class="text-left" width="10%" >${vo.no }</td>
+					<td class="text-left" width="10%" >${vo.num }</td>
 					<td class="text-left" width="12%" >${vo.reception_date }</td>
 					<td class="text-left" width="10%" >${vo.name }</td>
 					<td class="text-left" width="10%" >${vo.dname }</td>

@@ -31,7 +31,7 @@
 		<div id="totalresult">
 			<c:choose>
 				<c:when test="${list ne null && list.size() ne 0}">
-					<h3>전체<b> ${totalResult}</b>건의 검색 결과가 있습니다.</h3>
+					<h3>전체 <b style="color: #DB0000">${totalResult}</b>건의 검색 결과가 있습니다.</h3>
 				</c:when>
 				<c:when test="${list.size() eq 0}">
 					<h3>검색 결과가 없습니다.</h3>
@@ -106,14 +106,14 @@ function reservedate(){
 					</c:forEach>
 				</table>
 			</div>
-			<div class="col-sm-4" style="height: 90px; width: 100%">
+			<div class="col-sm-4" style="height: 90px; width: 100%; text-align: center;">
 				<ul class="pagination">
 					<c:if test="${curpage>BLOCK }">
 			           <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="1" value="&lt;&lt;"></li>
 			           <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${startPage-1 }" value="&lt;"></li>
 			         </c:if>
 					 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					   <li style="display: inline-block;margin: 3px 3px;" class=${curpage==i?"active":"" }><input type="button" class="result_page form-control3" data-page="${i}" value="${i}"></li>
+					   <li style="display: inline-block;margin: 3px 3px;" class=${curpage==i?"active":"" }><input type="button" style="height: 40px;width: 34.25px" class="result_page form-control3" data-page="${i}" value="${i}"></li>
 					 </c:forEach> 
 					 <c:if test="${endPage<allPage }">
 					   <li style="display: inline-block;margin: 0 3px;"><input type="button" class="result_page form-control3" data-page="${endPage+1 }" value="&gt;"></li>

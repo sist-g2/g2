@@ -63,7 +63,7 @@ $(function(){
 		<c:if test="${!empty list}" >
 			<c:forEach var="vo" items="${list }">
 				<tr class="content" height="50px">
-					<td class="text-left" width="10%" >${vo.no }</td>
+					<td class="text-left" width="10%" >${vo.num }</td>
 					<td class="text-left" width="12%" >${vo.vaccination_name }</td>
 					<td class="text-left" width="20%" >${vo.last_date }</td>
 					<td class="text-left" width="20%" >${vo.schedule_date }</td>

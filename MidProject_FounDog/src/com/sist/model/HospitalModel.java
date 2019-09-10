@@ -252,7 +252,6 @@ public class HospitalModel {
 		   {
 			   String day=model.getRequest().getParameter("day");	
 			   String time=HospitalDAO.reserveGetTime(Integer.parseInt(day));
-			   System.out.println("time="+time);
 			   String timeno = time.replace(",", "|");
 			   List<String> list = new ArrayList<String>();
 			   list = HospitalDAO.reserveTime(timeno);

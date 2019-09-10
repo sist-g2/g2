@@ -26,11 +26,27 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	var today = new Date();
+	var todays = new Date();
 	var prev_7day = new Date(); 
 	prev_7day.setDate(prev_7day.getDate() - 7);
 	document.getElementById('startDate').valueAsDate = prev_7day;
-	document.getElementById('endDate').valueAsDate = today;
+	document.getElementById('endDate').valueAsDate = todays;
+	
+	let today = new Date(),
+	day = today.getDate(),
+    month = today.getMonth()+1, //January is 0
+    year = today.getFullYear();
+         if(day<10){
+                day='0'+day
+            } 
+        if(month<10){
+            month='0'+month
+        }
+        today = year+'-'+month+'-'+day;
+        
+	document.getElementById('endDate').max = today;
+	document.getElementById('startDate').max = today;
+	
 	$('#detailbtn').click(function(){
 		var dno=$('#selectDog option:selected').attr("data-no");
 		var startDate=$('#startDate').val();
@@ -91,7 +107,7 @@ $(function(){
 					<h4>조회 기간</h4>
 				</th>
 				<td width="55%" style="padding: 5px;" >
-					<input type="date" id="startDate">&nbsp;~&nbsp;<input type="date" id="endDate">			
+					<input type="date" id="startDate">&nbsp;~&nbsp;<input type="date" id="endDate" min="" max="">			
 				</td>
 			</tr>
 		</table>

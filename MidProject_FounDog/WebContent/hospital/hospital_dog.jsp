@@ -41,8 +41,9 @@ return false;
 </head>
 <body>
 	<div id="container">
-		<h3>등록된 강아지</h3>
-		<input type="button" value="추가하기" id="dogInsert">
+		<span style="font-size: 20px">등록된 강아지</span>
+			<input type="button" value="추가하기" id="dogInsert">
+	
 		<div id="dogdiv" style="height: 400px; width: 510px; overflow: auto;">
 			<table style="height: 100px; width: 500px">
 				<tr>
@@ -53,7 +54,7 @@ return false;
 					<th></th>
 				</tr>
 			<c:forEach var="vo" items="${list }">
-				<tr style="border: solid 1px;">
+				<tr style="border: solid 1px #D5D5D5;">
 					<td class="dogname">${vo.dname}</td>
 					
 					<td>${vo.dtype}</td>	

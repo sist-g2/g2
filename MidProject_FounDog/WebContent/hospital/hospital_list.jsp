@@ -14,7 +14,8 @@
 	background: #bd8942;
 	color: #ffffff;
 	margin-right: 3px;
-	height: 30px;
+	height: 40px;
+	width: 50px;
 	line-height: 30px;
 	text-align: center;
 	cursor: pointer;
@@ -26,22 +27,22 @@
 <body>
 	<div class="container">
 		<div id="hospitalTitle">
-			<h2 class="hostitle">동물 병원</h2>
+			<h2 class="hostitle">병원 예약</h2>
 		</div>
 		<!-- <div class="hostab">
 			<a href="#" style="border-right: 0px;" class="btn">병원 찾기</a> <a
 				href="#" class="btn">주변 병원 찾기</a>
 		</div> -->
-		<div style="margin-top: 30px; margin-bottom: 30px;" class="map-best-info v1">
-			
-			본 화면의 정보는 입력시점과 검색시점의 차이로 현재 정보와 다를 수 있습니다. &nbsp;<span>방문전 반드시 유선으로 확인 하시기 바랍니다.</span><br>
+		<div style="margin-top: 30px; margin-bottom: 30px;" class="map-best-info v1">	
+			<span style="color: #595959;">본 화면의 정보는 입력시점과 검색시점의 차이로 현재 정보와 다를 수 있습니다. &nbsp;<span style="text-decoration: underline;">방문전 <span style="color: red">반드시 유선으로 확인</span> 하시기 바랍니다.</span><br>
 			병(의)원 기본정보 (명칭, 주소, 연락처 등)는 건강보험심사평가원에 신고된 자료로 변경정보를 매일 연계하고 있습니다.<br>
 			의료이용 편익정보(진료/점심/접수시간, 휴진, 주차정보 등)는 해당 병(의)원이 직접 입력한 정보입니다.		
 			<p>※ 해당 검진기관에서 입력한 정보가 잘못된 경우, 검색되지 않을 수 있으니 이점 양해하여 주시기 바랍니다.</p>
+			</span>
 			</div>
 		<div style="height:70px;">
 
-			<input type="text" value="서울특별시" readonly="readonly"
+			<input type="text" value="서울특별시" readonly="readonly"  style="background-color: #F0F0F0"
 				class="form-control2">&nbsp;&nbsp;<select name="searchloc"
 				id="searchloc" class="form-control2">
 				<option value="">전체</option>
@@ -107,7 +108,7 @@ $(function(){
 
 </script>
 		<div class="col-sm-4" style="height: 540px; width: 460px;" id="hospital_result">
-		<div align="center">
+		<div align="center" style="border-top: solid 1px #D5D5D5; border-bottom: solid 1px #D5D5D5; height: 540px">
 		<img src="hospital_search.png">
 		</div>
 		</div>	
