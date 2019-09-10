@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +83,7 @@ $(function(){
 <div class="rowrow optionList">
 	<table class="table table-borderless rowrow" style="width:400px">
 		<tr>
-			<td class="text-center"><h3 class="text-center">반려견 정보</h3>123</td>
+			<td class="text-center"><h3 class="text-center">반려견 정보</h3></td>
 		</tr>
 	</table>
 	<table class="table table-borderless" style="width:400px">
@@ -109,8 +110,11 @@ $(function(){
 			<td class="text-left" >
 				<select name=dyear id="dyear" class="form-control2" style="width:27%">
 					<option></option>
-					<option>2019</option>
-					<option>2018</option>
+					<c:set var="first" value="2019"/>
+					<c:set var="end" value="1989"/>
+					<c:forEach var="i" begin="0" end="${first-end}" step="1">
+						<option>${first -i }</option>
+					</c:forEach>
 				</select>&nbsp;년&nbsp;&nbsp;&nbsp;
 				<select name=dmonth id="dmonth" class="form-control2" style="width:27%">
 					<option></option>
@@ -127,11 +131,7 @@ $(function(){
 					<option>11</option>
 					<option>12</option>
 				</select>&nbsp;월&nbsp;&nbsp;&nbsp;
-				<select name=dday id="dday" class="form-control2" style="width:27%">
-					<option></option>
-					<option>1</option>
-					<option>2</option>
-				</select>&nbsp;일
+				<input type=text name=dday class="form-control2" style="width:27%" id="dday">&nbsp;일
 			</td>
 		</tr>
 		<tr>

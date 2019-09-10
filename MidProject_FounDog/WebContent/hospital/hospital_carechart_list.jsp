@@ -59,7 +59,7 @@ $('.detailbtn').click(function(){
 			<h3> ${sessionScope.name }님의 진료 내역입니다.</h3>
 		</caption>
 		<tr height="50px">
-			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">진료 번호</font></th>
+			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">번호</font></th>
 			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">진료날짜</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">의사명</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">동물명</font></th>
@@ -74,7 +74,7 @@ $('.detailbtn').click(function(){
 		<c:if test="${!empty list}" >
 			<c:forEach var="vo" items="${list }">
 				<tr class="content" height="50px">
-					<td class="text-left" width="10%" >${vo.no }</td>
+					<td class="text-left" width="10%" >${vo.num }</td>
 					<td class="text-left" width="12%" >${vo.caredate }</td>
 					<td class="text-left" width="10%" >${vo.doctor }</td>
 					<td class="text-left" width="10%" >${vo.dogname }</td>

@@ -137,6 +137,7 @@ function reservedate(){
 function cancel(){
 	
 	  if(confirm("취소 하시겠습니까?") == true){
+		  alert("취소 되었습니다.")
 		 history.back();
 		return true;        
 	    }
@@ -226,7 +227,8 @@ $(document).ready(function(){
 		</div>
 		<div id="a2" style="height: 200px;">
 			<div id="a3" style="height: 150px; border: 1px solid #d99c4e; overflow: auto; padding:8px">
-				파운독은 귀하의 개인정보보호를 매우 중요시하며, 개인정보보호방침을 통하여 귀하께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
+
+파운독은 귀하의 개인정보보호를 매우 중요시하며, 개인정보보호방침을 통하여 귀하께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 개인정보 수집에 대한 동의
 파운독은 귀하께 회원가입시 개인정보보호방침 또는 이용약관의 내용을 공지하며 회원가입버튼을 클릭하면 개인정보 수집에 대해 동의하신 것으로 봅니다.
 개인정보의 수집목적 및 이용목적
@@ -246,9 +248,9 @@ $(document).ready(function(){
 파운독은 귀하에 대한 정보를 저장하고 수시로 찾아내는 '쿠키 (cookie)' 를 사용합니다. 쿠키는 웹사이트가 귀하의 컴퓨터 브라우저(넷스케이프, 인터넷 익스플로러 등)로 전송하는 소량의 정보입니다. 귀하가 웹사이트에 접속을 하면 파운독 웹서버는 귀하의 브라우저에 있는 쿠키의 내용을 읽고, 귀하의 추가정보를 귀하의 컴퓨터에서 찾아 접속에 따른 아이디 등의 추가 입력없이 서비스를 제공할 수 있습니다. 쿠키는 귀하의 컴퓨터는 식별하지만 귀하를 개인적으로 식별하지는 않습니다.
 또한 귀하는 쿠키에 대한 선택권이 있습니다. 웹브라우저의 옵션을 조정함으로써 모든 쿠키를 다 받아들이거나, 쿠키가 설치될 때 통지를 보내도록 하거나 아니면 모든 쿠키를 거부할 수 있는 선택권을 가질 수 있습니다.
 개인정보의 제3자에 대한 제공
-파운독은 귀하의 개인정보를 <개인정보의 수집목적 및 이용목적>에서 고지한 범위 내에서 사용하며, 동 범위를 초과하여 이용하거나 타인 또는 타기업/기관에 제공하지 않습니다. 그러나 보다 나은 서비스 제공을 위하여 귀하의 개인정보를 제휴사에게 제공하거나 또는 제휴사와 공유할 수 있습니다. 단, 개인정보를 제공하거나 공유할 경우에는 사전에 귀하께 고지하여 드립니다.
+파운독은 귀하의 개인정보를 &lt;개인정보의 수집목적 및 이용목적&gt;에서 고지한 범위 내에서 사용하며, 동 범위를 초과하여 이용하거나 타인 또는 타기업/기관에 제공하지 않습니다. 그러나 보다 나은 서비스 제공을 위하여 귀하의 개인정보를 제휴사에게 제공하거나 또는 제휴사와 공유할 수 있습니다. 단, 개인정보를 제공하거나 공유할 경우에는 사전에 귀하께 고지하여 드립니다.
 개인정보의 열람/정정
-귀하는 언제든지 등록되어 있는 귀하의 개인정보를 열람하거나 정정하실 수 있습니다. 개인정보 열람 및 정정을 하고자 할 경우에는 <회원정보수정>을 클릭하여 직접 열람 또는 정정하거나 개인정보관리책임자에게 E-mail로 연락하시면 조치하여 드립니다.
+귀하는 언제든지 등록되어 있는 귀하의 개인정보를 열람하거나 정정하실 수 있습니다. 개인정보 열람 및 정정을 하고자 할 경우에는  &lt;회원정보수정&gt;을 클릭하여 직접 열람 또는 정정하거나 개인정보관리책임자에게 E-mail로 연락하시면 조치하여 드립니다.
 귀하가 개인정보의 오류에 대한 정정을 요청한 경우, 정정을 완료하기 전까지 당해 개인정보를 이용하지 않습니다.
 개인정보 수집, 이용, 제공에 대한 동의철회
 회원가입 등을 통해 개인정보의 수집, 이용, 제공에 대해 귀하께서 동의하신 내용을 귀하는 언제든지 철회할 수 있습니다. 동의철회는 웹사이트 및 개인정보관리책임자에게 E-mail 등으로 연락하시면 즉시 개인정보의 삭제 등 필요한 조치를 하겠습니다.
@@ -279,6 +281,7 @@ $(document).ready(function(){
 ㅁㅁㅁㅁ
 시행일
 본 개인정보보호정책은 2019년 9월 01일부터 시행합니다.
+
 				
 			</div>
 			<div id="a4" style="height: 50px;" class="text-right">
@@ -302,7 +305,7 @@ $(document).ready(function(){
 	<th rowspan="4">02. 예약희망날짜</th>
 	<td colspan="2" style="padding:20px 0 30px 0" class="ml_28">
 		<div id="contents">
-		  <a href="#layerPopup">&nbsp;&nbsp;예약 날짜 선택&nbsp;&nbsp;</a>
+		  <a href="#layerPopup" style="font-size: 15px;">&nbsp;&nbsp;예약 날짜 선택&nbsp;&nbsp;</a>
 		  <div id="layerPopup">
 				<div id="PopupDiary">
 				
@@ -318,7 +321,7 @@ $(document).ready(function(){
 		예약희망일
 	</td>
 	<td colspan="2" class="text-left">
-		<input type="text" class="form-control2" id="reserve_day" name="reserve_day" value="" readonly="readonly">
+		<input type="text" class="form-control2" id="reserve_day" name="reserve_day" value="" readonly="readonly"  style="background-color: #F0F0F0">
 	</td>
 </tr>
 <tr>
@@ -345,7 +348,7 @@ $(document).ready(function(){
 		보호자 명
 	</td>
 	<td colspan="2">
-		<input type="text" class="form-control2" readonly="readonly" value="${name }">
+		<input type="text" class="form-control2" readonly="readonly" value="${name }" style="background-color: #F0F0F0">
 	</td>
 </tr>
 <tr>
@@ -353,7 +356,7 @@ $(document).ready(function(){
 		진료받는 강아지
 	</td>
 	<td style="width:150px">
-		<input type="text" class="form-control2" readonly="readonly" id="dname">&nbsp;
+		<input type="text" class="form-control2" readonly="readonly" id="dname" style="background-color: #F0F0F0">&nbsp;
 		<input type="hidden" name="dogNo" id="dogNo" value="">
 	</td>
 	<td>
@@ -372,14 +375,14 @@ $(document).ready(function(){
 <tr>
 	<td class="end" colspan="3">
 		증상<br>
-		<textarea style="width: 600px;margin-top:10px" cols="30" rows="5" name="symptom"></textarea>
+		<textarea style="width: 600px;margin-top:10px; resize: none;" cols="30" rows="5" name="symptom"></textarea>
 	</td>
 </tr>
 </tbody>
 </table>
 	<table class="table-borderless" style="width:1140px;margin-top:30px;"><tr><td class="text-center">
-		<input type="button" onclick="javascript:reservedate();" class="btn-common2" value="예약">&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="button" class="btn-common2" value="취소" onclick="javascript:cancel();">
+		<input type="button" onclick="javascript:reservedate();" class="btn-common2" value="예약하기">&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" class="btn-common2" value="취소" onclick="javascript:cancel();" style="width: 108px; margin-left: 20px">
 	</td></tr></table>
 </form>
 	</div>		  

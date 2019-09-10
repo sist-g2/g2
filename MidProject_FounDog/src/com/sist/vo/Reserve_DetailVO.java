@@ -9,7 +9,14 @@ public class Reserve_DetailVO {
 	private String reserve_time;
 	private String state;
 	private String hosname;
+	private int num;
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getNo() {
 		return no;
 	}

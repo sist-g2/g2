@@ -9,6 +9,18 @@
 <link href="../css/hospital.css" rel="stylesheet">
 <style type="text/css">
 
+#contents a{
+	display: inline-block;
+	border-radius: 6px;
+	background: #bd8942;
+	color: #ffffff;
+	margin-right: 3px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
 #detailbtn {
 	display: inline-block;
 	border-radius: 6px;
@@ -35,11 +47,6 @@
   cursor:pointer;
 }
 
-/* #PopupDiary span {
-	font-size: 14px;
-	font-weight: 300;
-} */
-
 #vaccInsertSubmit {
 	display: inline-block;
 	border-radius: 6px;
@@ -57,6 +64,24 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	var todays = new Date();
+	document.getElementById('vdate').valueAsDate = todays;
+	
+	let today = new Date(),
+	day = today.getDate(),
+    month = today.getMonth()+1, //January is 0
+    year = today.getFullYear();
+         if(day<10){
+                day='0'+day
+            } 
+        if(month<10){
+            month='0'+month
+        }
+        today = year+'-'+month+'-'+day;
+        
+	document.getElementById('vdate').max = today;
+	
 	  $("#layerPopup").hide();
 	  $("#layerPopup2").hide();
 	  $("#contents > a").click(function(){
@@ -128,7 +153,7 @@ $(function(){
 		  	<div id="layerPopup">
 				<div id="PopupDiary">
 					<form method="post" id="vaccinationForm" action="hospital_vaccination_insert.do">
-						<div style="height: 250px; width: 300px">
+						<div style="height: 250px; width: 350px">
 							<table class="table" >
 								<tr>
 									<th class="text-right" >
@@ -165,7 +190,7 @@ $(function(){
 									</th>
 									<td class="text-left" >
 										&nbsp;&nbsp;
-										<input type="date" name="vdate" class="form-control2" >
+										<input type="date" name="vdate" class="form-control2" id="vdate" >
 									</td>
 								</tr>
 								<tr>
