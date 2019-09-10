@@ -51,6 +51,7 @@ $(function(){
 					<tr>
 						<td class="text-center" >
 						<input type=button value="삭제" class="btn btn-sm" id="delBtn">
+						<input type=button value="취소" class="btn btn-sm" onclick="javascript:history.back()">
 					</tr>
 				</table>
 			</form>
