@@ -212,4 +212,12 @@ public class HospitalDAO {
 			session.close();
 	 }
 	 
+	 public static void vaccinationMerge(VaccinationVO vo){
+		 List<VaccinationVO> list = new ArrayList<VaccinationVO>();
+		 SqlSession session = ssf.openSession();
+		 session.update("vaccinationMerge", vo);
+		 session.commit();
+		 session.close();
+	 }
+	 
 }

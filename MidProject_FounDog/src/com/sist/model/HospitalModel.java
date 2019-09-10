@@ -41,7 +41,7 @@ public class HospitalModel {
 	
 	@RequestMapping("hospital/hospital_search_ok.do")
 	public String hospital_search_ok(Model model){
-	// 요청값을 받는다
+	
 	try {
 		model.getRequest().setCharacterEncoding("UTF-8");
 	} catch (Exception e) {}
@@ -51,7 +51,7 @@ public class HospitalModel {
 	String name = model.getRequest().getParameter("name");
 	   if(page==null)
 		   page="1";
-	   // 현재 페이지 저장 
+	 
 	   int curpage=Integer.parseInt(page);
 	   Map map=new HashMap();
 	   int rowSize=8;
@@ -96,7 +96,7 @@ public class HospitalModel {
 		String name = model.getRequest().getParameter("name");
 		   if(page==null)
 			   page="1";
-		   // 현재 페이지 저장 
+		  
 
 		   int curpage=Integer.parseInt(page);
 		   Map map=new HashMap();
@@ -116,13 +116,8 @@ public class HospitalModel {
 		int totalpage = (int)Math.ceil(totalResult/8.0);
 		   
 		   int BLOCK=5;
-		   /*
-		    *    이전 1 2 3 4 5 다음    ==> 현재페이지 ==> 1~5page  startPage(1) endPage(5)
-		    *    이전 6 7 8 9 10 다음  ==> 현재페이지 ==> 6~10page startPage(6) endPage(10)
-		    */
+		 
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
-		   // 1~5 => (curpage-1)/BLOCK*BLOCK (0) ===> 1
-		   // 6~10 => (curpage-1)/BLOCK*BLOCK (5) ==> 6   ==> 1~5  totalpage=4
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		   
 		   int allPage=totalpage;
@@ -169,10 +164,10 @@ public class HospitalModel {
 		   String strYear=model.getRequest().getParameter("year");
 		   String strMonth=model.getRequest().getParameter("month");
 		   
-		   // 현재 날짜 읽기
+		
 		   Date date=new Date();
-		   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-M-d");//07 08  MM=>1~9 => 01,09
-		   // 자바는 숫자표현식 => 10,8(0),16(0x)
+		   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-M-d");
+	
 		   StringTokenizer st=new StringTokenizer(sdf.format(date),"-");
 		   
 		   String sy=st.nextToken();
@@ -199,15 +194,15 @@ public class HospitalModel {
 		   String[] strWeek={"일","월","화","수","목","금","토"};
 		   model.addAttribute("strWeek", strWeek);
 		   
-		   // 요일 구하기
+		
 		   int[] lastday={31,28,31,30,31,30,
 				          31,31,30,31,30,31};
-		   // 1년 1월 1일 ~ 2018년 12월 31의 총합
+		
 		   int total=(year-1)*365
 				   +(year-1)/4
 				   -(year-1)/100
 				   +(year-1)/400;
-		   //2019년 1월 ~ 7월의 총합
+		
 		   if((year%4==0 && year%100!=0)||(year%400==0))
 			   lastday[1]=29;
 		   else
@@ -219,7 +214,7 @@ public class HospitalModel {
 		   
 		   total++;
 		   
-		   // 요일구하기
+		
 		   int week=total%7;
 		   
 		   model.addAttribute("week", week);
@@ -618,7 +613,7 @@ public class HospitalModel {
 			vo.setDogname(dname);
 			vo.setId(id);
 			
-			HospitalDAO.vaccinationInsert(vo);
+			HospitalDAO.vaccinationMerge(vo);
 			
 			return "redirect:../hospital/hospital_vaccination_detail.do";
 		}

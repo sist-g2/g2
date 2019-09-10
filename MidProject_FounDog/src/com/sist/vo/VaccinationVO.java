@@ -7,6 +7,13 @@ public class VaccinationVO {
 	private String schedule_date;
 	private String dogname;
 	private String id;
+	private int vacc_no;
+	public int getVacc_no() {
+		return vacc_no;
+	}
+	public void setVacc_no(int vacc_no) {
+		this.vacc_no = vacc_no;
+	}
 	private int num;
 	
 	public int getNum() {

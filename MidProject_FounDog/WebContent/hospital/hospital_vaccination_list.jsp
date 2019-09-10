@@ -53,6 +53,7 @@ $(function(){
 			<th class="text-left" width="15%" ><font style="font-weight: 400; font-size: 16px;">예방접종 이름</font></th>
 			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">최종접종일</font></th>
 			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">예정접종일</font></th>
+			<th class="text-left" width="20%" ><font style="font-weight: 400; font-size: 16px;">회차</font></th>
 			<th class="text-left" width="10%" ><font style="font-weight: 400; font-size: 16px;">강아지명</font></th>
 		</tr>
 		<c:if test="${empty list}">
@@ -67,6 +68,7 @@ $(function(){
 					<td class="text-left" width="12%" >${vo.vaccination_name }</td>
 					<td class="text-left" width="20%" >${vo.last_date }</td>
 					<td class="text-left" width="20%" >${vo.schedule_date }</td>
+					<td class="text-left" width="10%" >${vo.vacc_no }</td>
 					<td class="text-left" width="15%" >${vo.dogname }</td>
 				</tr>
 			</c:forEach>

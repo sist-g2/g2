@@ -204,15 +204,16 @@ FROM carechart
 </select>
 
 <select id="vaccinationDetail" resultType="VaccinationVO" parameterType="hashmap">
-SELECT no, vaccination_name, last_date, schedule_date, dogname, num
+SELECT no, vaccination_name, last_date, schedule_date, dogname,vacc_no, num
 FROM (
-	SELECT no, vaccination_name, last_date , schedule_date, dogname, rownum as num
+	SELECT no, vaccination_name, last_date , schedule_date, dogname,vacc_no, rownum as num
 	FROM(
 		SELECT no,
         vaccination_name,
 		TO_CHAR(last_date,'YYYY-MM-DD') as last_date,
 		TO_CHAR(schedule_date,'YYYY-MM-DD') as schedule_date,
-		(SELECT dname FROM dog WHERE dno = dogno) as dogname
+		(SELECT dname FROM dog WHERE dno = dogno) as dogname,
+		vacc_no
 		FROM vaccination
 		<where>
 			<if test="dno==''" >
@@ -273,14 +274,31 @@ FROM carechart)
 WHERE no=#{no}
 </select>
 
-<insert id="vaccinationInsert" parameterType="VaccinationVO">
-	INSERT INTO vaccination VALUES(
-			vaccination_no_seq.nextval,
-			#{vaccination_name},		
-			#{last_date},
-			TO_DATE(#{schedule_date},'YYYY-MM-DD')+365,
-			(SELECT dno FROM dog WHERE dname = #{dogname} AND id = #{id})
-		)
-</insert>
+<update id="vaccinationMerge" parameterType="VaccinationVO">
+MERGE INTO vaccination vc
+USING DUAL 
+    ON ( vc.VACCINATION_NAME = #{vaccination_name} AND vc.DOGNO = (SELECT dno FROM dog WHERE dname = #{dogname} AND id = #{id}) )
+WHEN MATCHED THEN
+    UPDATE SET      
+        last_date = #{last_date},
+       schedule_date = TO_DATE(#{schedule_date},'YYYY-MM-DD')+365,
+       vacc_no = vacc_no+1
+WHEN NOT MATCHED THEN 
+    INSERT (
+      NO
+      , VACCINATION_NAME
+      , LAST_DATE
+      , SCHEDULE_DATE
+      , DOGNO
+      , VACC_NO
+    ) values (
+     vaccination_no_seq.nextval,
+	#{vaccination_name},		
+	#{last_date},
+	TO_DATE(#{schedule_date},'YYYY-MM-DD')+365,
+	(SELECT dno FROM dog WHERE dname = #{dogname} AND id = #{id})
+	,1
+    )
+</update>
 
 </mapper>
