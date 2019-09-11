@@ -47,7 +47,7 @@
 		<div class="col-md-3 col-sm-5">
                     <div class="sidebar blog-sidebar">                           
                         <div class="sidebar-item categories" style="margin-top: 40px">
-                            <h3>사이트이용안내</h3>
+                            <h3>사이트 이용안내</h3>
                             <ul class="nav navbar-stacked">
                                 <li class="active"><a href="../site/site_list.do">FAQ<span class="pull-right"></span></a></li>
                                 <li><a href="../qnaboard/qna_board_list.do">Q&A<span class="pull-right"></span></a></li>
@@ -65,7 +65,7 @@
 		 <section id="portfolio">
                 <ul class="portfolio-filter text-center">
                     <li><a class="btn btn-default ${cate==0?'active':'' }" href="../site/site_list.do?cate=0" >회원정보</a></li>
-                    <li><a class="btn btn-default ${cate==1?'active':'' }" href="../site/site_list.do?cate=1" >사료비교</a></li>
+                    <li><a class="btn btn-default ${cate==1?'active':'' }" href="../site/site_list.do?cate=1" >상품정보</a></li>
                     <li><a class="btn btn-default ${cate==2?'active':'' }" href="../site/site_list.do?cate=2" >병원이용</a></li>
                     <li><a class="btn btn-default ${cate==3?'active':'' }" href="../site/site_list.do?cate=3" >커뮤니티</a></li>
                     </ul>

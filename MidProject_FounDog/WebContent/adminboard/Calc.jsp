@@ -206,7 +206,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<div class="container">
-		<h2 align="center">칼로리 계산기</h2>
+		<h2 align="center">강아지 필요열량 계산기</h2>
 		<div class="row">
 			<div class="clear">
 				<form name="first" class="well2">

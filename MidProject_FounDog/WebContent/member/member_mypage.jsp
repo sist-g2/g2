@@ -131,7 +131,7 @@ $(function(){
 				<div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="900ms">
 					<div class="feature-inner">
 						<!-- <div class="icon-wrapper"> -->
-							<a href="#"><img src="../member/vacc.png"></a>
+							<a href="../hospital/hospital_vaccination_detail.do"><img src="../member/vacc.png"></a>
 						<!-- </div> -->
 						<h3>예방접종 내역</h3>
 					</div>

@@ -65,7 +65,7 @@
                     <span class="icon-bar"></span>
                 </button> -->
                 <a class="navbar-brand" href="../main/main.do">
-                	<h1><img src="../images/FounDog.png" alt="logo"></h1>
+                	<h1><img src="../images/logo_2.png" alt="logo"></h1>
                 </a>
             </div>
             <div class="collapse navbar-collapse">
@@ -92,7 +92,7 @@
                     <li class="dropdown"><a href="../adminboard/adminboard_list.do">강아지와 함께</a><!-- <i class="fa fa-angle-down"></i> -->
                          <ul role="menu" class="sub-menu">
                             <li><a href="../adminboard/adminboard_list.do">애견 상식</a></li>
-                            <li><a href="../adminboard/Calc.do">사료 열량 계산기</a></li>
+                            <li><a href="../adminboard/Calc.do">강아지 필요열량 계산기</a></li>
                         </ul>
                     </li>                         
                     <li class="dropdown"><a href="../dogboard/dogboard_list.do">커뮤니티</a>
